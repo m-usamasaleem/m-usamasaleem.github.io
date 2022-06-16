@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Survey | Archit Parnami</title>
+    <link>https://ArchitParnami.github.io/tag/survey/</link>
+      <atom:link href="https://ArchitParnami.github.io/tag/survey/index.xml" rel="self" type="application/rss+xml" />
+    <description>Survey</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>@2022 Archit Parnami. All Rights Reserved.</copyright><lastBuildDate>Mon, 07 Mar 2022 16:58:49 -0400</lastBuildDate>
+    <image>
+      <url>https://ArchitParnami.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <title>Survey</title>
+      <link>https://ArchitParnami.github.io/tag/survey/</link>
+    </image>
+    
+    <item>
+      <title>Learning from Few Examples: A Summary of Approaches to Few-Shot Learning</title>
+      <link>https://ArchitParnami.github.io/publication/03-fsl-survey/</link>
+      <pubDate>Mon, 07 Mar 2022 16:58:49 -0400</pubDate>
+      <guid>https://ArchitParnami.github.io/publication/03-fsl-survey/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

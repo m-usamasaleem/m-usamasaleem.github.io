@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cloud | Archit Parnami</title>
+    <link>https://ArchitParnami.github.io/tag/cloud/</link>
+      <atom:link href="https://ArchitParnami.github.io/tag/cloud/index.xml" rel="self" type="application/rss+xml" />
+    <description>Cloud</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>@2022 Archit Parnami. All Rights Reserved.</copyright><lastBuildDate>Tue, 17 May 2022 16:00:00 -0400</lastBuildDate>
+    <image>
+      <url>https://ArchitParnami.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <title>Cloud</title>
+      <link>https://ArchitParnami.github.io/tag/cloud/</link>
+    </image>
+    
+    <item>
+      <title>Privacy Enhancement for Cloud-Based Few-Shot Learning</title>
+      <link>https://ArchitParnami.github.io/publication/05-fs-privacy/</link>
+      <pubDate>Tue, 17 May 2022 16:00:00 -0400</pubDate>
+      <guid>https://ArchitParnami.github.io/publication/05-fs-privacy/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
