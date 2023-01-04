@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Keyword Spotting | Muhammad Usaam Saleem</title>
+    <title> | Muhammad Usaam Saleem</title>
     <link>https://m-usamasaleem.github.io/tag/keyword-spotting/</link>
       <atom:link href="https://m-usamasaleem.github.io/tag/keyword-spotting/index.xml" rel="self" type="application/rss+xml" />
-    <description>Keyword Spotting</description>
+    <description></description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>@2022 Muhammad Usaam Saleem. All Rights Reserved.</copyright><lastBuildDate>Mon, 03 Aug 2020 16:58:49 -0400</lastBuildDate>
     <image>
       <url>https://m-usamasaleem.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
-      <title>Keyword Spotting</title>
+      <title></title>
       <link>https://m-usamasaleem.github.io/tag/keyword-spotting/</link>
     </image>
     
     <item>
-      <title>Few-Shot Keyword Spotting With Prototypical Networks</title>
+      <title>Few-Shot  With Prototypical Networks</title>
       <link>https://m-usamasaleem.github.io/publication/01-fs-kws/</link>
       <pubDate>Mon, 03 Aug 2020 16:58:49 -0400</pubDate>
       <guid>https://m-usamasaleem.github.io/publication/01-fs-kws/</guid>
