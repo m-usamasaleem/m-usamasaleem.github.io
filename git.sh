@@ -16,5 +16,5 @@ if ! git remote | grep -q "^origin$"; then
     git remote add origin https://github.com/m-usamasaleem/m-usamasaleem.github.io.git
 fi
 
-# Push changes to the remote repository
+# Push changes to the remote repository, setting 'main' as the upstream branch
 git push --set-upstream origin main
