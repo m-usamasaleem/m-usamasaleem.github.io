@@ -17,4 +17,4 @@ if ! git remote | grep -q "^origin$"; then
 fi
 
 # Push changes to the remote repository
-git push --set-upstream origin master
+git push --set-upstream origin main
