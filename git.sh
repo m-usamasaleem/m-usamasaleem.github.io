@@ -23,21 +23,21 @@ else
     echo "Remote 'origin' already exists."
 fi
 
-# Determine the current branch
-current_branch=$(git rev-parse --abbrev-ref HEAD)
-
-# Ensure the branch is either 'main' or 'master'
-if [ "$current_branch" != "main" ] && [ "$current_branch" != "master" ]; then
-    echo "Error: Current branch is '$current_branch'. Please switch to 'main' or 'master'."
-    exit 1
+# Switch to the 'main' branch
+if [ "$(git rev-parse --abbrev-ref HEAD)" != "main" ]; then
+    echo "Switching to 'main' branch."
+    git checkout main 2>/dev/null || {
+        echo "Branch 'main' does not exist locally. Creating and switching to 'main'."
+        git checkout -b main
+    }
 fi
 
-# Push changes to the current branch and set upstream if not already set
-git push --set-upstream origin "$current_branch"
+# Push changes to the 'main' branch and set upstream if needed
+git push --set-upstream origin main
 
 # Confirm successful push
 if [ $? -eq 0 ]; then
-    echo "Changes pushed to 'origin/$current_branch' successfully."
+    echo "Changes pushed to 'origin/main' successfully."
 else
     echo "Failed to push changes. Please check your Git configuration."
 fi
