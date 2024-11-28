@@ -23,7 +23,7 @@ else
     echo "Remote 'origin' already exists."
 fi
 
-# Switch to the 'main' branch
+# Ensure we are on the 'main' branch
 if [ "$(git rev-parse --abbrev-ref HEAD)" != "main" ]; then
     echo "Switching to 'main' branch."
     git checkout main 2>/dev/null || {
@@ -32,12 +32,18 @@ if [ "$(git rev-parse --abbrev-ref HEAD)" != "main" ]; then
     }
 fi
 
-# Push changes to the 'main' branch and set upstream if needed
-git push --set-upstream origin main
+# Pull latest changes from the remote 'main' branch to avoid conflicts
+echo "Pulling latest changes from 'origin/main'."
+if ! git pull origin main --rebase; then
+    echo "Failed to pull latest changes. Resolve conflicts and try again."
+    exit 1
+fi
 
-# Confirm successful push
-if [ $? -eq 0 ]; then
+# Push changes to the 'main' branch and set upstream if needed
+echo "Pushing changes to 'origin/main'."
+if git push origin main; then
     echo "Changes pushed to 'origin/main' successfully."
 else
     echo "Failed to push changes. Please check your Git configuration."
+    exit 1
 fi
