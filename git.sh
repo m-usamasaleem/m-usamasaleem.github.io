@@ -1,4 +1,8 @@
+
 #!/bin/bash
+
+git config --global user.name "m-usamasaleem"
+git config --global user.email "21100273@lums.edu.pk"
 
 # Stage all changes
 git add .
