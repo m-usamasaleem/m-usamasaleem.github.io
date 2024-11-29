@@ -51,25 +51,19 @@
   </head>
 
   <style>
-    .btn-primary {
-        background-color: #2962ff;
-        color: #fff;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-    .btn-primary:hover {
-        background-color: #0039cb;
-    }
-    #mapmyvisitors {
-      display: block;
-      margin: 0 auto;
-      width: 100%;
-      max-width: 600px; /* Adjust based on your layout */
-      height: 400px; /* Increase height for better visibility */
-      border: 1px solid #ddd; /* Optional: Add a border */
-      border-radius: 10px; /* Optional: Rounded corners */
+    #visitor-map {
+      width: 90%;
+      max-width: 1200px;
+      height: 80vh;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  #fallback-message {
+      text-align: center;
+      font-size: 1.2em;
+      color: #333;
   }
   
 </style>
@@ -333,17 +327,7 @@
         </div>
       </div>
     </section>
-    <div class="container py-5">
-      <div class="row justify-content-center">
-          <div class="col-md-8">
-              <h2 class="text-center mb-4">Visitor Map</h2>
-              <div id="visitor-map" style="height: 400px;">
-                  <script type="text/javascript" id="mapmyvisitors"
-                      src="//mapmyvisitors.com/map.js?d=vBTv5rH3V9hDaL2NRGBwM4KMi2JQ7zGgaBmNG_9A5es&cl=ffffff&w=a"></script>
-              </div>
-          </div>
-      </div>
-  </div>
+
   
     <!-- <section id="posts" class="home-section wg-pages   "> -->
     <!-- <div class="container"> -->
@@ -416,9 +400,7 @@
             <a href="/tag/privacy/">Privacy</a>
         </p>
         <p class="powered-by"> @2022 Muhammad Usama Saleem. All Rights Reserved. </p>
-        <p>
-            <a href="map.html" class="btn btn-primary" target="_blank">View Visitor Map</a>
-        </p>
+
         <span class="float-right" aria-hidden="true">
             <a href="#" class="back-to-top">
                 <span class="button_icon">
@@ -427,7 +409,18 @@
             </a>
         </span>
     </footer>
-    
+    <div id="visitor-map">
+      <!-- Visitor Map Script -->
+      <script type="text/javascript" id="mapmyvisitors"
+          src="//mapmyvisitors.com/map.js?d=8PZR3rhBAnuOEFb9RecojjlYPmyeuvZ7B5cY31wCebE&cl=ffffff&w=a"></script>
+      
+      <!-- Fallback Message -->
+      <noscript>
+          <div id="fallback-message">
+              Visitor map cannot be displayed because JavaScript is disabled in your browser.
+          </div>
+      </noscript>
+  </div>
       
     </div>
     <div id="modal" class="modal fade" role="dialog">
