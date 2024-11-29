@@ -62,6 +62,16 @@
     .btn-primary:hover {
         background-color: #0039cb;
     }
+    #mapmyvisitors {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 600px; /* Adjust based on your layout */
+      height: 400px; /* Increase height for better visibility */
+      border: 1px solid #ddd; /* Optional: Add a border */
+      border-radius: 10px; /* Optional: Rounded corners */
+  }
+  
 </style>
 
   <body id="top" data-spy="scroll" data-offset="70" data-target="#navbar-main">
@@ -323,13 +333,18 @@
         </div>
       </div>
     </section>
-    <div class="container">
-      <hr>
-      <div style="width:200px; height:150px;">
-        <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=8PZR3rhBAnuOEFb9RecojjlYPmyeuvZ7B5cY31wCebE&cl=ffffff&w=a"></script>
+    <div class="container py-5">
+      <div class="row justify-content-center">
+          <div class="col-md-8">
+              <h2 class="text-center mb-4">Visitor Map</h2>
+              <div id="visitor-map" style="height: 400px;">
+                  <script type="text/javascript" id="mapmyvisitors"
+                      src="//mapmyvisitors.com/map.js?d=vBTv5rH3V9hDaL2NRGBwM4KMi2JQ7zGgaBmNG_9A5es&cl=ffffff&w=a"></script>
+              </div>
+          </div>
       </div>
-      <hr>
-    </div>
+  </div>
+  
     <!-- <section id="posts" class="home-section wg-pages   "> -->
     <!-- <div class="container"> -->
     <!-- <div class="row"><div class="col-12 col-lg-4 section-heading"><h1>Recent Posts</h1></div><div class="col-12 col-lg-8"><div class="media stream-item"><div class="media-body"><h3 class="article-title mb-0 mt-0"><a href="/post/laplacian-fsl/">Laplacian Regularized Few-Shot Learning</a></h3><a href="/post/laplacian-fsl/" class="summary-link"><div class="article-style"> Paper https://arxiv.org/abs/2006.15486 Code
