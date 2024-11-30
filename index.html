@@ -88,6 +88,42 @@
       text-decoration: underline;
       /* Underline on hover for better accessibility */
     }
+  /* Masthead */
+  .masthead {
+    height: 100vh;
+    min-height: 500px;
+    background-image: url('./website/head.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+
+  .masthead h1 {
+    font-size: 3rem;
+    color: white;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding-top: 40%;
+  }
+
+  /* Media Queries */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .masthead h1 {
+      font-size: 2rem;
+      padding-top: 50%;
+    }
+  }
+
+
   </style>
   <body id="top" data-spy="scroll" data-offset="70" data-target="#navbar-main">
     <aside class="search-results" id="search">
