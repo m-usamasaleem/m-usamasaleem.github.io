@@ -165,6 +165,159 @@
         color: #666;
         margin-top: 20px;
       }
+        /* General Font Styling */
+  body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #ffffff;
+    color: #212529;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  a {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 1rem;
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+  }
+
+  /* Section Titles */
+  h3 {
+    color: #333333;
+    margin-top: 1.5rem;
+  }
+
+  /* Footer */
+  footer.site-footer {
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+  }
+
+  footer .powered-by a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  footer .powered-by a:hover {
+    color: #ffca28;
+  }
+
+  /* Card Styling */
+  .card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-body {
+    background-color: #f8f9fa;
+  }
+
+  .card-body p {
+    font-size: 1rem;
+    color: #555555;
+  }
+
+  /* Buttons */
+  .btn {
+    border-radius: 30px;
+    padding: 10px 20px;
+  }
+
+  .btn-primary {
+    background-color: #ffca28;
+    color: #343a40;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #ffd740;
+    color: #212529;
+  }
+
+  .btn-outline-secondary {
+    border: 1px solid #ccc;
+    color: #333;
+  }
+
+  .btn-outline-secondary:hover {
+    background-color: #f1f1f1;
+    color: #333;
+  }
+
+  /* Visitor Map */
+  #visitor-map {
+    margin: 30px auto;
+    width: 300px;
+    height: 200px;
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Masthead */
+  .masthead {
+    height: 100vh;
+    min-height: 500px;
+    background-image: url('./website/head.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+
+  .masthead h1 {
+    font-size: 3rem;
+    color: white;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding-top: 40%;
+  }
+
+  /* Media Queries */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .masthead h1 {
+      font-size: 2rem;
+      padding-top: 50%;
+    }
+  }
 
     </style>
   </head>
@@ -280,9 +433,11 @@
     </main>
     <div class="container">
       <div id="visitor-map">
-        <script type="text/javascript" id="mmvst_globe" src="//mapmyvisitors.com/globe.js?d=sOj4YeGmOfHGanYaf-PFFD_OFCTuFQHhxmqL5UcBKAU"></script>          <div id="fallback-message"> Visitor map cannot be displayed because JavaScript is disabled in your browser. </div>
+        <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=fTCu_cQksIUNiuvXAlgZR1B_GiZTgfjOgPQiQI-_p0A&cl=ffffff&w=a"></script>        <noscript>
+          <div id="fallback-message"> Visitor map cannot be displayed because JavaScript is disabled in your browser. </div>
         </noscript>
       </div>
+    </div>
       <footer class="site-footer">
         <p class="powered-by">
           <a href="/tag/privacy/">Privacy</a>
