@@ -144,6 +144,255 @@
       video {
         height: auto
       }
+
+      #visitor-map {
+        width: 100px;
+        height: 100px;
+        background: #f4f4f4;
+        /* Light background */
+        border: 1px solid #ddd;
+        /* Add a subtle border */
+        border-radius: 8px;
+        /* Optional rounded corners */
+        margin: 20px auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Optional shadow for a modern look */
+      }
+  
+      #fallback-message {
+        text-align: center;
+        font-size: 1.2em;
+        color: #666;
+        margin-top: 20px;
+      }
+        /* General Font Styling */
+  body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #ffffff;
+    color: #212529;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  a {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 1rem;
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+  }
+
+  /* Section Titles */
+  h3 {
+    color: #333333;
+    margin-top: 1.5rem;
+  }
+
+  /* Footer */
+  footer.site-footer {
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+  }
+
+  footer .powered-by a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  footer .powered-by a:hover {
+    color: #ffca28;
+  }
+
+  /* Card Styling */
+  .card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-body {
+    background-color: #f8f9fa;
+  }
+
+  .card-body p {
+    font-size: 1rem;
+    color: #555555;
+  }
+
+  /* Buttons */
+  .btn {
+    border-radius: 30px;
+    padding: 10px 20px;
+  }
+
+  .btn-primary {
+    background-color: #ffca28;
+    color: #343a40;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #ffd740;
+    color: #212529;
+  }
+
+  .btn-outline-secondary {
+    border: 1px solid #ccc;
+    color: #333;
+  }
+
+  .btn-outline-secondary:hover {
+    background-color: #f1f1f1;
+    color: #333;
+  }
+
+  /* Visitor Map */
+  #visitor-map {
+    margin: 30px auto;
+    width: 300px;
+    height: 200px;
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Masthead */
+  .masthead {
+    height: 100vh;
+    min-height: 500px;
+    background-image: url('./website/head.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+
+  .masthead h1 {
+    font-size: 3rem;
+    color: white;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding-top: 40%;
+  }
+
+  /* Media Queries */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .masthead h1 {
+      font-size: 2rem;
+      padding-top: 50%;
+    }
+  }
+  body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+  }
+
+  h1, h2, h3 {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  a {
+    font-family: 'Poppins', Arial, sans-serif;
+    color: #C02504;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .responsive-padding {
+    padding: 40px; /* Default padding */
+  }
+  
+  @media (max-width: 768px) {
+    .responsive-padding {
+      padding: 20px; /* Smaller padding for tablets */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .responsive-padding {
+      padding: 10px; /* Smallest padding for mobile devices */
+    }
+  }
+  
+  #visitor-map {
+    width: 100px;
+    height: 100px;
+    background: #f4f4f4;
+    /* Light background */
+    border: 1px solid #ddd;
+    /* Add a subtle border */
+    border-radius: 8px;
+    /* Optional rounded corners */
+    margin: 20px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Optional shadow for a modern look */
+  }
+
+  #fallback-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #666;
+    margin-top: 20px;
+  }
+
     </style>
   </head>
   <body>
@@ -153,20 +402,29 @@
           <div class="col-lg-12 col-md-12 mx-auto">
             <h1>GenHMR: Generative Human Mesh Recovery</h1>
             <h2 style="margin-top: 10px; font-size: 1.5em; font-weight: normal; color: #C02504;">
-              <u><strong>Muhammad Usama Saleem</strong></u>, Ekkasit Pinyoanuntapong, Pu Wang, Hongfei Xue, Srijan Das, Chen Chen†
-            </h2> 
-            <div style="font-size: 0.9em; color: gray; margin-top: 5px;">
-              °University of North Carolina at Charlotte, †University of Central Florida
-            </div>
+              <u>
+                <strong>Muhammad Usama Saleem</strong>
+              </u>, Ekkasit Pinyoanuntapong, Pu Wang, Hongfei Xue, Srijan Das, Chen Chen†
+            </h2>
+            <div style="font-size: 0.9em; color: gray; margin-top: 5px;"> °University of North Carolina at Charlotte, †University of Central Florida </div>
             <div style="margin-top: 15px;">
               <a href="#" style="text-decoration: none; border: 1px solid #ccc; padding: 10px 15px; border-radius: 5px; margin-right: 10px; font-size: 0.9em;">arXiv</a>
             </div>
           </div>
-        </div>
-        
-      </section>
-      </div>
+          <div class="container text-center responsive-padding">
+            <h1>Abstract</h1>
+            <p style="font-family: Arial, sans-serif; line-height: 1.6; text-align: justify;">
+              Human mesh recovery (HMR) is crucial in many computer vision applications, from health to arts and entertainment. HMR from monocular images has predominantly been addressed by deterministic methods that output a single prediction for a given 2D image. However, HMR from a single image is an ill-posed problem due to depth ambiguity and occlusions. Probabilistic methods have attempted to address this by generating and fusing multiple plausible 3D reconstructions, but their performance has often lagged behind deterministic approaches. In this paper, we introduce <span style="font-weight: bold; color: #C02504;">GenHMR</span>, a novel generative framework that reformulates monocular HMR as an image-conditioned generative task, explicitly modeling and mitigating uncertainties in the 2D-to-3D mapping process. GenHMR comprises two key components: (1) <span style="font-weight: bold; color: #C02504;">a pose tokenizer</span> to convert 3D human poses into a sequence of discrete tokens in a latent space, and (2) <span style="font-weight: bold; color: #C02504;">an image-conditional masked transformer</span> to learn the probabilistic distributions of the pose tokens, conditioned on the input image prompt along with randomly masked token sequences. During <span style="font-style: italic;">inference</span>, the model samples from the learned conditional distribution to iteratively decode high-confidence pose tokens, thereby reducing 3D reconstruction uncertainties. To further refine the reconstruction, a 2D pose-guided refinement technique is proposed to directly fine-tune the decoded pose tokens in the latent space, which forces the projected 3D body mesh to align with the 2D pose clues. Experiments on benchmark datasets demonstrate that <span style="font-weight: bold; color: #C02504;">GenHMR</span> significantly outperforms state-of-the-art methods.
+            </p>
+          </div>
+          
 
+      </section>
+      <h3 class="text-center">Video Demos</h3>
+
+
+
+      </div>
       <div class="album py-5 bg-body-tertiary">
         <div class="container">
           <div class="row">
@@ -241,52 +499,40 @@
           <img src="./assets/challenging_poses/genhmr_front_pose.png" class="img-fluid" alt="2D Pose-Guided Refinement Image">
         </div>
       </div>
-      <!-- <div class="album py-5 bg-body-tertiary"><div class="container"><h3>Overall architecture of MMM</h3><div class="d-flex justify-content-center" style="padding-top: 50px; padding-bottom: 20px;"><img src="./assets/images/BAMM-Training.png" class="img-fluid" alt="Responsive image" width="1200"></div><b>Overall architecture of BAMM.</b> (a) <b>Motion Tokenizer</b> encodes the raw motion sequence into discrete motion tokens according to a learned codebook. (b) <b> Masked Self-attention Transformer</b> learns to sequentially predict next tokens conditioned on text embedding from CLIP model and future unmasked tokens. Masked self-attention mechanism unifies autoregressive model and generative masked motion via bidirectional and unidirectional causal masks.
-        </div></div> -->
-      <!-- <section class="py-5 text-center container"><div class="row py-lg-5"><div class="col-lg-8 col-md-8 mx-auto"><h1>GenHMR: Generative Human Mesh Recovery</h1><h5>Anonymous</h5></div></div></section> -->
-      </div>
+
+    
+    </div>
       </div>
       <!-- 
         <div class="album py-5 bg-body-tertiary"><div class="container"><div class="row"><div class="col"><h3>Long Sequence Generation:</h3><h6>Generating long sequence motion by combining multiple motions as follow: 'A person is doing a salsa dance moving their legs and arms.', 'a figure sits on the chair.', 'a man jump forward.',
                             'A person punches as if they are boxing.', 'A person is stumbling while walking', 'A person is running forward in a long line.'
-                            <span style='color:#660000'>Blue frames indicate the generated short motion sequences.</span><span style='color:#255F83'>Red frames indicate transition frames.</span></h6></div></div><div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2 justify-content-center"><div class="col"><div class="card shadow-sm"><video id="longrange_true" autoplay controls muted loop playsinline height="100%"><source src="./assets/longrange/longrange.mp4" type="video/mp4"></video><div class="card-body mmm-card"><p class="card-text">BAMM (our)</p>
-								<!-- <div class="d-flex justify-content-between align-items-center"><small class="text-body-secondary">(Realistic Motion)</small></div> -->
+                            <span style='color:#660000'>#C02504 frames indicate the generated short motion sequences.</span><span style='color:#255F83'>Red frames indicate transition frames.</span></h6></div></div><div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2 justify-content-center"><div class="col"><div class="card shadow-sm"><video id="longrange_true" autoplay controls muted loop playsinline height="100%"><source src="./assets/longrange/longrange.mp4" type="video/mp4"></video><div class="card-body mmm-card"><p class="card-text">BAMM (our)</p>
+							<!-- <div class="d-flex justify-content-between align-items-center"><small class="text-body-secondary">(Realistic Motion)</small></div> -->
       </div>
       </div>
       </div>
       </div>
       </div>
       </div> -->
-      <!-- <div class="album py-5 bg-body-tertiary"><div class="container"><div class="row"><div class="col"><h3>Motion Completion:</h3></div></div><div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2"><div class="col"><div class="card shadow-sm"><video id="complete2" autoplay controls muted loop playsinline height="100%"><source src="./assets/complete2.mp4" type="video/mp4"></video><div class="card-body mmm-card"><h6 class="card-text">BAMM (our)</h6><p>Completing <u><b>first</b></u> 50% motion based on the text <span
-                                        style='color:#660000'>“A person
-                                        performs jumping jacks.”</span> conditioned on last 50% of
-                                    motion of
-                                    <span style='color:#255F83'>“A person
-                                        crawling from left to right”</span></p></div></div></div><div class="col"><div class="card shadow-sm"><video id="complete1" autoplay controls muted loop playsinline height="100%"><source src="./assets/completion1.mp4" type="video/mp4"></video><div class="card-body mmm-card"><h6 class="card-text">BAMM (our)</h6><p>Completing <u><b>last</b></u> 50% motion based on the text <span
-                                        style='color:#660000'>“A person
-                                        performs jumping jacks.”</span> conditioned on first 50% of
-                                    motion of
-                                    <span style='color:#255F83'>“A person
-                                        crawling from left to right”</span></p></div></div></div></div></div></div><div class="album py-5 bg-body-tertiary"><div class="container"><div class="row"><div class="col"><h3>Motion Temporal Outpainting:</h3></div></div><div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2"><div class="col"><div class="card shadow-sm"><video id="outpainting" autoplay controls muted loop playsinline height="100%"><source src="./assets/outpainting.mp4" type="video/mp4"></video><div class="card-body mmm-card"><h6 class="card-text">BAMM (our)</h6><p>Generating first 25% and last 25% of motion of based on the text <span
-                                        style='color:#660000'>“A person sits down”</span> conditioned on 50% motion in
-                                    the middle of motion of <span style='color:#255F83'>“A person is running in place at
-                                        a medium pace.”</span></p></div></div></div><div class="col"><div class="card shadow-sm"><video id="outpainting" autoplay controls muted loop playsinline height="100%"><source src="./assets/outpaint_forward_backward.mp4" type="video/mp4"></video><div class="card-body mmm-card"><h6 class="card-text">BAMM (our)</h6><p>Generating first 25% and last 25% of motion of based on the text <span
-                                        style='color:#660000'>“person walks backward.”</span> conditioned on 50% motion
-                                    in
-                                    the middle of motion of <span style='color:#255F83'>“A person walks forward in a
-                                        straight line.”</span></p></div></div></div></div></div></div> -->
+     
     </main>
-    <footer class="text-body-secondary py-5">
-      <div class="container">
-        <p class="float-end mb-1">
-          <a href="#">Back to top</a>
+    <div class="container">
+      <div id="visitor-map">
+        <script type='text/javascript' id='mapmyvisitors' src='https://mapmyvisitors.com/map.js?cl=ffffff&w=a&t=n&d=j2G8dNEYiZr7g9T4B76-liMmN2ZRf7aTZomwfAXMnaA'></script>      </div>
+    </div>
+      <footer class="site-footer">
+        <p class="powered-by">
+          <a href="/tag/privacy/">Privacy</a>
         </p>
-        <!-- <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p><p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a
-                    href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p> -->
-      </div>
-    </footer>
-    <!-- <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script> -->
+        <p class="powered-by"> @2022 Muhammad Usama Saleem. All Rights Reserved. </p>
+        <span class="float-right" aria-hidden="true">
+          <a href="#" class="back-to-top">
+            <span class="button_icon">
+              <i class="fas fa-chevron-up fa-2x"></i>
+            </span>
+          </a>
+        </span>
+      </footer>
+
   </body>
 </html>
