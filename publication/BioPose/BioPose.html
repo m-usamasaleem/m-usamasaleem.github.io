@@ -459,7 +459,7 @@
         <div class="container">
           <div class="card-body text-center">
             <h3 class="display-4 mb-4" style="font-weight: bold;">Video Demos</h3>
-            <p class="lead" style="font-size: 1rem; line-height: 1.8;"> The GenHMR demo highlights our method for achieving accurate 3D human mesh reconstructions from monocular images. Key to our approach is <strong>Uncertainty-Guided Sampling</strong> (UGS), which iteratively samples high-confidence pose tokens based on their probabilistic distributions, ensuring precise and reliable 3D reconstructions. Here, we show only the initial pose estimates from UGS for 5 iterations. </p>
+            <p class="lead" style="font-size: 1rem; line-height: 1.8;">   The MQ-HMR demo highlights our method for achieving accurate 3D human mesh reconstructions from monocular images. Key to our approach is the use of a <strong>Multi-Query Deformable Transformer</strong>, which leverages multi-scale feature maps and deformable attention mechanisms to enhance pose recovery, even in complex and ambiguous scenarios. By efficiently handling uncertainty in the 2D-to-3D mapping process, MQ-HMR delivers precise and anatomically consistent 3D reconstructions. </p>
           </div>
           <div class="container text-center responsive-padding">
             <div class="row g-3">
@@ -681,48 +681,35 @@
       </div>
       <div class="album py-5">
         <div class="container">
-          <h3>GenHMR <i>Training Phase</i>
+          <h3>BioPose <i>Overall Framework</i>
           </h3>
-          <p style="font-size: 1em;">GenHMR consists of two key components: (1) a <strong>Pose Tokenizer</strong> that encodes 3D human poses into a sequence of discrete tokens within a latent space, and (2) an Image-Conditioned Masked Transformer that models the probabilistic distributions of these tokens, conditioned on the input image and a partially masked token sequence. </p>
-          <img src="./assets/arch/genhmr_overview.png" class="img-fluid" alt="GenHMR Overview Image">
+          <p style="font-size: 1em;"> Overview of BioPose, comprising two key components: (1) the <strong>MQ-HMR</strong> model, which leverages a multi-query deformable transformer decoder to extract multi-scale image features from a vision transformer, enabling precise 3D mesh recovery, and (2) the <strong>NeurIK</strong> model, which uses the mesh vertices as virtual markers and applies a spatio-temporal network to infer biomechanically accurate 3D poses while maintaining anatomical constraints. </p>          <img src="./assets/arch/overview.png" class="img-fluid" alt="BioPose Overview Image">
+        </div>
+      </div>
+
+      <div class="album py-5">
+        <div class="container">
+          <h3>State-of-the-Art Comparison of MQHMR</h3>
+          <p style="font-size: 1em;"> Comparison of state-of-the-art methods, HMR2.0 and TokenHMR, which use vision transformers for 3D human mesh recovery from a single image. Red circles highlight errors in these methods when dealing with complex or ambiguous poses. In contrast, our <strong>MQ-HMR</strong> method addresses these challenges by incorporating a multi-query deformable transformer, leveraging multi-scale feature maps and a deformable attention mechanism to deliver more accurate and anatomically consistent pose estimations, even in difficult scenarios. </p>          <img src="./assets/challenging_poses/mqhmr_sota.png" class="img-fluid" alt="State-of-the-Art Comparison Image">
         </div>
       </div>
       <div class="album py-5">
         <div class="container">
-          <h3>Our <i>Inference Strategy</i>
-          </h3>
-          <p style="font-size: 1em;">Our inference strategy comprises two key stages: (1) <strong>Uncertainty-Guided Sampling</strong>, which iteratively samples high-confidence pose tokens based on their probabilistic distributions, and (2) <strong>2D Pose-Guided Refinement</strong>, which fine-tunes the sampled pose tokens to further minimize 3D reconstruction uncertainty by ensuring consistency between the 3D body mesh and 2D pose estimates. </p>
-          <img src="./assets/arch/genhmr_inference.png" class="img-fluid" alt="GenHMR Inference Image">
+          <h3>State-of-the-Art Comparison of NeurIK</h3>
+          <p style="font-size: 1em;"> Qualitative results of our proposed method BioPose and comparison with ground truth. These pictures include multiple actions such as squatting and drop jumps. </p>
+                    <img src="./assets/challenging_poses/Biopose-D3KE.png" class="img-fluid" alt="State-of-the-Art Comparison Image">
         </div>
       </div>
-      <div class="album py-5">
-        <div class="container">
-          <h3>State-of-the-Art Comparison</h3>
-          <p style="font-size: 1em;">State-of-the-art (SOTA) methods, such as HMR2.0 and TokenHMR, utilize vision transformers to recover 3D human meshes from single images. However, the limitations of these SOTA approaches, particularly in dealing with unusual poses or ambiguous situations, are evident in the errors marked by red circles. Our approach, GenHMR, addresses these challenges by explicitly modeling and mitigating uncertainties in the 2D-to-3D mapping process, leading to more accurate and robust 3D pose reconstructions in complex scenarios.</p>
-          <img src="./assets/challenging_poses/genhmr_sota final_complete.png" class="img-fluid" alt="State-of-the-Art Comparison Image">
-        </div>
-      </div>
+
       <div class="album py-5">
         <div class="container">
           <h3>Qualitative Results on Challenging Poses</h3>
           <p style="font-size: 1em;">The effect of 2D Pose-Guided Refinement on 3D pose reconstruction. The red circles highlight error-prone areas after each refinement iteration, demonstrating how the method progressively corrects these errors. By fine-tuning the pose tokens to better align the 3D pose with 2D detections, our approach iteratively reduces uncertainties and enhances accuracy. Notable improvements are observed in the early iterations, with most errors significantly reduced by the 10th iteration. The initial mesh is derived from uncertainty-guided sampling.</p>
-          <img src="./assets/challenging_poses/genhmr_chall_poses_3d.png" class="img-fluid" alt="Qualitative Results on Challenging Poses Image">
+          <img src="./assets/challenging_poses/mqhmr_challposes.png" class="img-fluid" alt="Qualitative Results on Challenging Poses Image">
         </div>
       </div>
-      <div class="album py-5">
-        <div class="container">
-          <h3>2D Pose-Guided Refinement</h3>
-          <p style="font-size: 1em;">The effect of 2D Pose-Guided Refinement on 3D pose reconstruction. The red circles highlight error-prone areas after each refinement iteration, demonstrating how the method progressively corrects these errors. By fine-tuning the pose tokens to better align the 3D pose with 2D detections, our approach iteratively reduces uncertainties and enhances accuracy. Notable improvements are observed in the early iterations, with most errors significantly reduced by the 10th iteration. The initial mesh is derived from uncertainty-guided sampling.</p>
-          <img src="./assets/challenging_poses/genhmr_2dpose_guided_supp.png" class="img-fluid" alt="2D Pose-Guided Refinement Image">
-        </div>
-      </div>
-      <div class="album py-5">
-        <div class="container">
-          <h3>More Results on Challenging Pose</h3>
-          <p style="font-size: 1em;">This figure showcases qualitative results of our GenHMR model on challenging poses. These results demonstrate the model's ability to accurately reconstruct complex 3D poses even in scenarios further highlighting the robustness and effectiveness of our approach.</p>
-          <img src="./assets/challenging_poses/genhmr_front_pose.png" class="img-fluid" alt="More Results on Challenging Pose Image">
-        </div>
-      </div>
+
+
     </main>
     <div class="container">
       <div id="visitor-map">
