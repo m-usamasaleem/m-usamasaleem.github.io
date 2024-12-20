@@ -404,6 +404,13 @@
         text-decoration: underline;
         color: #C02504; /* Optional hover color */
       }
+
+      .album img {
+        max-width: 50%; /* Adjusts the width to 50% of the container */
+        height: auto;   /* Maintains the aspect ratio */
+        margin: 0 auto; /* Centers the image within its container */
+        display: block; /* Ensures proper centering */
+      }
       #visitor-map {
         display: none; /* Hides the element completely */
       }
@@ -604,7 +611,7 @@
         <div class="container">
           <h3>State-of-the-Art Comparison of NeurIK</h3>
           <p style="font-size: 1em;"> Qualitative results of our proposed method BioPose and comparison with ground truth. These pictures include multiple actions such as squatting and drop jumps. </p>
-                    <img src="./assets/challenging_poses/Biopose-D3KE.png" class="img-fluid" alt="State-of-the-Art Comparison Image">
+                    <img  style="max-width: 100%;" src="./assets/challenging_poses/Biopose-D3KE.png" class="img-fluid" alt="State-of-the-Art Comparison Image">
         </div>
       </div>
 
