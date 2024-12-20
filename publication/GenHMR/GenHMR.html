@@ -686,7 +686,7 @@
           <h3>GenHMR <i>Training Phase</i>
           </h3>
           <p style="font-size: 1em;">GenHMR consists of two key components: (1) a <strong>Pose Tokenizer</strong> that encodes 3D human poses into a sequence of discrete tokens within a latent space, and (2) an Image-Conditioned Masked Transformer that models the probabilistic distributions of these tokens, conditioned on the input image and a partially masked token sequence. </p>
-          <img src="./assets/arch/genhmr_overview.png" class="img-fluid" alt="GenHMR Overview Image">
+          <img style="max-width: 100%;" src="./assets/arch/genhmr_overview.png" class="img-fluid" alt="GenHMR Overview Image">
         </div>
       </div>
       <div class="album py-5">
@@ -694,7 +694,7 @@
           <h3>Our <i>Inference Strategy</i>
           </h3>
           <p style="font-size: 1em;">Our inference strategy comprises two key stages: (1) <strong>Uncertainty-Guided Sampling</strong>, which iteratively samples high-confidence pose tokens based on their probabilistic distributions, and (2) <strong>2D Pose-Guided Refinement</strong>, which fine-tunes the sampled pose tokens to further minimize 3D reconstruction uncertainty by ensuring consistency between the 3D body mesh and 2D pose estimates. </p>
-          <img src="./assets/arch/genhmr_inference.png" class="img-fluid" alt="GenHMR Inference Image">
+          <img style="max-width: 100%;" src="./assets/arch/genhmr_inference.png" class="img-fluid" alt="GenHMR Inference Image">
         </div>
       </div>
       <div class="album py-5">
