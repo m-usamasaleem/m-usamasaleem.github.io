@@ -411,9 +411,9 @@
         margin: 0 auto; /* Centers the image within its container */
         display: block; /* Ensures proper centering */
       }
-      #visitor-map {
+      <!-- #visitor-map {
         display: none; /* Hides the element completely */
-      }
+      } -->
 
 
     </style>
@@ -602,7 +602,7 @@
       </div> -->
 
       <div class="album py-5">
-        <div class="container">
+        <div class="container">  
           <h3>State-of-the-Art Comparison of MQHMR</h3>
           <p style="font-size: 1em;"> Comparison of state-of-the-art methods, HMR2.0 and TokenHMR, which use vision transformers for 3D human mesh recovery from a single image. Red circles highlight errors in these methods when dealing with complex or ambiguous poses. In contrast, our <strong>MQ-HMR</strong> method addresses these challenges by incorporating a multi-query deformable transformer, leveraging multi-scale feature maps and a deformable attention mechanism to deliver more accurate and anatomically consistent pose estimations, even in difficult scenarios. </p>          <img src="./assets/challenging_poses/mqhmr_sota.png" class="img-fluid" alt="State-of-the-Art Comparison Image">
         </div>
@@ -611,7 +611,7 @@
         <div class="container">
           <h3>State-of-the-Art Comparison of NeurIK</h3>
           <p style="font-size: 1em;"> Qualitative results of our proposed method BioPose and comparison with ground truth. These pictures include multiple actions such as squatting and drop jumps. </p>
-                    <img  style="max-width: 100%;" src="./assets/challenging_poses/Biopose-D3KE.png" class="img-fluid" alt="State-of-the-Art Comparison Image">
+                    <img  src="./assets/challenging_poses/Biopose-D3KE.png" class="img-fluid" alt="State-of-the-Art Comparison Image">
         </div>
       </div>
 
@@ -628,8 +628,7 @@
     </main>
     <div class="container">
       <div id="visitor-map">
-        <script type='text/javascript' id='mapmyvisitors' src='https://mapmyvisitors.com/map.js?cl=ffffff&w=a&t=n&d=j2G8dNEYiZr7g9T4B76-liMmN2ZRf7aTZomwfAXMnaA'></script>
-      </div>
+        <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=1iFTPuQdZbR2fNFOMQ1GyM7OSlank5aHsVLT-Ryv8Fs&cl=ffffff&w=a"></script>      </div>
     </div>
     <footer class="site-footer">
       <p class="powered-by">
