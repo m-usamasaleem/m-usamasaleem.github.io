@@ -1,0 +1,547 @@
+<!-- from https://getbootstrap.com/docs/5.3/examples/album/ -->
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <!-- <script src="/docs/5.3/assets/js/color-modes.js"></script> -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <title>Private Data Synthesis from Decentralized Non-IID Data</title>
+    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"><link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"><link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180"><link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png"><link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png"><link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json"><link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9"><link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <meta name="theme-color" content="#712cf9">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+
+      .masthead {
+        height: 100vh;
+        min-height: 500px;
+        background-image: url('./website/head.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .btn span.icon {
+        background: url(assets/arxiv-logomark-small.svg) no-repeat;
+        float: left;
+        width: 10px;
+        height: 40px;
+      }
+
+      .arxiv-icon {
+        background-image: url(assets/arxiv-logomark-small.svg);
+        background-size: cover;
+        display: inline-block;
+        background-position: center center;
+        height: 24px;
+        width: 24px;
+      }
+
+      .mmm-card {
+        border-color: #660000;
+        border-style: solid;
+        border-width: 2px;
+      }
+
+      .custom-video-size {
+        width: 100%;
+        /* Sets the width of the video to 100% of its container */
+        width: 100%;
+        /* Sets the width of the video to 100% of its container */
+      }
+
+      body {
+        background-color: #ffffff;
+        /* Or any other color code */
+      }
+
+      video {
+        height: auto
+      }
+
+      #visitor-map {
+        width: 100px;
+        height: 100px;
+        background: #f4f4f4;
+        /* Light background */
+        border: 1px solid #ddd;
+        /* Add a subtle border */
+        border-radius: 8px;
+        /* Optional rounded corners */
+        margin: 20px auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Optional shadow for a modern look */
+      }
+
+      #fallback-message {
+        text-align: center;
+        ;
+        color: #666;
+        margin-top: 20px;
+      }
+
+      /* General Font Styling */
+      body {
+        font-family: 'Roboto', Arial, sans-serif;
+        background-color: #ffffff;
+        color: #212529;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: 'Poppins', Arial, sans-serif;
+        font-weight: 700;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-family: 'Roboto', Arial, sans-serif;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      a {
+        font-family: 'Poppins', Arial, sans-serif;
+        font-size: 1rem;
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+        color: #0056b3;
+      }
+
+      /* Section Titles */
+      h3 {
+        color: #333333;
+        margin-top: 1.5rem;
+      }
+
+      /* Footer */
+      footer.site-footer {
+        background-color: #343a40;
+        color: #ffffff;
+        text-align: center;
+        padding: 20px;
+      }
+
+      footer .powered-by a {
+        color: #ffffff;
+        text-decoration: none;
+      }
+
+      footer .powered-by a:hover {
+        color: #ffca28;
+      }
+
+      /* Card Styling */
+      .card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-body p {
+        height: 40x;
+        /* Set a minimum height */
+      }
+
+      /* Buttons */
+      .btn {
+        border-radius: 30px;
+        padding: 10px 20px;
+      }
+
+      .btn-primary {
+        background-color: #ffca28;
+        color: #343a40;
+        border: none;
+      }
+
+      .btn-primary:hover {
+        background-color: #ffd740;
+        color: #212529;
+      }
+
+      .btn-outline-secondary {
+        border: 1px solid #ccc;
+        color: #333;
+      }
+
+      .btn-outline-secondary:hover {
+        background-color: #f1f1f1;
+        color: #333;
+      }
+
+      /* Visitor Map */
+      #visitor-map {
+        margin: 30px auto;
+        width: 300px;
+        height: 200px;
+        background: #f4f4f4;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Masthead */
+      .masthead {
+        height: 100vh;
+        min-height: 500px;
+        background-image: url('./website/head.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+      }
+
+      .masthead h1 {
+        font-size: 3rem;
+        color: white;
+        text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        padding-top: 40%;
+      }
+
+      /* Media Queries */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        .masthead h1 {
+          font-size: 2rem;
+          padding-top: 50%;
+        }
+      }
+
+      body {
+        font-family: 'Roboto', Arial, sans-serif;
+        background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: 'Poppins', Arial, sans-serif;
+        font-weight: 700;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-family: 'Roboto', Arial, sans-serif;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      a {
+        font-family: 'Poppins', Arial, sans-serif;
+        color: #C02504;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .responsive-padding {
+        padding: 40px;
+        /* Default padding */
+      }
+
+      @media (max-width: 768px) {
+        .responsive-padding {
+          padding: 20px;
+          /* Smaller padding for tablets */
+        }
+      }
+
+      @media (max-width: 576px) {
+        .responsive-padding {
+          padding: 10px;
+          /* Smallest padding for mobile devices */
+        }
+      }
+
+      #visitor-map {
+        width: 100px;
+        height: 100px;
+        background: #f4f4f4;
+        /* Light background */
+        border: 1px solid #ddd;
+        /* Add a subtle border */
+        border-radius: 8px;
+        /* Optional rounded corners */
+        margin: 20px auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Optional shadow for a modern look */
+      }
+
+      #fallback-message {
+        text-align: center;
+        ;
+        color: #666;
+        margin-top: 20px;
+      }
+
+      a {
+        font-size: inherit;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      a:hover {
+        text-decoration: underline;
+        color: #C02504;
+        /* Optional hover color */
+      }
+
+      .album img {
+        max-width: 50%;
+        /* Adjusts the width to 50% of the container */
+        height: auto;
+        /* Maintains the aspect ratio */
+        margin: 0 auto;
+        /* Centers the image within its container */
+        display: block;
+        /* Ensures proper centering */
+      }
+
+      < !-- #visitor-map {
+        display: none;
+        /* Hides the element completely */
+      }
+
+      -->
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-12 col-md-12 mx-auto">
+            <h1>Private Data Synthesis from Decentralized Non-IID Data</h1>
+            <h1>(ICJNN 2023)</h1>
+            <h3 style="margin-top: 10px; font-size: 1.5em; font-weight: normal; color: #C02504;">
+              <u>
+                <strong>
+                  <a href="https://m-usamasaleem.github.io/" style="font-size: inherit; text-decoration: none; color: inherit;"> Muhammad Usama Saleem </a>
+                </strong>
+              </u>, Liyue Fan
+            </h3>
+            <div style="font-size: 0.9em; color: gray; margin-top: 5px;">University of North Carolina at Charlotte</div>
+            <div style="margin-top: 15px;">
+              <a href="#" style="text-decoration: none; border: 1px solid #ccc; padding: 10px 15px; border-radius: 5px; margin-right: 10px; font-size: 0.9em;">arXiv</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.85em; color: gray;"> For any inquiries, please email to: <a href="mailto:msaleem2@charlotte.edu">msaleem2@charlotte.edu</a>
+            </p>
+          </div>
+        </div>
+        <div class="container text-center responsive-padding">
+          <h1>Abstract</h1>
+          <p style="font-family: Arial, sans-serif; line-height: 1.6; text-align: justify;"> Privacy-preserving data sharing enables a wide range of exploratory and secondary data analyses while protecting the privacy of individuals in the datasets. Recent advancements in machine learning, specifically generative adversarial networks (GANs), have shown great promise for synthesizing realistic datasets. In this work, we investigate the feasibility of training GAN models privately in practical settings, where the input data is distributed across multiple parties, and local data may be highly skewed, i.e., non-IID. We examine centralized private GAN solutions applied at each local party and propose a federated solution    <span style="font-weight: bold; color: #C02504;">DP-FedProxGAN that provides strong privacy and is suitable for non-IID data.</span>   We conduct extensive empirical analysis with a wide range of non-IID settings and data from different domains. We provide in-depth discussions about the utility of the synthetic data, the privacy risks in terms of membership inference attacks, as well as the privacy-utility trade-off for private solutions. </p>
+        </div>
+      </section>
+      <div class="album py-5">
+        <div class="container">
+          <h3>Private Data Synthesis from Decentralized
+            Non-IID Data
+          </h3>
+          <p style="font-size: 1em;"> Approaches to Private Data Synthesis from Decentralized Non-IID Data: note that in both approaches, the central server may be potentially untrusted. </p>
+          <div class="image-container">
+            <figure>
+                <img src="./assets/images/local_training.png" class="img-fluid" alt="Local Training Approach">
+                <figcaption> <span style="font-weight: bold; color: #C02504;">Local Training Approach </span> - Each party trains a private GAN locally and shares synthetic data instead of raw data. This approach provides full autonomy to each party.</figcaption>
+            </figure>
+            <figure>
+                <img src="./assets/images/federated_training.png" class="img-fluid" alt="Federated Training Approach">
+                <figcaption><span style="font-weight: bold; color: #C02504;">Federated Training Approach </span> - All parties collaboratively train a global GAN model without sharing raw data. This method is effective for learning from decentralized and non-IID data.</figcaption>
+            </figure>
+
+            
+        </div>
+        
+
+        </div>
+      </div>
+      <div class="album py-5">
+        <div class="container">
+          <h3>Privacy (White-Box Attack) vs. Utility Tradeoff</h3>
+          <p style="font-size: 1em;">The figure illustrates the tradeoff between privacy and utility for synthetic data generation using three GAN approaches (DP-FedProx GAN, privGAN, and DPGAN) across MNIST, Fashion-MNIST, CIFAR-10, and CelebA datasets. Privacy is measured by White-Box (WB) attack accuracy (%) on the x-axis, while utility is represented by the Inception Score (IS) on the y-axis. Results are shown for four distribution settings: Non-Skew (NS), Quantity-based Label Imbalance (QLI), Distribution-based Label Imbalance (DLI), and Quantity Skew (QS). The DP-FedProx GAN approach demonstrates a superior privacy-utility tradeoff, achieving higher IS scores with lower WB attack accuracy, particularly in balanced (NS) and moderately imbalanced (QLI and DLI) distributions.</p>        </p>
+          <img src="./assets/images/wbattackVSis.png" class="img-fluid" alt="State-of-the-Art Comparison Image">
+        </div>
+      </div>
+
+
+      <div class="album py-5">
+        <div class="container">
+          <h3>Privacy (Total Variation Distance (TVD) Attack) vs. Utility Tradeoff</h3>
+          <p style="font-size: 1em;">The figure illustrates the privacy vs. utility tradeoff for synthetic data generation, showing Total Variation Distance (TVD) attack scores (x-axis) against Inception Score (IS) (y-axis) for three GAN approaches: DP-FedProx GAN, privGAN, and DPGAN. Results are presented across four datasets (MNIST, Fashion-MNIST, CIFAR-10, and CelebA) and four data distribution settings: Non-Skew (NS), Quantity-based Label Imbalance (QLI), Distribution-based Label Imbalance (DLI), and Quantity Skew (QS). DP-FedProx GAN consistently achieves better tradeoffs, demonstrating higher IS with lower TVD scores compared to privGAN and DPGAN, especially in NS and DLI settings. However, privGAN and DPGAN show increased vulnerability under QLI and QS distributions.</p>
+        </p>
+          <img src="./assets/images/varyPrivacy_TVD_IS.png" class="img-fluid" alt="State-of-the-Art Comparison Image">
+        </div>
+      </div>
+
+      <div class="album py-5">
+        <div class="container">
+          <h3>Privacy (Monte-Carlo (MC) Attack) vs. Utility Tradeoff</h3>
+          <p style="font-size: 1em;">The figure illustrates the privacy vs. utility tradeoff for synthetic data generation under Monte-Carlo (MC) attack accuracy (x-axis) and Inception Score (IS) (y-axis) across three GAN approaches: DP-FedProx GAN, privGAN, and DPGAN. Results are shown for four datasets (MNIST, Fashion-MNIST, CIFAR-10, and CelebA) and four data distribution settings: Non-Skew (NS), Quantity-based Label Imbalance (QLI), Distribution-based Label Imbalance (DLI), and Quantity Skew (QS). DP-FedProx GAN achieves a more favorable tradeoff in most scenarios, particularly in NS and DLI settings, while privGAN and DPGAN demonstrate higher MC attack risks, especially under QLI and QS settings.</p>
+        </p>
+          <img src="./assets/images/varyPrivacy_MC_IS.png" class="img-fluid" alt="State-of-the-Art Comparison Image">
+        </div>
+      </div>
+
+      <div class="album py-5">
+        <div class="container">
+          <h3>Varying Number of Parties</h3>
+          <p style="font-size: 1em;">The figure illustrates the impact of the number of participating parties on the Inception Score (IS) for synthetic data generation across three GAN approaches: DP-FedProx GAN, privGAN, and DPGAN. Results are shown for four datasets (Fashion-MNIST, CIFAR-10, and CelebA) under four data distribution settings: Non-Skew (NS), Quantity-based Label Imbalance (QLI), Distribution-based Label Imbalance (DLI), and Quantity Skew (QS). As the number of parties increases, DP-FedProx GAN demonstrates significant improvements in IS, highlighting its capability to effectively utilize contributions from multiple parties. In contrast, privGAN and DPGAN show relatively smaller gains, indicating limitations in handling distributed data.</p>
+        </p>
+          <img src="./assets/images/vary_parties_IS.png" class="img-fluid" alt="State-of-the-Art Comparison Image">
+        </div>
+      </div>
+
+      <div class="album py-5">
+        <div class="container">
+          <h3>Varying Concentration Parameters</h3>
+          <p style="font-size: 1em;">The figure illustrates the Fréchet Inception Distance (FID) scores for synthetic data generation across varying concentration parameters (&alpha;) in three GAN approaches: privGAN, DPGAN, and DP-FedProx GAN. Results are shown for four datasets (MNIST, Fashion-MNIST, CIFAR-10, and CelebA) and two data distribution settings: Distribution-based Label Imbalance (DLI, solid lines) and Quantity Skew (QS, dashed lines). Lower FID scores indicate better quality synthetic data. DP-FedProx GAN demonstrates superior performance in handling highly imbalanced distributions (lower &alpha; values), especially for complex datasets like CelebA, while privGAN and DPGAN show higher FID scores, indicating poorer performance in such scenarios.</p>        </p>
+          <img src="./assets/images/vary_alpha_FID.png" class="img-fluid" alt="State-of-the-Art Comparison Image">
+        </div>
+      </div>
+
+
+      <!-- <div class="album py-5">
+        <div class="container">
+          <h3>Varying Privacy Parameters</h3>
+          <p style="font-size: 1em;">The figure illustrates the impact of privacy parameters (&lambda; for privGAN and &epsilon; for other methods) on the Inception Score (IS) for synthetic data generation across MNIST, Fashion-MNIST, CIFAR-10, and CelebA datasets. Different GAN approaches (privGAN, DPGAN, DP-FedProx GAN, and DP-FedAvg GAN) are evaluated under four distribution settings: Quantity-based Label Imbalance (QLI), Distribution-based Label Imbalance (DLI), Non-Skew (NS), and Quantity Skew (QS). Federated solutions demonstrate superior performance under strong privacy constraints (&epsilon;), particularly with the DP-FedProx GAN approach.</p>
+        </p>
+          <img src="./assets/images/varyNoise.png" class="img-fluid" alt="State-of-the-Art Comparison Image">
+        </div>
+      </div> -->
+
+    </main>
+    <!-- <div class="container">
+      <div id="visitor-map">
+        <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=1iFTPuQdZbR2fNFOMQ1GyM7OSlank5aHsVLT-Ryv8Fs&cl=ffffff&w=a"></script>
+      </div>
+    </div> -->
+    <footer class="site-footer">
+      <p class="powered-by">
+        <a href="/tag/privacy/">Privacy</a>
+      </p>
+      <p class="powered-by">@2022 Muhammad Usama Saleem. All Rights Reserved.</p>
+      <span class="float-right" aria-hidden="true">
+        <a href="#" class="back-to-top">
+          <span class="button_icon">
+            <i class="fas fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+    </footer>
+  </body>
+</html>

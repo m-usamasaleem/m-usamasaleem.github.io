@@ -1,0 +1,65 @@
+
+\begin{algorithm}
+\DontPrintSemicolon
+\SetAlgoLined
+\textbf{Server loop:}
+
+\KwIn{total number of parties $\emph{K} \in \mathbb{N}$, total number of rounds $T \in \mathbb{N}$, sampling probability q $\in$ (0, 1], noise scale $\emph{z} \in \mathbb{R^+}$ , clipping parameter  $S \in \mathbb{R^+} $, generator $\theta^{0}_{ G}$ , discriminator $\theta^{0}_{D}$, privacy accountant $ \mathcal{M}$ }
+
+\text{Initialize} $\sigma = \frac{zS}{qN}$ \;
+
+\For{\text{round} $t=0$ in $T-1$}  
+{
+	$C^{t}  \leftarrow   \text{ (randomly sample $qN$ distinct parties)}$ \;
+ 
+	\For{$  \text{each party } k  \in C^{t} $} 
+ {
+		$\Delta^{t+1}_{k} \leftarrow  \text{LocalDiscUpdate}(k, \theta^{t}_{D} , \theta^{t}_{G})$
+		\tcp*[l]{compute local update} } 
+
+$\Delta^{t+1} \leftarrow  \frac{1}{qN}  \sum_{k\in C^{t}}^{} \Delta^{t+1}_{k} $\;
+ 
+$\theta^{t+1}_{D} \leftarrow   \theta^{t}_{D} +  \Delta^{t+1} + \mathcal{N} (0,I \sigma^{2})$ \tcp*[l]{update discriminator privately} 
+$\mathcal{M}\text{.accum-privacy-spending($z$)}$\;
+
+$\theta^{t+1}_{G} \leftarrow  \text{GeneratorUpdate}(\theta^{t+1}_{D} , \theta^{t}_{G})$\;
+}
+$\mathcal{M}\text{.accum-privacy-spent()}$ \tcp*[l]{report total privacy}
+
+\noindent\rule{8cm}{0.4pt}
+\BlankLine
+\textbf{LocalDiscUpdate$(k,\theta^{t}_{D},\theta_G)$:} 
+
+\KwIn{batch-size $B \in$ $\mathbb{N}$, number of disc. steps $n$ $\in \mathbb{N}$, disc. learning rate $\eta_D$ $\in \mathbb{R^+}$, clipping parameter $ S \in \mathbb{R^+}$ , weight for proximal term $\mu \in \mathbb{R^+}$ }
+
+$\theta_{D} \leftarrow   \theta^{t}_{D}$\;
+
+$ \mathcal{B} \leftarrow \text{(sample $n$ size-$B$ batches from real data $D^k$ )}  $ \;
+
+\For{$  \text{each batch }  b_{real}  \in \mathcal{B}$} {
+$b_{fake} \leftarrow \text{(sample $B$ synthetic records from generator $\theta_G$)}$\;
+
+$\nabla h  \leftarrow  \nabla h_{\mu} (\theta_D)$  \tcp*[l]{as in~(\ref{eq:proxloss}), parameterized with $\theta^{t}_{D}$, $b_{real}$, $b_{fake}$}
+$\theta_D \leftarrow \theta_D - \eta_D  \nabla h  $ \tcp*[l]{local update}
+	}
+$\Delta = \theta_D - \theta^{t}_{D}$  \;
+
+$ \text{return }\Delta_{k}= \Delta .  \text{min}(1,\frac{S}{||\Delta|| }) $ \tcp{clip locally} 
+\BlankLine
+\noindent\rule{8cm}{0.4pt}
+\BlankLine
+\textbf{GeneratorUpdate$(\theta_D, \theta^{t}_{G})$:}
+
+\KwIn{batch-size $B \in \mathbb{N} $, number of gen. steps $n \in \mathbb{N}$,   gen. learning rate $\eta_{G} \in \mathbb{R^{+}}$}
+$\theta_{G} \leftarrow \theta^{t}_{G}$ \;
+
+\For{$  \text{each  step from } i=0 \text{ to } n$} {
+$b_{fake }  \leftarrow  \text{(sample $B$ synthetic records from generator $\theta_G$)}$\;
+
+$\theta_G \leftarrow  \theta_G - \eta_G \nabla l_G (\theta_G$) \tcp*[l]{update generator, $l_G$ parameterized with $\theta_D$ and $b_{fake}$}
+}
+	
+$ \text{return } \theta_G$
+\caption{DP-FedProx-GAN}
+\label{alg:dpfedproxgan}
+\end{algorithm} 
