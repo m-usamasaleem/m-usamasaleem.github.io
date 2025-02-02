@@ -462,10 +462,102 @@
           <h1>Abstract</h1>
           <p style="font-family: Arial, sans-serif; line-height: 1.6; text-align: justify;"> Recent advancements in 3D human pose estimation from single-camera images and videos have relied on parametric models, like SMPL. However, these models oversimplify anatomical structures, limiting their accuracy in capturing true joint locations and movements, which reduces their applicability in biomechanics, healthcare, and robotics. Biomechanically accurate pose estimation, on the other hand, typically requires costly marker-based motion capture systems and optimization techniques in specialized labs. To bridge this gap, we propose <span style="font-style: italic;">BioPose</span>, a novel learning-based framework for predicting biomechanically accurate 3D human pose directly from monocular videos. BioPose includes three key components: <span style="font-weight: bold; color: #C02504;">a Multi-Query Human Mesh Recovery model (MQ-HMR)</span>, <span style="font-weight: bold; color: #C02504;">a Neural Inverse Kinematics (NeurIK)</span> model, and <span style="font-weight: bold; color: #C02504;">a 2D-informed pose refinement technique</span>. MQ-HMR leverages a multi-query deformable transformer to extract multi-scale fine-grained image features, enabling precise human mesh recovery. NeurIK treats the mesh vertices as virtual markers, applying a spatial-temporal network to regress biomechanically accurate 3D poses under anatomical constraints. To further improve 3D pose estimations, a 2D-informed refinement step optimizes the query tokens during inference by aligning the 3D structure with 2D pose observations. Experiments on benchmark datasets demonstrate that <span style="font-weight: bold; color: #C02504;">BioPose</span> significantly outperforms state-of-the-art methods. </p>        </div>
       </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div class="album py-5 bg-body-tertiary">
         <div class="container">
           <div class="card-body text-center">
-            <h3 class="display-4 mb-4" style="font-weight: bold;">Video Demos</h3>
+            <h3 class="display-4 mb-4" style="font-weight: bold;">Video Demos of BioPose</h3>
+            <!-- <p class="lead" style="font-size: 1rem; line-height: 1.8;">   The MQ-HMR demo highlights our method for achieving accurate 3D human mesh reconstructions from monocular images. Key to our approach is the use of a <strong>Multi-Query Deformable Transformer</strong>, which leverages multi-scale feature maps and deformable attention mechanisms to enhance pose recovery, even in complex and ambiguous scenarios. By efficiently handling uncertainty in the 2D-to-3D mapping process, MQ-HMR delivers precise and anatomically consistent 3D reconstructions. </p> -->
+          </div>
+
+          <div class="container-fluid text-center responsive-padding"> <!-- Changed to container-fluid -->
+            <div class="row g-3">
+              <div class="col-12"> <!-- Full width -->
+                <div class="card shadow-sm">
+                  <video id="dance" autoplay controls muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                    <source src="./assets/demo/neurik/Pitching.mov" type="video/mp4">
+                  </video>
+                  <div class="card-body">
+                    <p>Pitching</p> <!-- Merged descriptions -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+
+
+
+
+          <div class="container text-center responsive-padding">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="card shadow-sm">
+                  <video id="dance1" autoplay controls muted loop playsinline style="width: 100%; height: auto;">
+                    <source src="./assets/demo/neurik/Jumping.mov" type="video/mp4">
+                  </video>
+                  <div class="card-body">
+                    <p>Jumping</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card shadow-sm">
+                  <video id="dance2" autoplay controls muted loop playsinline style="width: 100%; height: auto;">
+                    <source src="./assets/demo/neurik/Squating.mov" type="video/mp4">
+                  </video>
+                  <div class="card-body">
+                    <p>Squats</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+          <div class="card-body text-center">
+            <h3 class="display-4 mb-4" style="font-weight: bold;">Video Demos of MQ-HMR</h3>
             <p class="lead" style="font-size: 1rem; line-height: 1.8;">   The MQ-HMR demo highlights our method for achieving accurate 3D human mesh reconstructions from monocular images. Key to our approach is the use of a <strong>Multi-Query Deformable Transformer</strong>, which leverages multi-scale feature maps and deformable attention mechanisms to enhance pose recovery, even in complex and ambiguous scenarios. By efficiently handling uncertainty in the 2D-to-3D mapping process, MQ-HMR delivers precise and anatomically consistent 3D reconstructions. </p>
           </div>
           <div class="container text-center responsive-padding">
