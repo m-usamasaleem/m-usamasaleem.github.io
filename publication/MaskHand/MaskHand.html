@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <title>MMHMR: Generative Masked Modeling for Hand Mesh Recovery</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      body {
+        background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+        font-family: Arial, sans-serif;
+      }
+
+      .carousel-indicators [data-bs-target] {
+        background-color: #741906;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+
+      .carousel-indicators .active {
+        background-color: #d9534f;
+        width: 15px;
+        height: 15px;
+      }
+
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon {
+        background-color: #741906;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+      }
+
+      header {
+        background-color: #343a40;
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      .video-background {
+        position: relative;
+        min-width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .video-background video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 100%;
+        min-height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        /* Semi-transparent overlay */
+        z-index: 1;
+      }
+
+      .video-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        color: white;
+        text-align: center;
+      }
+
+      .video-content h1 {
+        font-size: 3rem;
+        margin: 0;
+      }
+
+      .video-content p {
+        font-size: 1.5rem;
+      }
+
+      footer {
+        background-color: #343a40;
+        color: #ffffff;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      /* Media Query for Smaller Devices */
+      @media (max-width: 768px) {
+        .carousel-indicators [data-bs-target] {
+          width: 10px;
+          height: 10px;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+          width: 40px;
+          height: 40px;
+        }
+
+        .card-title {
+          font-size: 1rem;
+        }
+
+        .video-content h1 {
+          font-size: 2rem;
+        }
+
+        .video-content p {
+          font-size: 1rem;
+        }
+      }
+
+      body {
+        font-family: 'Roboto', Arial, sans-serif;
+        background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: 'Poppins', Arial, sans-serif;
+        font-weight: 700;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-family: 'Roboto', Arial, sans-serif;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      a {
+        font-family: 'Poppins', Arial, sans-serif;
+        color: #C02504;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .responsive-padding {
+        padding: 40px;
+        /* Default padding */
+      }
+
+      @media (max-width: 768px) {
+        .responsive-padding {
+          padding: 20px;
+          /* Smaller padding for tablets */
+        }
+      }
+
+      @media (max-width: 576px) {
+        .responsive-padding {
+          padding: 10px;
+          /* Smallest padding for mobile devices */
+        }
+      }
+
+      #visitor-map {
+        width: 100px;
+        height: 100px;
+        background: #f4f4f4;
+        /* Light background */
+        border: 1px solid #ddd;
+        /* Add a subtle border */
+        border-radius: 8px;
+        /* Optional rounded corners */
+        margin: 20px auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* Optional shadow for a modern look */
+      }
+
+      #fallback-message {
+        text-align: center;
+        font-size: 1.2em;
+        color: #666;
+        margin-top: 20px;
+      }
+
+      #visitor-map {
+        display: none;
+        /* Hides the element completely */
+      }
+    </style>
+  </head>
+  <body>
+    <header class="py-3 bg-dark text-white">
+      <div class="container text-center">
+        <h1>MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild</h1>
+        <h2 style="margin-top: 10px; font-size: 1.0em; font-weight: normal; color: #C02504;"><u><strong><a href="https://m-usamasaleem.github.io/" style="font-size: inherit; text-decoration: none; color: inherit;">Muhammad Usama Saleem</a></strong></u>, Ekkasit Pinyoanuntapong, Mayur Jagdishbhai Patel, Hongfei Xue, Ahmed Helmy, Srijan Das, Pu Wang </h2>
+        <div style="font-size: 0.9em; color: gray; margin-top: 5px;"> University of North Carolina at Charlotte (UNCC) </div>
+        <div style="margin-top: 15px;"><a href="https://arxiv.org/abs/2412.13393" class="btn btn-outline-secondary">arXiv</a></div>
+      </div>
+      <p style="margin-top: 20px; font-size: 0.85em; color: gray;"> For any inquiries, please email to: <a href="mailto:msaleem2@charlotte.edu">msaleem2@charlotte.edu</a></p>
+    </header>
+    <main>
+      <div class="video-background"><video autoplay muted loop playsinline>
+          <source src="./assets/video/sample11_.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="video-content"></div>
+      </div>
+      <div class="album py-5" style="background-color: #f8f9fa;">
+        <div class="container" style="min-width: 100%;">
+          <div class="row g-4">
+            <!-- First Video -->
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="card h-100 shadow-lg border-0">
+                <video id="video-1" autoplay controls muted loop playsinline class="w-100 rounded-top">
+                  <source src="./assets/video/sample6.mp4" type="video/mp4">
+                </video>
+                <!-- <div class="card-body text-center"><h5 class="card-title">Video Title 1</h5></div> -->
+              </div>
+            </div>
+            <!-- Second Video -->
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="card h-100 shadow-lg border-0">
+                <video id="video-2" autoplay controls muted loop playsinline class="w-100 rounded-top">
+                  <source src="./assets/video/chop.mp4" type="video/mp4">
+                </video>
+                <!-- <div class="card-body text-center"><h5 class="card-title">Video Title 2</h5></div> -->
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="card h-100 shadow-lg border-0">
+                <video id="video-4" autoplay controls muted loop playsinline class="w-100 rounded-top">
+                  <source src="./assets/video/doereel.mp4" type="video/mp4">
+                </video>
+                <!-- <div class="card-body text-center"><h5 class="card-title">Video Title 4</h5></div> -->
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="card h-100 shadow-lg border-0">
+                <video id="video-4" autoplay controls muted loop playsinline class="w-100 rounded-top">
+                  <source src="./assets/video/doe.mp4" type="video/mp4">
+                </video>
+                <!-- <div class="card-body text-center"><h5 class="card-title">Video Title 4</h5></div> -->
+              </div>
+            </div>
+            <!-- Third Video -->
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="card h-100 shadow-lg border-0">
+                <video id="video-3" autoplay controls muted loop playsinline class="w-100 rounded-top">
+                  <source src="./assets/video/sample21_.mp4" type="video/mp4">
+                </video>
+                <!-- <div class="card-body text-center"><h5 class="card-title">Video Title 3</h5></div> -->
+              </div>
+            </div>
+            <!-- Fourth Video -->
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="card h-100 shadow-lg border-0">
+                <video id="video-4" autoplay controls muted loop playsinline class="w-100 rounded-top">
+                  <source src="./assets/video/sample24_.mp4" type="video/mp4">
+                </video>
+                <!-- <div class="card-body text-center"><h5 class="card-title">Video Title 4</h5></div> -->
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="card h-100 shadow-lg border-0">
+                <video id="video-4" autoplay controls muted loop playsinline class="w-100 rounded-top">
+                  <source src="./assets/video/sample22_.mp4" type="video/mp4">
+                </video>
+                <!-- <div class="card-body text-center"><h5 class="card-title">Video Title 4</h5></div> -->
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="card h-100 shadow-lg border-0">
+                <video id="video-4" autoplay controls muted loop playsinline class="w-100 rounded-top">
+                  <source src="./assets/video/typing.mp4" type="video/mp4">
+                </video>
+                <!-- <div class="card-body text-center"><h5 class="card-title">Video Title 4</h5></div> -->
+              </div>
+            </div>
+          </div>
+          <section class="py-4 text-center container">
+            <h5>
+              <strong>Our demo videos showcase MaskHand's ability to reconstruct highly accurate and realistic 3D hand meshes from single RGB images, overcoming challenges like complex articulations, self-occlusions, and depth ambiguities.</strong>
+            </h5>
+          </section>
+        </div>
+      </div>
+      <div class="album py-5" style="background-color: #f8f9fa;">
+        <div class="container">
+          <h3 class="text-center">MaskHand Training</h3>
+          <p>
+            <strong>MaskHand <em>Training Phase</em>
+            </strong>. MaskHand consists of two key components: (1) <strong>VQ-MANO</strong>, which encodes 3D hand poses into a sequence of discrete tokens within a latent space, and (2) a <strong>Context-Guided Masked Transformer</strong> that models the probabilistic distributions of these tokens, conditioned on the input image, 2D pose cues, and a partially masked token sequence.
+          </p>
+          <img src="./assets/arch/MMHMR_overview.png" class="img-fluid" alt="MMHMR Overview Image">
+        </div>
+      </div>
+      <!-- <div class="album py-5" style="background-color: #f8f9fa;"><div class="container"><h3 class="text-center">MMHMR Inference</h3><div class="text-center"><img src="./assets/arch/MMHMR_infer.png" class="custom-img" alt="MMHMR Inference Image"></div></div></div> -->
+      <!-- Carousel -->
+      <div id="carouselExampleIndicators" class="carousel slide py-5" data-bs-ride="carousel">
+        <div class="container">
+          <h3 class="text-center">State-of-the-Art Comparison</h3>
+          <!-- Indicators -->
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <!-- Slides -->
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="./assets/arch/sota/SOTA_image_1.png" class="d-block w-100 img-fluid" alt="SOTA Comparison Slide 1">
+            </div>
+            <div class="carousel-item">
+              <img src="./assets/arch/sota/SOTA_image_2.png" class="d-block w-100 img-fluid" alt="SOTA Comparison Slide 2">
+            </div>
+            <div class="carousel-item">
+              <img src="./assets/arch/sota/SOTA_image_3.png" class="d-block w-100 img-fluid" alt="SOTA Comparison Slide 3">
+            </div>
+          </div>
+          <!-- Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div id="carouselExampleIndicators2" class="carousel slide py-5" data-bs-ride="carousel">
+        <div class="container">
+          <h3 class="text-center">Occluded Masked Regions around 80-90%: Challenging Poses</h3>
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <!-- <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button> -->
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="./assets/arch/masked/masked1.png" class="d-block w-100 img-fluid" alt="HINT Challenging Pose 1">
+            </div>
+            <div class="carousel-item">
+              <img src="./assets/arch/masked/masked2.png" class="d-block w-100 img-fluid" alt="HINT Challenging Pose 2">
+            </div>
+            <!-- <div class="carousel-item"><img src="./assets/arch/masked/masked3.png" class="d-block w-100 img-fluid" alt="HINT Challenging Pose 3"></div><div class="carousel-item"><img src="./assets/arch/masked/masked4.png" class="d-block w-100 img-fluid" alt="HINT Challenging Pose 3"></div>             -->
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div id="carouselExampleIndicators4" class="carousel slide py-5" data-bs-ride="carousel">
+        <div class="container">
+          <h3 class="text-center">Multiple Reconstruction Hypotheses with Explicit Confidence Levels</h3>
+          <h6 class="text-center"> Multiple reconstruction hypotheses with explicit confidence levels. The figure illustrates MaskHand's 3D hand mesh reconstructions in occluded scenarios, ranked by confidence. High-confidence hypotheses closely align with the ground truth, ensuring structural accuracy and fidelity. As confidence decreases (e.g., from the 100th to the 1000th hypothesis), reconstructions degrade, exhibiting distortions and unrealistic poses. This highlights the importance of prioritizing high-confidence hypotheses for robust and accurate 3D hand reconstruction. </h6>
+          <!-- Indicators -->
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          </div>
+          <!-- Slides -->
+          <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+              <img src="./assets/arch/conf/confidence_1.png" class="d-block w-100 img-fluid" alt="Confidence Image 1">
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+              <img src="./assets/arch/conf/confidence_2.png" class="d-block w-100 img-fluid" alt="Confidence Image 2">
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+              <img src="./assets/arch/conf/confidence_3.png" class="d-block w-100 img-fluid" alt="Confidence Image 3">
+            </div>
+            <!-- Slide 4 -->
+            <div class="carousel-item">
+              <img src="./assets/arch/conf/confidence_4.png" class="d-block w-100 img-fluid" alt="Confidence Image 4">
+            </div>
+          </div>
+          <!-- Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators4" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <!-- <div id="carouselExampleIndicators2" class="carousel slide py-5" data-bs-ride="carousel"><div class="container"><h3 class="text-center">HINT Benchmark: Challenging Poses in Wild</h3><div class="carousel-indicators"><button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button><button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button><button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button></div><div class="carousel-inner"><div class="carousel-item active"><img src="./assets/arch/hint/MMHMR_chall_poses_3d_1.png" class="d-block w-100 img-fluid" alt="HINT Challenging Pose 1"></div><div class="carousel-item"><img src="./assets/arch/hint/MMHMR_chall_poses_3d_2.png" class="d-block w-100 img-fluid" alt="HINT Challenging Pose 2"></div><div class="carousel-item"><img src="./assets/arch/hint/MMHMR_chall_poses_3d_3.png" class="d-block w-100 img-fluid" alt="HINT Challenging Pose 3"></div></div><button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button><button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></button></div></div> -->
+      <div id="carouselComplexOcclusion" class="carousel slide py-5" data-bs-ride="carousel">
+        <div class="container">
+          <h3 class="text-center">HINT Benchmark: Challenging Poses in Wild</h3>
+          <!-- Indicators -->
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselComplexOcclusion" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselComplexOcclusion" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselComplexOcclusion" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselComplexOcclusion" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          </div>
+          <!-- Slides -->
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="./assets/arch/complex/R_1.png" class="d-block w-100 img-fluid" alt="Complex Scenario 1">
+            </div>
+            <div class="carousel-item">
+              <img src="./assets/arch/complex/R_2.png" class="d-block w-100 img-fluid" alt="Complex Scenario 2">
+            </div>
+            <div class="carousel-item">
+              <img src="./assets/arch/complex/R_3.png" class="d-block w-100 img-fluid" alt="Complex Scenario 3">
+            </div>
+            <div class="carousel-item">
+              <img src="./assets/arch/complex/R_4.png" class="d-block w-100 img-fluid" alt="Complex Scenario 4">
+            </div>
+          </div>
+          <!-- Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselComplexOcclusion" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselComplexOcclusion" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div id="carouselExampleIndicators3" class="carousel slide py-5" data-bs-ride="carousel">
+        <div class="container">
+          <h3 class="text-center">Visualizing In-Wild Results</h3>
+          <!-- Indicators -->
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          </div>
+          <!-- Slides -->
+          <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+              <img src="./assets/arch/wild/MMHMR_inwild_1.png" class="d-block w-100 img-fluid" alt="MMHMR In-Wild Image 1">
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+              <img src="./assets/arch/wild/MMHMR_inwild_2.png" class="d-block w-100 img-fluid" alt="MMHMR In-Wild Image 2">
+            </div>
+          </div>
+          <!-- Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div id="carouselKeypointsOffsets" class="carousel slide py-5" data-bs-ride="carousel">
+        <div class="container">
+          <h3 class="text-center">Visualizing Reference Keypoints and their Offsets</h3>
+          <!-- Indicators -->
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselKeypointsOffsets" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselKeypointsOffsets" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselKeypointsOffsets" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselKeypointsOffsets" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          </div>
+          <!-- Slides -->
+          <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+              <img src="./assets/arch/anchors/MMHMR_offsetsamples1.png" class="d-block w-100 img-fluid" alt="MMHMR Overview Image 1">
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+              <img src="./assets/arch/anchors/MMHMR_offsetsamples2.png" class="d-block w-100 img-fluid" alt="MMHMR Overview Image 2">
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+              <img src="./assets/arch/anchors/MMHMR_offsetsamples3.png" class="d-block w-100 img-fluid" alt="MMHMR Overview Image 3">
+            </div>
+            <!-- Slide 4 -->
+            <div class="carousel-item">
+              <img src="./assets/arch/anchors/MMHMR_offsetsamples4.png" class="d-block w-100 img-fluid" alt="MMHMR Overview Image 4">
+            </div>
+          </div>
+          <!-- Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselKeypointsOffsets" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselKeypointsOffsets" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div id="carouselMMHMRComponents" class="carousel slide py-5" data-bs-ride="carousel">
+        <div class="container">
+          <h3 class="text-center">Effectiveness of Proposed MaskHand Components</h3>
+          <!-- <h6 class="text-center"><strong>Effectiveness of Proposed MMHMR Components:</strong> Comparison of the MMHMR (full model) vs. w/o 2D OpenPose Context, Upsampler, and GGPM. 
+            The Upsampler enhances details, while 2D OpenPose Context provides spatial cues; their removal reduces accuracy. 
+            GGPM ensures joint dependencies and anatomical coherence.
+          </h6> -->
+          <!-- Indicators -->
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselMMHMRComponents" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselMMHMRComponents" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselMMHMRComponents" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <!-- Slides -->
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="./assets/arch/component/2.png" class="d-block w-100 img-fluid" alt="Component Analysis Image 1">
+            </div>
+            <div class="carousel-item">
+              <img src="./assets/arch/component/3.png" class="d-block w-100 img-fluid" alt="Component Analysis Image 2">
+            </div>
+            <div class="carousel-item">
+              <img src="./assets/arch/component/1.png" class="d-block w-100 img-fluid" alt="Component Analysis Image 3">
+            </div>
+          </div>
+          <!-- Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselMMHMRComponents" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselMMHMRComponents" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div class="album py-5" style="color: black;">
+        <div class="container">
+          <h3 class="text-center">Text-to-Mesh Generation</h3>
+          <div class="text-center">
+            <img src="./assets/arch/ASL_alphabet.png" class="custom-img" alt="MMHMR Inference Image" style="max-width: 100%; height: auto; object-fit: contain; aspect-ratio: 3 / 2;">
+          </div>
+        </div>
+      </div>
+      <div class="album py-5" style="color: black;">
+        <div class="container">
+          <h3 class="text-center">Confidence-Aware Unconditional Mesh Generation</h3>
+          <div class="text-center">
+            <img src="./assets/arch/uncond_conf.png" class="custom-img" alt="MMHMR Inference Image" style="max-width: 100%; height: auto; object-fit: contain; aspect-ratio: 3 / 2;">
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- <footer><p>&copy; 2024 MMHMR: Generative Hand Mesh Recovery. All rights reserved.</p></footer> -->
+  </body>
+</html>
