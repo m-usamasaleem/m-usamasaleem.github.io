@@ -268,16 +268,24 @@ section:last-of-type {
   margin-right: 4px;         /* space between logo and name */
 }
 
-.inline-logo a {
-  display: inline-block;     /* so vertical-align works if you need it */
-  vertical-align: middle;
-  text-decoration: none;
-  color: inherit;
-}
-
-.inline-logo a.logo-name {
-  font-weight: 700;          /* bold the text name */
-}
+  .inline-logo {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 0.25em;
+  }
+  .inline-logo img {
+    width: 20px;
+    height: auto;
+  }
+  .logo-name {
+    font-weight: 700;
+    color: #C02504; /* your brand color */
+    text-decoration: none;
+    margin: 0 0.25em;
+  }
+  .logo-name:hover {
+    text-decoration: underline;
+  }
 
 	  /* tighten up the gap after your News list */
 #about .container > .row:last-of-type {
@@ -430,22 +438,24 @@ section:last-of-type {
           supervised by <strong><a href="https://scholar.google.com/citations?hl=en&user=0buJlAUAAAAJ" target="_blank">Dr. Pu Wang</a></strong>
           in the GENIUS Lab. In industry, I work as a researcher with the Computer Vision teams at
           
- <span class="inline-logo">
+  <span class="inline-logo">
     <a href="https://www.amazon.com/" target="_blank">
       <img src="/author/usama/az.jpg" alt="Amazon logo">
     </a>
-    <a href="https://www.amazon.com/" target="_blank" class="logo-name">Amazon</a>
   </span>
+  <!-- Amazon name separately -->
+  <a href="https://www.amazon.com/" target="_blank" class="logo-name">Amazon</a>
 
   and
 
-  <!-- Lowe’s -->
+  <!-- Lowe’s logo only -->
   <span class="inline-logo">
     <a href="https://www.lowes.com/" target="_blank">
       <img src="/author/usama/lowes.png" alt="Lowe’s logo">
     </a>
-    <a href="https://www.lowes.com/" target="_blank" class="logo-name">Lowe’s</a>
   </span>
+  <!-- Lowe’s name separately -->
+  <a href="https://www.lowes.com/" target="_blank" class="logo-name">Lowe’s</a>
 
 		
           where I am developing large-scale, multimodal vision and generative-AI models to enhance operational efficiency and customer experience.
