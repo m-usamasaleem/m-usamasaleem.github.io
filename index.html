@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+	  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -171,6 +172,62 @@
         /* Smallest padding for mobile devices */
       }
     }
+
+	  
+body {
+  font-family: 'Merriweather', serif;
+  font-size: 1rem;         /* ≈16px */
+  line-height: 1.6;        /* extra breathing room */
+  color: #333;             /* dark gray, softer than pure black */
+  background-color: #fafafa;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  color: #111;             /* almost black for strong hierarchy */
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+	  p {
+  margin-bottom: 1em;
+}
+
+ul, ol {
+  margin-left: 1.5em;      /* indent lists */
+  margin-bottom: 1em;
+}
+
+.container {
+  max-width: 960px;        /* constrain line length to ~60–75ch */
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+
+	  :root {
+  --brand-color: #A6372A;   /* a deeper, more subdued red */
+  --accent-color: #555;     /* for links and hover states */
+}
+
+a {
+  color: var(--brand-color);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+section {
+  padding: 3rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+section:last-of-type {
+  border-bottom: none;
+}
+
 
     < !-- #visitor-map {
       display: none;
