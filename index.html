@@ -270,6 +270,22 @@ section:last-of-type {
   margin-right: 0;
 }
 
+	  /* tighten up the gap after your News list */
+#about .container > .row:last-of-type {
+  margin-bottom: 1rem;  /* was something much larger by default */
+}
+
+/* reduce the top‐padding of the Publications section */
+#publications {
+  padding-top: 1.5rem !important;  /* instead of the default 3rem */
+}
+
+/* if you still see too much space, also trim the section wrapper: */
+#publications .container {
+  margin-top: 0;
+}
+
+
     < !-- #visitor-map {
       display: none;
       /* Hides the element completely */
