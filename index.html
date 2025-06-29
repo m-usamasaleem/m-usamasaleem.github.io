@@ -301,7 +301,34 @@ section:last-of-type {
 #publications .container {
   margin-top: 0;
 }
+  #about.home-section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
 
+  /* narrow the default container gutters */
+  #about .container {
+    max-width: 960px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  /* shrink the avatar column */
+  #about .col-lg-2 {
+    max-width: 16.6667%;
+    flex: 0 0 16.6667%;
+  }
+
+  /* slightly reduce h1 → p spacing */
+  #about h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  /* tighten the gap before Publications */
+  #about .network-icon + h2,
+  #about p + h2 {
+    margin-top: 1.5rem;
+  }
 
     < !-- #visitor-map {
       display: none;
