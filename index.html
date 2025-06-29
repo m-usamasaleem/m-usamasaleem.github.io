@@ -348,26 +348,23 @@ section:last-of-type {
   text-decoration: underline;
 }
 
-/* remove default bullets and tighten up spacing */
-ul.news-list {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-ul.news-list li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.75em;
-}
-
-/* bell icon */
-.news-icon {
-  color: #C02504;       /* brand red */
-  font-size: 1em;
-  margin-right: 0.5em;
-  width: 1.2em;         /* reserve same width for alignment */
-  text-align: center;
-}
+  .news-list {
+    list-style: none;
+    padding: 0;
+    font-size: 0.8em;
+  }
+  .news-list li {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 0.75em;
+  }
+  .news-list .icon {
+    margin-right: 0.5em;
+  }
+  .news-list time {
+    font-weight: bold;
+    margin-right: 0.5em;
+  }
 
 /* company link names */
 .logo-name {
@@ -559,19 +556,76 @@ ul.news-list li {
 
         <h3>News</h3>
 
-	      <ul class="news-list" style="font-size:0.8em; list-style:none; padding:0;">
-  <li>🎉 <strong>June 2025:</strong> A paper on “MaskHand: Generative Masked Modeling…” is accepted to <span style="color:#C02504">ICCV 2025</span>!</li>
-  <li>🎉 <strong>June 2025:</strong> A paper on “ControlMM: Controllable Masked Motion Generation” is accepted to <span style="color:#C02504">ICCV 2025</span>!</li>
-  <li>🚀 <strong>June 2025:</strong> Joined <a href="https://www.amazon.com/" target="_blank" class="logo-name">Amazon</a> as Applied Scientist II Intern</li>
-  <li>📜 <strong>April 2025:</strong> “DanceMosaic: High-Fidelity Dance Generation…” is now available on <span style="color:#C02504">arXiv</span>.</li>
-  <li>🎉 <strong>Dec 2024:</strong> “GenHMR: Generative Human Mesh Recovery” is accepted to <span style="color:#C02504">AAAI 2025</span>!</li>
-  <li>🎉 <strong>Oct 2024:</strong> “BioPose: Biomechanically-accurate 3D Pose Estimation…” is accepted to <span style="color:#C02504">WACV 2025</span>!</li>
-  <li>🎉 <strong>July 2024:</strong> “BAMM: Bidirectional Autoregressive Motion Model” is accepted to <span style="color:#C02504">ECCV 2024</span>!</li>
-  <li>🚀 <strong>Sept 2023:</strong> Joined <a href="https://www.lowes.com/" target="_blank" class="logo-name">Lowe’s</a> as Research Lead of the Computer Vision UNCC Team</li>
-  <li>🎉 <strong>June 2023:</strong> “Private Data Synthesis from Decentralized Non-IID Data” accepted to <span style="color:#C02504">IJCNN 2023</span>, presented in Australia & received a \$5 000 travel grant!</li>
-  <li>🎤 <strong>April 2023:</strong> Presented at the <span style="color:#C02504">SIAM SDM'23</span> Doctoral Forum; awarded NSF \$1 400 travel grant.</li>
-  <li>🎉 <strong>July 2022:</strong> “Privacy Enhancement for Cloud-Based Few-Shot Learning” accepted to <span style="color:#C02504">IJCNN 2022</span>!</li>
-  <li>🎉 <strong>Jan 2022:</strong> “DP-Shield: Face Obfuscation with Differential Privacy” accepted to <span style="color:#C02504">EDBT 2022</span>!</li>
+<ul class="news-list">
+  <li>
+    <span class="icon">🎉</span>
+    <time datetime="2025-06">June 2025:</time>
+    A paper on “MaskHand: Generative Masked Modeling…” is accepted to 
+    <span style="color:#C02504">ICCV 2025</span>!
+  </li>
+  <li>
+    <span class="icon">🎉</span>
+    <time datetime="2025-06">June 2025:</time>
+    A paper on “ControlMM: Controllable Masked Motion Generation” is accepted to 
+    <span style="color:#C02504">ICCV 2025</span>!
+  </li>
+  <li>
+    <span class="icon">🚀</span>
+    <time datetime="2025-06">June 2025:</time>
+    Joined <a href="https://www.amazon.com/" target="_blank" style="color:#C02504; font-weight:bold;">Amazon</a> as Applied Scientist II Intern
+  </li>
+  <li>
+    <span class="icon">📜</span>
+    <time datetime="2025-04">April 2025:</time>
+    “DanceMosaic: High-Fidelity Dance Generation…” is now available on 
+    <span style="color:#C02504">arXiv</span>.
+  </li>
+  <li>
+    <span class="icon">🎉</span>
+    <time datetime="2024-12">Dec 2024:</time>
+    “GenHMR: Generative Human Mesh Recovery” is accepted to 
+    <span style="color:#C02504">AAAI 2025</span>!
+  </li>
+  <li>
+    <span class="icon">🎉</span>
+    <time datetime="2024-10">Oct 2024:</time>
+    “BioPose: Biomechanically-accurate 3D Pose Estimation…” is accepted to 
+    <span style="color:#C02504">WACV 2025</span>!
+  </li>
+  <li>
+    <span class="icon">🎉</span>
+    <time datetime="2024-07">July 2024:</time>
+    “BAMM: Bidirectional Autoregressive Motion Model” is accepted to 
+    <span style="color:#C02504">ECCV 2024</span>!
+  </li>
+  <li>
+    <span class="icon">🚀</span>
+    <time datetime="2023-09">Sept 2023:</time>
+    Joined <a href="https://www.lowes.com/" target="_blank" style="color:#C02504; font-weight:bold;">Lowe’s</a> as Research Lead of the Computer Vision UNCC Team
+  </li>
+  <li>
+    <span class="icon">🎉</span>
+    <time datetime="2023-06">June 2023:</time>
+    “Private Data Synthesis from Decentralized Non-IID Data” accepted to 
+    <span style="color:#C02504">IJCNN 2023</span>, presented in Australia & received a \$5 000 travel grant!
+  </li>
+  <li>
+    <span class="icon">🎤</span>
+    <time datetime="2023-04">April 2023:</time>
+    Presented at the <span style="color:#C02504">SIAM SDM'23</span> Doctoral Forum; awarded NSF \$1 400 travel grant.
+  </li>
+  <li>
+    <span class="icon">🎉</span>
+    <time datetime="2022-07">July 2022:</time>
+    “Privacy Enhancement for Cloud-Based Few-Shot Learning” accepted to 
+    <span style="color:#C02504">IJCNN 2022</span>!
+  </li>
+  <li>
+    <span class="icon">🎉</span>
+    <time datetime="2022-01">Jan 2022:</time>
+    “DP-Shield: Face Obfuscation with Differential Privacy” accepted to 
+    <span style="color:#C02504">EDBT 2022</span>!
+  </li>
 </ul>
 
 
