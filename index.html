@@ -348,10 +348,11 @@ section:last-of-type {
   text-decoration: underline;
 }
 
-/* optional: remove default list bullets and align everything nicely */
+/* remove default bullets and tighten up spacing */
 ul.news-list {
   list-style: none;
   padding-left: 0;
+  margin: 0;
 }
 ul.news-list li {
   display: flex;
@@ -359,11 +360,26 @@ ul.news-list li {
   margin-bottom: 0.75em;
 }
 
+/* bell icon */
+.news-icon {
+  color: #C02504;       /* brand red */
+  font-size: 1em;
+  margin-right: 0.5em;
+  width: 1.2em;         /* reserve same width for alignment */
+  text-align: center;
+}
 
-    < !-- #visitor-map {
-      display: none;
-      /* Hides the element completely */
-    }
+/* company link names */
+.logo-name {
+  font-weight: 700;
+  color: var(--brand-color);
+  text-decoration: none;
+  margin: 0 0.25em;
+}
+.logo-name:hover {
+  text-decoration: underline;
+}
+
 
     -->
   </style>
@@ -542,56 +558,49 @@ ul.news-list li {
         -->
 
         <h3>News</h3>
-<ul style="font-size: 0.8em;">
-  <!-- 2025 highlights with bell icon -->
+<ul class="news-list" style="font-size:0.8em;">
   <li>
-    <i class="fas fa-bell news-icon" style="color: #C02504;"></i>
-    <strong>June 2025:</strong> A paper on “<strong>MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild</strong>” is accepted to <span style="color: #C02504;"><strong>ICCV 2025</strong></span>!
+    <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+    <strong>June 2025:</strong> A paper on “MaskHand: Generative Masked Modeling…” is accepted to <span style="color: #C02504;">ICCV 2025</span>!
   </li>
   <li>
-    <i class="fas fa-bell news-icon" style="color: #C02504;"></i>
-    <strong>June 2025:</strong> A paper on “<strong>ControlMM: Controllable Masked Motion Generation</strong>” is accepted to <span style="color: #C02504;"><strong>ICCV 2025</strong></span>!
+    <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+    <strong>June 2025:</strong> A paper on “ControlMM: Controllable Masked Motion Generation” is accepted to <span style="color: #C02504;">ICCV 2025</span>!
   </li>
   <li>
-    <i class="fas fa-bell news-icon" style="color: #C02504;"></i>
-    <strong>June 2025:</strong> Joined as <a href="https://www.amazon.com/" target="_blank" class="logo-name"><strong>Amazon</strong></a> as Applied Scientist II Intern
-  </li>
-
-  <!-- earlier 2025 -->
-  <li>
-    <strong>April 2025:</strong> One paper, “<strong>DanceMosaic: High-Fidelity Dance Generation with Multimodal Editability</strong>,” is now available on <span style="color: #C02504;"><strong>arXiv</strong></span>.
-  </li>
-
-  <!-- late 2024 -->
-  <li>
-    <strong>Dec 2024:</strong> One paper, “<strong>GenHMR: Generative Human Mesh Recovery</strong>,” is accepted to <span style="color: #C02504;"><strong>AAAI 2025</strong></span>!
+    <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+    <strong>June 2025:</strong> Joined 
+    <a href="https://www.amazon.com/" target="_blank" class="logo-name">Amazon</a> as Applied Scientist II Intern
   </li>
   <li>
-    <strong>Oct 2024:</strong> One paper, “<strong>BioPose: Biomechanically-accurate 3D Pose Estimation from Monocular Videos</strong>,” is accepted to <span style="color: #C02504;"><strong>WACV 2025</strong></span>!
+    <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+    <strong>April 2025:</strong> “DanceMosaic: High-Fidelity Dance Generation…” is now available on <span style="color: #C02504;">arXiv</span>.
   </li>
   <li>
-    <strong>July 2024:</strong> One paper, “<strong>BAMM: Bidirectional Autoregressive Motion Model</strong>,” is accepted to <span style="color: #C02504;"><strong>ECCV 2024</strong></span>!
-  </li>
-
-  <!-- industry news -->
-  <li>
-    <strong>Sept 2023:</strong> Joined <a href="https://www.lowes.com/" target="_blank" class="logo-name"><strong>Lowe’s</strong></a> as Research Lead of the Computer Vision UNCC Team
-  </li>
-
-  <!-- earlier highlights -->
-  <li>
-    <strong>June 2023:</strong> One paper, “<strong>Private Data Synthesis from Decentralized Non-IID Data</strong>,” is accepted to <span style="color: #C02504;"><strong>IJCNN 2023</strong></span>, presented in Queensland, Australia, and received a $5 000 travel grant!
+    <strong>Dec 2024:</strong> “GenHMR: Generative Human Mesh Recovery” is accepted to <span style="color: #C02504;">AAAI 2025</span>!
   </li>
   <li>
-    <strong>April 2023:</strong> Presented at the <span style="color: #C02504;"><strong>SIAM International Conference on Data Mining (SDM’23)</strong></span> Doctoral Forum and received the NSF $1 400 travel grant.
+    <strong>Oct 2024:</strong> “BioPose: Biomechanically-accurate 3D Pose Estimation…” is accepted to <span style="color: #C02504;">WACV 2025</span>!
   </li>
   <li>
-    <strong>July 2022:</strong> One paper, “<strong>Privacy Enhancement for Cloud-Based Few-Shot Learning</strong>,” is accepted to <span style="color: #C02504;"><strong>IJCNN 2022</strong></span>!
+    <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+    <strong>Sept 2023:</strong> Joined 
+    <a href="https://www.lowes.com/" target="_blank" class="logo-name">Lowe’s</a> as Research Lead of the Computer Vision UNCC Team
   </li>
   <li>
-    <strong>Jan 2022:</strong> One paper, “<strong>DP-Shield: Face Obfuscation with Differential Privacy</strong>,” is accepted to <span style="color: #C02504;"><strong>EDBT 2022</strong></span>!
+    <strong>June 2023:</strong> “Private Data Synthesis from Decentralized Non-IID Data” accepted to <span style="color: #C02504;">IJCNN 2023</span>, presented in Australia & received a \$5000 travel grant!
+  </li>
+  <li>
+    <strong>April 2023:</strong> Presented at the <span style="color: #C02504;">SIAM SDM'23</span> Doctoral Forum; awarded NSF \$1400 travel grant.
+  </li>
+  <li>
+    <strong>July 2022:</strong> “Privacy Enhancement for Cloud-Based Few-Shot Learning” accepted to <span style="color: #C02504;">IJCNN 2022</span>!
+  </li>
+  <li>
+    <strong>Jan 2022:</strong> “DP-Shield: Face Obfuscation with Differential Privacy” accepted to <span style="color: #C02504;">EDBT 2022</span>!
   </li>
 </ul>
+
 
       </div>
     </div>
