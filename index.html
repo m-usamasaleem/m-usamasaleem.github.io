@@ -247,11 +247,14 @@ section:last-of-type {
 #publications h1 {
   margin-bottom: 2rem;
 }
+/* Place this **after** your default avatar styles */
 #profile .avatar.avatar-circle {
-  width: 30%;      /* 30% of its container’s width */
-  max-width: 150px;
-  height: auto;    /* keep aspect ratio */
+  width: 150px !important;      /* or whatever fixed size you prefer */
+  height: 150px !important;     /* match width to keep it square */
+  border-radius: 50% !important;/* ensure it's a perfect circle */
+  object-fit: cover !important;  /* crop/scale the image to fill the square */
 }
+
 
 
     < !-- #visitor-map {
