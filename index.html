@@ -428,60 +428,67 @@
       margin: 0 auto;
     }
 
-    #publications .media.stream-item.boxed {
-      position: relative;
-      padding: 1.5rem;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      margin-bottom: 2rem;
-      overflow: hidden;
-    }
 
-    /* ---------- THUMBNAIL VIDEO ---------- */
-    #publications .media.stream-item.boxed .thumbnail {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      width: 150px;
-      height: 90px;
-      overflow: hidden;
-      border-radius: 4px;
-    }
+	  #publications .stream-item.boxed {
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    background: #fff;
+  }
 
-    #publications .media.stream-item.boxed .thumbnail video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+  /* Text area: leave space on the right for the thumbnail */
+  #publications .stream-item.boxed .media-body {
+    flex: 1 1 auto;
+    padding-right: 180px; /* thumbnail width + gap */
+  }
 
-    /* ---------- HEADINGS & META ---------- */
-    #publications .media.stream-item.boxed .article-title {
-      margin-top: 0;
-      margin-bottom: 0.25rem;
-    }
+  /* Thumbnail/video */
+  #publications .stream-item.boxed .thumbnail {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 150px;
+    height: 90px;
+    border-radius: 4px;
+    overflow: hidden;
+    flex: 0 0 auto;
+  }
+  #publications .stream-item.boxed .thumbnail video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-    #publications .media.stream-item.boxed .conference-name {
-      font-style: italic;
-      color: #A6372A;
-      margin-bottom: 0.5rem;
-    }
+  /* Headings & metadata */
+  #publications .stream-item.boxed .article-title {
+    margin: 0 0 0.25rem;
+  }
+  #publications .stream-item.boxed .conference-name {
+    font-style: italic;
+    color: #A6372A;
+    margin-bottom: 0.75rem;
+  }
+  #publications .stream-item.boxed .stream-meta.article-metadata {
+    font-size: 0.9em;
+    margin-bottom: 1rem;
+  }
 
-    #publications .media.stream-item.boxed .stream-meta.article-metadata {
-      font-size: 0.9em;
-      margin-bottom: 0.75rem;
-    }
+  /* Summary */
+  #publications .stream-item.boxed .media-summary {
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    color: #333;
+  }
 
-    /* ---------- SUMMARY ---------- */
-    #publications .media.stream-item.boxed .media-summary {
-      font-size: 0.95em;
-      line-height: 1.5;
-      margin-bottom: 1rem;
-    }
-
-    /* ---------- BUTTONS ---------- */
-    #publications .media.stream-item.boxed .btn-links a {
-      margin-right: 0.5rem;
-    }
+  /* Buttons */
+  #publications .stream-item.boxed .btn-links a {
+    margin-right: 0.5rem;
+  }
 
     -->
   </style>
@@ -729,110 +736,124 @@
                 </video>
               </div>
             </div>
-            <!-- MaskHand -->
-            <!-- MaskHand -->
-            <div class="media stream-item boxed">
-              <div class="media-body">
-                <h4 class="article-title">
-                  <a href="./publication/MaskHand/MaskHand.html"> MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild </a>
-                </h4>
-                <div class="conference-name">
-                  <strong>ICCV 2025</strong>
-                </div>
-                <div class="stream-meta article-metadata">
-                  <strong>
-                    <u>Muhammad Usama Saleem</u>
-                  </strong>, Ekkasit Pinyoanuntapong, Mayur Jagdishbhai Patel, Hongfei Xue, Ahmed Helmy, Srijan Das, Pu Wang
-                </div>
-                <div class="media-summary"> MaskHand is a probabilistic masked modeling framework—tokenizing articulations with VQ-MANO and using a context-aware masked transformer to fuse multi-scale image features and 2D cues for iterative, confidence-guided sampling. </div>
-                <div class="btn-links">
-                  <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/abs/2412.13393" target="_blank">PDF</a>
-                  <a class="btn btn-outline-primary btn-sm" href="./publication/MaskHand/MaskHand.html" target="_blank">Webpage</a>
-                </div>
-              </div>
-              <div class="thumbnail">
-                <video autoplay loop muted playsinline>
-                  <source src="./videos/mmhmr.mp4" type="video/mp4">
-                </video>
-              </div>
-            </div>
-            <!-- ControlMM -->
-            <div class="media stream-item boxed">
-              <div class="media-body">
-                <h4 class="article-title">
-                  <a href="https://exitudio.github.io/ControlMM-page/"> ControlMM: Controllable Masked Motion Generation </a>
-                </h4>
-                <div class="conference-name">
-                  <strong>ICCV 2025</strong>
-                </div>
-                <div class="stream-meta article-metadata"> Ekkasit Pinyoanuntapong, <strong>
-                    <u>Muhammad Usama Saleem</u>
-                  </strong>, Korrawe Karunratanakul, Pu Wang, Hongfei Xue, Chen Chen, Chuan Guo, Junli Cao, Jian Ren, Sergey Tulyakov </div>
-                <div class="media-summary"> ControlMM is a novel masked generative motion model—combining masked consistency and inference-time logit editing in a parallel decoder for fast, high-fidelity, spatially precise motion generation. </div>
-                <div class="btn-links">
-                  <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/pdf/2410.10780" target="_blank">PDF</a>
-                  <a class="btn btn-outline-primary btn-sm" href="https://exitudio.github.io/ControlMM-page/" target="_blank">Webpage</a>
-                  <a class="btn btn-outline-primary btn-sm" href="https://github.com/exitudio/ControlMM" target="_blank">Code</a>
-                </div>
-              </div>
-              <div class="thumbnail">
-                <video autoplay loop muted playsinline>
-                  <source src="./videos/CAM.mp4" type="video/mp4">
-                </video>
-              </div>
-            </div>
-            <!-- GenHMR -->
-            <div class="media stream-item boxed">
-              <div class="media-body">
-                <h4 class="article-title">
-                  <a href="./publication/GenHMR/GenHMR.html"> GenHMR: Generative Human Mesh Recovery </a>
-                </h4>
-                <div class="conference-name">
-                  <strong>AAAI 2025</strong>
-                </div>
-                <div class="stream-meta article-metadata">
-                  <strong>
-                    <u>Muhammad Usama Saleem</u>
-                  </strong>, Ekkasit Pinyoanuntapong, Pu Wang, Hongfei Xue, Srijan Das, Chen Chen
-                </div>
-                <div class="media-summary"> GenHMR reframes monocular HMR as an image-conditioned generative task—employing a VQ-VAE pose tokenizer and masked transformer to model 2D→3D uncertainty, iteratively sampling high-confidence tokens and refining them with 2D cues for accurate mesh recovery. </div>
-                <div class="btn-links">
-                  <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/abs/2412.14444" target="_blank">PDF</a>
-                  <a class="btn btn-outline-primary btn-sm" href="./publication/GenHMR/GenHMR.html" target="_blank">Webpage</a>
-                </div>
-              </div>
-              <div class="thumbnail">
-                <video autoplay loop muted playsinline>
-                  <source src="./videos/genhmr.mp4" type="video/mp4">
-                </video>
-              </div>
-            </div>
-            <!-- BioPose -->
-            <div class="media stream-item boxed">
-              <div class="media-body">
-                <h4 class="article-title">
-                  <a href="./publication/BioPose/BioPose.html"> BioPose: Biomechanically-accurate 3D Pose Estimation from Monocular Videos </a>
-                </h4>
-                <div class="conference-name">
-                  <strong>WACV 2025</strong>
-                </div>
-                <div class="stream-meta article-metadata">
-                  <strong>
-                    <u>Muhammad Usama Saleem*</u>
-                  </strong>, Farnoosh Koleini*, Pu Wang, Hongfei Xue, Ahmed Helmy, Abbey Fenwick
-                </div>
-                <div class="media-summary"> BioPose is a novel biomechanics-guided 3D pose estimation framework—combining a multi-query deformable transformer for precise mesh recovery, a neural IK network that enforces anatomical constraints, and 2D-informed iterative pose refinement. </div>
-                <div class="btn-links">
-                  <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/abs/2501.07800" target="_blank">PDF</a>
-                  <a class="btn btn-outline-primary btn-sm" href="./publication/BioPose/BioPose.html" target="_blank">Webpage</a>
-                </div>
-              </div>
-              <div class="thumbnail">
-                <video autoplay loop muted playsinline>
-                  <source src="./videos/biopose.mp4" type="video/mp4">
-                </video>
-              </div>
-            </div>
+          
+    <!-- MaskHand -->
+    <div class="media stream-item boxed">
+      <div class="media-body">
+        <h4 class="article-title">
+          <a href="./publication/MaskHand/MaskHand.html">
+            MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild
+          </a>
+        </h4>
+        <div class="conference-name"><strong>ICCV 2025</strong></div>
+        <div class="stream-meta article-metadata">
+          <strong><u>Muhammad Usama Saleem</u></strong>,
+          Ekkasit Pinyoanuntapong, Mayur Jagdishbhai Patel,
+          Hongfei Xue, Ahmed Helmy, Srijan Das, Pu Wang
+        </div>
+        <div class="media-summary">
+          MaskHand is a probabilistic masked modeling framework—tokenizing articulations with VQ-MANO and using a context-aware masked transformer to fuse multi-scale image features and 2D cues for iterative, confidence-guided sampling.
+        </div>
+        <div class="btn-links">
+          <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/abs/2412.13393" target="_blank">PDF</a>
+          <a class="btn btn-outline-primary btn-sm" href="./publication/MaskHand/MaskHand.html" target="_blank">Webpage</a>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <video autoplay loop muted playsinline>
+          <source src="./videos/mmhmr.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <!-- ControlMM -->
+    <div class="media stream-item boxed">
+      <div class="media-body">
+        <h4 class="article-title">
+          <a href="https://exitudio.github.io/ControlMM-page/">
+            ControlMM: Controllable Masked Motion Generation
+          </a>
+        </h4>
+        <div class="conference-name"><strong>ICCV 2025</strong></div>
+        <div class="stream-meta article-metadata">
+          Ekkasit Pinyoanuntapong,
+          <strong><u>Muhammad Usama Saleem</u></strong>,
+          Korrawe Karunratanakul, Pu Wang, Hongfei Xue,
+          Chen Chen, Chuan Guo, Junli Cao, Jian Ren, Sergey Tulyakov
+        </div>
+        <div class="media-summary">
+          ControlMM is a novel masked generative motion model—combining masked consistency and inference-time logit editing in a parallel decoder for fast, high-fidelity, spatially precise motion generation.
+        </div>
+        <div class="btn-links">
+          <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/pdf/2410.10780" target="_blank">PDF</a>
+          <a class="btn btn-outline-primary btn-sm" href="https://exitudio.github.io/ControlMM-page/" target="_blank">Webpage</a>
+          <a class="btn btn-outline-primary btn-sm" href="https://github.com/exitudio/ControlMM" target="_blank">Code</a>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <video autoplay loop muted playsinline>
+          <source src="./videos/CAM.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <!-- GenHMR -->
+    <div class="media stream-item boxed">
+      <div class="media-body">
+        <h4 class="article-title">
+          <a href="./publication/GenHMR/GenHMR.html">
+            GenHMR: Generative Human Mesh Recovery
+          </a>
+        </h4>
+        <div class="conference-name"><strong>AAAI 2025</strong></div>
+        <div class="stream-meta article-metadata">
+          <strong><u>Muhammad Usama Saleem</u></strong>,
+          Ekkasit Pinyoanuntapong, Pu Wang,
+          Hongfei Xue, Srijan Das, Chen Chen
+        </div>
+        <div class="media-summary">
+          GenHMR reframes monocular HMR as an image-conditioned generative task—employing a VQ-VAE pose tokenizer and masked transformer to model 2D→3D uncertainty, iteratively sampling high-confidence tokens and refining them with 2D cues for accurate mesh recovery.
+        </div>
+        <div class="btn-links">
+          <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/abs/2412.14444" target="_blank">PDF</a>
+          <a class="btn btn-outline-primary btn-sm" href="./publication/GenHMR/GenHMR.html" target="_blank">Webpage</a>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <video autoplay loop muted playsinline>
+          <source src="./videos/genhmr.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <!-- BioPose -->
+    <div class="media stream-item boxed">
+      <div class="media-body">
+        <h4 class="article-title">
+          <a href="./publication/BioPose/BioPose.html">
+            BioPose: Biomechanically-accurate 3D Pose Estimation from Monocular Videos
+          </a>
+        </h4>
+        <div class="conference-name"><strong>WACV 2025</strong></div>
+        <div class="stream-meta article-metadata">
+          <strong><u>Muhammad Usama Saleem*</u></strong>,
+          Farnoosh Koleini*, Pu Wang, Hongfei Xue,
+          Ahmed Helmy, Abbey Fenwick
+        </div>
+        <div class="media-summary">
+          BioPose is a novel biomechanics-guided 3D pose estimation framework—combining a multi-query deformable transformer for precise mesh recovery, a neural IK network that enforces anatomical constraints, and 2D-informed iterative pose refinement.
+        </div>
+        <div class="btn-links">
+          <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/abs/2501.07800" target="_blank">PDF</a>
+          <a class="btn btn-outline-primary btn-sm" href="./publication/BioPose/BioPose.html" target="_blank">Webpage</a>
+        </div>
+      </div>
+      <div class="thumbnail">
+        <video autoplay loop muted playsinline>
+          <source src="./videos/biopose.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
             <!-- BAMM -->
             <div class="media stream-item">
               <div class="media-body">
