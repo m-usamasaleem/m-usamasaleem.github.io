@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-	  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -51,13 +51,13 @@
     <title>Muhammad Usama Saleem</title>
   </head>
   <style>
+    .conference-name {
+      color: #A6372A;
+      font-style: italic;
+      font-weight: normal;
+      font-size: 1.2em;
+    }
 
-.conference-name {
-  color: #A6372A;
-  font-style: italic;
-  font-weight: normal; 
-  font-size: 1.2em; 
-}
     #visitor-map {
       width: 100px;
       height: 100px;
@@ -173,268 +173,316 @@
       }
     }
 
-	  
-body {
-  font-family: 'Merriweather', serif;
-  font-size: 1rem;         /* ≈16px */
-  line-height: 1.6;        /* extra breathing room */
-  color: #333;             /* dark gray, softer than pure black */
-  background-color: #fafafa;
-}
+    body {
+      font-family: 'Merriweather', serif;
+      font-size: 1rem;
+      /* ≈16px */
+      line-height: 1.6;
+      /* extra breathing room */
+      color: #333;
+      /* dark gray, softer than pure black */
+      background-color: #fafafa;
+    }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-  color: #111;             /* almost black for strong hierarchy */
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-}
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      color: #111;
+      /* almost black for strong hierarchy */
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
 
-	  p {
-  margin-bottom: 1em;
-}
+    p {
+      margin-bottom: 1em;
+    }
 
-ul, ol {
-  margin-left: 1.5em;      /* indent lists */
-  margin-bottom: 1em;
-}
+    ul,
+    ol {
+      margin-left: 1.5em;
+      /* indent lists */
+      margin-bottom: 1em;
+    }
 
-.container {
-  max-width: 960px;        /* constrain line length to ~60–75ch */
-  margin: 0 auto;
-  padding: 0 1rem;
-}
+    .container {
+      max-width: 960px;
+      /* constrain line length to ~60–75ch */
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
 
+    :root {
+      --brand-color: #A6372A;
+      /* a deeper, more subdued red */
+      --accent-color: #555;
+      /* for links and hover states */
+    }
 
-	  :root {
-  --brand-color: #A6372A;   /* a deeper, more subdued red */
-  --accent-color: #555;     /* for links and hover states */
-}
+    a {
+      color: var(--brand-color);
+      text-decoration: none;
+    }
 
-a {
-  color: var(--brand-color);
-  text-decoration: none;
-}
-a:hover {
-  color: var(--accent-color);
-  text-decoration: underline;
-}
-section {
-  padding: 3rem 0;
-  border-bottom: 1px solid #e0e0e0;
-}
+    a:hover {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
 
-section:last-of-type {
-  border-bottom: none;
-}
+    section {
+      padding: 3rem 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
 
-	  html {
-  /* make 1rem equal to 14px instead of the browser default (~16px) */
-  font-size: 87.5%; /* 16px * 0.875 = 14px */
-}
-/* Make the publications list 80% width and center it */
-#publications .pub-list {
-  max-width: 90%;
-  margin: 0 auto;
-}
+    section:last-of-type {
+      border-bottom: none;
+    }
 
-/* Space out each entry a bit */
-#publications .stream-item {
-  margin-bottom: 2rem;
-}
+    html {
+      /* make 1rem equal to 14px instead of the browser default (~16px) */
+      font-size: 87.5%;
+      /* 16px * 0.875 = 14px */
+    }
 
-/* (Optional) Tweak the heading under this section */
-#publications h1 {
-  margin-bottom: 2rem;
-}
-/* Place this **after** your default avatar styles */
-#profile .avatar.avatar-circle {
-  width: 150px !important;      /* or whatever fixed size you prefer */
-  height: 150px !important;     /* match width to keep it square */
-  border-radius: 50% !important;/* ensure it's a perfect circle */
-  object-fit: cover !important;  /* crop/scale the image to fill the square */
-}
+    /* Make the publications list 80% width and center it */
+    #publications .pub-list {
+      max-width: 90%;
+      margin: 0 auto;
+    }
 
+    /* Space out each entry a bit */
+    #publications .stream-item {
+      margin-bottom: 2rem;
+    }
 
-.inline-logo {
-  display: inline-flex;
-  align-items: center;       /* vertical-center everything */
-/*   margin: 0 0.5em;           /* small horizontal spacing */ */
-}
+    /* (Optional) Tweak the heading under this section */
+    #publications h1 {
+      margin-bottom: 2rem;
+    }
 
-.inline-logo img {
-  width: 20px;               /* or whatever you prefer */
-  height: auto;
-/*   margin-right: 4px;         /* space between logo and name */ */
-}
+    /* Place this **after** your default avatar styles */
+    #profile .avatar.avatar-circle {
+      width: 150px !important;
+      /* or whatever fixed size you prefer */
+      height: 150px !important;
+      /* match width to keep it square */
+      border-radius: 50% !important;
+      /* ensure it's a perfect circle */
+      object-fit: cover !important;
+      /* crop/scale the image to fill the square */
+    }
 
-  .inline-logo {
-    display: inline-flex;
-    align-items: center;
-/*     margin: 0 0.25em; */
-  }
-  .inline-logo img {
-    width: 20px;
-    height: auto;
-  }
-  .logo-name {
-    font-weight: 700;
-    color: #A6372A; /* your brand color */
-    text-decoration: none;
-/*     margin: 0 0.25em; */
-  }
-  .logo-name:hover {
-    text-decoration: underline;
-  }
+    .inline-logo {
+      display: inline-flex;
+      align-items: center;
+      /* vertical-center everything */
+      /*   margin: 0 0.5em;           /* small horizontal spacing */
+      */
+    }
 
-	  /* tighten up the gap after your News list */
-#about .container > .row:last-of-type {
-  margin-bottom: 1rem;  /* was something much larger by default */
-}
+    .inline-logo img {
+      width: 20px;
+      /* or whatever you prefer */
+      height: auto;
+      /*   margin-right: 4px;         /* space between logo and name */
+      */
+    }
 
-/* reduce the top‐padding of the Publications section */
-#publications {
-  padding-top: 1.5rem !important;  /* instead of the default 3rem */
-}
+    .inline-logo {
+      display: inline-flex;
+      align-items: center;
+      /*     margin: 0 0.25em; */
+    }
 
-/* if you still see too much space, also trim the section wrapper: */
-#publications .container {
-  margin-top: 0;
-}
-  #about.home-section {
-    padding-top: 1.5rem !important;
-    padding-bottom: 1.5rem !important;
-  }
+    .inline-logo img {
+      width: 20px;
+      height: auto;
+    }
 
-  /* narrow the default container gutters */
-  #about .container {
-    max-width: 960px;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
+    .logo-name {
+      font-weight: 700;
+      color: #A6372A;
+      /* your brand color */
+      text-decoration: none;
+      /*     margin: 0 0.25em; */
+    }
 
-  /* shrink the avatar column */
-  #about .col-lg-2 {
-    max-width: 16.6667%;
-    flex: 0 0 16.6667%;
-  }
+    .logo-name:hover {
+      text-decoration: underline;
+    }
 
-  /* slightly reduce h1 → p spacing */
-  #about h1 {
-    margin-bottom: 0.5rem;
-  }
+    /* tighten up the gap after your News list */
+    #about .container>.row:last-of-type {
+      margin-bottom: 1rem;
+      /* was something much larger by default */
+    }
 
-  /* tighten the gap before Publications */
-  #about .network-icon + h2,
-  #about p + h2 {
-    margin-top: 1.5rem;
-  }
+    /* reduce the top‐padding of the Publications section */
+    #publications {
+      padding-top: 1.5rem !important;
+      /* instead of the default 3rem */
+    }
 
-	  /* style your bell icon */
-.news-icon {
-  color: #A6372A;        /* same brand red */
-  margin-right: 0.5em;   /* space between icon and date */
-  font-size: 1em;        /* match your text size */
-}
+    /* if you still see too much space, also trim the section wrapper: */
+    #publications .container {
+      margin-top: 0;
+    }
 
-/* style the company names */
-.logo-name {
-  font-weight: 700;
-  color: var(--brand-color);
-  text-decoration: none;
-  margin: 0 0.25em;
-}
-.logo-name:hover {
-  text-decoration: underline;
-}
+    #about.home-section {
+      padding-top: 1.5rem !important;
+      padding-bottom: 1.5rem !important;
+    }
 
- .news-heading {
-    display: flex;
-    align-items: center;
-    font-family: 'Roboto', sans-serif;
-    margin-bottom: 0.5em;
-  }
-  .news-heading .news-icon {
-    color: #A6372A;
-    margin-left: 0.5em;
-    font-size: 1.2em;
-  }
-  .news-list {
-    font-size: 0.8em;
-    list-style: none;
-    padding-left: 0;
-  }
-  .news-list li {
-    margin-bottom: 0.5em;
-    line-height: 1.4;
-  }
-  .news-list .news-icon {
-    color: #A6372A;
-    margin-right: 0.25em;
-  }
-  .logo-name {
-    font-weight: 700;
-    color: #A6372A;
-    text-decoration: none;
-  }
-  .logo-name:hover {
-    text-decoration: underline;
-  }
+    /* narrow the default container gutters */
+    #about .container {
+      max-width: 960px;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
 
-	  
-  /* constrain the publications list to ~80% width, centered */
-  #publications .pub-list {
-    max-width: 80%;
-    margin: 0 auto;
-  }
+    /* shrink the avatar column */
+    #about .col-lg-2 {
+      max-width: 16.6667%;
+      flex: 0 0 16.6667%;
+    }
 
-  #publications .media.stream-item.boxed {
-    position: relative;
-    padding: 1.5rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    overflow: hidden;
-  }
-  /* ---------- THUMBNAIL VIDEO ---------- */
-  #publications .media.stream-item.boxed .thumbnail {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    width: 150px;
-    height: 90px;
-    overflow: hidden;
-    border-radius: 4px;
-  }
-  #publications .media.stream-item.boxed .thumbnail video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  /* ---------- HEADINGS & META ---------- */
-  #publications .media.stream-item.boxed .article-title {
-    margin-top: 0;
-    margin-bottom: 0.25rem;
-  }
-  #publications .media.stream-item.boxed .conference-name {
-    font-style: italic;
-    color: #A6372A;
-    margin-bottom: 0.5rem;
-  }
-  #publications .media.stream-item.boxed .stream-meta.article-metadata {
-    font-size: 0.9em;
-    margin-bottom: 0.75rem;
-  }
-  /* ---------- SUMMARY ---------- */
-  #publications .media.stream-item.boxed .media-summary {
-    font-size: 0.95em;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-  }
-  /* ---------- BUTTONS ---------- */
-  #publications .media.stream-item.boxed .btn-links a {
-    margin-right: 0.5rem;
-  }
+    /* slightly reduce h1 → p spacing */
+    #about h1 {
+      margin-bottom: 0.5rem;
+    }
+
+    /* tighten the gap before Publications */
+    #about .network-icon+h2,
+    #about p+h2 {
+      margin-top: 1.5rem;
+    }
+
+    /* style your bell icon */
+    .news-icon {
+      color: #A6372A;
+      /* same brand red */
+      margin-right: 0.5em;
+      /* space between icon and date */
+      font-size: 1em;
+      /* match your text size */
+    }
+
+    /* style the company names */
+    .logo-name {
+      font-weight: 700;
+      color: var(--brand-color);
+      text-decoration: none;
+      margin: 0 0.25em;
+    }
+
+    .logo-name:hover {
+      text-decoration: underline;
+    }
+
+    .news-heading {
+      display: flex;
+      align-items: center;
+      font-family: 'Roboto', sans-serif;
+      margin-bottom: 0.5em;
+    }
+
+    .news-heading .news-icon {
+      color: #A6372A;
+      margin-left: 0.5em;
+      font-size: 1.2em;
+    }
+
+    .news-list {
+      font-size: 0.8em;
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .news-list li {
+      margin-bottom: 0.5em;
+      line-height: 1.4;
+    }
+
+    .news-list .news-icon {
+      color: #A6372A;
+      margin-right: 0.25em;
+    }
+
+    .logo-name {
+      font-weight: 700;
+      color: #A6372A;
+      text-decoration: none;
+    }
+
+    .logo-name:hover {
+      text-decoration: underline;
+    }
+
+    /* constrain the publications list to ~80% width, centered */
+    #publications .pub-list {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+
+    #publications .media.stream-item.boxed {
+      position: relative;
+      padding: 1.5rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+
+    /* ---------- THUMBNAIL VIDEO ---------- */
+    #publications .media.stream-item.boxed .thumbnail {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 150px;
+      height: 90px;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    #publications .media.stream-item.boxed .thumbnail video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ---------- HEADINGS & META ---------- */
+    #publications .media.stream-item.boxed .article-title {
+      margin-top: 0;
+      margin-bottom: 0.25rem;
+    }
+
+    #publications .media.stream-item.boxed .conference-name {
+      font-style: italic;
+      color: #A6372A;
+      margin-bottom: 0.5rem;
+    }
+
+    #publications .media.stream-item.boxed .stream-meta.article-metadata {
+      font-size: 0.9em;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ---------- SUMMARY ---------- */
+    #publications .media.stream-item.boxed .media-summary {
+      font-size: 0.95em;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    /* ---------- BUTTONS ---------- */
+    #publications .media.stream-item.boxed .btn-links a {
+      margin-right: 0.5rem;
+    }
+
     -->
   </style>
   <aside class="search-results" id="search">
@@ -515,415 +563,383 @@ section:last-of-type {
     </div>
   </nav>
   <span class="js-widget-page d-none"></span>
-<section id="about" class="home-section wg-about">
-  <div class="container">
-    <div class="row">
-      <!-- shrink avatar column to give more room for text -->
-      <div class="col-12 col-lg-3">
-        <div id="profile">
-          <img class="avatar avatar-circle" src="/author/usama/image.jpeg" alt="Muhammad Usama Saleem">
-          <div class="portrait-title">
-            <h2>Muhammad Usama Saleem</h2>
-            <h3>Ph.D. Student</h3>
-            <h3><span>University of North Carolina at Charlotte</span></h3>
+  <section id="about" class="home-section wg-about">
+    <div class="container">
+      <div class="row">
+        <!-- shrink avatar column to give more room for text -->
+        <div class="col-12 col-lg-3">
+          <div id="profile">
+            <img class="avatar avatar-circle" src="/author/usama/image.jpeg" alt="Muhammad Usama Saleem">
+            <div class="portrait-title">
+              <h2>Muhammad Usama Saleem</h2>
+              <h3>Ph.D. Student</h3>
+              <h3>
+                <span>University of North Carolina at Charlotte</span>
+              </h3>
+            </div>
+            <ul class="network-icon" aria-hidden="true">
+              <li>
+                <a href="mailto:msaleem2@charlotte.edu">
+                  <i class="fas fa-envelope big-icon"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://scholar.google.com/citations?user=8ZSRk3IAAAAJ&hl" target="_blank" rel="noopener">
+                  <i class="ai ai-google-scholar big-icon"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/m-usamasaleem" target="_blank" rel="noopener">
+                  <i class="fab fa-github big-icon"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/muhammad-usama-saleem-504b65164" target="_blank" rel="noopener">
+                  <i class="fab fa-linkedin big-icon"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://x.com/usamasaleem_" target="_blank" rel="noopener">
+                  <i class="fab fa-twitter big-icon"></i>
+                </a>
+              </li>
+            </ul>
           </div>
-          <ul class="network-icon" aria-hidden="true">
-            <li>
-              <a href="mailto:msaleem2@charlotte.edu">
-                <i class="fas fa-envelope big-icon"></i>
+        </div>
+        <!-- expand text column -->
+        <div class="col-12 col-lg-9">
+          <h1>About me</h1>
+          <p> I am a Ph.D. candidate in Computer Science at the University of North Carolina at Charlotte, supervised by <strong>
+              <a href="https://scholar.google.com/citations?hl=en&user=0buJlAUAAAAJ" target="_blank">Dr. Pu Wang</a>
+            </strong> in the GENIUS Lab. In industry, I work as a researcher with the Computer Vision teams at <span class="inline-logo">
+              <a href="https://www.amazon.com/" target="_blank">
+                <img src="/author/usama/az.webp" alt="Amazon logo">
               </a>
+            </span>
+            <!-- Amazon name separately -->
+            <a href="https://www.amazon.com/" target="_blank" class="logo-name">Amazon</a> and
+            <!-- Lowe’s logo only -->
+            <span class="inline-logo">
+              <a href="https://www.lowes.com/" target="_blank">
+                <img src="/author/usama/lowes.png" alt="Lowe’s logo">
+              </a>
+            </span>
+            <!-- Lowe’s name separately -->
+            <a href="https://www.lowes.com/" target="_blank" class="logo-name">Lowe’s</a> where I am developing large-scale, multimodal language models (MLLMs) to enhance operational efficiency and customer experience in complex, real-world environments.
+          </p>
+          <!--
+        <p>I am currently a Ph.D. candidate in the Department of Computer Science at the <strong><a href="https://www.charlotte.edu/" target="_blank">University of North Carolina at Charlotte</a></strong>, working under the supervision of <span style="color: #A6372A;"><strong><a href="https://scholar.google.com/citations?hl=en&user=0buJlAUAAAAJ&view_op=list_works&authuser=2&sortby=pubdate" target="_blank">Dr. Pu Wang</a></strong></span> at the <span style="color: #A6372A;"><em><a href="" target="_blank">GENIUS Lab</a></em></span>. My research focuses on advancing computer vision and generative AI, particularly in <strong>3D Human Pose Estimation</strong> and <strong>Mesh Recovery</strong>. Moreover, I am interested in <strong>3D Human Motion Generation</strong> driven by multi-modal inputs (e.g., text, music, or speech), with a focus on achieving controllable, high-quality synthesis for realistic and dynamically responsive motion generation in real-time interactive settings. Previously, at the <span style="color: #A6372A;"><em><a href="https://webpages.charlotte.edu/lfan4/index.html" target="_blank">Image Privacy Lab</a></em></span> under <span style="color: #A6372A;"><strong><a href="https://scholar.google.com/citations?hl=en&user=mPJmXakAAAAJ&view_op=list_works&sortby=pubdate" target="_blank">Dr. Liyue Fan</a></strong></span>, I developed privacy-preserving federated frameworks for generative AI, enabling secure synthetic data generation in non-IID settings. Currently, I am a researcher at Amazon and Lowe’s working on computer vision and generative AI. Before joining UNCC, I earned my Bachelor's degree in Computer Science from <strong><a href="https://_"></a></strong></p>
+        -->
+          <h2>Research Interests</h2>
+          <p> My research interests lie at the intersection of computer vision and generative AI, with a focus on 3D human modeling. Specifically, I focus on 3D human pose estimation and mesh reconstruction via generative masked modeling. Moreover, I’m interested in developing multimodal motion synthesis frameworks that synthesize controllable, high-fidelity 3D human animations for real time applications. </p>
+          <p>
+            <strong> If you have any research opportunities, please feel free to reach out at <a href="mailto:msaleem2@charlotte.edu" style="color: #A6372A;">
+                <em>msaleem2@charlotte.edu</em>
+              </a>. </strong>
+          </p>
+          <!--  In parallel, I’m building large-scale multimodal language models to enable robust video understanding in complex, real-world environments. -->
+          <!--
+        <p> My research interests lie in Computer Vision and Generative AI, specifically focusing on two interconnected pillars: </p><ul><li>3D Human Pose Estimation and Mesh Recovery</li><li>Multi-Modality Motion Synthesis</li></ul>
+        -->
+          <h3 class="news-heading">
+            <i class="fas fa-bell news-icon" aria-hidden="true"></i> News
+          </h3>
+          <ul class="news-list">
+            <li>
+              <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+              <strong>June 2025:</strong> A paper on “MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild” is accepted to <strong style="color:#A6372A">ICCV 2025</strong>!
             </li>
             <li>
-              <a href="https://scholar.google.com/citations?user=8ZSRk3IAAAAJ&hl" target="_blank" rel="noopener">
-                <i class="ai ai-google-scholar big-icon"></i>
-              </a>
+              <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+              <strong>June 2025:</strong> A paper on “ControlMM: Controllable Masked Motion Generation” is accepted to <strong style="color:#A6372A">ICCV 2025</strong>!
             </li>
             <li>
-              <a href="https://github.com/m-usamasaleem" target="_blank" rel="noopener">
-                <i class="fab fa-github big-icon"></i>
-              </a>
+              <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+              <strong>June 2025:</strong> Joined <a href="https://www.amazon.com/" target="_blank" class="logo-name">Amazon</a> as Applied Scientist II Intern
             </li>
             <li>
-              <a href="https://www.linkedin.com/in/muhammad-usama-saleem-504b65164" target="_blank" rel="noopener">
-                <i class="fab fa-linkedin big-icon"></i>
-              </a>
+              <strong>April 2025:</strong> “DanceMosaic: High-Fidelity Dance Generation with Multimodal Editability” is now available on <strong style="color:#A6372A">arXiv</strong>.
             </li>
             <li>
-              <a href="https://x.com/usamasaleem_" target="_blank" rel="noopener">
-                <i class="fab fa-twitter big-icon"></i>
-              </a>
+              <strong>Dec 2024:</strong> “GenHMR: Generative Human Mesh Recovery” was accepted to <strong style="color:#A6372A">AAAI 2025</strong>, presented in Philadelphia, and received a travel award.
+            </li>
+            <li>
+              <strong>Oct 2024:</strong> “BioPose: Biomechanically-Accurate 3D Pose Estimation from Monocular Videos” is accepted to <strong style="color:#A6372A">WACV 2025</strong>!
+            </li>
+            <li>
+              <strong>July 2024:</strong> “BAMM: Bidirectional Autoregressive Motion Model” is accepted to <strong style="color:#A6372A">ECCV 2024</strong>!
+            </li>
+            <li>
+              <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+              <strong>Sept 2023:</strong> Joined <a href="https://www.lowes.com/" target="_blank" class="logo-name">Lowe’s</a> as Research Lead of the Computer Vision UNCC Team
+            </li>
+            <li>
+              <strong>June 2023:</strong> “Private Data Synthesis from Decentralized Non-IID Data” accepted to <strong style="color:#A6372A">IJCNN 2023</strong>, presented in Queensland, Australia, and received a $5500 travel grant!
+            </li>
+            <li>
+              <strong>April 2023:</strong> Presented at the <strong style="color:#A6372A">SIAM International Conference on Data Mining (SDM’23)</strong> Doctoral Forum; awarded NSF $1400 travel grant.
+            </li>
+            <li>
+              <strong>July 2022:</strong> “Privacy Enhancement for Cloud-Based Few-Shot Learning” accepted to <strong style="color:#A6372A">IJCNN 2022</strong>!
+            </li>
+            <li>
+              <strong>Jan 2022:</strong> “DP-Shield: Face Obfuscation with Differential Privacy” accepted to <strong style="color:#A6372A">EDBT 2022</strong>!
             </li>
           </ul>
         </div>
       </div>
-
-      <!-- expand text column -->
-      <div class="col-12 col-lg-9">
-        <h1>About me</h1>
-        <p>
-          I am a Ph.D. candidate in Computer Science at the University of North Carolina at Charlotte,
-          supervised by <strong><a href="https://scholar.google.com/citations?hl=en&user=0buJlAUAAAAJ" target="_blank">Dr. Pu Wang</a></strong>
-          in the GENIUS Lab. In industry, I work as a researcher with the Computer Vision teams at
-          
-  <span class="inline-logo">
-    <a href="https://www.amazon.com/" target="_blank">
-      <img src="/author/usama/az.webp" alt="Amazon logo">
-    </a>
-  </span>
-  <!-- Amazon name separately -->
-  <a href="https://www.amazon.com/" target="_blank" class="logo-name">Amazon</a>
-
-  and
-
-  <!-- Lowe’s logo only -->
-  <span class="inline-logo">
-    <a href="https://www.lowes.com/" target="_blank">
-      <img src="/author/usama/lowes.png" alt="Lowe’s logo">
-    </a>
-  </span>
-  <!-- Lowe’s name separately -->
-  <a href="https://www.lowes.com/" target="_blank" class="logo-name">Lowe’s</a>
-
-		
-          where I am developing large-scale, multimodal language models (MLLMs) to enhance operational efficiency and customer experience in complex, real-world environments.
-        </p>
-
-        <!--
-        <p>I am currently a Ph.D. candidate in the Department of Computer Science at the <strong><a href="https://www.charlotte.edu/" target="_blank">University of North Carolina at Charlotte</a></strong>, working under the supervision of <span style="color: #A6372A;"><strong><a href="https://scholar.google.com/citations?hl=en&user=0buJlAUAAAAJ&view_op=list_works&authuser=2&sortby=pubdate" target="_blank">Dr. Pu Wang</a></strong></span> at the <span style="color: #A6372A;"><em><a href="" target="_blank">GENIUS Lab</a></em></span>. My research focuses on advancing computer vision and generative AI, particularly in <strong>3D Human Pose Estimation</strong> and <strong>Mesh Recovery</strong>. Moreover, I am interested in <strong>3D Human Motion Generation</strong> driven by multi-modal inputs (e.g., text, music, or speech), with a focus on achieving controllable, high-quality synthesis for realistic and dynamically responsive motion generation in real-time interactive settings. Previously, at the <span style="color: #A6372A;"><em><a href="https://webpages.charlotte.edu/lfan4/index.html" target="_blank">Image Privacy Lab</a></em></span> under <span style="color: #A6372A;"><strong><a href="https://scholar.google.com/citations?hl=en&user=mPJmXakAAAAJ&view_op=list_works&sortby=pubdate" target="_blank">Dr. Liyue Fan</a></strong></span>, I developed privacy-preserving federated frameworks for generative AI, enabling secure synthetic data generation in non-IID settings. Currently, I am a researcher at Amazon and Lowe’s working on computer vision and generative AI. Before joining UNCC, I earned my Bachelor's degree in Computer Science from <strong><a href="https://_"></a></strong></p>
-        -->
-
-        <h2>Research Interests</h2>
-        <p>
-          My research interests lie at the intersection of computer vision and generative AI, with a focus on 3D human modeling. Specifically, I focus on 3D human pose estimation and mesh reconstruction via generative masked modeling. Moreover, I’m interested in developing multimodal motion synthesis frameworks that synthesize controllable, high-fidelity 3D human animations for real time applications.
-        </p>
-        <p>
-          <strong>
-            If you have any research opportunities, please feel free to reach out at
-            <a href="mailto:msaleem2@charlotte.edu" style="color: #A6372A;"><em>msaleem2@charlotte.edu</em></a>.
-          </strong>
-        </p>
-<!--  In parallel, I’m building large-scale multimodal language models to enable robust video understanding in complex, real-world environments. -->
-        <!--
-        <p> My research interests lie in Computer Vision and Generative AI, specifically focusing on two interconnected pillars: </p>
-        <ul>
-          <li>3D Human Pose Estimation and Mesh Recovery</li>
-          <li>Multi-Modality Motion Synthesis</li>
-        </ul>
-        -->
-
-        
-<h3 class="news-heading"><i class="fas fa-bell news-icon" aria-hidden="true"></i> News </h3>
-
-<ul class="news-list">
-  <li>
-    <i class="fas fa-bell news-icon" aria-hidden="true"></i>
-    <strong>June 2025:</strong> A paper on “MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild” is accepted to <strong style="color:#A6372A">ICCV 2025</strong>!
-  </li>
-  <li>
-    <i class="fas fa-bell news-icon" aria-hidden="true"></i>
-    <strong>June 2025:</strong> A paper on “ControlMM: Controllable Masked Motion Generation” is accepted to <strong style="color:#A6372A">ICCV 2025</strong>!
-  </li>
-  <li>
-    <i class="fas fa-bell news-icon" aria-hidden="true"></i>
-    <strong>June 2025:</strong> Joined <a href="https://www.amazon.com/" target="_blank" class="logo-name">Amazon</a> as Applied Scientist II Intern
-  </li>
-  <li>
-    <strong>April 2025:</strong> “DanceMosaic: High-Fidelity Dance Generation with Multimodal Editability” is now available on <strong style="color:#A6372A">arXiv</strong>.
-  </li>
-<li>
-  <strong>Dec 2024:</strong> “GenHMR: Generative Human Mesh Recovery” was accepted to 
-  <strong style="color:#A6372A">AAAI 2025</strong>, presented in Philadelphia, and received a travel award.
-</li>
-  <li>
-    <strong>Oct 2024:</strong> “BioPose: Biomechanically-Accurate 3D Pose Estimation from Monocular Videos” is accepted to <strong style="color:#A6372A">WACV 2025</strong>!
-  </li>
-  <li>
-    <strong>July 2024:</strong> “BAMM: Bidirectional Autoregressive Motion Model” is accepted to <strong style="color:#A6372A">ECCV 2024</strong>!
-  </li>
-  <li>
-    <i class="fas fa-bell news-icon" aria-hidden="true"></i>
-    <strong>Sept 2023:</strong> Joined <a href="https://www.lowes.com/" target="_blank" class="logo-name">Lowe’s</a> as Research Lead of the Computer Vision UNCC Team
-  </li>
-  <li>
-    <strong>June 2023:</strong> “Private Data Synthesis from Decentralized Non-IID Data” accepted to <strong style="color:#A6372A">IJCNN 2023</strong>, presented in Queensland, Australia, and received a $5500 travel grant!
-  </li>
-  <li>
-    <strong>April 2023:</strong> Presented at the <strong style="color:#A6372A">SIAM International Conference on Data Mining (SDM’23)</strong> Doctoral Forum; awarded NSF $1400 travel grant.
-  </li>
-  <li>
-    <strong>July 2022:</strong> “Privacy Enhancement for Cloud-Based Few-Shot Learning” accepted to <strong style="color:#A6372A">IJCNN 2022</strong>!
-  </li>
-  <li>
-    <strong>Jan 2022:</strong> “DP-Shield: Face Obfuscation with Differential Privacy” accepted to <strong style="color:#A6372A">EDBT 2022</strong>!
-  </li>
-</ul>
-
-      </div>
     </div>
-  </div>
-</section>
-
+  </section>
   <!-- <section id="skills" class="home-section wg-featurette   "><div class="container"><div class="row featurette"><div class="col-md-12 section-heading"><h1>Skills</h1></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/python.svg" alt="python" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/C.svg" alt="C" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/cplusplus.svg" alt="cplusplus" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/csharp.svg" alt="csharp" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/java.svg" alt="java" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/matlab.svg" alt="matlab" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/scala.svg" alt="scala" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/mysql.svg" alt="mysql" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/bash.svg" alt="bash" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/latex.svg" alt="latex" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/R.svg" alt="R" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/haskell.svg" alt="haskell" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/docker.svg" alt="docker" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/git.svg" alt="git" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/jupyter.svg" alt="jupyter" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/numpy.svg" alt="numpy" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/opencv.svg" alt="opencv" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/pandas.svg" alt="pandas" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/pytorch.svg" alt="pytorch" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/scikit.svg" alt="scikit" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/tensorflow.svg" alt="tensorflow" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/huggingface.svg" alt="huggingface" class="svg-icon svg-baseline"></div><h3></h3></div></div></div></section> -->
- <section id="publications" class="home-section wg-pages">
-  <div class="container">
-    <!-- Full-width heading -->
-    <div class="row">
-      <div class="col-12">
-        <h1 class="text-center">Recent Publications</h1>
-      </div>
-    </div>
-
-    <!-- Centered list at 80% width -->
-    <div class="row">
-      <div class="col-12">
-        <div class="pub-list mx-auto">
-
-          <!-- DanceMosaic -->
-          <div class="media stream-item">
-            <div class="media-body">
-              <h4 class="article-title mb-1">
-                <a href="https://foram-s1.github.io/DanceMosaic/">DanceMosaic: High-Fidelity Dance Generation with Multimodal Editability</a>
-              </h4>
-              <div class="article-style mb-2">
-                <span class="conference-name"><strong>arXiv 2025</strong></span>
-              </div>
-              <div class="stream-meta article-metadata mb-2">
-                Foram Shah*, Parshwa Shah*, <strong><u>Muhammad Usama Saleem</u></strong>, Ekkasit Pinyoanuntapong, Pu Wang, Hongfei Xue, Ahmed Helmy
-              </div>
-              <div class="mb-3" style="font-weight:bold; color:#A6372A;">*Equal Contribution</div>
-              <div class="btn-links mb-4">
-                <a class="btn btn-outline-primary btn-sm mr-2" href="https://arxiv.org/abs/2504.04634" target="_blank">PDF</a>
-                <a class="btn btn-outline-primary btn-sm"         href="https://foram-s1.github.io/DanceMosaic/" target="_blank">Webpage</a>
-              </div>
-            </div>
-            <div class="ml-3 d-flex align-items-center">
-              <video style="width:150px; height:90px; object-fit:cover;" autoplay loop muted playsinline>
-                <source src="./videos/DanceMosaic.mkv" type="video/mp4">
-              </video>
-            </div>
-          </div>
-<!-- MaskHand -->
-
- <!-- MaskHand -->
-    <div class="media stream-item boxed">
-      <div class="media-body">
-        <h4 class="article-title">
-          <a href="./publication/MaskHand/MaskHand.html">
-            MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild
-          </a>
-        </h4>
-        <div class="conference-name"><strong>ICCV 2025</strong></div>
-        <div class="stream-meta article-metadata">
-          <strong><u>Muhammad Usama Saleem</u></strong>,
-          Ekkasit Pinyoanuntapong, Mayur Jagdishbhai Patel,
-          Hongfei Xue, Ahmed Helmy, Srijan Das, Pu Wang
-        </div>
-        <div class="media-summary">
-          MaskHand is a probabilistic masked modeling framework—tokenizing articulations with VQ-MANO and using a context-aware masked transformer to fuse multi-scale image features and 2D cues for iterative, confidence-guided sampling.
-        </div>
-        <div class="btn-links">
-          <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/abs/2412.13393" target="_blank">PDF</a>
-          <a class="btn btn-outline-primary btn-sm" href="./publication/MaskHand/MaskHand.html" target="_blank">Webpage</a>
+  <section id="publications" class="home-section wg-pages">
+    <div class="container">
+      <!-- Full-width heading -->
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-center">Recent Publications</h1>
         </div>
       </div>
-      <div class="thumbnail">
-        <video autoplay loop muted playsinline>
-          <source src="./videos/mmhmr.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
-
-    <!-- ControlMM -->
-    <div class="media stream-item boxed">
-      <div class="media-body">
-        <h4 class="article-title">
-          <a href="https://exitudio.github.io/ControlMM-page/">
-            ControlMM: Controllable Masked Motion Generation
-          </a>
-        </h4>
-        <div class="conference-name"><strong>ICCV 2025</strong></div>
-        <div class="stream-meta article-metadata">
-          Ekkasit Pinyoanuntapong,
-          <strong><u>Muhammad Usama Saleem</u></strong>,
-          Korrawe Karunratanakul, Pu Wang, Hongfei Xue,
-          Chen Chen, Chuan Guo, Junli Cao, Jian Ren, Sergey Tulyakov
-        </div>
-        <div class="media-summary">
-          ControlMM is a novel masked generative motion model—combining masked consistency and inference-time logit editing in a parallel decoder for fast, high-fidelity, spatially precise motion generation.
-        </div>
-        <div class="btn-links">
-          <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/pdf/2410.10780" target="_blank">PDF</a>
-          <a class="btn btn-outline-primary btn-sm" href="https://exitudio.github.io/ControlMM-page/" target="_blank">Webpage</a>
-          <a class="btn btn-outline-primary btn-sm" href="https://github.com/exitudio/ControlMM" target="_blank">Code</a>
-        </div>
-      </div>
-      <div class="thumbnail">
-        <video autoplay loop muted playsinline>
-          <source src="./videos/CAM.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
-
-    <!-- GenHMR -->
-    <div class="media stream-item boxed">
-      <div class="media-body">
-        <h4 class="article-title">
-          <a href="./publication/GenHMR/GenHMR.html">
-            GenHMR: Generative Human Mesh Recovery
-          </a>
-        </h4>
-        <div class="conference-name"><strong>AAAI 2025</strong></div>
-        <div class="stream-meta article-metadata">
-          <strong><u>Muhammad Usama Saleem</u></strong>,
-          Ekkasit Pinyoanuntapong, Pu Wang,
-          Hongfei Xue, Srijan Das, Chen Chen
-        </div>
-        <div class="media-summary">
-          GenHMR reframes monocular HMR as an image-conditioned generative task—employing a VQ-VAE pose tokenizer and masked transformer to model 2D→3D uncertainty, iteratively sampling high-confidence tokens and refining them with 2D cues for accurate mesh recovery.
-        </div>
-        <div class="btn-links">
-          <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/abs/2412.14444" target="_blank">PDF</a>
-          <a class="btn btn-outline-primary btn-sm" href="./publication/GenHMR/GenHMR.html" target="_blank">Webpage</a>
-        </div>
-      </div>
-      <div class="thumbnail">
-        <video autoplay loop muted playsinline>
-          <source src="./videos/genhmr.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
-
-    <!-- BioPose -->
-    <div class="media stream-item boxed">
-      <div class="media-body">
-        <h4 class="article-title">
-          <a href="./publication/BioPose/BioPose.html">
-            BioPose: Biomechanically-accurate 3D Pose Estimation from Monocular Videos
-          </a>
-        </h4>
-        <div class="conference-name"><strong>WACV 2025</strong></div>
-        <div class="stream-meta article-metadata">
-          <strong><u>Muhammad Usama Saleem*</u></strong>,
-          Farnoosh Koleini*, Pu Wang, Hongfei Xue,
-          Ahmed Helmy, Abbey Fenwick
-        </div>
-        <div class="media-summary">
-          BioPose is a novel biomechanics-guided 3D pose estimation framework—combining a multi-query deformable transformer for precise mesh recovery, a neural IK network that enforces anatomical constraints, and 2D-informed iterative pose refinement.
-        </div>
-        <div class="btn-links">
-          <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/abs/2501.07800" target="_blank">PDF</a>
-          <a class="btn btn-outline-primary btn-sm" href="./publication/BioPose/BioPose.html" target="_blank">Webpage</a>
-        </div>
-      </div>
-      <div class="thumbnail">
-        <video autoplay loop muted playsinline>
-          <source src="./videos/biopose.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
-
-
-
-          <!-- BAMM -->
-          <div class="media stream-item">
-            <div class="media-body">
-              <h4 class="article-title mb-1">
-                <a href="https://exitudio.github.io/BAMM-page/">BAMM: Bidirectional Autoregressive Motion Model</a>
-              </h4>
-              <div class="article-style mb-2">
-                <span class="conference-name"><strong>ECCV 2024</strong></span>
+      <!-- Centered list at 80% width -->
+      <div class="row">
+        <div class="col-12">
+          <div class="pub-list mx-auto">
+            <!-- DanceMosaic -->
+            <div class="media stream-item">
+              <div class="media-body">
+                <h4 class="article-title mb-1">
+                  <a href="https://foram-s1.github.io/DanceMosaic/">DanceMosaic: High-Fidelity Dance Generation with Multimodal Editability</a>
+                </h4>
+                <div class="article-style mb-2">
+                  <span class="conference-name">
+                    <strong>arXiv 2025</strong>
+                  </span>
+                </div>
+                <div class="stream-meta article-metadata mb-2"> Foram Shah*, Parshwa Shah*, <strong>
+                    <u>Muhammad Usama Saleem</u>
+                  </strong>, Ekkasit Pinyoanuntapong, Pu Wang, Hongfei Xue, Ahmed Helmy </div>
+                <div class="mb-3" style="font-weight:bold; color:#A6372A;">*Equal Contribution</div>
+                <div class="btn-links mb-4">
+                  <a class="btn btn-outline-primary btn-sm mr-2" href="https://arxiv.org/abs/2504.04634" target="_blank">PDF</a>
+                  <a class="btn btn-outline-primary btn-sm" href="https://foram-s1.github.io/DanceMosaic/" target="_blank">Webpage</a>
+                </div>
               </div>
-              <div class="stream-meta article-metadata mb-3">
-                Ekkasit Pinyoanuntapong, <strong><u>Muhammad Usama Saleem</u></strong>, Pu Wang, Minwoo Lee, Srijan Das, Chen Chen
-              </div>
-              <div class="btn-links mb-4">
-                <a class="btn btn-outline-primary btn-sm mr-2" href="https://arxiv.org/abs/2403.19435" target="_blank">PDF</a>
-                <a class="btn btn-outline-primary btn-sm mr-2" href="https://exitudio.github.io/BAMM-page/" target="_blank">Webpage</a>
-                <a class="btn btn-outline-primary btn-sm"         href="https://github.com/exitudio/BAMM/" target="_blank">Code</a>
+              <div class="ml-3 d-flex align-items-center">
+                <video style="width:150px; height:90px; object-fit:cover;" autoplay loop muted playsinline>
+                  <source src="./videos/DanceMosaic.mkv" type="video/mp4">
+                </video>
               </div>
             </div>
-            <div class="ml-3 d-flex align-items-center">
-              <video style="width:150px; height:90px; object-fit:cover;" autoplay loop muted playsinline>
-                <source src="./videos/BAMM.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
-
-          <!-- Private Data Synthesis -->
-          <div class="media stream-item">
-            <div class="media-body">
-              <h4 class="article-title mb-1">
-                <a href="./publication/DPFedProxGAN/dpfedproxgan.html">Private Data Synthesis from Decentralized Non-IID Data</a>
-              </h4>
-              <div class="article-style mb-2">
-                <span class="conference-name"><strong>IJCNN 2023</strong></span>
+            <!-- MaskHand -->
+            <!-- MaskHand -->
+            <div class="media stream-item boxed">
+              <div class="media-body">
+                <h4 class="article-title">
+                  <a href="./publication/MaskHand/MaskHand.html"> MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild </a>
+                </h4>
+                <div class="conference-name">
+                  <strong>ICCV 2025</strong>
+                </div>
+                <div class="stream-meta article-metadata">
+                  <strong>
+                    <u>Muhammad Usama Saleem</u>
+                  </strong>, Ekkasit Pinyoanuntapong, Mayur Jagdishbhai Patel, Hongfei Xue, Ahmed Helmy, Srijan Das, Pu Wang
+                </div>
+                <div class="media-summary"> MaskHand is a probabilistic masked modeling framework—tokenizing articulations with VQ-MANO and using a context-aware masked transformer to fuse multi-scale image features and 2D cues for iterative, confidence-guided sampling. </div>
+                <div class="btn-links">
+                  <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/abs/2412.13393" target="_blank">PDF</a>
+                  <a class="btn btn-outline-primary btn-sm" href="./publication/MaskHand/MaskHand.html" target="_blank">Webpage</a>
+                </div>
               </div>
-              <div class="stream-meta article-metadata mb-3">
-                <strong><u>Muhammad Usama Saleem</u></strong>, L. Fan
-              </div>
-              <div class="btn-links mb-4">
-                <a class="btn btn-outline-primary btn-sm mr-2" href="https://ieeexplore.ieee.org/document/10191553" target="_blank">PDF</a>
-                <a class="btn btn-outline-primary btn-sm mr-2" href="./publication/DPFedProxGAN/Private_Data_Synthesis_from_Decentralized_Non_IID_Data_with_Appendix_IJCNN_23.pdf" target="_blank">Supplementary</a>
-                <a class="btn btn-outline-primary btn-sm"         href="./publication/DPFedProxGAN/dpfedproxgan.html" target="_blank">Webpage</a>
-              </div>
-            </div>
-            <div class="ml-3 d-flex align-items-center">
-              <img src="/publication/06-fs-data-synthesis/private_data.png" alt="Private Data Synthesis">
-            </div>
-          </div>
-
-          <!-- Privacy Enhancement -->
-          <div class="media stream-item">
-            <div class="media-body">
-              <h4 class="article-title mb-1">
-                <a href="/publication/05-fs-privacy/">Privacy Enhancement for Cloud-Based Few-Shot Learning</a>
-              </h4>
-              <div class="article-style mb-2">
-                <span class="conference-name"><strong>IJCNN 2022</strong></span>
-              </div>
-              <div class="stream-meta article-metadata mb-3">
-                A. Parnami, <strong><u>Muhammad Usama Saleem</u></strong>, L. Fan, M. Lee
-              </div>
-              <div class="btn-links mb-4">
-                <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/abs/2205.07864" target="_blank">PDF</a>
+              <div class="thumbnail">
+                <video autoplay loop muted playsinline>
+                  <source src="./videos/mmhmr.mp4" type="video/mp4">
+                </video>
               </div>
             </div>
-            <div class="ml-3 d-flex align-items-center">
-              <img src="/publication/05-fs-privacy/featured_hu5afa6d22d114b7460f804b57e93d75ca_82188_150x0_resize_lanczos_3.png" alt="Privacy Enhancement">
+            <!-- ControlMM -->
+            <div class="media stream-item boxed">
+              <div class="media-body">
+                <h4 class="article-title">
+                  <a href="https://exitudio.github.io/ControlMM-page/"> ControlMM: Controllable Masked Motion Generation </a>
+                </h4>
+                <div class="conference-name">
+                  <strong>ICCV 2025</strong>
+                </div>
+                <div class="stream-meta article-metadata"> Ekkasit Pinyoanuntapong, <strong>
+                    <u>Muhammad Usama Saleem</u>
+                  </strong>, Korrawe Karunratanakul, Pu Wang, Hongfei Xue, Chen Chen, Chuan Guo, Junli Cao, Jian Ren, Sergey Tulyakov </div>
+                <div class="media-summary"> ControlMM is a novel masked generative motion model—combining masked consistency and inference-time logit editing in a parallel decoder for fast, high-fidelity, spatially precise motion generation. </div>
+                <div class="btn-links">
+                  <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/pdf/2410.10780" target="_blank">PDF</a>
+                  <a class="btn btn-outline-primary btn-sm" href="https://exitudio.github.io/ControlMM-page/" target="_blank">Webpage</a>
+                  <a class="btn btn-outline-primary btn-sm" href="https://github.com/exitudio/ControlMM" target="_blank">Code</a>
+                </div>
+              </div>
+              <div class="thumbnail">
+                <video autoplay loop muted playsinline>
+                  <source src="./videos/CAM.mp4" type="video/mp4">
+                </video>
+              </div>
             </div>
-          </div>
-
-          <!-- DP-Shield -->
-          <div class="media stream-item">
-            <div class="media-body">
-              <h4 class="article-title mb-1">
-                <a href="http://3.223.148.187/">DP-Shield: Face Obfuscation with Differential Privacy</a>
-              </h4>
-              <div class="article-style mb-2">
-                <span class="conference-name"><strong>EDBT 2022</strong></span>
+            <!-- GenHMR -->
+            <div class="media stream-item boxed">
+              <div class="media-body">
+                <h4 class="article-title">
+                  <a href="./publication/GenHMR/GenHMR.html"> GenHMR: Generative Human Mesh Recovery </a>
+                </h4>
+                <div class="conference-name">
+                  <strong>AAAI 2025</strong>
+                </div>
+                <div class="stream-meta article-metadata">
+                  <strong>
+                    <u>Muhammad Usama Saleem</u>
+                  </strong>, Ekkasit Pinyoanuntapong, Pu Wang, Hongfei Xue, Srijan Das, Chen Chen
+                </div>
+                <div class="media-summary"> GenHMR reframes monocular HMR as an image-conditioned generative task—employing a VQ-VAE pose tokenizer and masked transformer to model 2D→3D uncertainty, iteratively sampling high-confidence tokens and refining them with 2D cues for accurate mesh recovery. </div>
+                <div class="btn-links">
+                  <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/abs/2412.14444" target="_blank">PDF</a>
+                  <a class="btn btn-outline-primary btn-sm" href="./publication/GenHMR/GenHMR.html" target="_blank">Webpage</a>
+                </div>
               </div>
-              <div class="stream-meta article-metadata mb-3">
-                <strong><u>Muhammad Usama Saleem</u></strong>, D. Reilly, L. Fan
-              </div>
-              <div class="btn-links mb-4">
-                <a class="btn btn-outline-primary btn-sm mr-2" href="https://openproceedings.org/2022/conf/edbt/paper-150.pdf" target="_blank">PDF</a>
-                <a class="btn btn-outline-primary btn-sm mr-2" href="http://3.223.148.187/" target="_blank">Webpage</a>
-                <a class="btn btn-outline-primary btn-sm"         href="https://github.com/m-usamasaleem/DP-Shield-EDBT-22" target="_blank">Code</a>
+              <div class="thumbnail">
+                <video autoplay loop muted playsinline>
+                  <source src="./videos/genhmr.mp4" type="video/mp4">
+                </video>
               </div>
             </div>
-            <div class="ml-3 d-flex align-items-center">
-              <video style="width:150px; height:90px; object-fit:cover;" autoplay loop muted playsinline>
-                <source src="./videos/edbt.webm" type="video/mp4">
-              </video>
+            <!-- BioPose -->
+            <div class="media stream-item boxed">
+              <div class="media-body">
+                <h4 class="article-title">
+                  <a href="./publication/BioPose/BioPose.html"> BioPose: Biomechanically-accurate 3D Pose Estimation from Monocular Videos </a>
+                </h4>
+                <div class="conference-name">
+                  <strong>WACV 2025</strong>
+                </div>
+                <div class="stream-meta article-metadata">
+                  <strong>
+                    <u>Muhammad Usama Saleem*</u>
+                  </strong>, Farnoosh Koleini*, Pu Wang, Hongfei Xue, Ahmed Helmy, Abbey Fenwick
+                </div>
+                <div class="media-summary"> BioPose is a novel biomechanics-guided 3D pose estimation framework—combining a multi-query deformable transformer for precise mesh recovery, a neural IK network that enforces anatomical constraints, and 2D-informed iterative pose refinement. </div>
+                <div class="btn-links">
+                  <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/abs/2501.07800" target="_blank">PDF</a>
+                  <a class="btn btn-outline-primary btn-sm" href="./publication/BioPose/BioPose.html" target="_blank">Webpage</a>
+                </div>
+              </div>
+              <div class="thumbnail">
+                <video autoplay loop muted playsinline>
+                  <source src="./videos/biopose.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <!-- BAMM -->
+            <div class="media stream-item">
+              <div class="media-body">
+                <h4 class="article-title mb-1">
+                  <a href="https://exitudio.github.io/BAMM-page/">BAMM: Bidirectional Autoregressive Motion Model</a>
+                </h4>
+                <div class="article-style mb-2">
+                  <span class="conference-name">
+                    <strong>ECCV 2024</strong>
+                  </span>
+                </div>
+                <div class="stream-meta article-metadata mb-3"> Ekkasit Pinyoanuntapong, <strong>
+                    <u>Muhammad Usama Saleem</u>
+                  </strong>, Pu Wang, Minwoo Lee, Srijan Das, Chen Chen </div>
+                <div class="btn-links mb-4">
+                  <a class="btn btn-outline-primary btn-sm mr-2" href="https://arxiv.org/abs/2403.19435" target="_blank">PDF</a>
+                  <a class="btn btn-outline-primary btn-sm mr-2" href="https://exitudio.github.io/BAMM-page/" target="_blank">Webpage</a>
+                  <a class="btn btn-outline-primary btn-sm" href="https://github.com/exitudio/BAMM/" target="_blank">Code</a>
+                </div>
+              </div>
+              <div class="ml-3 d-flex align-items-center">
+                <video style="width:150px; height:90px; object-fit:cover;" autoplay loop muted playsinline>
+                  <source src="./videos/BAMM.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <!-- Private Data Synthesis -->
+            <div class="media stream-item">
+              <div class="media-body">
+                <h4 class="article-title mb-1">
+                  <a href="./publication/DPFedProxGAN/dpfedproxgan.html">Private Data Synthesis from Decentralized Non-IID Data</a>
+                </h4>
+                <div class="article-style mb-2">
+                  <span class="conference-name">
+                    <strong>IJCNN 2023</strong>
+                  </span>
+                </div>
+                <div class="stream-meta article-metadata mb-3">
+                  <strong>
+                    <u>Muhammad Usama Saleem</u>
+                  </strong>, L. Fan
+                </div>
+                <div class="btn-links mb-4">
+                  <a class="btn btn-outline-primary btn-sm mr-2" href="https://ieeexplore.ieee.org/document/10191553" target="_blank">PDF</a>
+                  <a class="btn btn-outline-primary btn-sm mr-2" href="./publication/DPFedProxGAN/Private_Data_Synthesis_from_Decentralized_Non_IID_Data_with_Appendix_IJCNN_23.pdf" target="_blank">Supplementary</a>
+                  <a class="btn btn-outline-primary btn-sm" href="./publication/DPFedProxGAN/dpfedproxgan.html" target="_blank">Webpage</a>
+                </div>
+              </div>
+              <div class="ml-3 d-flex align-items-center">
+                <img src="/publication/06-fs-data-synthesis/private_data.png" alt="Private Data Synthesis">
+              </div>
+            </div>
+            <!-- Privacy Enhancement -->
+            <div class="media stream-item">
+              <div class="media-body">
+                <h4 class="article-title mb-1">
+                  <a href="/publication/05-fs-privacy/">Privacy Enhancement for Cloud-Based Few-Shot Learning</a>
+                </h4>
+                <div class="article-style mb-2">
+                  <span class="conference-name">
+                    <strong>IJCNN 2022</strong>
+                  </span>
+                </div>
+                <div class="stream-meta article-metadata mb-3"> A. Parnami, <strong>
+                    <u>Muhammad Usama Saleem</u>
+                  </strong>, L. Fan, M. Lee </div>
+                <div class="btn-links mb-4">
+                  <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/abs/2205.07864" target="_blank">PDF</a>
+                </div>
+              </div>
+              <div class="ml-3 d-flex align-items-center">
+                <img src="/publication/05-fs-privacy/featured_hu5afa6d22d114b7460f804b57e93d75ca_82188_150x0_resize_lanczos_3.png" alt="Privacy Enhancement">
+              </div>
+            </div>
+            <!-- DP-Shield -->
+            <div class="media stream-item">
+              <div class="media-body">
+                <h4 class="article-title mb-1">
+                  <a href="http://3.223.148.187/">DP-Shield: Face Obfuscation with Differential Privacy</a>
+                </h4>
+                <div class="article-style mb-2">
+                  <span class="conference-name">
+                    <strong>EDBT 2022</strong>
+                  </span>
+                </div>
+                <div class="stream-meta article-metadata mb-3">
+                  <strong>
+                    <u>Muhammad Usama Saleem</u>
+                  </strong>, D. Reilly, L. Fan
+                </div>
+                <div class="btn-links mb-4">
+                  <a class="btn btn-outline-primary btn-sm mr-2" href="https://openproceedings.org/2022/conf/edbt/paper-150.pdf" target="_blank">PDF</a>
+                  <a class="btn btn-outline-primary btn-sm mr-2" href="http://3.223.148.187/" target="_blank">Webpage</a>
+                  <a class="btn btn-outline-primary btn-sm" href="https://github.com/m-usamasaleem/DP-Shield-EDBT-22" target="_blank">Code</a>
+                </div>
+              </div>
+              <div class="ml-3 d-flex align-items-center">
+                <video style="width:150px; height:90px; object-fit:cover;" autoplay loop muted playsinline>
+                  <source src="./videos/edbt.webm" type="video/mp4">
+                </video>
+              </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
-  </div>
-</section>
-
+  </section>
   <!-- <section id="posts" class="home-section wg-pages   "> -->
   <!-- <div class="container"> -->
   <!-- <div class="row"><div class="col-12 col-lg-4 section-heading"><h1>Recent Posts</h1></div><div class="col-12 col-lg-8"><div class="media stream-item"><div class="media-body"><h3 class="article-title mb-0 mt-0"><a href="/post/laplacian-fsl/">Laplacian Regularized Few-Shot Learning</a></h3><a href="/post/laplacian-fsl/" class="summary-link"><div class="article-style"> Paper https://arxiv.org/abs/2006.15486 Code
@@ -966,15 +982,15 @@ section:last-of-type {
     };
   </script>
   <script id="search-hit-fuse-template" type="text/x-template"> <div class="search-hit" id="summary-{{key}}">
-																																											<div class="search-hit-content">
-																																												<div class="search-hit-name">
-																																													<a href="{{relpermalink}}">{{title}}</a>
-																																													<div class="article-metadata search-hit-type">{{type}}</div>
-																																													<p class="search-hit-description">{{snippet}}</p>
-																																												</div>
-																																											</div>
-																																										</div>
-																																									</script>
+																																														<div class="search-hit-content">
+																																															<div class="search-hit-name">
+																																																<a href="{{relpermalink}}">{{title}}</a>
+																																																<div class="article-metadata search-hit-type">{{type}}</div>
+																																																<p class="search-hit-description">{{snippet}}</p>
+																																															</div>
+																																														</div>
+																																													</div>
+																																												</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
   <script>
@@ -1021,8 +1037,8 @@ section:last-of-type {
         </div>
         <div class="modal-body">
           <pre>
-																																														<code class="tex hljs"></code>
-																																													</pre>
+																																																	<code class="tex hljs"></code>
+																																																</pre>
         </div>
         <div class="modal-footer">
           <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
