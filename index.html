@@ -381,21 +381,26 @@ section:last-of-type {
     text-decoration: underline;
   }
 
+.media.stream-item.boxed {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;      /* ← rounded corners */
+  padding: 1rem;
+  margin-bottom: 2rem;
+  transition: background-color 0.2s ease;
+}
+
+.media.stream-item.boxed:hover {
+  background-color: rgba(166, 55, 42, 0.1);
+}
+
 .media-summary {
-  margin-top: 0.25rem;
-  margin-bottom: 0;      
+  margin-top: 0.5rem;
   line-height: 1.5;
   color: #555;
   font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-size: 0.9em;              /* ← slightly smaller */
+  font-size: 0.9em;
 }
 
-/* light brand‐red hover */
-.media.stream-item:hover {
-  background-color: rgba(166, 55, 42, 0.1);
-  transition: background-color 0.2s ease;
-}
 
     -->
   </style>
