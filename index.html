@@ -568,6 +568,33 @@
   background-color: #fff;
 }
 
+	  /* 1) Make the entire Experience section pure white */
+#experience {
+  background-color: #fff;
+  /* tighten its top & bottom padding to match your other sections */
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+/* 2) Kill the section‐border “hairlines” just above & below it */
+#experience,
+#experience + section {
+  border-bottom: none !important;
+}
+
+/* 3) Reduce the huge gutters between sections */
+section {
+  /* shrink the 3rem default to something tighter if you like */
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+/* 4) If your HTML is emitting extra <hr> tags, hide them */
+hr {
+  display: none;
+}
+
+
   </style>
   <aside class="search-results" id="search">
     <div class="container">
