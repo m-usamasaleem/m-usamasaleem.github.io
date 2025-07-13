@@ -511,8 +511,40 @@
   border-radius: 4px;
 }
 
+#experience .experience-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
 
-    -->
+#experience .company-logo {
+  flex: 0 0 80px;
+  margin-right: 1.5rem;
+}
+
+#experience .company-logo img {
+  width: 150px;      /* or whatever full size you want */
+  height: auto;      /* preserve aspect ratio */
+  max-width: none;   /* override any library constraints */
+}
+
+#experience .experience-details h3 {
+  margin-top: 0;
+}
+
+.experience-details p {
+  display: inline-flex;
+  align-items: baseline;   /* keep text aligned nicely */
+  gap: 2rem;               /* space between location and dates */
+  flex-wrap: wrap;         /* in case it needs to wrap on small screens */
+}
+
+
+#experience .experience-details ul {
+  margin: 0;
+  padding-left: 1.25em;
+}
+
   </style>
   <aside class="search-results" id="search">
     <div class="container">
@@ -723,6 +755,63 @@
     </div>
   </section>
   <!-- <section id="skills" class="home-section wg-featurette   "><div class="container"><div class="row featurette"><div class="col-md-12 section-heading"><h1>Skills</h1></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/python.svg" alt="python" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/C.svg" alt="C" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/cplusplus.svg" alt="cplusplus" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/csharp.svg" alt="csharp" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/java.svg" alt="java" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/matlab.svg" alt="matlab" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/scala.svg" alt="scala" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/mysql.svg" alt="mysql" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/bash.svg" alt="bash" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/latex.svg" alt="latex" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/R.svg" alt="R" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/haskell.svg" alt="haskell" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/docker.svg" alt="docker" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/git.svg" alt="git" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/jupyter.svg" alt="jupyter" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/numpy.svg" alt="numpy" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/opencv.svg" alt="opencv" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/pandas.svg" alt="pandas" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/pytorch.svg" alt="pytorch" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/scikit.svg" alt="scikit" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/tensorflow.svg" alt="tensorflow" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/huggingface.svg" alt="huggingface" class="svg-icon svg-baseline"></div><h3></h3></div></div></div></section> -->
+  
+  
+  <section id="experience" class="home-section wg-pages">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-center">Work Experience</h1>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-12">
+  
+          <div class="experience-item">
+            <div class="company-logo">
+              <img src="./amazon.webp" alt="Amazon logo" width="200">
+            </div>
+            <div class="experience-details">
+              <h3>Applied Scientist II Intern</h3>
+              <p>
+                <span class="company-location">
+                  <strong>Amazon Inc.</strong>, Boston, MA
+                </span>
+                <span class="employment-dates">
+                  June 2025 – Present
+                </span>
+              </p>
+            </div>
+          </div>
+  
+          <div class="experience-item">
+            <div class="company-logo">
+              <img src="lowes.png" alt="Lowe’s logo" width="200">
+            </div>
+            <div class="experience-details">
+              <h3>Research Lead, Computer Vision UNCC Team</h3>
+              <p>
+                <span class="company-location">
+                  <strong>Lowe’s</strong>, Charlotte, NC
+                </span>
+                <span class="employment-dates">
+                  Sept. 2023 – Present
+                </span>
+              </p>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+  
+  
   <section id="publications" class="home-section wg-pages">
     <div class="container">
       <!-- Full-width heading -->
