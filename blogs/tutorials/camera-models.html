@@ -343,9 +343,8 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script>
-    // Tutorial content embedded directly
-    const tutorialContent = `# 📖 Table of Contents — Understanding Camera Models in Detail
+  <script id="tutorial-md" type="text/plain">
+# 📖 Table of Contents — Understanding Camera Models in Detail
 
 ---
 
@@ -1094,12 +1093,16 @@ Volume rendering integrates along rays to produce color; differentiable projecti
 
 ---
 
-✅ **Wrap-Up**: Special models (fisheye, catadioptric, omni) extend beyond pinhole; multi-view geometry couples cameras; calibration resolves metric scale; modern AR/SLAM/NeRFs critically rely on accurate camera models.`;
+✅ **Wrap-Up**: Special models (fisheye, catadioptric, omni) extend beyond pinhole; multi-view geometry couples cameras; calibration resolves metric scale; modern AR/SLAM/NeRFs critically rely on accurate camera models.
+  </script>
+  <script>
 
     // Load and render tutorial content
     function loadTutorial() {
       try {
         const container = document.getElementById('tutorial-content');
+        const mdNode = document.getElementById('tutorial-md');
+        const tutorialContent = mdNode ? mdNode.textContent : '';
         
         // Configure marked
         marked.setOptions({
@@ -1109,7 +1112,7 @@ Volume rendering integrates along rays to produce color; differentiable projecti
         });
         
         // Render markdown
-        container.innerHTML = marked.parse(tutorialContent);
+        container.innerHTML = marked.parse(tutorialContent || '# Error\nContent missing.');
         
         // Add smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(link => {
