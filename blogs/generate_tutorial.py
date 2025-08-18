@@ -17,7 +17,7 @@ def generate_tutorial(tutorial_data):
     """
     
     # Read the template
-    template_path = "blogs/template.html"
+    template_path = "template.html"
     with open(template_path, 'r', encoding='utf-8') as f:
         template_content = f.read()
     
@@ -26,7 +26,7 @@ def generate_tutorial(tutorial_data):
         template_content = template_content.replace(placeholder, str(value))
     
     # Create output filename
-    output_filename = f"blogs/tutorials/{tutorial_data['TUTORIAL_SLUG']}.html"
+    output_filename = f"tutorials/{tutorial_data['TUTORIAL_SLUG']}.html"
     
     # Write the generated tutorial
     os.makedirs(os.path.dirname(output_filename), exist_ok=True)
