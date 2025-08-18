@@ -921,6 +921,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
     <script src="/js/academic.min.341e58d06db179e1d53f3322b6883f4c.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <style>
       /* Base styles */
@@ -1421,6 +1422,35 @@
           }
         });
       });
+
+      // Replace article content with exact Markdown from tutorial.txt
+      (async function renderTutorialMarkdown() {
+        try {
+          const container = document.querySelector('.docs-article-container .article-style');
+          if (!container) return;
+          const res = await fetch('camera_models/resources/tutorial.txt');
+          if (!res.ok) return;
+          const md = await res.text();
+          container.innerHTML = marked.parse(md);
+          // Ensure MathJax is available, then typeset
+          function typesetMath() {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+              window.MathJax.typesetPromise();
+            }
+          }
+          if (!window.MathJax) {
+            const mj = document.createElement('script');
+            mj.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+            mj.defer = true;
+            mj.onload = typesetMath;
+            document.head.appendChild(mj);
+          } else {
+            typesetMath();
+          }
+        } catch (e) {
+          console.error('Failed to render tutorial Markdown:', e);
+        }
+      })();
     </script>
   </body>
 </html>
