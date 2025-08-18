@@ -1008,6 +1008,861 @@ $$
 * Projective invariant for four collinear points
 * Preserved under projective transformations
 * Used in camera calibration and 3D reconstruction
+
+---
+
+# 📷 Part II: Classical Camera Models
+
+---
+
+## 4. **The Pinhole Camera Model**
+
+### 📌 Basic Setup and Assumptions
+
+* Dark box, **tiny aperture** (pinhole), and an **image plane**.
+* Aperture is *infinitesimal* (ideal), no lens refraction, purely perspective geometry.
+
+### 📐 Perspective Projection Equations
+
+Let the image plane be at distance $f$.
+
+$$
+x_i = \frac{f X_c}{Z_c}, \quad y_i = \frac{f Y_c}{Z_c}
+$$
+
+### 🔄 Image Inversion and Virtual Image Plane
+
+* Physical plane behind pinhole → **inverted** image.
+* Virtual plane in front → same math without inversion.
+
+### 🔍 Aperture Size Trade-offs
+
+| Aperture Size | Brightness | Sharpness |
+|---------------|------------|-----------|
+| **Small**     | Dim        | Sharp (few rays) |
+| **Large**     | Bright     | Blurred (many rays) |
+
+This trade-off motivates **lenses**: more light while preserving focus.
+
+### 🔬 Mathematical Derivation of Pinhole Projection
+
+**Step 1: Ray Geometry**
+Consider a 3D point $X_c = (X_c, Y_c, Z_c)^T$ in camera coordinates. The ray from the optical center $O = (0, 0, 0)^T$ through this point has direction:
+$$
+\mathbf{d} = \frac{X_c}{\|X_c\|} = \frac{(X_c, Y_c, Z_c)^T}{\sqrt{X_c^2 + Y_c^2 + Z_c^2}}
+$$
+
+**Step 2: Ray Parameterization**
+The ray equation is:
+$$
+\mathbf{r}(t) = O + t \cdot \mathbf{d} = t \cdot \frac{X_c}{\|X_c\|}
+$$
+
+**Step 3: Image Plane Intersection**
+The image plane is at $Z = f$. Setting the Z-component equal to $f$:
+$$
+t \cdot \frac{Z_c}{\|X_c\|} = f \implies t = \frac{f \cdot \|X_c\|}{Z_c}
+$$
+
+**Step 4: Projection Coordinates**
+Substituting back into the ray equation:
+$$
+x_i = t \cdot \frac{X_c}{\|X_c\|} = \frac{f \cdot \|X_c\|}{Z_c} \cdot \frac{X_c}{\|X_c\|} = \frac{f X_c}{Z_c}
+$$
+
+$$
+y_i = t \cdot \frac{Y_c}{\|X_c\|} = \frac{f \cdot \|X_c\|}{Z_c} \cdot \frac{Y_c}{\|X_c\|} = \frac{f Y_c}{Z_c}
+$$
+
+### 📊 Properties of Pinhole Projection
+
+**Linearity in Homogeneous Coordinates:**
+In homogeneous coordinates, the projection becomes linear:
+$$
+\begin{bmatrix} x_i \\ y_i \\ 1 \end{bmatrix} \sim 
+\begin{bmatrix} f & 0 & 0 & 0 \\ 0 & f & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix}
+\begin{bmatrix} X_c \\ Y_c \\ Z_c \\ 1 \end{bmatrix}
+$$
+
+**Depth Ambiguity:**
+Points $(X, Y, Z)$ and $(kX, kY, kZ)$ project to the same image point for any $k > 0$:
+$$
+\frac{f \cdot kX}{kZ} = \frac{f X}{Z}, \quad \frac{f \cdot kY}{kZ} = \frac{f Y}{Z}
+$$
+
+**Back-Projection:**
+Given an image point $(x_i, y_i)$, the corresponding 3D ray is:
+$$
+X_c(\lambda) = \lambda \cdot \begin{bmatrix} x_i/f \\ y_i/f \\ 1 \end{bmatrix}
+$$
+
+### 🎯 Mathematical Analysis of Aperture Effects
+
+**Geometric Blur:**
+For a finite aperture of diameter $D$, the blur circle diameter $b$ at distance $Z$ is:
+$$
+b = \frac{D \cdot |Z - Z_f|}{Z_f}
+$$
+
+where $Z_f$ is the focal distance.
+
+**Optimal Aperture Size:**
+The optimal aperture balances geometric blur and diffraction:
+$$
+D_{opt} = \sqrt{\lambda f}
+$$
+
+where $\lambda$ is the wavelength of light.
+
+**Depth of Field:**
+The depth of field $\Delta Z$ is:
+$$
+\Delta Z = \frac{2 Z_f^2 \cdot c \cdot (f/\#)}{f^2 - c^2 \cdot (f/\#)^2}
+$$
+
+where $c$ is the circle of confusion diameter and $f/\#$ is the f-number.
+
+### 🔄 Virtual vs. Physical Image Plane
+
+**Physical Image Plane (Behind Pinhole):**
+* Image coordinates: $x_i = -\frac{f X_c}{Z_c}, y_i = -\frac{f Y_c}{Z_c}$
+* Image is inverted and left-right reversed
+* Mathematically equivalent to virtual plane with coordinate transformation
+
+**Virtual Image Plane (In Front):**
+* Image coordinates: $x_i = \frac{f X_c}{Z_c}, y_i = \frac{f Y_c}{Z_c}$
+* Image has same orientation as scene
+* Preferred for mathematical convenience
+
+**Equivalence Proof:**
+The transformation between physical and virtual coordinates is:
+$$
+\begin{bmatrix} x_{virtual} \\ y_{virtual} \end{bmatrix} = 
+\begin{bmatrix} -1 & 0 \\ 0 & -1 \end{bmatrix}
+\begin{bmatrix} x_{physical} \\ y_{physical} \end{bmatrix}
+$$
+
+### 📐 Mathematical Limitations
+
+**Singularities:**
+* Points at $Z_c = 0$ (on the image plane) cannot be projected
+* Points behind the camera ($Z_c < 0$) project to negative coordinates
+
+**Approximations:**
+* Assumes infinitesimal aperture (no diffraction)
+* Ignores lens aberrations
+* Assumes perfect geometric optics
+
+**Error Analysis:**
+For a real aperture of diameter $D$, the projection error is bounded by:
+$$
+|\Delta x_i| \leq \frac{D}{2} \cdot \frac{x_i}{Z_c}
+$$
+
+### 🔍 Advanced Mathematical Properties
+
+**Projective Invariance:**
+The pinhole projection preserves:
+* Straight lines remain straight
+* Incidence relationships
+* Cross ratios
+
+**Non-Invertibility:**
+The projection is not invertible - multiple 3D points map to the same 2D point. The inverse mapping is a ray in 3D space.
+
+**Homogeneous Form:**
+The complete projection matrix in homogeneous coordinates is:
+$$
+P = \begin{bmatrix} f & 0 & 0 & 0 \\ 0 & f & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix}
+$$
+
+**Eigenvalues and Eigenvectors:**
+* Eigenvalues: $[f, f, 1, 0]$
+* The zero eigenvalue corresponds to the camera center
+* The eigenvector $(0, 0, 0, 1)^T$ represents the camera center
+
+### 📊 Numerical Examples
+
+**Example 1: Basic Projection**
+Point $(10, 20, 50)$ with focal length $f = 25$:
+$$
+x_i = \frac{25 \cdot 10}{50} = 5, \quad y_i = \frac{25 \cdot 20}{50} = 10
+$$
+
+**Example 2: Depth Scaling**
+Points $(10, 20, 50)$ and $(20, 40, 100)$:
+* First point: $(5, 10)$
+* Second point: $(5, 10)$ (same projection due to depth scaling)
+
+**Example 3: Back-Projection**
+Image point $(5, 10)$ with $f = 25$:
+* Ray direction: $(5/25, 10/25, 1) = (0.2, 0.4, 1)$
+* Any point on this ray projects to $(5, 10)$ 
+
+---
+
+## 5. **Lens-Based Models**
+
+### 🔎 The Thin Lens Equation
+
+Replacing the pinhole with a convex lens lets multiple rays converge to a point on the sensor.
+
+$$
+\frac{1}{f} = \frac{1}{z_o} + \frac{1}{z_i}
+$$
+
+* $f$: focal length, $z_o$: object distance, $z_i$: image distance.
+
+### 🎯 Depth of Field and Focus
+
+* Only a specific distance is perfectly in focus; others blur to *circles of confusion*.
+* DoF increases with smaller aperture; affected by focal length and sensor size.
+
+### 📉 Lens Distortions
+
+1. **Radial distortion** (barrel / pincushion):
+   $$
+   x_d = x (1 + k_1 r^2 + k_2 r^4 + \dots),\quad
+   y_d = y (1 + k_1 r^2 + k_2 r^4 + \dots)
+   $$
+
+2. **Tangential distortion** (misalignment):
+   $$
+   x_d = x + [2 p_1 xy + p_2(r^2 + 2x^2)], \\
+   y_d = y + [p_1(r^2 + 2y^2) + 2p_2 xy]
+   $$
+
+### 🔬 Mathematical Derivation of Thin Lens Equation
+
+**Step 1: Ray Tracing Through Lens**
+Consider a ray from object point $P_o$ at distance $z_o$ from the lens. The ray passes through the lens center and continues to image point $P_i$ at distance $z_i$.
+
+**Step 2: Geometric Analysis**
+Using similar triangles:
+$$
+\frac{h_o}{z_o} = \frac{h_i}{z_i}
+$$
+
+where $h_o$ is object height and $h_i$ is image height.
+
+**Step 3: Lens Power**
+The lens power $P$ is defined as:
+$$
+P = \frac{1}{f}
+$$
+
+**Step 4: Derivation**
+For a thin lens, the lens equation follows from the geometric relationship:
+$$
+\frac{1}{z_o} + \frac{1}{z_i} = \frac{1}{f}
+$$
+
+**Alternative Derivation Using Snell's Law:**
+At the lens surface, Snell's law gives:
+$$
+n_1 \sin \theta_1 = n_2 \sin \theta_2
+$$
+
+For small angles (paraxial approximation):
+$$
+n_1 \theta_1 = n_2 \theta_2
+$$
+
+This leads to the lens equation through geometric optics.
+
+### 📊 Magnification and Image Formation
+
+**Lateral Magnification:**
+$$
+M = \frac{h_i}{h_o} = -\frac{z_i}{z_o}
+$$
+
+**Angular Magnification:**
+$$
+M_\alpha = \frac{\alpha_i}{\alpha_o} = \frac{z_o}{z_i}
+$$
+
+**Total Magnification:**
+$$
+M_{total} = M \cdot M_\alpha = -1
+$$
+
+**Image Formation Cases:**
+
+1. **Real Object, Real Image** ($z_o > f$):
+   * $z_i > 0$ (image on opposite side)
+   * $M < 0$ (inverted image)
+
+2. **Real Object, Virtual Image** ($z_o < f$):
+   * $z_i < 0$ (image on same side)
+   * $M > 0$ (upright image)
+
+3. **Virtual Object** ($z_o < 0$):
+   * Always forms real image
+   * Used in compound lens systems
+
+### 🎯 Mathematical Analysis of Depth of Field
+
+**Circle of Confusion:**
+The diameter of the blur circle $c$ for a point at distance $Z$ from the focal plane is:
+$$
+c = \frac{D \cdot |Z - Z_f|}{Z_f}
+$$
+
+where $D$ is the aperture diameter and $Z_f$ is the focal distance.
+
+**Depth of Field Calculation:**
+The near and far limits of acceptable focus are:
+$$
+Z_{near} = \frac{Z_f \cdot (f^2 - c \cdot f \cdot N)}{f^2 + c \cdot f \cdot N}
+$$
+
+$$
+Z_{far} = \frac{Z_f \cdot (f^2 + c \cdot f \cdot N)}{f^2 - c \cdot f \cdot N}
+$$
+
+where $N = f/D$ is the f-number.
+
+**Total Depth of Field:**
+$$
+\Delta Z = Z_{far} - Z_{near} = \frac{2 \cdot Z_f^2 \cdot c \cdot N}{f^2 - c^2 \cdot N^2}
+$$
+
+**Hyperfocal Distance:**
+The distance at which the far limit extends to infinity:
+$$
+H = \frac{f^2}{c \cdot N} + f
+$$
+
+### 📉 Mathematical Models of Lens Distortion
+
+**Radial Distortion Model:**
+
+**Barrel Distortion** ($k_1 < 0$):
+$$
+x_d = x \cdot (1 + k_1 r^2 + k_2 r^4 + k_3 r^6)
+$$
+
+$$
+y_d = y \cdot (1 + k_1 r^2 + k_2 r^4 + k_3 r^6)
+$$
+
+where $r^2 = x^2 + y^2$.
+
+**Pincushion Distortion** ($k_1 > 0$):
+Same equations as barrel distortion but with positive coefficients.
+
+**Mathematical Properties:**
+* **Symmetry**: Distortion depends only on radial distance
+* **Monotonicity**: Distortion increases with distance from center
+* **Smoothness**: Continuous and differentiable
+
+**Tangential Distortion Model:**
+
+**Decentering Distortion:**
+$$
+x_d = x + [2p_1 xy + p_2(r^2 + 2x^2)]
+$$
+
+$$
+y_d = y + [p_1(r^2 + 2y^2) + 2p_2 xy]
+$$
+
+**Mathematical Properties:**
+* **Asymmetry**: Depends on both $x$ and $y$ coordinates
+* **Quadratic**: Second-order polynomial in image coordinates
+* **Decentering**: Models lens misalignment
+
+### 🔍 Advanced Distortion Models
+
+**Brown-Conrady Model:**
+Combines radial and tangential distortion:
+$$
+x_d = x \cdot (1 + k_1 r^2 + k_2 r^4 + k_3 r^6) + [2p_1 xy + p_2(r^2 + 2x^2)]
+$$
+
+$$
+y_d = y \cdot (1 + k_1 r^2 + k_2 r^4 + k_3 r^6) + [p_1(r^2 + 2y^2) + 2p_2 xy]
+$$
+
+**Fisheye Distortion:**
+For wide-angle lenses:
+$$
+r_d = f \cdot \theta \cdot (1 + k_1 \theta^2 + k_2 \theta^4 + \dots)
+$$
+
+where $\theta = \arctan(r/f)$.
+
+**Polynomial Distortion:**
+General polynomial model:
+$$
+x_d = \sum_{i=0}^{n} \sum_{j=0}^{i} a_{ij} x^{i-j} y^j
+$$
+
+$$
+y_d = \sum_{i=0}^{n} \sum_{j=0}^{i} b_{ij} x^{i-j} y^j
+$$
+
+### 📐 Mathematical Calibration of Distortion
+
+**Linear Calibration:**
+For small distortions, linear approximation:
+$$
+\begin{bmatrix} x_d \\ y_d \end{bmatrix} = 
+\begin{bmatrix} 1 + k_1 r^2 & 0 \\ 0 & 1 + k_1 r^2 \end{bmatrix}
+\begin{bmatrix} x \\ y \end{bmatrix}
+$$
+
+**Nonlinear Calibration:**
+Minimize reprojection error:
+$$
+\min_{k_1, k_2, p_1, p_2} \sum_i \|x_i - \pi(K, R, t, k_1, k_2, p_1, p_2; X_i)\|^2
+$$
+
+**Calibration Targets:**
+* **Checkerboard**: Known 3D-2D correspondences
+* **Circular targets**: Sub-pixel accuracy
+* **Natural features**: Self-calibration
+
+### 🔬 Numerical Examples
+
+**Example 1: Thin Lens Calculation**
+Object at $z_o = 100$mm, focal length $f = 50$mm:
+$$
+\frac{1}{100} + \frac{1}{z_i} = \frac{1}{50} \implies z_i = 100\text{mm}
+$$
+
+**Example 2: Magnification**
+For the above case:
+$$
+M = -\frac{100}{100} = -1
+$$
+
+**Example 3: Radial Distortion**
+Point $(100, 100)$ with $k_1 = 0.001$:
+$$
+r^2 = 100^2 + 100^2 = 20000
+$$
+
+$$
+x_d = 100 \cdot (1 + 0.001 \cdot 20000) = 2100
+$$
+
+$$
+y_d = 100 \cdot (1 + 0.001 \cdot 20000) = 2100
+$$
+
+**Example 4: Depth of Field**
+$f = 50$mm, $N = 2.8$, $c = 0.03$mm, $Z_f = 1000$mm:
+$$
+\Delta Z = \frac{2 \cdot 1000^2 \cdot 0.03 \cdot 2.8}{50^2 - 0.03^2 \cdot 2.8^2} \approx 67\text{mm}
+$$ 
+
+---
+
+# 📐 Part III: Mathematical Formulation of Camera Projection
+
+---
+
+## 7. **Extrinsic Parameters (World → Camera)**
+
+### 📍 Camera Coordinate System
+
+* Origin at optical center, $Z$-axis forward, $X$ right, $Y$ down.
+
+### 🔄 Rotation Matrix $R$
+
+$$
+X' = R X_W, \quad R \in SO(3), \ R^T R = I, \ \det(R)=+1
+$$
+
+### ➕ Translation Vector $t$
+
+$$
+X_C = R X_W + t
+$$
+
+### 🧩 Rigid Body Transformation
+
+$$
+\begin{bmatrix} X_C \\ 1 \end{bmatrix} =
+\begin{bmatrix} R & t \\ 0 & 1 \end{bmatrix}
+\begin{bmatrix} X_W \\ 1 \end{bmatrix}
+$$
+
+### 🔬 Mathematical Properties of Rotation Matrices
+
+**SO(3) Group Properties:**
+* **Orthogonality**: $R^T R = RR^T = I$
+* **Determinant**: $\det(R) = +1$
+* **Inverse**: $R^{-1} = R^T$
+* **Composition**: $R_1 R_2 \in SO(3)$
+
+**Euler Angles Representation:**
+Rotation around $Z$, then $Y$, then $X$:
+$$
+R = R_x(\alpha) R_y(\beta) R_z(\gamma)
+$$
+
+where:
+$$
+R_x(\alpha) = \begin{bmatrix} 1 & 0 & 0 \\ 0 & \cos\alpha & -\sin\alpha \\ 0 & \sin\alpha & \cos\alpha \end{bmatrix}
+$$
+
+$$
+R_y(\beta) = \begin{bmatrix} \cos\beta & 0 & \sin\beta \\ 0 & 1 & 0 \\ -\sin\beta & 0 & \cos\beta \end{bmatrix}
+$$
+
+$$
+R_z(\gamma) = \begin{bmatrix} \cos\gamma & -\sin\gamma & 0 \\ \sin\gamma & \cos\gamma & 0 \\ 0 & 0 & 1 \end{bmatrix}
+$$
+
+**Axis-Angle Representation:**
+Rotation by angle $\theta$ around unit vector $\mathbf{u}$:
+$$
+R = I + \sin\theta \cdot [\mathbf{u}]_\times + (1-\cos\theta) \cdot [\mathbf{u}]_\times^2
+$$
+
+where $[\mathbf{u}]_\times$ is the skew-symmetric matrix:
+$$
+[\mathbf{u}]_\times = \begin{bmatrix} 0 & -u_z & u_y \\ u_z & 0 & -u_x \\ -u_y & u_x & 0 \end{bmatrix}
+$$
+
+**Quaternion Representation:**
+Rotation represented by unit quaternion $q = (q_w, q_x, q_y, q_z)$:
+$$
+R = \begin{bmatrix} 
+1-2q_y^2-2q_z^2 & 2(q_x q_y - q_w q_z) & 2(q_x q_z + q_w q_y) \\
+2(q_x q_y + q_w q_z) & 1-2q_x^2-2q_z^2 & 2(q_y q_z - q_w q_x) \\
+2(q_x q_z - q_w q_y) & 2(q_y q_z + q_w q_x) & 1-2q_x^2-2q_y^2
+\end{bmatrix}
+$$
+
+### 📊 Degrees of Freedom Analysis
+
+**Rotation Matrix:**
+* 9 elements but only 3 DOF due to constraints
+* Constraints: $R^T R = I$ (6 equations)
+* Free parameters: 3 (Euler angles, axis-angle, or quaternion)
+
+**Translation Vector:**
+* 3 DOF (x, y, z components)
+
+**Total Extrinsic Parameters:**
+* 6 DOF (3 rotation + 3 translation)
+
+### 🔍 Numerical Examples
+
+**Example 1: Rotation Matrix**
+Rotation of $90°$ around Z-axis:
+$$
+R = \begin{bmatrix} 0 & -1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+$$
+
+**Example 2: Translation**
+Translation by $(1, 2, 3)$:
+$$
+t = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}
+$$
+
+**Example 3: Combined Transformation**
+Point $(10, 20, 30)$ in world coordinates:
+$$
+X_C = R X_W + t = \begin{bmatrix} 0 & -1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} 10 \\ 20 \\ 30 \end{bmatrix} + \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} = \begin{bmatrix} -19 \\ 12 \\ 33 \end{bmatrix}
+$$
+
+---
+
+## 8. **Intrinsic Parameters (Camera → Pixels)**
+
+### 🎯 Effective Focal Lengths $f_x, f_y$
+
+$$
+f_x = m_x f,\quad f_y = m_y f
+$$
+
+### 📍 Principal Point $(c_x, c_y)$
+
+Intersection of optical axis with sensor; near image center but not exact.
+
+### 🔀 Skew and Pixel Aspect Ratio
+
+Skew $s = f_x \cot\theta$ if axes not perfectly orthogonal.
+
+### 🏗 Calibration Matrix $K$
+
+$$
+K =
+\begin{bmatrix}
+f_x & s & c_x \\
+0 & f_y & c_y \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+### 🔬 Mathematical Derivation of Intrinsic Matrix
+
+**Step 1: Physical Parameters**
+* **Focal length**: $f$ (distance from optical center to image plane)
+* **Pixel size**: $m_x, m_y$ (physical size of pixels in mm)
+* **Principal point**: $(c_x, c_y)$ (intersection of optical axis with sensor)
+* **Skew**: $s$ (non-orthogonality of pixel axes)
+
+**Step 2: Coordinate Transformations**
+From image coordinates $(x_i, y_i)$ to pixel coordinates $(u, v)$:
+
+$$
+u = m_x \cdot x_i + c_x = \frac{f_x \cdot X_c}{Z_c} + c_x
+$$
+
+$$
+v = m_y \cdot y_i + c_y = \frac{f_y \cdot Y_c}{Z_c} + c_y
+$$
+
+**Step 3: Matrix Form**
+In homogeneous coordinates:
+$$
+\begin{bmatrix} u \\ v \\ 1 \end{bmatrix} = 
+\begin{bmatrix} f_x & 0 & c_x \\ 0 & f_y & c_y \\ 0 & 0 & 1 \end{bmatrix}
+\begin{bmatrix} x_i \\ y_i \\ 1 \end{bmatrix}
+$$
+
+**Step 4: Including Skew**
+For non-orthogonal pixel axes:
+$$
+\begin{bmatrix} u \\ v \\ 1 \end{bmatrix} = 
+\begin{bmatrix} f_x & s & c_x \\ 0 & f_y & c_y \\ 0 & 0 & 1 \end{bmatrix}
+\begin{bmatrix} x_i \\ y_i \\ 1 \end{bmatrix}
+$$
+
+### 📊 Properties of Calibration Matrix
+
+**Invertibility:**
+$$
+K^{-1} = \begin{bmatrix} 
+\frac{1}{f_x} & -\frac{s}{f_x f_y} & \frac{s c_y - f_y c_x}{f_x f_y} \\
+0 & \frac{1}{f_y} & -\frac{c_y}{f_y} \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+**Determinant:**
+$$
+\det(K) = f_x f_y
+$$
+
+**Image of Absolute Conic:**
+$$
+\omega = K^{-T} K^{-1} = \begin{bmatrix} 
+\frac{1}{f_x^2} & -\frac{s}{f_x^2 f_y} & \frac{s c_y - f_y c_x}{f_x^2 f_y} \\
+-\frac{s}{f_x^2 f_y} & \frac{s^2 + f_y^2}{f_x^2 f_y^2} & \frac{s(c_x f_y - s c_y) - f_y^2 c_y}{f_x^2 f_y^2} \\
+\frac{s c_y - f_y c_x}{f_x^2 f_y} & \frac{s(c_x f_y - s c_y) - f_y^2 c_y}{f_x^2 f_y^2} & \frac{(s c_y - f_y c_x)^2 + f_y^2 c_y^2}{f_x^2 f_y^2} + 1
+\end{bmatrix}
+$$
+
+### 🎯 Principal Point Estimation
+
+**Geometric Method:**
+* Find vanishing points of orthogonal lines
+* Principal point is the intersection of lines connecting opposite vanishing points
+
+**Algebraic Method:**
+* Use the Image of Absolute Conic (IAC)
+* Principal point is the pole of the line at infinity
+
+**Statistical Method:**
+* Minimize reprojection error over multiple images
+* Principal point often near image center but not exactly
+
+### 🔍 Skew Parameter Analysis
+
+**Physical Meaning:**
+* Skew models non-orthogonal pixel axes
+* Common in CCD sensors with rectangular pixels
+* Usually very small in modern cameras
+
+**Mathematical Properties:**
+* $s = f_x \cot\theta$ where $\theta$ is the angle between pixel axes
+* For orthogonal axes: $s = 0$
+* Skew affects the shape of the IAC
+
+**Calibration:**
+* Estimate from checkerboard calibration
+* Often fixed to zero for simplicity
+* Important for high-precision applications
+
+### 📐 Numerical Examples
+
+**Example 1: Basic Intrinsic Matrix**
+$f_x = 1000$, $f_y = 1000$, $c_x = 320$, $c_y = 240$:
+$$
+K = \begin{bmatrix} 1000 & 0 & 320 \\ 0 & 1000 & 240 \\ 0 & 0 & 1 \end{bmatrix}
+$$
+
+**Example 2: With Skew**
+$f_x = 1000$, $f_y = 1000$, $s = 0.1$, $c_x = 320$, $c_y = 240$:
+$$
+K = \begin{bmatrix} 1000 & 0.1 & 320 \\ 0 & 1000 & 240 \\ 0 & 0 & 1 \end{bmatrix}
+$$
+
+**Example 3: Projection**
+3D point $(10, 20, 50)$ with above intrinsic matrix:
+$$
+\begin{bmatrix} u \\ v \\ 1 \end{bmatrix} = 
+\begin{bmatrix} 1000 & 0 & 320 \\ 0 & 1000 & 240 \\ 0 & 0 & 1 \end{bmatrix}
+\begin{bmatrix} 10/50 \\ 20/50 \\ 1 \end{bmatrix} = 
+\begin{bmatrix} 520 \\ 640 \\ 1 \end{bmatrix}
+$$
+
+---
+
+## 9. **The Full Camera Matrix**
+
+### 🧮 Derivation: $P = K [R|t]$
+
+Start with homogeneous world point $\tilde{X}_W = (X,Y,Z,1)^T$:
+
+1. $\ X_C = [R|t]\tilde{X}_W$
+2. $\ x_{img} = (X_C/Z_C, \ Y_C/Z_C, \ 1)^T$
+3. $\ x = K x_{img}$
+
+$$
+x \sim K [R|t] \tilde{X}_W \ \Rightarrow \ P = K [R|t]
+$$
+
+### 📊 Properties and Degrees of Freedom
+
+* $K$: 5 DOF, $[R|t]$: 6 DOF → $P$ has 11 DOF up to scale.
+
+### 🌐 Geometric Interpretation
+
+Each pixel corresponds to a ray $X_W(\lambda)=C+\lambda d$; projection collapses depth, so it's non-invertible.
+
+### 🔬 Complete Mathematical Derivation
+
+**Step 1: World to Camera Transformation**
+$$
+X_C = R X_W + t
+$$
+
+In homogeneous coordinates:
+$$
+\begin{bmatrix} X_C \\ 1 \end{bmatrix} = 
+\begin{bmatrix} R & t \\ 0^T & 1 \end{bmatrix}
+\begin{bmatrix} X_W \\ 1 \end{bmatrix}
+$$
+
+**Step 2: Perspective Projection**
+$$
+x_{img} = \frac{X_C}{Z_C}, \quad y_{img} = \frac{Y_C}{Z_C}
+$$
+
+In homogeneous coordinates:
+$$
+\begin{bmatrix} x_{img} \\ y_{img} \\ 1 \end{bmatrix} \sim 
+\begin{bmatrix} X_C \\ Y_C \\ Z_C \end{bmatrix}
+$$
+
+**Step 3: Intrinsic Transformation**
+$$
+\begin{bmatrix} u \\ v \\ 1 \end{bmatrix} = K 
+\begin{bmatrix} x_{img} \\ y_{img} \\ 1 \end{bmatrix}
+$$
+
+**Step 4: Combined Transformation**
+$$
+\begin{bmatrix} u \\ v \\ 1 \end{bmatrix} \sim K 
+\begin{bmatrix} X_C \\ Y_C \\ Z_C \end{bmatrix} = K [R|t] 
+\begin{bmatrix} X_W \\ Y_W \\ Z_W \\ 1 \end{bmatrix}
+$$
+
+Therefore:
+$$
+P = K [R|t]
+$$
+
+### 📐 Mathematical Properties of Camera Matrix
+
+**Rank:**
+* $\text{rank}(P) = 3$ (full rank)
+* The null space of $P$ is the camera center
+
+**Camera Center:**
+The camera center $C$ satisfies $P C = 0$:
+$$
+C = -\begin{bmatrix} R^T t \\ 1 \end{bmatrix}
+$$
+
+**Projection Rays:**
+Each pixel $(u, v)$ corresponds to a ray in 3D space:
+$$
+X(\lambda) = C + \lambda \cdot R^T K^{-1} \begin{bmatrix} u \\ v \\ 1 \end{bmatrix}
+$$
+
+**Epipolar Geometry:**
+For two cameras with matrices $P_1$ and $P_2$:
+$$
+F = [P_2 C_1]_\times P_2 P_1^+
+$$
+
+where $P_1^+$ is the pseudo-inverse of $P_1$.
+
+### 🔍 Decomposition of Camera Matrix
+
+**QR Decomposition:**
+$$
+P = K [R|t] = \begin{bmatrix} Q & q \end{bmatrix} \begin{bmatrix} R & t \\ 0^T & 1 \end{bmatrix}
+$$
+
+where $Q$ is orthogonal and $R$ is upper triangular.
+
+**SVD Decomposition:**
+$$
+P = U \Sigma V^T
+$$
+
+where $U \in \mathbb{R}^{3 \times 3}$ is orthogonal, $\Sigma \in \mathbb{R}^{3 \times 4}$ is diagonal, and $V \in \mathbb{R}^{4 \times 4}$ is orthogonal.
+
+**Extraction of Parameters:**
+From $P = K [R|t]$:
+* $K$: Upper triangular part of $P$ after normalization
+* $R$: Orthogonal part of $[R|t]$
+* $t$: Translation part of $[R|t]$
+
+### 📊 Numerical Examples
+
+**Example 1: Complete Camera Matrix**
+Given:
+$$
+K = \begin{bmatrix} 1000 & 0 & 320 \\ 0 & 1000 & 240 \\ 0 & 0 & 1 \end{bmatrix}
+$$
+
+$$
+R = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}, \quad t = \begin{bmatrix} 0 \\ 0 \\ -5 \end{bmatrix}
+$$
+
+Then:
+$$
+P = K [R|t] = \begin{bmatrix} 1000 & 0 & 320 & 0 \\ 0 & 1000 & 240 & 0 \\ 0 & 0 & 1 & -5 \end{bmatrix}
+$$
+
+**Example 2: Projection**
+World point $(10, 20, 30)$:
+$$
+\begin{bmatrix} u \\ v \\ 1 \end{bmatrix} \sim 
+\begin{bmatrix} 1000 & 0 & 320 & 0 \\ 0 & 1000 & 240 & 0 \\ 0 & 0 & 1 & -5 \end{bmatrix}
+\begin{bmatrix} 10 \\ 20 \\ 30 \\ 1 \end{bmatrix} = 
+\begin{bmatrix} 10320 \\ 20240 \\ 25 \end{bmatrix} \sim 
+\begin{bmatrix} 412.8 \\ 809.6 \\ 1 \end{bmatrix}
+$$
+
+**Example 3: Camera Center**
+For the above camera matrix:
+$$
+C = -\begin{bmatrix} R^T t \\ 1 \end{bmatrix} = -\begin{bmatrix} 0 \\ 0 \\ -5 \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 5 \\ 1 \end{bmatrix}
+$$
+
+So the camera is at $(0, 0, 5)$ in world coordinates. 
   </script>
   <script>
 
