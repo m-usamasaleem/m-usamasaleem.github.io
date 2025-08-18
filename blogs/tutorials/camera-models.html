@@ -1486,7 +1486,7 @@ $$
 
 $$
 \begin{bmatrix} X_C \\ 1 \end{bmatrix} =
-\begin{bmatrix} R & t \\ 0 & 1 \end{bmatrix}
+\begin{bmatrix} R & t \\ 0^T & 1 \end{bmatrix}
 \begin{bmatrix} X_W \\ 1 \end{bmatrix}
 $$
 
@@ -1863,6 +1863,677 @@ C = -\begin{bmatrix} R^T t \\ 1 \end{bmatrix} = -\begin{bmatrix} 0 \\ 0 \\ -5 \\
 $$
 
 So the camera is at $(0, 0, 5)$ in world coordinates. 
+
+---
+
+## 10. **Projection in Homogeneous Coordinates**
+
+### 🧾 Matrix Form of Projection
+
+$$
+\tilde{x} =
+\begin{bmatrix} u \\ v \\ w \end{bmatrix}
+\sim
+P
+\begin{bmatrix} X \\ Y \\ Z \\ 1 \end{bmatrix}
+$$
+
+### ✂️ Perspective Divide
+
+$$
+(u', v') = \left(\frac{u}{w}, \frac{v}{w}\right)
+$$
+
+### 📸 From 3D Points to 2D Pixels
+
+1. World → camera via $[R|t]$
+2. Perspective divide $/Z_c$
+3. Intrinsics $K$ → pixel $(u,v)$
+
+### 🔬 Mathematical Analysis of Perspective Divide
+
+**Why Perspective Divide is Necessary:**
+The homogeneous projection gives us:
+$$
+\begin{bmatrix} u \\ v \\ w \end{bmatrix} = P \begin{bmatrix} X \\ Y \\ Z \\ 1 \end{bmatrix}
+$$
+
+But we need Euclidean coordinates $(u', v')$ for the image. The perspective divide converts homogeneous to Euclidean:
+$$
+u' = \frac{u}{w}, \quad v' = \frac{v}{w}
+$$
+
+**Mathematical Properties:**
+* **Scale Invariance**: $(u, v, w) \equiv (ku, kv, kw)$ for any $k \neq 0$
+* **Singularity**: When $w = 0$, the point is at infinity
+* **Linearity**: The projection matrix $P$ is linear in homogeneous coordinates
+
+**Complete Projection Pipeline:**
+$$
+\begin{bmatrix} X_W \\ Y_W \\ Z_W \\ 1 \end{bmatrix} 
+\xrightarrow{[R|t]} 
+\begin{bmatrix} X_C \\ Y_C \\ Z_C \\ 1 \end{bmatrix}
+\xrightarrow{\text{perspective}} 
+\begin{bmatrix} X_C/Z_C \\ Y_C/Z_C \\ 1 \end{bmatrix}
+\xrightarrow{K} 
+\begin{bmatrix} u \\ v \\ 1 \end{bmatrix}
+$$
+
+---
+
+# 📷 Part IV: Practical Considerations in Real Cameras
+
+---
+
+## 11. **Lens Distortion Models**
+
+Ideal pinhole maps straight 3D lines to straight 2D lines; real lenses bend rays → **distortion**.
+
+### 🔵 Radial Distortion
+
+$$
+r^2 = x^2 + y^2
+$$
+
+$$
+x_d = x (1 + k_1 r^2 + k_2 r^4 + k_3 r^6), \quad
+y_d = y (1 + k_1 r^2 + k_2 r^4 + k_3 r^6)
+$$
+
+### 🔶 Tangential Distortion
+
+$$
+x_d = x + [2p_1 xy + p_2(r^2 + 2x^2)], \\
+y_d = y + [p_1(r^2 + 2y^2) + 2p_2 xy]
+$$
+
+### 🛠 Modeling and Correction
+
+Estimate $K$ and distortion parameters together (e.g., OpenCV `calibrateCamera`); correction uses inverse mapping (often iterative).
+
+### 🔬 Mathematical Analysis of Distortion Models
+
+**Radial Distortion Function:**
+The radial distortion function $D(r)$ is:
+$$
+D(r) = 1 + k_1 r^2 + k_2 r^4 + k_3 r^6 + \dots
+$$
+
+**Mathematical Properties:**
+* **Symmetry**: $D(r) = D(-r)$ (radial symmetry)
+* **Monotonicity**: Usually $D(r) > 1$ for barrel distortion, $D(r) < 1$ for pincushion
+* **Smoothness**: Continuous and differentiable
+
+**Inverse Distortion:**
+For correction, we need the inverse function. For small distortions:
+$$
+D^{-1}(r) \approx 1 - k_1 r^2 - k_2 r^4 - k_3 r^6
+$$
+
+**Combined Distortion Model:**
+The complete distortion model is:
+$$
+\begin{bmatrix} x_d \\ y_d \end{bmatrix} = 
+\begin{bmatrix} x \\ y \end{bmatrix} \cdot D(r) + 
+\begin{bmatrix} 2p_1 xy + p_2(r^2 + 2x^2) \\ p_1(r^2 + 2y^2) + 2p_2 xy \end{bmatrix}
+$$
+
+---
+
+## 12. **Sensor Characteristics**
+
+### 🟦 Discretization into Pixels
+
+$$
+u = \lfloor m_x x_i + c_x \rfloor,\quad v = \lfloor m_y y_i + c_y \rfloor
+$$
+
+Sampling causes aliasing on high-frequency patterns.
+
+### 🔊 Noise and Quantization
+
+* Photon shot, thermal, and readout noise.
+* $b$-bit sensor → intensities in $[0, 2^b-1]$.
+
+### 🎥 Rolling Shutter Effects
+
+Rows exposed sequentially; fast motion bends geometry.
+
+$$
+t_i = t_0 + i \Delta t \ \Rightarrow \ x(t), y(t) \sim P(t) X_W
+$$
+
+### 🔬 Mathematical Models of Sensor Noise
+
+**Photon Shot Noise:**
+Follows Poisson distribution:
+$$
+P(n) = \frac{\lambda^n e^{-\lambda}}{n!}
+$$
+
+where $\lambda$ is the expected number of photons.
+
+**Readout Noise:**
+Gaussian noise with standard deviation $\sigma_{read}$:
+$$
+I_{measured} = I_{true} + \mathcal{N}(0, \sigma_{read}^2)
+$$
+
+**Quantization Noise:**
+For $b$-bit quantization:
+$$
+\sigma_{quant} = \frac{1}{\sqrt{12}} \cdot \frac{1}{2^b}
+$$
+
+**Total Noise Model:**
+$$
+\sigma_{total}^2 = \sigma_{shot}^2 + \sigma_{read}^2 + \sigma_{quant}^2
+$$
+
+---
+
+## 13. **Multi-Camera Systems**
+
+### 🔀 Stereo Geometry and Epipolar Constraint
+
+$$
+x_R^T F x_L = 0
+$$
+
+If intrinsics known, essential matrix $E = K_R^T F K_L$.
+
+### 🏗 Structure from Motion (SfM)
+
+$$
+x_{ij} \sim P_i X_j
+$$
+
+Estimate relative poses, triangulate, then bundle adjust.
+
+### 🌍 Camera Networks and Panoramic Cameras
+
+Arrays and panoramic systems require nonlinear projection models (e.g., fisheye).
+
+### 🔬 Mathematical Foundation of Stereo Geometry
+
+**Epipolar Constraint:**
+For corresponding points $x_L$ and $x_R$ in left and right images:
+$$
+x_R^T F x_L = 0
+$$
+
+where $F$ is the fundamental matrix.
+
+**Fundamental Matrix Properties:**
+* **Rank**: $\text{rank}(F) = 2$
+* **Singularity**: $F$ is singular (det$(F) = 0$)
+* **Epipolar Lines**: $l_R = F x_L$ and $l_L = F^T x_R$
+
+**Essential Matrix:**
+When camera intrinsics are known:
+$$
+E = K_R^T F K_L
+$$
+
+**Essential Matrix Decomposition:**
+$$
+E = U \text{diag}(1, 1, 0) V^T
+$$
+
+The relative pose $(R, t)$ can be extracted from $E$:
+$$
+R = U W V^T \text{ or } U W^T V^T
+$$
+
+$$
+t = U \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}
+$$
+
+where $W = \begin{bmatrix} 0 & -1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}$.
+
+**Triangulation:**
+Given corresponding points and camera matrices, 3D point $X$ satisfies:
+$$
+x_L \sim P_L X, \quad x_R \sim P_R X
+$$
+
+This gives the linear system:
+$$
+\begin{bmatrix} x_L \times P_L \\ x_R \times P_R \end{bmatrix} X = 0
+$$
+
+---
+
+# 📷 Part V: Camera Calibration
+
+---
+
+## 14. **Why Calibration Matters**
+
+**Intrinsics**
+* Focal lengths $(f_x, f_y)$
+* Principal point $(c_x, c_y)$
+* Skew, aspect ratio
+* Distortion parameters
+
+**Extrinsics**
+* Rotation $R$
+* Translation $t$
+
+**Applications**
+* 3D measurement, pose estimation, reconstruction, robotics & navigation.
+
+### 🔬 Mathematical Motivation for Calibration
+
+**Metric Reconstruction:**
+Without calibration, we can only reconstruct up to a projective transformation. With calibration, we can achieve metric reconstruction.
+
+**Pose Estimation:**
+For pose estimation, we need to solve:
+$$
+\min_{R,t} \sum_i \|x_i - \pi(K, R, t; X_i)\|^2
+$$
+
+**3D Measurement:**
+Accurate 3D measurements require precise camera parameters:
+$$
+X = \frac{Z}{f} \cdot (u - c_x, v - c_y)
+$$
+
+---
+
+## 15. **Linear Camera Calibration**
+
+### 15.1 Projection Equation
+
+$$
+x \sim P X,\ \ P \in \mathbb{R}^{3 \times 4}
+$$
+
+In inhomogeneous form:
+$ u = \frac{p_1^T X}{p_3^T X}, \ v = \frac{p_2^T X}{p_3^T X} $
+
+### 15.2 Linear Constraints
+
+$$
+u (p_3^T X) - (p_1^T X) = 0,\quad
+v (p_3^T X) - (p_2^T X) = 0
+$$
+
+Stack into $A\,\text{vec}(P)=0$ with $A\in \mathbb{R}^{2n\times12}$.
+
+### 15.3 Solving with SVD
+
+Solve $\min \|A p\|$ s.t. $\|p\|=1$; take last singular vector, reshape to $P$.
+
+### 15.4 Requirements & Degenerate Cases
+
+* ≥ 6 correspondences (12 equations).
+* Points must not be coplanar (rank deficiency otherwise).
+
+### 🔬 Mathematical Derivation of DLT
+
+**Step 1: Linearization**
+From the projection equation:
+$$
+\begin{bmatrix} u \\ v \\ 1 \end{bmatrix} \sim 
+\begin{bmatrix} p_{11} & p_{12} & p_{13} & p_{14} \\
+p_{21} & p_{22} & p_{23} & p_{24} \\
+p_{31} & p_{32} & p_{33} & p_{34} \end{bmatrix}
+\begin{bmatrix} X \\ Y \\ Z \\ 1 \end{bmatrix}
+$$
+
+**Step 2: Cross Product**
+Taking the cross product with the left side:
+$$
+\begin{bmatrix} u \\ v \\ 1 \end{bmatrix} \times P \begin{bmatrix} X \\ Y \\ Z \\ 1 \end{bmatrix} = 0
+$$
+
+This gives two independent equations:
+$$
+u \cdot (p_3^T X) - (p_1^T X) = 0
+$$
+
+$$
+v \cdot (p_3^T X) - (p_2^T X) = 0
+$$
+
+**Step 3: Linear System**
+For $n$ correspondences, we get $2n$ equations:
+$$
+A \cdot \text{vec}(P) = 0
+$$
+
+where $A \in \mathbb{R}^{2n \times 12}$.
+
+**Step 4: SVD Solution**
+The solution is the right singular vector corresponding to the smallest singular value:
+$$
+P = \text{reshape}(v_{12}, 3, 4)
+$$
+
+**Degenerate Cases:**
+* **Coplanar points**: Points lie on a plane, rank deficiency
+* **Collinear points**: Points lie on a line, severe rank deficiency
+* **Single point**: Insufficient constraints
+
+---
+
+## 16. **Nonlinear Optimization (Bundle Adjustment)**
+
+### 16.1 Reprojection Error
+
+$$
+\hat{x}(X) = \pi(K, R, t, d;\, X),\quad
+e = \|x - \hat{x}(X)\|^2
+$$
+
+Multi-view objective:
+$$
+E = \sum_{i,j} \|x_{ij} - \pi(P_i, X_j)\|^2
+$$
+
+### 16.2 Optimization
+
+* Nonlinear least squares (e.g., Levenberg–Marquardt).
+* Optimize $K, R, t,$ and distortion $(k_1,k_2,p_1,p_2,\dots)$.
+
+### 🔬 Mathematical Formulation of Bundle Adjustment
+
+**Cost Function:**
+$$
+C = \sum_{i=1}^{n} \sum_{j=1}^{m} w_{ij} \|x_{ij} - \pi(P_i, X_j)\|^2
+$$
+
+where:
+* $n$ cameras with poses $P_i$
+* $m$ 3D points $X_j$
+* $x_{ij}$ is the projection of point $j$ in camera $i$
+* $w_{ij}$ is the weight (confidence)
+
+**Parameter Vector:**
+$$
+\theta = [K, R_1, t_1, \dots, R_n, t_n, X_1, \dots, X_m]
+$$
+
+**Jacobian Matrix:**
+$$
+J = \frac{\partial \pi}{\partial \theta}
+$$
+
+**Normal Equations:**
+$$
+(J^T W J) \Delta \theta = J^T W r
+$$
+
+where $r$ is the residual vector and $W$ is the weight matrix.
+
+**Levenberg-Marquardt Update:**
+$$
+(J^T W J + \lambda I) \Delta \theta = J^T W r
+$$
+
+**Convergence Criteria:**
+* Relative change in cost: $\frac{|C_{k+1} - C_k|}{C_k} < \epsilon$
+* Gradient norm: $\|J^T r\| < \epsilon$
+* Maximum iterations reached
+
+---
+
+## 17. **Practical Calibration Pipelines**
+
+### 17.1 Checkerboard Calibration
+
+1. Print checkerboard of known square size.
+2. Capture many views at varied orientations.
+3. Detect corners → build 2D–3D correspondences.
+4. DLT for initial $P$ → nonlinear refinement.
+
+### 17.2 OpenCV Implementation
+
+* `findChessboardCorners()`, `calibrateCamera()`
+* Returns $K$, distortion coeffs, and per-image $(R_i,t_i)$.
+
+### 17.3 Evaluating Calibration Accuracy
+
+1. **Reprojection error**: RMS < ~0.5 px (depends on resolution).
+2. **Cross-validation**: hold-out images.
+3. **Stability**: many images; cover full FOV.
+
+### 🔬 Mathematical Evaluation Metrics
+
+**Reprojection Error:**
+$$
+\text{RMS} = \sqrt{\frac{1}{N} \sum_{i=1}^{N} \|x_i - \hat{x}_i\|^2}
+$$
+
+**Mean Reprojection Error:**
+$$
+\text{Mean Error} = \frac{1}{N} \sum_{i=1}^{N} \|x_i - \hat{x}_i\|
+$$
+
+**Standard Deviation:**
+$$
+\sigma = \sqrt{\frac{1}{N-1} \sum_{i=1}^{N} (\|x_i - \hat{x}_i\| - \text{Mean Error})^2}
+$$
+
+**Calibration Uncertainty:**
+From the covariance matrix of the estimated parameters:
+$$
+\Sigma_\theta = (J^T W J)^{-1}
+$$
+
+The standard error of parameter $\theta_i$ is:
+$$
+\sigma_{\theta_i} = \sqrt{\Sigma_{\theta,ii}}
+$$
+
+---
+
+# 📷 Part VI: Advanced Topics in Camera Models
+
+---
+
+## 18. **Special Camera Models**
+
+### 18.1 Fish-eye Cameras
+
+Very wide FOV; rays mapped with nonlinear radial functions. Let $\theta$ be the angle from optical axis:
+
+* Equidistant: $ r = f \theta $
+* Equisolid: $ r = 2f \sin(\theta/2) $
+* Stereographic: $ r = 2f \tan(\theta/2) $
+* Orthographic: $ r = f \sin\theta $
+
+### 18.2 Catadioptric Cameras
+
+Lenses + curved mirrors, often with single effective viewpoint. Unified sphere model:
+
+$$
+x = \frac{X}{Z+\xi \sqrt{X^2+Y^2+Z^2}},\quad
+y = \frac{Y}{Z+\xi \sqrt{X^2+Y^2+Z^2}}
+$$
+
+### 18.3 Omnidirectional Cameras
+
+Full 360° coverage; spherical mapping:
+
+$$
+u = \arctan2(Y,X),\quad
+v = \arccos\!\left(\frac{Z}{\sqrt{X^2+Y^2+Z^2}}\right)
+$$
+
+Unwrap to equirectangular for panoramic images.
+
+### 🔬 Mathematical Analysis of Special Camera Models
+
+**Fish-eye Projection Functions:**
+The general fish-eye projection is:
+$$
+r = f \cdot g(\theta)
+$$
+
+where $g(\theta)$ is the projection function:
+
+**Equidistant:**
+$$
+g(\theta) = \theta
+$$
+
+**Equisolid:**
+$$
+g(\theta) = 2 \sin(\theta/2)
+$$
+
+**Stereographic:**
+$$
+g(\theta) = 2 \tan(\theta/2)
+$$
+
+**Orthographic:**
+$$
+g(\theta) = \sin(\theta)
+$$
+
+**Mathematical Properties:**
+* **Equidistant**: Preserves angular distances
+* **Equisolid**: Preserves solid angles
+* **Stereographic**: Conformal mapping
+* **Orthographic**: Preserves area ratios
+
+**Catadioptric Camera Model:**
+The unified sphere model parameterizes all central catadioptric cameras:
+$$
+\xi = \frac{d}{2f}
+$$
+
+where $d$ is the mirror diameter and $f$ is the focal length.
+
+**Omnidirectional Camera:**
+Spherical coordinates $(r, \theta, \phi)$:
+$$
+r = \sqrt{X^2 + Y^2 + Z^2}
+$$
+
+$$
+\theta = \arctan2(Y, X)
+$$
+
+$$
+\phi = \arccos(Z/r)
+$$
+
+---
+
+## 19. **Camera Model Extensions**
+
+### 19.1 Projective Ambiguity & Self-Calibration
+
+For any invertible $4\times4$ $H$: $P' = P H,\ X' = H^{-1} X$ gives the same images $x\sim PX = P'X'$.
+
+Use the Image of the Absolute Conic $\omega=K^{-\top}K^{-1}$ for self-calibration constraints.
+
+### 19.2 Multi-View Geometry Basics
+
+$$
+x'^T F x = 0,\quad E = K'^T F K
+$$
+
+Decompose $E$ to get relative pose $(R,t)$.
+
+### 19.3 Absolute vs. Relative Camera Pose
+
+**Relative**: pose of cam 2 w.r.t cam 1. **Absolute**: pose in world frame via PnP with known 3D–2D matches.
+
+### 🔬 Mathematical Analysis of Projective Ambiguity
+
+**Projective Ambiguity:**
+The camera matrix $P$ and 3D points $X$ can be transformed by any invertible $4 \times 4$ matrix $H$:
+$$
+P' = P H, \quad X' = H^{-1} X
+$$
+
+This gives the same projections:
+$$
+x \sim P X \sim P' X'
+$$
+
+**Self-Calibration Constraints:**
+The Image of the Absolute Conic (IAC) $\omega$ is invariant under rigid transformations:
+$$
+\omega = K^{-\top} K^{-1}
+$$
+
+**Kruppa Equations:**
+For two views with fundamental matrix $F$:
+$$
+\omega = F \omega' F^{\top}
+$$
+
+**Modulus Constraint:**
+For three views, the modulus constraint provides additional constraints on the IAC.
+
+---
+
+## 20. **Modern Applications of Camera Models**
+
+### 20.1 Augmented Reality & Pose Estimation
+
+Align graphics by estimating pose $(R,t)$ s.t. $ \hat{x} = K [R|t] X$ aligns with features.
+
+### 20.2 SLAM & Visual Odometry
+
+Minimize
+$$
+E = \sum_{i,j} \| x_{ij} - \pi(K, R_i, t_i, X_j)\|^2
+$$
+over poses and 3D structure.
+
+### 20.3 Neural Rendering (NeRFs, Differentiable Cameras)
+
+Each pixel casts a ray:
+$$
+\mathbf{r}(t) = C + t \, R \, K^{-1}(u,v,1)^T
+$$
+Volume rendering integrates along rays to produce color; differentiable projection is key for learning.
+
+### 🔬 Mathematical Foundations of Modern Applications
+
+**Pose Estimation (PnP):**
+Given 3D-2D correspondences, solve:
+$$
+\min_{R,t} \sum_i \|x_i - \pi(K, R, t; X_i)\|^2
+$$
+
+**Direct Linear Transform (DLT) for PnP:**
+For each correspondence:
+$$
+\begin{bmatrix} X_i^T & 0^T & -u_i X_i^T \\ 0^T & X_i^T & -v_i X_i^T \end{bmatrix}
+\begin{bmatrix} r_1 \\ r_2 \\ t \end{bmatrix} = 0
+$$
+
+**Neural Radiance Fields (NeRFs):**
+The volume rendering equation:
+$$
+C(\mathbf{r}) = \int_{t_n}^{t_f} T(t) \sigma(\mathbf{r}(t)) c(\mathbf{r}(t), \mathbf{d}) dt
+$$
+
+where:
+* $T(t) = \exp(-\int_{t_n}^{t} \sigma(\mathbf{r}(s)) ds)$ is the transmittance
+* $\sigma(\mathbf{r}(t))$ is the volume density
+* $c(\mathbf{r}(t), \mathbf{d})$ is the view-dependent color
+
+**Differentiable Camera Models:**
+The camera projection becomes differentiable:
+$$
+\frac{\partial \pi}{\partial \theta} = \frac{\partial \pi}{\partial K} \frac{\partial K}{\partial \theta}
+$$
+
+This enables end-to-end learning of camera parameters.
+
+---
+
+✅ **Wrap-Up**: Special models (fisheye, catadioptric, omni) extend beyond pinhole; multi-view geometry couples cameras; calibration resolves metric scale; modern AR/SLAM/NeRFs critically rely on accurate camera models. 
   </script>
   <script>
 
