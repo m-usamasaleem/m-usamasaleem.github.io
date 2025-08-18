@@ -70,7 +70,7 @@
                   <p class="lead">Master the mathematical foundations of camera models, from the simple pinhole camera to complex lens systems. Learn how 3D world points are transformed into 2D pixel coordinates through rigorous geometric analysis.</p>
                 </div>
 
-                <h2 id="introduction">Introduction</h2>
+                <h2 id="introduction">Introduction to Camera Models</h2>
                 <p>Computer vision begins with capturing images of the 3D world. Cameras act as the interface between the real world and digital systems, making understanding how cameras form images essential. A <strong>camera model</strong> mathematically describes how 3D points in space are transformed into 2D pixels in a captured image.</p>
 
                 <div class="alert alert-info">
@@ -78,8 +78,45 @@
                   <p>Map a 3D world point <strong>X = (X, Y, Z, 1)<sup>T</sup></strong> onto a 2D pixel <strong>x = (u, v, 1)<sup>T</sup></strong> using a perspective camera model (central/pinhole projection).</p>
                 </div>
 
-                <h3>Four Coordinate Systems</h3>
+                <h3>Why Do We Need Camera Models?</h3>
+                <p>In computer vision, the camera is the interface between the <strong>3D world</strong> and a <strong>2D digital image</strong>. A camera model is a mathematical abstraction that describes this transformation.</p>
+
+                <p>Mathematically, a 3D point</p>
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>3D World Point</strong><br>
+                    X = (X, Y, Z, 1)<sup>T</sup>
+                  </div>
+                </div>
+
+                <p>is projected to a 2D pixel</p>
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>2D Pixel</strong><br>
+                    x = (u, v, 1)<sup>T</sup>
+                  </div>
+                </div>
+
+                <p>through a <strong>camera projection function</strong>:</p>
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Camera Projection</strong><br>
+                    x ∼ P·X
+                  </div>
+                </div>
+
+                <p>where P ∈ ℝ<sup>3×4</sup> is the <strong>camera matrix</strong>.</p>
+
+                <h3>Applications in Vision and Robotics</h3>
                 <div class="row">
+                  <div class="col-md-6">
+                    <ul>
+                      <li><strong>Computer Vision</strong>: 3D reconstruction, depth estimation, object recognition</li>
+                      <li><strong>Robotics</strong>: visual SLAM, robot navigation</li>
+                      <li><strong>AR/VR</strong>: overlaying graphics aligned with the physical world</li>
+                      <li><strong>Industrial/Medical</strong>: photogrammetry, medical imaging, surgical navigation</li>
+                    </ul>
+                  </div>
                   <div class="col-md-6">
                     <table class="table table-bordered">
                       <thead class="thead-dark">
@@ -96,26 +133,79 @@
                       </tbody>
                     </table>
                   </div>
-                  <div class="col-md-6">
-                    <p>This tutorial covers the complete mathematical framework, from basic geometric principles to advanced calibration techniques. We'll explore:</p>
-                    <ul>
-                      <li>The fundamental pinhole camera model and its geometric derivation</li>
-                      <li>Lens-based cameras and the paraxial refraction model</li>
-                      <li>Camera matrix formulation using homogeneous coordinates</li>
-                      <li>Intrinsic and extrinsic parameter estimation</li>
-                      <li>Camera calibration techniques and distortion modeling</li>
-                    </ul>
+                </div>
+
+                <h3>Historical Note: From Pinhole to Digital Cameras</h3>
+                <ul>
+                  <li><strong>Pinhole Camera (5th century BCE)</strong>: used by Mozi (China) and Aristotle (Greece) — a dark chamber with a tiny hole projects an inverted image</li>
+                  <li><strong>Renaissance Perspective (15th century)</strong>: Alberti and Brunelleschi formalized projection geometry for art</li>
+                  <li><strong>19th–20th century</strong>: photographic film and glass lenses dominate</li>
+                  <li><strong>Modern Era</strong>: CCD/CMOS sensors replace film, but the geometry (pinhole model + distortions) still forms the mathematical backbone</li>
+                </ul>
+
+                <h2 id="pinhole-camera">Geometry of Image Formation</h2>
+                <h3>Light, Rays, and Projection</h3>
+                <p>Each <strong>3D point</strong> emits or reflects light rays in all directions. The <strong>camera aperture (pinhole)</strong> restricts rays so that exactly <strong>one ray per 3D point</strong> reaches the image plane. This ensures a <strong>unique mapping</strong>: one world point → one image point.</p>
+
+                <h4>Mathematical Setup</h4>
+                <p>Let the <strong>camera coordinate system</strong> have origin at the optical center O, with the Z-axis pointing forward. A world point in camera coordinates is:</p>
+
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Camera Coordinates</strong><br>
+                    X_c = (X_c, Y_c, Z_c)<sup>T</sup>
                   </div>
                 </div>
 
-                <h2 id="pinhole-camera">The Pinhole Camera Model</h2>
-                <h3>Core Concept</h3>
-                <p>The pinhole camera is the simplest model of perspective projection. It consists of:</p>
+                <p>The ray from O through X_c intersects the <strong>image plane</strong> at distance f (focal length) along the Z-axis.</p>
+
+                <p>By similar triangles:</p>
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Perspective Projection</strong><br>
+                    x_i = f·X_c/Z_c, y_i = f·Y_c/Z_c
+                  </div>
+                </div>
+
+                <p>This is the <strong>perspective projection equation</strong>.</p>
+
+                <h3>The Concept of the Optical Center</h3>
                 <ul>
-                  <li>A small aperture (pinhole) between the scene and image plane</li>
-                  <li>Only one light ray per scene point passes through the pinhole</li>
-                  <li>Ensures a unique mapping between 3D scene points and 2D image locations</li>
+                  <li>The <strong>optical center</strong> (a.k.a. camera center or projection center) is the point where all rays converge</li>
+                  <li>In the pinhole model, it's a single idealized point</li>
+                  <li>In real cameras, it corresponds approximately to the center of the entrance pupil of the lens system</li>
                 </ul>
+
+                <p>All rays pass through this center → projection is a <strong>central projection</strong>.</p>
+
+                <h3>The Image Plane vs. the Sensor Plane</h3>
+                <ul>
+                  <li>In pure geometry, the <strong>image plane</strong> is placed <strong>behind the pinhole</strong> at distance f</li>
+                  <li>This produces an <strong>inverted image</strong></li>
+                  <li>Alternatively, we can place a <strong>virtual image plane</strong> in front of the pinhole (same math up to a scale inversion)</li>
+                </ul>
+
+                <p>In real cameras:</p>
+                <ul>
+                  <li>The <strong>sensor plane</strong> (CCD/CMOS) is a discrete pixel array</li>
+                  <li>The mapping from continuous (x_i, y_i) (in mm) to pixels (u,v) is handled by the <strong>intrinsic calibration matrix</strong> K</li>
+                </ul>
+
+                <h2 id="pinhole-camera-model">The Pinhole Camera Model</h2>
+                <h3>Basic Setup and Assumptions</h3>
+                <p>The <strong>pinhole camera</strong> is the most fundamental camera model. It consists of:</p>
+                <ul>
+                  <li>A completely dark box</li>
+                  <li>A <strong>tiny aperture (pinhole)</strong> on one side</li>
+                  <li>An <strong>image plane</strong> (film/sensor) opposite the hole</li>
+                </ul>
+
+                <h4>Assumptions</h4>
+                <ol>
+                  <li>The aperture is <strong>infinitesimally small</strong>, allowing exactly one light ray from each 3D point to pass through</li>
+                  <li>No lens, so no refraction effects</li>
+                  <li>Geometry is purely <strong>perspective projection</strong></li>
+                </ol>
 
                 <div class="alert alert-info">
                   <h4><i class="fas fa-info-circle"></i> Key Insight</h4>
@@ -175,59 +265,108 @@
                   </div>
                 </div>
 
-                <h2 id="lens-cameras">Cameras with Lenses</h2>
-                <p>Real cameras use lenses to resolve the brightness-sharpness trade-off. The <strong>paraxial refraction model</strong> (thin lens assumption) provides a mathematical framework for lens-based cameras.</p>
+                <h2 id="lens-cameras">Lens-Based Models</h2>
+                <h3>The Thin Lens Equation</h3>
+                <p>Replacing the pinhole with a <strong>convex lens</strong> allows multiple rays from the same point to converge on the image plane.</p>
 
-                <h3>Thin Lens Equation</h3>
-                <p>The fundamental relationship in lens optics is the thin lens equation:</p>
-
-                <div style="text-align: center; margin: 2rem 0;">
-                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                <p>The <strong>thin lens equation</strong>:</p>
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
                     <strong>Thin Lens Equation</strong><br>
-                    1/z + 1/z' = 1/f
+                    1/f = 1/z_o + 1/z_i
                   </div>
                 </div>
 
-                <p>Where:</p>
+                <p>where:</p>
                 <ul>
-                  <li><strong>z</strong> = object distance</li>
-                  <li><strong>z'</strong> = image distance</li>
-                  <li><strong>f</strong> = focal length</li>
+                  <li><strong>f</strong> = focal length of lens</li>
+                  <li><strong>z_o</strong> = object distance (from lens to object point)</li>
+                  <li><strong>z_i</strong> = image distance (from lens to image plane)</li>
                 </ul>
 
-                <h3>Paraxial Refraction Model</h3>
-                <p>For the paraxial refraction model, the projection becomes:</p>
+                <p>If the sensor is placed at z_i, the object point is in focus.</p>
 
-                <div style="text-align: center; margin: 2rem 0;">
-                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
-                    <strong>Lens-based Projection</strong><br>
-                    P' = (x', y') = (f·x/(f+z₀), f·y/(f+z₀))
-                  </div>
-                </div>
+                <h3>Depth of Field and Focus</h3>
+                <ul>
+                  <li>Only points at a specific distance are in <strong>perfect focus</strong></li>
+                  <li>Points closer/further blur into <strong>circles of confusion</strong></li>
+                  <li>The <strong>range of distances</strong> where the blur is acceptably small = <strong>depth of field (DoF)</strong></li>
+                </ul>
 
-                <p>Note that z' = f + z₀, where z₀ is the reference depth.</p>
+                <p>DoF depends on:</p>
+                <ul>
+                  <li>Aperture size (smaller → larger DoF, sharper background)</li>
+                  <li>Focal length</li>
+                  <li>Sensor size</li>
+                </ul>
 
                 <h3>Lens Distortions</h3>
-                <p>Real lenses introduce geometric distortions:</p>
+                <p>Real lenses deviate from the thin-lens ideal. Common distortions:</p>
 
-                <div class="row">
-                  <div class="col-md-6">
-                    <h5>Barrel Distortion</h5>
-                    <ul>
-                      <li>Lines bulge outward</li>
-                      <li>Common in wide-angle lenses</li>
-                      <li>Magnification decreases with distance from center</li>
-                    </ul>
-                  </div>
-                  <div class="col-md-6">
-                    <h5>Pincushion Distortion</h5>
-                    <ul>
-                      <li>Lines pinch inward</li>
-                      <li>Common in telephoto lenses</li>
-                      <li>Magnification increases with distance from center</li>
-                    </ul>
+                <h4>1. Radial Distortion (Symmetric around center)</h4>
+                <ul>
+                  <li><strong>Barrel</strong>: straight lines bulge outward</li>
+                  <li><strong>Pincushion</strong>: straight lines pinch inward</li>
+                </ul>
+
+                <p>Approximate model:</p>
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Radial Distortion</strong><br>
+                    x_d = x(1 + k₁r² + k₂r⁴ + ...)<br>
+                    y_d = y(1 + k₁r² + k₂r⁴ + ...)
                   </div>
                 </div>
+
+                <p>where r = √(x² + y²).</p>
+
+                <h4>2. Tangential Distortion (Due to lens misalignment)</h4>
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Tangential Distortion</strong><br>
+                    x_d = x + [2p₁xy + p₂(r² + 2x²)]<br>
+                    y_d = y + [p₁(r² + 2y²) + 2p₂xy]
+                  </div>
+                </div>
+
+                <h3>Alternative Simplified Models</h3>
+                <p>In many applications, exact perspective projection is unnecessary — simpler models suffice.</p>
+
+                <h4>Weak Perspective Model</h4>
+                <p>Assumption: All scene points are at approximately the <strong>same depth</strong> z₀.</p>
+
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Weak Perspective</strong><br>
+                    x' = (f/z₀)X, y' = (f/z₀)Y
+                  </div>
+                </div>
+
+                <p>Equivalent to a uniform <strong>scaling + orthographic projection</strong>. Good for <strong>small, distant objects</strong>.</p>
+
+                <h4>Orthographic Projection</h4>
+                <p>Assumption: Rays are <strong>parallel</strong> to the optical axis (camera at infinity).</p>
+
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Orthographic</strong><br>
+                    x' = X, y' = Y
+                  </div>
+                </div>
+
+                <p>Depth Z is ignored completely. Preserves parallelism (no vanishing points). Used in <strong>engineering drawings, CAD</strong>.</p>
+
+                <h4>Scaled Orthographic (Paraperspective) Projection</h4>
+                <p>Hybrid between weak perspective and true perspective:</p>
+
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Paraperspective</strong><br>
+                    x' = (f/Z₀)X, y' = (f/Z₀)Y
+                  </div>
+                </div>
+
+                <p>where Z₀ = average depth of the object. Each object is scaled by a constant depending on its depth. More accurate than orthographic, simpler than full perspective. Useful in <strong>human pose estimation</strong> and <strong>face alignment</strong>.</p>
 
                 <h2 id="digital-space">From Image Plane to Digital Pixels</h2>
                 <p>The projection from 3D world points to digital pixel coordinates requires several transformations to account for:</p>
@@ -369,7 +508,68 @@
                 </div>
 
                 <h2 id="homogeneous-coordinates">Homogeneous Coordinates</h2>
-                <p>Homogeneous coordinates allow us to represent the non-linear perspective projection as a linear matrix transformation.</p>
+                <h3>Why Do We Use Homogeneous Coordinates?</h3>
+                <p>Perspective projection involves <strong>division by depth</strong> (Z_c):</p>
+
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Nonlinear Projection</strong><br>
+                    x_i = f·X_c/Z_c, y_i = f·Y_c/Z_c
+                  </div>
+                </div>
+
+                <p>This is nonlinear. But using <strong>homogeneous coordinates</strong>, we can write projection as a <strong>linear matrix multiplication</strong>.</p>
+
+                <h3>Representing Points</h3>
+                <ul>
+                  <li>A 2D point (u,v) is represented as (u,v,1)<sup>T</sup></li>
+                  <li>A 3D point (X,Y,Z) becomes (X,Y,Z,1)<sup>T</sup></li>
+                  <li>More generally: (x,y) ≡ (kx, ky, k) ∀ k ≠ 0</li>
+                </ul>
+
+                <p>That is, homogeneous coordinates are defined <strong>up to scale</strong>.</p>
+
+                <h3>Representing Lines and Transformations</h3>
+                <ul>
+                  <li>A 2D line ax + by + c = 0 is represented as the vector (a,b,c)<sup>T</sup></li>
+                  <li>A point x = (u,v,1)<sup>T</sup> lies on line l = (a,b,c)<sup>T</sup> if: l<sup>T</sup>x = 0</li>
+                  <li>Geometric transformations (translation, rotation, projection) can be written as <strong>matrices</strong> in homogeneous coordinates</li>
+                </ul>
+
+                <h4>Example: 2D Translation</h4>
+                <p>A 2D translation by (t_x, t_y):</p>
+
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Translation Matrix</strong><br>
+                    T = [1 0 t_x; 0 1 t_y; 0 0 1]
+                  </div>
+                </div>
+
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Transformation</strong><br>
+                    x' = T·x
+                  </div>
+                </div>
+
+                <h3>Projective Geometry Basics</h3>
+                <p>Homogeneous coordinates extend Euclidean geometry into <strong>projective geometry</strong>:</p>
+                <ul>
+                  <li><strong>Points at infinity</strong> (parallel lines meeting at vanishing points) are naturally represented</li>
+                  <li>A perspective projection is just a <strong>projective transformation</strong> in homogeneous space</li>
+                  <li>Camera projection matrix P is a 3×4 projective transform</li>
+                </ul>
+
+                <p>This framework is what allows us to write:</p>
+                <div style="text-align: center; margin: 1rem 0;">
+                  <div style="background: #f8f9fa; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Linear Projection</strong><br>
+                    x̃ ∼ P·X̃
+                  </div>
+                </div>
+
+                <p>for any 3D point X̃.</p>
 
                 <h3>Coordinate Transformation</h3>
                 <p>Convert between Euclidean and homogeneous coordinates:</p>
