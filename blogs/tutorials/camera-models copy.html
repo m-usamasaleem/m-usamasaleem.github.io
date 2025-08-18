@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Camera Models: Mathematical Foundations</title>
+  <meta name="description" content="Master the mathematical foundations of camera models">
+  
+  <!-- MathJax for LaTeX rendering -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(','\\)'], ['$', '$']],
+        displayMath: [['$$','$$']],
+        processEscapes: true
+      }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      color: #222;
+      background: #fff;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 20px 0;
+      border-bottom: 2px solid #A6372A;
+    }
+
+    h1 {
+      color: #A6372A;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+
+    /* Navigation */
+    nav {
+      margin: 16px 0 24px;
+      padding: 0;
+    }
+
+    nav a {
+      color: #A6372A;
+      text-decoration: none;
+      margin-right: 20px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Main content */
+    main {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      margin-bottom: 40px;
+    }
+
+    /* Typography */
+    h2 {
+      color: #A6372A;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 30px 0 15px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    h3 {
+      color: #444;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin: 25px 0 10px 0;
+    }
+
+    h4 {
+      color: #555;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 20px 0 10px 0;
+    }
+
+    p {
+      margin-bottom: 14px;
+      font-size: 1.02rem;
+      line-height: 1.8;
+    }
+
+    ul, ol {
+      margin: 15px 0;
+      padding-left: 30px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    strong {
+      color: #A6372A;
+      font-weight: 600;
+    }
+
+    em {
+      font-style: italic;
+      color: #666;
+    }
+
+    /* Dividers */
+    hr {
+      border: none;
+      height: 1px;
+      background: #eee;
+      margin: 30px 0;
+    }
+
+    /* Code */
+    code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      color: #e83e8c;
+      font-size: 0.9rem;
+    }
+
+    pre {
+      background: #f6f8fa;
+      padding: 16px;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 18px 0;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      color: #333;
+    }
+
+    /* Math styling */
+    .math-display {
+      text-align: center;
+      margin: 20px 0;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border-left: 4px solid #A6372A;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      background: white;
+      border: 1px solid #eee;
+    }
+
+    th {
+      background: #A6372A;
+      color: white;
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    tr:nth-child(even) {
+      background: #fafafa;
+    }
+
+    /* Loading state */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+
+    .spinner {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #A6372A;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+      border-top: 1px solid #eee;
+    }
+
+    footer a {
+      color: #A6372A;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      body {
+        padding: 15px;
+      }
+
+      main {
+        padding: 25px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+      }
+
+      nav {
+        text-align: center;
+      }
+
+      nav a {
+        display: block;
+        margin: 5px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+
+      main {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      h3 {
+        font-size: 1.1rem;
+      }
+
+      ul, ol {
+        padding-left: 20px;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        max-width: none;
+        padding: 0;
+      }
+
+      main {
+        box-shadow: none;
+        padding: 0;
+      }
+
+      nav, footer {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Camera Models: Mathematical Foundations</h1>
+    <p class="subtitle">A comprehensive guide to understanding camera geometry and projection</p>
+  </header>
+
+  <nav>
+    <a href="/blogs/">← Back to Tutorials</a>
+    <a href="/">Portfolio</a>
+  </nav>
+
+  <main>
+    <div id="tutorial-content">
+      <div class="loading">
+        <div class="spinner"></div>
+        <p>Loading tutorial content...</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Muhammad Usama Saleem. <a href="/blogs/">Back to Tutorials</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script id="tutorial-md" type="text/plain">
+# 📖 Table of Contents — Understanding Camera Models in Detail
+
+---
+
+## Part I: Foundations of Camera Models
+
+1. **Introduction to Camera Models**
+
+   * Why do we need camera models?
+   * Applications in computer vision, robotics, AR/VR
+   * Historical note: pinhole to modern digital cameras
+
+2. **Geometry of Image Formation**
+
+   * Light, rays, and projection
+   * The concept of the optical center
+   * The image plane vs. the sensor plane
+
+3. **Homogeneous Coordinates**
+
+   * Why we use homogeneous coordinates
+   * Representing points, lines, and transformations
+   * Projective geometry basics
+
+---
+
+## Part II: Classical Camera Models
+
+4. **The Pinhole Camera Model**
+
+   * Basic setup and assumptions
+   * Perspective projection equations
+   * Image inversion and virtual image plane
+   * Aperture size trade-offs
+
+5. **Lens-Based Models**
+
+   * The thin lens equation
+   * Depth of field and focus
+   * Lens distortions (barrel, pincushion, tangential)
+
+6. **Alternative Simplified Models**
+
+   * Weak perspective model
+   * Orthographic projection
+   * Scaled orthographic (paraperspective)
+   * When approximations are useful
+
+---
+
+## Part III: Mathematical Formulation of Camera Projection
+
+7. **Extrinsic Parameters (World → Camera)**
+
+   * Camera coordinate system
+   * Rotation matrix $R$
+   * Translation vector $t$
+   * Rigid body transformation
+
+8. **Intrinsic Parameters (Camera → Pixels)**
+
+   * Effective focal lengths $f_x, f_y$
+   * Principal point $(c_x, c_y)$
+   * Skew and pixel aspect ratio
+   * The calibration matrix $K$
+
+9. **The Full Camera Matrix**
+
+   * Derivation: $P = K [R|t]$
+   * Properties and degrees of freedom
+   * Geometric interpretation
+
+10. **Projection in Homogeneous Coordinates**
+
+    * Matrix form of projection
+    * Perspective divide
+    * From 3D points to 2D pixels
+
+---
+
+## Part IV: Practical Considerations in Real Cameras
+
+11. **Lens Distortion Models**
+
+    * Radial distortion
+    * Tangential distortion
+    * Modeling and correction
+
+12. **Sensor Characteristics**
+
+    * Discretization into pixels
+    * Noise and quantization
+    * Rolling shutter effects
+
+13. **Multi-Camera Systems**
+
+    * Stereo geometry and epipolar constraint
+    * Structure from motion (SfM)
+    * Camera networks and panoramic cameras
+
+---
+
+## Part V: Camera Calibration
+
+14. **Why Calibration Matters**
+
+    * Estimating intrinsics and extrinsics
+    * Applications in measurement and 3D vision
+
+15. **Linear Camera Calibration**
+
+    * Direct Linear Transform (DLT)
+    * Requirements and degenerate cases
+
+16. **Nonlinear Optimization (Bundle Adjustment)**
+
+    * Reprojection error minimization
+    * Distortion parameter estimation
+
+17. **Practical Calibration Pipelines**
+
+    * Checkerboard calibration
+    * OpenCV implementation
+    * Evaluating calibration accuracy
+
+---
+
+## Part VI: Advanced Topics
+
+18. **Special Camera Models**
+
+    * Fish-eye cameras
+    * Catadioptric (mirror + lens) systems
+    * Omnidirectional cameras
+
+19. **Camera Model Extensions**
+
+    * Projective ambiguity and self-calibration
+    * Multi-view geometry basics
+    * Absolute vs. relative camera pose
+
+20. **Modern Applications of Camera Models**
+
+    * Augmented reality & pose estimation
+    * SLAM and visual odometry
+    * Neural rendering (NeRFs, differentiable cameras)
+
+---
+
+⚡ This TOC builds from **basic geometry → classical models → full camera matrix → calibration → advanced models and applications**.
+
+# 📷 Part I: Foundations of Camera Models
+
+---
+
+## 1. **Introduction to Camera Models**
+
+### 🔍 Why Do We Need Camera Models?
+
+In computer vision, the camera is the interface between the **3D world** and a **2D digital image**. A **camera model** is a mathematical abstraction that describes this transformation.
+
+Mathematically, a 3D point
+
+$$
+X = (X, Y, Z, 1)^T
+$$
+
+is projected to a 2D pixel
+
+$$
+x = (u, v, 1)^T
+$$
+
+through a **camera projection function**:
+
+$$
+x \\sim P X
+$$
+
+where $P \\in \\mathbb{R}^{3 \\times 4}$ is the **camera matrix**.
+
+Without a model, tasks like 3D reconstruction, augmented reality overlays, or robot navigation would be impossible — because we couldn't reason how the 2D images relate back to the 3D world.
+
+### ⚙️ Applications in Vision and Robotics
+
+* **Computer Vision**: 3D reconstruction, depth estimation, object recognition.
+* **Robotics**: visual SLAM (Simultaneous Localization and Mapping), robot navigation.
+* **AR/VR**: overlaying graphics aligned with the physical world.
+* **Industrial/Medical**: photogrammetry, medical imaging, surgical navigation.
+
+### 🕰 Historical Note: From Pinhole to Digital Cameras
+
+* **Pinhole Camera (5th century BCE)**: used by Mozi (China) and Aristotle (Greece) — a dark chamber with a tiny hole projects an inverted image.
+* **Renaissance Perspective (15th century)**: Alberti and Brunelleschi formalized projection geometry for art.
+* **19th–20th century**: photographic film and glass lenses dominate.
+* **Modern Era**: CCD/CMOS sensors replace film, but the geometry (pinhole model + distortions) still forms the mathematical backbone.
+
+---
+
+## 2. **Geometry of Image Formation**
+
+### 🌞 Light, Rays, and Projection
+
+* Each **3D point** emits or reflects light rays in all directions.
+* The **camera aperture (pinhole)** restricts rays so that exactly **one ray per 3D point** reaches the image plane.
+* This ensures a **unique mapping**: one world point → one image point.
+
+**Mathematical Setup:**
+Let the **camera coordinate system** have origin at the optical center $O$, with the $Z$-axis pointing forward.
+A world point in camera coordinates is
+
+$$
+X_c = (X_c, Y_c, Z_c)^T
+$$
+
+The ray from $O$ through $X_c$ intersects the **image plane** at distance $f$ (focal length) along the $Z$-axis.
+
+By similar triangles (see diagram placeholder below):
+
+$$
+x_i = \\frac{f X_c}{Z_c}, \\quad y_i = \\frac{f Y_c}{Z_c}
+$$
+
+This is the **perspective projection equation**.
+
+### 🎯 The Concept of the Optical Center
+
+* The **optical center** (camera center) is the point where all rays converge.
+* In the pinhole model, it's a single idealized point; in real cameras, it approximates the entrance pupil center.
+
+### 🖼 The Image Plane vs. the Sensor Plane
+
+* In pure geometry, the **image plane** is placed *behind* the pinhole at distance $f$ → inverted image.
+* Equivalently, a **virtual image plane** in front of the pinhole yields the same math up to a reflection.
+* In real cameras, the **sensor plane** (CCD/CMOS) is a discrete pixel array; mapping to pixels is handled by the **intrinsic matrix** $K$.
+
+---
+
+## 3. **Homogeneous Coordinates**
+
+### ⚡ Why Do We Use Homogeneous Coordinates?
+
+Perspective projection involves **division by depth** $(Z_c)$:
+
+$$
+x_i = \\frac{f X_c}{Z_c}, \\quad y_i = \\frac{f Y_c}{Z_c}
+$$
+
+This is nonlinear. But using **homogeneous coordinates**, we can write projection as a **linear matrix multiplication**.
+
+### ✍ Representing Points
+
+* A 2D point $(u,v)$ is $(u,v,1)^T$.
+* A 3D point $(X,Y,Z)$ is $(X,Y,Z,1)^T$.
+* More generally: $ (x,y) \\equiv (kx, ky, k) \\ \\forall k \\neq 0 $ (defined up to scale).
+
+### 📐 Representing Lines and Transformations
+
+* A 2D line $ax + by + c = 0$ is the vector $(a,b,c)^T$.
+* Incidence: $l^T x = 0$ ⇔ point $x$ lies on line $l$.
+* Geometric transforms (translation, rotation, projection) become matrices in homogeneous coordinates.
+
+**Example: 2D translation by (t_x, t_y)**
+```
+T = [[1, 0, t_x],
+     [0, 1, t_y],
+     [0, 0,   1]]
+x' = T x
+```
+
+### 🌐 Projective Geometry Basics
+
+Homogeneous coordinates extend Euclidean geometry into **projective geometry**:
+
+* **Points at infinity** and **vanishing points** are naturally represented.
+* Camera projection matrix $P$ is a $3\\times4$ projective transform, enabling the compact form $ \\tilde{x} \\sim P \\tilde{X} $.
+
+---
+
+# 📷 Part II: Classical Camera Models
+
+---
+
+## 4. **The Pinhole Camera Model**
+
+### 📌 Basic Setup and Assumptions
+
+* Dark box, **tiny aperture** (pinhole), and an **image plane**.
+* Aperture is *infinitesimal* (ideal), no lens refraction, purely perspective geometry.
+
+### 📐 Perspective Projection Equations
+
+Let the image plane be at distance $f$.
+
+$$
+x_i = \\frac{f X_c}{Z_c}, \\quad y_i = \\frac{f Y_c}{Z_c}
+$$
+
+### 🔄 Image Inversion and Virtual Image Plane
+
+* Physical plane behind pinhole → **inverted** image.
+* Virtual plane in front → same math without inversion.
+
+### 🔍 Aperture Size Trade-offs
+
+| Aperture Size | Brightness | Sharpness |
+|---------------|------------|-----------|
+| **Small**     | Dim        | Sharp (few rays) |
+| **Large**     | Bright     | Blurred (many rays) |
+
+This trade-off motivates **lenses**: more light while preserving focus.
+
+---
+
+## 5. **Lens-Based Models**
+
+### 🔎 The Thin Lens Equation
+
+Replacing the pinhole with a convex lens lets multiple rays converge to a point on the sensor.
+
+$$
+\\frac{1}{f} = \\frac{1}{z_o} + \\frac{1}{z_i}
+$$
+
+* $f$: focal length, $z_o$: object distance, $z_i$: image distance.
+
+### 🎯 Depth of Field and Focus
+
+* Only a specific distance is perfectly in focus; others blur to *circles of confusion*.
+* DoF increases with smaller aperture; affected by focal length and sensor size.
+
+### 📉 Lens Distortions
+
+1. **Radial distortion** (barrel / pincushion):
+   $$
+   x_d = x (1 + k_1 r^2 + k_2 r^4 + \\dots),\\quad
+   y_d = y (1 + k_1 r^2 + k_2 r^4 + \\dots)
+   $$
+
+2. **Tangential distortion** (misalignment):
+   $$
+   x_d = x + [2 p_1 xy + p_2 (r^2 + 2x^2)], \\\\
+   y_d = y + [p_1 (r^2 + 2y^2) + 2p_2 xy]
+   $$
+
+---
+
+## 6. **Alternative Simplified Models**
+
+### 🪞 Weak Perspective Model
+
+Assume all scene points at approximately same depth $z_0$:
+
+$$
+x' = \\frac{f}{z_0} X, \\quad y' = \\frac{f}{z_0} Y
+$$
+
+### 📐 Orthographic Projection
+
+Parallel rays, camera at infinity:
+
+$$
+x' = X, \\quad y' = Y
+$$
+
+### ⚖️ Scaled Orthographic (Paraperspective)
+
+$$
+x' = \\frac{f}{Z_0} X, \\quad y' = \\frac{f}{Z_0} Y
+$$
+
+### 🤔 When Approximations Are Useful
+
+* **Orthographic**: far objects, minimal depth variation.
+* **Weak / Paraperspective**: mild perspective effects, simpler math.
+* **Full perspective**: close objects or precision geometry.
+
+---
+
+# 📐 Part III: Mathematical Formulation of Camera Projection
+
+---
+
+## 7. **Extrinsic Parameters (World → Camera)**
+
+### 📍 Camera Coordinate System
+
+* Origin at optical center, $Z$-axis forward, $X$ right, $Y$ down.
+
+### 🔄 Rotation Matrix $R$
+
+$$
+X' = R X_W, \\quad R \\in SO(3), \\ R^T R = I, \\ \\det(R)=+1
+$$
+
+### ➕ Translation Vector $t$
+
+$$
+X_C = R X_W + t
+$$
+
+### 🧩 Rigid Body Transformation
+
+$$
+\\begin{bmatrix} X_C \\\\ 1 \\end{bmatrix} =
+\\begin{bmatrix} R & t \\\\ 0 & 1 \\end{bmatrix}
+\\begin{bmatrix} X_W \\\\ 1 \\end{bmatrix}
+$$
+
+---
+
+## 8. **Intrinsic Parameters (Camera → Pixels)**
+
+### 🎯 Effective Focal Lengths $f_x, f_y$
+
+$$
+f_x = m_x f,\\quad f_y = m_y f
+$$
+
+### 📍 Principal Point $(c_x, c_y)$
+
+Intersection of optical axis with sensor; near image center but not exact.
+
+### 🔀 Skew and Pixel Aspect Ratio
+
+Skew $s = f_x \\cot\\theta$ if axes not perfectly orthogonal.
+
+### 🏗 Calibration Matrix $K$
+
+$$
+K =
+\\begin{bmatrix}
+f_x & s & c_x \\\\
+0 & f_y & c_y \\\\
+0 & 0 & 1
+\\end{bmatrix}
+$$
+
+---
+
+## 9. **The Full Camera Matrix**
+
+### 🧮 Derivation: $P = K [R|t]$
+
+Start with homogeneous world point $\\tilde{X}_W = (X,Y,Z,1)^T$:
+
+1. $\\ X_C = [R|t]\\tilde{X}_W$
+2. $\\ x_{img} = (X_C/Z_C, \\ Y_C/Z_C, \\ 1)^T$
+3. $\\ x = K x_{img}$
+
+$$
+x \\sim K [R|t] \\tilde{X}_W \\ \\Rightarrow \\ P = K [R|t]
+$$
+
+### 📊 Properties and Degrees of Freedom
+
+* $K$: 5 DOF, $[R|t]$: 6 DOF → $P$ has 11 DOF up to scale.
+
+### 🌐 Geometric Interpretation
+
+Each pixel corresponds to a ray $X_W(\\lambda)=C+\\lambda d$; projection collapses depth, so it's non-invertible.
+
+---
+
+## 10. **Projection in Homogeneous Coordinates**
+
+### 🧾 Matrix Form of Projection
+
+$$
+\\tilde{x} =
+\\begin{bmatrix} u \\\\ v \\\\ w \\end{bmatrix}
+\\sim
+P
+\\begin{bmatrix} X \\\\ Y \\\\ Z \\\\ 1 \\end{bmatrix}
+$$
+
+### ✂️ Perspective Divide
+
+$$
+(u', v') = \\left(\\frac{u}{w}, \\frac{v}{w}\\right)
+$$
+
+### 📸 From 3D Points to 2D Pixels
+
+1. World → camera via $[R|t]$
+2. Perspective divide $/Z_c$
+3. Intrinsics $K$ → pixel $(u,v)$
+
+---
+
+# 📷 Part IV: Practical Considerations in Real Cameras
+
+---
+
+## 11. **Lens Distortion Models**
+
+Ideal pinhole maps straight 3D lines to straight 2D lines; real lenses bend rays → **distortion**.
+
+### 🔵 Radial Distortion
+
+$$
+r^2 = x^2 + y^2
+$$
+
+$$
+x_d = x (1 + k_1 r^2 + k_2 r^4 + k_3 r^6), \\quad
+y_d = y (1 + k_1 r^2 + k_2 r^4 + k_3 r^6)
+$$
+
+### 🔶 Tangential Distortion
+
+$$
+x_d = x + [2p_1 xy + p_2(r^2 + 2x^2)], \\\\
+y_d = y + [p_1(r^2 + 2y^2) + 2p_2 xy]
+$$
+
+### 🛠 Modeling and Correction
+
+Estimate $K$ and distortion parameters together (e.g., OpenCV \`calibrateCamera\`); correction uses inverse mapping (often iterative).
+
+---
+
+## 12. **Sensor Characteristics**
+
+### 🟦 Discretization into Pixels
+
+$$
+u = \\lfloor m_x x_i + c_x \\rfloor,\\quad v = \\lfloor m_y y_i + c_y \\rfloor
+$$
+
+Sampling causes aliasing on high-frequency patterns.
+
+### 🔊 Noise and Quantization
+
+* Photon shot, thermal, and readout noise.
+* $b$-bit sensor → intensities in $[0, 2^b-1]$.
+
+### 🎥 Rolling Shutter Effects
+
+Rows exposed sequentially; fast motion bends geometry.
+
+$$
+t_i = t_0 + i \\Delta t \\ \\Rightarrow \\ x(t), y(t) \\sim P(t) X_W
+$$
+
+---
+
+## 13. **Multi-Camera Systems**
+
+### 🔀 Stereo Geometry and Epipolar Constraint
+
+$$
+x_R^T F x_L = 0
+$$
+
+If intrinsics known, essential matrix $E = K_R^T F K_L$.
+
+### 🏗 Structure from Motion (SfM)
+
+$$
+x_{ij} \\sim P_i X_j
+$$
+
+Estimate relative poses, triangulate, then bundle adjust.
+
+### 🌍 Camera Networks and Panoramic Cameras
+
+Arrays and panoramic systems require nonlinear projection models (e.g., fisheye).
+
+---
+
+# 📷 Part V: Camera Calibration
+
+---
+
+## 14. **Why Calibration Matters**
+
+**Intrinsics**
+* Focal lengths $(f_x, f_y)$
+* Principal point $(c_x, c_y)$
+* Skew, aspect ratio
+* Distortion parameters
+
+**Extrinsics**
+* Rotation $R$
+* Translation $t$
+
+**Applications**
+* 3D measurement, pose estimation, reconstruction, robotics & navigation.
+
+---
+
+## 15. **Linear Camera Calibration**
+
+### 15.1 Projection Equation
+
+$$
+x \\sim P X,\\ \\ P \\in \\mathbb{R}^{3 \\times 4}
+$$
+
+In inhomogeneous form:
+$ u = \\frac{p_1^T X}{p_3^T X}, \\ v = \\frac{p_2^T X}{p_3^T X} $
+
+### 15.2 Linear Constraints
+
+$$
+u (p_3^T X) - (p_1^T X) = 0,\\quad
+v (p_3^T X) - (p_2^T X) = 0
+$$
+
+Stack into $A\\,\\text{vec}(P)=0$ with $A\\in \\mathbb{R}^{2n\\times12}$.
+
+### 15.3 Solving with SVD
+
+Solve $\\min \\|A p\\|$ s.t. $\\|p\\|=1$; take last singular vector, reshape to $P$.
+
+### 15.4 Requirements & Degenerate Cases
+
+* ≥ 6 correspondences (12 equations).
+* Points must not be coplanar (rank deficiency otherwise).
+
+---
+
+## 16. **Nonlinear Optimization (Bundle Adjustment)**
+
+### 16.1 Reprojection Error
+
+$$
+\\hat{x}(X) = \\pi(K, R, t, d;\\, X),\\quad
+e = \\|x - \\hat{x}(X)\\|^2
+$$
+
+Multi-view objective:
+$$
+E = \\sum_{i,j} \\|x_{ij} - \\pi(P_i, X_j)\\|^2
+$$
+
+### 16.2 Optimization
+
+* Nonlinear least squares (e.g., Levenberg–Marquardt).
+* Optimize $K, R, t,$ and distortion $(k_1,k_2,p_1,p_2,\\dots)$.
+
+---
+
+## 17. **Practical Calibration Pipelines**
+
+### 17.1 Checkerboard Calibration
+
+1. Print checkerboard of known square size.
+2. Capture many views at varied orientations.
+3. Detect corners → build 2D–3D correspondences.
+4. DLT for initial $P$ → nonlinear refinement.
+
+### 17.2 OpenCV Implementation
+
+* \`findChessboardCorners()\`, \`calibrateCamera()\`
+* Returns $K$, distortion coeffs, and per-image $(R_i,t_i)$.
+
+### 17.3 Evaluating Calibration Accuracy
+
+1. **Reprojection error**: RMS < ~0.5 px (depends on resolution).
+2. **Cross-validation**: hold-out images.
+3. **Stability**: many images; cover full FOV.
+
+---
+
+# 📷 Part VI: Advanced Topics in Camera Models
+
+---
+
+## 18. **Special Camera Models**
+
+### 18.1 Fish-eye Cameras
+
+Very wide FOV; rays mapped with nonlinear radial functions. Let $\\theta$ be the angle from optical axis:
+
+* Equidistant: $ r = f \\theta $
+* Equisolid: $ r = 2f \\sin(\\theta/2) $
+* Stereographic: $ r = 2f \\tan(\\theta/2) $
+* Orthographic: $ r = f \\sin\\theta $
+
+### 18.2 Catadioptric Cameras
+
+Lenses + curved mirrors, often with single effective viewpoint. Unified sphere model:
+
+$$
+x = \\frac{X}{Z+\\xi \\sqrt{X^2+Y^2+Z^2}},\\quad
+y = \\frac{Y}{Z+\\xi \\sqrt{X^2+Y^2+Z^2}}
+$$
+
+### 18.3 Omnidirectional Cameras
+
+Full 360° coverage; spherical mapping:
+
+$$
+u = \\arctan2(Y,X),\\quad
+v = \\arccos\\!\\left(\\frac{Z}{\\sqrt{X^2+Y^2+Z^2}}\\right)
+$$
+
+Unwrap to equirectangular for panoramic images.
+
+---
+
+## 19. **Camera Model Extensions**
+
+### 19.1 Projective Ambiguity & Self-Calibration
+
+For any invertible $4\\times4$ $H$: $P' = P H,\\ X' = H^{-1} X$ gives the same images $x\\sim PX = P'X'$.
+
+Use the Image of the Absolute Conic $\\omega=K^{-\\top}K^{-1}$ for self-calibration constraints.
+
+### 19.2 Multi-View Geometry Basics
+
+$$
+x'^T F x = 0,\\quad E = K'^T F K
+$$
+
+Decompose $E$ to get relative pose $(R,t)$.
+
+### 19.3 Absolute vs. Relative Camera Pose
+
+**Relative**: pose of cam 2 w.r.t cam 1. **Absolute**: pose in world frame via PnP with known 3D–2D matches.
+
+---
+
+## 20. **Modern Applications of Camera Models**
+
+### 20.1 Augmented Reality & Pose Estimation
+
+Align graphics by estimating pose $(R,t)$ s.t. $ \\hat{x} = K [R|t] X$ aligns with features.
+
+### 20.2 SLAM & Visual Odometry
+
+Minimize
+$$
+E = \\sum_{i,j} \\| x_{ij} - \\pi(K, R_i, t_i, X_j)\\|^2
+$$
+over poses and 3D structure.
+
+### 20.3 Neural Rendering (NeRFs, Differentiable Cameras)
+
+Each pixel casts a ray:
+$$
+\\mathbf{r}(t) = C + t \\, R \\, K^{-1}(u,v,1)^T
+$$
+Volume rendering integrates along rays to produce color; differentiable projection is key for learning.
+
+---
+
+✅ **Wrap-Up**: Special models (fisheye, catadioptric, omni) extend beyond pinhole; multi-view geometry couples cameras; calibration resolves metric scale; modern AR/SLAM/NeRFs critically rely on accurate camera models.
+  </script>
+  <script>
+
+    // Load and render tutorial content
+    function loadTutorial() {
+      try {
+        const container = document.getElementById('tutorial-content');
+        const mdNode = document.getElementById('tutorial-md');
+        const tutorialContent = mdNode ? mdNode.textContent : '';
+        
+        // Configure marked
+        marked.setOptions({
+          breaks: true,
+          gfm: true,
+          headerIds: true
+        });
+        
+        // Render markdown
+        container.innerHTML = marked.parse(tutorialContent || '# Error\nContent missing.');
+        
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth' });
+            }
+          });
+        });
+        
+      } catch (error) {
+        document.getElementById('tutorial-content').innerHTML = `
+          <div style="text-align: center; padding: 40px; color: #666;">
+            <h3>Error Loading Content</h3>
+            <p>Sorry, the tutorial content could not be loaded.</p>
+            <p><small>${error.message}</small></p>
+          </div>
+        `;
+      }
+    }
+
+    // Load content when page loads
+    document.addEventListener('DOMContentLoaded', loadTutorial);
+  </script>
+</body>
+</html>
