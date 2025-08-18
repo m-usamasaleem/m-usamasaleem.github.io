@@ -1,0 +1,123 @@
+
+## 📌 Goal
+
+Map a point
+
+$$
+X = (X, Y, Z, 1)^T  \quad \text{(in world coordinates)}
+$$
+
+onto
+
+$$
+x = (u, v, 1)^T  \quad \text{(pixel / image coordinates)}
+$$
+
+using a **perspective camera model** (central/pinhole projection).
+
+---
+
+## 🔁 Four Coordinate Systems
+
+| Coordinate System  | Description                        |
+| ------------------ | ---------------------------------- |
+| **World**          | 3D coordinate frame of your scene  |
+| **Camera**         | Origin at optical center of camera |
+| **Image Plane**    | 2D plane inside camera (in meters) |
+| **Sensor (Pixel)** | Discrete pixel grid (u, v)         |
+
+---
+
+## 🔧 Step 1 – Transform world point → camera coordinates
+
+We need to describe where the **camera is located** and how it is **oriented** in the world.
+
+$$
+X_c = \underbrace{R}_{3\times3} \; X_w + \underbrace{t}_{3\times1}
+$$
+
+* $R$: rotation matrix (camera orientation)
+* $t$: translation (camera center position in world coordinates)
+
+👉 This conversion uses the **extrinsic parameters.**
+
+In homogeneous form:
+
+$$
+X_c = [R \; | \; t] \cdot X_w
+$$
+
+---
+
+## 🔭 Step 2 – Central (perspective) projection onto the image plane
+
+Given camera coordinates $X_c = (x_c, y_c, z_c)$,
+
+$$
+x_{img} = \left( \frac{x_c}{z_c}, \; \frac{y_c}{z_c}, \; 1 \right)^T
+$$
+
+This is **where light rays hit the image plane**.
+Note the division by $z_c$ ⇒ nonlinear (perspective).
+
+---
+
+## 📏 Step 3 – Convert image-plane coordinates → pixel coordinates
+
+This depends on the internal geometry of the camera: focal length, pixel sizes, skew, optical center, etc. These are the **intrinsic parameters**, encoded into matrix $K$:
+
+$$
+K =
+\begin{bmatrix}
+f_x & s & c_x \\
+0 & f_y & c_y \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+* $f_x, f_y$: effective focal lengths in pixel units
+* $(c_x, c_y)$: principal point (optical center in pixels)
+* $s$: skew (usually 0)
+
+Pixel coordinates:
+
+$$
+x = K \cdot x_{img}
+$$
+
+---
+
+## ✅ Final Combined Mapping
+
+All three steps can be merged into one matrix equation:
+
+$$
+x \sim P \cdot X_w  \quad \text{with} \quad P = K \,[R \;|\; t]
+$$
+
+* $P \in \mathbb{R}^{3\times4}$: **camera projection matrix**
+* $X_w \in \mathbb{R}^{4}$: homogeneous world point
+* $x \in \mathbb{R}^{3}$: homogeneous pixel coordinate
+* “$\sim$” means equality up to scaling ⇒ you divide by the last coordinate to get (u,v)
+
+---
+
+## 🔄 Why can’t we invert this?
+
+Because projection collapses 3D depth onto 2D — so information *is lost*. From a single image you know only that the 3D point lies somewhere on a **ray** starting from the camera center through the pixel. You cannot recover the depth without:
+
+* Another camera (stereo/structure-from-motion)
+* Or prior knowledge
+
+---
+
+## 🎯 Summary Table
+
+| Transformation       | Matrix        | Parameters          |                   |
+| -------------------- | ------------- | ------------------- | ----------------- |
+| World → Camera       | ( \[R         | t] )                | Extrinsic (6 DOF) |
+| Camera → Image plane | divide by $z$ | Perspective         |                   |
+| Image plane → Pixels | $K$           | Intrinsic (4–5 DOF) |                   |
+| **Full projection**  | $P$           | 11 DOF total        |                   |
+
+---

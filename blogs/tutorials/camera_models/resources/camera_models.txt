@@ -1,0 +1,1103 @@
+
+
+# 📷 Camera Models: A Detailed Tutorial
+
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [The Pinhole Camera Model](#the-pinhole-camera-model)
+
+   * Basic Concept
+   * Geometric Derivation
+   * Aperture Size Trade-offs
+3. [Cameras with Lenses](#cameras-with-lenses)
+
+   * Thin Lens (Paraxial Refraction) Model
+   * Depth of Field
+   * Lens Distortions
+4. [From Image Plane to Digital Pixels](#from-image-plane-to-digital-pixels)
+
+   * Motivation for Camera Calibration
+   * Camera Intrinsic Parameters
+   * Homogeneous Coordinates and Projection Matrices
+5. [Extrinsic Parameters](#extrinsic-parameters)
+6. [Camera Calibration](#camera-calibration)
+7. [Modeling Distortion](#modeling-distortion)
+8. [Appendix: Common Camera Transformations](#appendix-common-camera-transformations)
+9. [Other Camera Models](#other-camera-models)
+
+---
+
+## Introduction
+
+Computer vision begins with **capturing images of the 3D world**. Cameras act as the interface between the real world and digital systems, so understanding how cameras form images is essential. A *camera model* mathematically describes how 3D points in space are transformed into 2D pixels in a captured image.
+
+---
+
+## The Pinhole Camera Model
+
+### 📌 Core Idea
+
+* Place a small hole (aperture) between a scene and a film/sensor.
+* Only one light ray per scene point passes through the pinhole.
+* This ensures a **unique mapping** between 3D scene points and 2D image locations.
+* This is the simplest model of perspective projection.
+
+### 📐 Geometric Perspective Transform
+
+Given a point
+
+$$
+P = (x, y, z)^T
+$$
+
+in the 3D camera coordinate frame (origin at pinhole), its projection onto the 2D image plane located at distance *f* is:
+
+$$
+P' = \left( x' , y' \right) = \left(\frac{f x}{z} , \frac{f y}{z}\right)
+$$
+
+* *f* = focal length (distance from pinhole to image plane)
+* Projection is **non-linear** due to division by depth *z*.
+
+### 🔍 Aperture Size Trade-offs
+
+| Aperture Size | Brightness  | Sharpness  |
+| ------------- | ----------- | ---------- |
+| Smaller       | ⬇️ Dimmer   | ⬆️ Sharper |
+| Bigger        | ⬆️ Brighter | ⬇️ Blurred |
+
+Real cameras cannot have infinitesimally small apertures, so **lenses** are introduced.
+
+---
+
+## Cameras with Lenses
+
+### 🔎 Paraxial (Thin Lens) Model
+
+* Replaces the pinhole with a lens to let **multiple rays converge** to a single image point → bright AND crisp images.
+* The **Thin Lens Equation** demonstrates focusing at a depth:
+
+$$
+\frac{1}{z} + \frac{1}{z'} = \frac{1}{f}
+$$
+
+* Parallel rays converge to the **focal point**.
+
+### 🎯 Depth of Field
+
+Only points at a particular depth are perfectly focused. Points closer/farther become blurred → *bokeh*. The range that appears sharp is called the **depth of field**.
+
+### 📉 Lens Distortions
+
+Real lenses introduce geometric distortions:
+
+| Distortion Type | Effect              |
+| --------------- | ------------------- |
+| Barrel          | Lines bulge outward |
+| Pincushion      | Lines pinch inward  |
+
+---
+
+## From Image Plane to Digital Pixels
+
+To map a 3D world point to a 2D **pixel location**, we introduce the **Camera Matrix Model**, which breaks into:
+
+### 🎛 Intrinsic Parameters (*camera calibration matrix* K)
+
+Captures internal properties:
+
+| Parameter | Meaning                               |
+| --------- | ------------------------------------- |
+| *α, β*    | effective focal lengths (scaled)      |
+| *cx, cy*  | principal point offset (image center) |
+| *θ*       | skew angle between image axes         |
+
+Camera matrix:
+
+$$
+K =
+\begin{bmatrix}
+\alpha & -\alpha \cot\theta & c_x \\
+0      & \beta             & c_y \\
+0      & 0                & 1
+\end{bmatrix}
+$$
+
+### 📌 Homogeneous Coordinates
+
+To express the perspective divide (division by *z*) as a linear transformation:
+
+* 3D point → $(x, y, z, 1)$
+* 2D point → $(u, v, 1)$
+
+Full projection:
+
+$$
+P' = M P = K [R\;|\;T] P
+$$
+
+---
+
+## Extrinsic Parameters
+
+Describe camera pose (position/orientation) relative to the world coordinate frame:
+
+* **Rotation matrix** $R$ ∈ SO(3)
+* **Translation vector** $T$ ∈ ℝ³
+
+Thus,
+
+$$
+M = K [R\mid T]
+$$
+
+$M$ is a $3×4$ **projection matrix** with:
+
+* 5 intrinsic DOF
+* 6 extrinsic DOF → total 11
+
+---
+
+## Camera Calibration
+
+**Goal**: Estimate intrinsic $K$ and extrinsic $[R|T]$ from **images** alone.
+
+### 🎯 Calibration Process
+
+1. Capture a calibration pattern (checkerboard) with known 3D positions.
+2. Find 2D image points.
+3. Solve linear system relating 3D↦2D correspondences for $M$ using **Singular Value Decomposition (SVD)**.
+4. Decompose $M$ → extract $K$, $R$, $T$.
+
+### 📉 Degenerate Configurations
+
+Calibration fails if 3D points lie on a plane (no depth variation). Use multiple tilted views.
+
+---
+
+## Modeling Distortion
+
+Ideal pinhole models ignore lens distortion. To account:
+
+* Radial distortion modeled as:
+
+$$
+(u_d, v_d) = (u, v)(1 + \lambda r^2)
+$$
+
+where $r = \sqrt{u^2 + v^2}$, and $\lambda$ is distortion coefficient.
+
+* More advanced calibration jointly estimates $K, R, T, \lambda$ by nonlinear optimization.
+
+---
+
+## Appendix: Common Camera Transformations
+
+| Transform   | Representation (4×4) | Notes                |                    |
+| ----------- | -------------------- | -------------------- | ------------------ |
+| Rotation    | R                    | Orthogonal, det=1    |                    |
+| Translation | T                    | Adds position offset |                    |
+| Scaling     | S                    | Affine (not rigid)   |                    |
+| Projection  | M=K\[R               | T]                   | Perspective divide |
+
+Combined transformation in homogeneous form:
+
+$$
+\begin{bmatrix}
+u\\v\\w
+\end{bmatrix} =
+M
+\begin{bmatrix}
+x\\y\\z\\1
+\end{bmatrix}
+,\quad \text{pixel location} = \left(\frac{u}{w},\frac{v}{w}\right)
+$$
+
+---
+
+## Other Camera Models
+
+| Model                | Key Idea                   | Equation Simplification     |
+| -------------------- | -------------------------- | --------------------------- |
+| **Weak Perspective** | Approximate constant depth | $x' = \frac{f}{z_0}x$       |
+| **Orthographic**     | Parallel projection        | $x' = x,\,y'=y$             |
+| **Fish-eye**         | Highly nonlinear radial    | Uses distortion polynomials |
+
+Simpler models trade realism for tractable mathematics — useful for distant, small objects.
+
+---
+
+## ✅ Summary
+
+* **Pinhole model**: foundational perspective projection $(u,v)=(fx/z, fy/z)$.
+* **Lens model**: resolves brightness–sharpness trade-off, introduces focus and distortion.
+* **Intrinsic vs Extrinsic**: internal parameters vs camera pose.
+* **Projection matrix** $M = K [R|T]$ projects 3D world points into pixels.
+* **Calibration** solves for unknown parameters using known calibration patterns.
+* **Alternative models** (weak perspective, orthographic) simplify assumptions.
+
+
+CS231A Course Notes 1: Camera Models
+Kenji Hata and Silvio Savarese
+
+1
+
+Introduction
+
+The camera is one of the most essential tools in computer vision. It is the
+mechanism by which we can record the world around us and use its output photographs - for various applications. Therefore, one question we must ask
+in introductory computer vision is: how do we model a camera?
+
+2
+
+Pinhole cameras
+object
+
+barrier
+
+film
+aperture
+
+Figure 1: A simple working camera model: the pinhole camera model.
+Let’s design a simple camera system – a system that can record an image
+of an object or scene in the 3D world. This camera system can be designed
+by placing a barrier with a small aperture between the 3D object and a
+photographic film or sensor. As Figure 1 shows, each point on the 3D object
+emits multiple rays of light outwards. Without a barrier in place, every point
+on the film will be influenced by light rays emitted from every point on the
+3D object. Due to the barrier, only one (or a few) of these rays of light passes
+through the aperture and hits the film. Therefore, we can establish a oneto-one mapping between points on the 3D object and the film. The result is
+that the film gets exposed by an “image” of the 3D object by means of this
+mapping. This simple model is known as the pinhole camera model.
+1
+
+𝒋
+𝒇
+
+𝑷
+𝒌
+
+𝑪′
+
+𝚷′
+
+𝑶
+𝒊
+𝑷′
+
+Figure 2: A formal construction of the pinhole camera model.
+A more formal construction of the pinhole camera is shown in Figure 2. In
+this construction, the film is commonly called the image or retinal plane.
+The aperture is referred to as the pinhole O or center of the camera. The
+distance between the image plane and the pinhole O is the focal length f .
+Sometimes, the retinal plane is placed between O and the 3D object at a
+distance f from O. In this case, it is called the virtual image or virtual
+retinal plane. Note that the projection of the object in the image plane
+and the image of the object in the virtual image plane are identical up to a
+scale (similarity) transformation.
+
+T
+Now, how do we use pinhole cameras? Let P = x y z be a point
+on some 3D object visible to the pinhole camera. P will be mapped or pro
+T
+jected onto the image plane Π0 , resulting in point1 P 0 = x0 y 0 . Similarly,
+the pinhole itself can be projected onto the image plane, giving a new point
+C 0.
+
+
+Here, we can define a coordinate system i j k centered at the pinhole
+O such that the axis k is perpendicular to the image plane and points toward
+it. This coordinate system is often known as the camera reference system
+or camera coordinate system. The line defined by C 0 and O is called the
+optical axis of the camera system.
+Recall that point P 0 is derived from the projection of 3D point P on the
+image plane Π0 . Therefore, if we derive the relationship between 3D point
+P and image plane point P 0 , we can understand how the 3D world imprints
+itself upon the image taken by a pinhole camera. Notice that triangle P 0 C 0 O
+is similar to the triangle formed by P , O and (0, 0, z). Therefore, using the
+law of similar triangles we find that:
+1
+Throughout the course notes, let the prime superscript (e.g. P 0 ) indicate that this
+point is a projected or complementary point to the non-superscript version. For example,
+P 0 is the projected version of P .
+
+2
+
+
+T 
+T
+P 0 = x0 y 0 = f xz f yz
+
+(1)
+
+Notice that one large assumption we make in this pinhole model is that
+the aperture is a single point. In most real world scenarios, however, we
+cannot assume the aperture can be infinitely small. Thus, what is the effect
+of varying aperture size?
+
+Figure 3: The effects of aperture size on the image. As the aperture size
+decreases, the image gets sharper, but darker.
+As the aperture size increases, the number of light rays that passes
+through the barrier consequently increases. With more light rays passing
+through, then each point on the film may be affected by light rays from
+multiple points in 3D space, blurring the image. Although we may be inclined to try to make the aperture as small as possible, recall that a smaller
+aperture size causes less light rays to pass through, resulting in crisper but
+darker images. Therefore, we arrive at the fundamental problem presented by
+the pinhole formulation: can we develop cameras that take crisp and bright
+images?
+
+3
+
+Cameras and lenses
+
+In modern cameras, the above conflict between crispness and brightness is
+mitigated by using lenses, devices that can focus or disperse light. If we
+replace the pinhole with a lens that is both properly placed and sized, then
+it satisfies the following property: all rays of light that are emitted by some
+point P are refracted by the lens such that they converge to a single point P 0
+3
+
+object
+
+film
+
+lens
+
+Figure 4: A setup of a simple lens model. Notice how the rays of the top
+point on the tree converge nicely on the film. However, a point at a different
+distance away from the lens results in rays not converging perfectly on the
+film.
+in the image plane. Therefore, the problem of the majority of the light rays
+blocked due to a small aperture is removed (Figure 4). However, please note
+that this property does not hold for all 3D points, but only for some specific
+point P . Take another point Q which is closer or further from the image
+plane than P . The corresponding projection into the image will be blurred
+or out of focus. Thus, lenses have a specific distance for which objects are
+“in focus”. This property is also related to a photography and computer
+graphics concept known as depth of field, which is the effective range at
+which cameras can take clear photos.
+film
+
+lens
+
+object
+
+z'
+focal point
+
+P’
+
+P
+
+f
+
+-z
+
+zo
+
+Figure 5: Lenses focus light rays parallel to the optical axis into the focal point. Furthermore, this setup illustrates the paraxial refraction model,
+which helps us find the relationship between points in the image plane and
+the 3D world in cameras with lenses.
+Camera lenses have another interesting property: they focus all light rays
+traveling parallel to the optical axis to one point known as the focal point
+(Figure 5). The distance between the focal point and the center of the lens
+is commonly referred to as the focal length f . Furthermore, light rays
+4
+
+passing through the center of the lens are not deviated. We thus can arrive
+at a similar construction to the pinhole model that relates a point P in 3D
+space with its corresponding point P 0 in the image plane.
+ 0  0 x 
+x
+z
+0
+P = 0 = 0 yz
+(2)
+zz
+y
+The derivation for this model is outside the scope of the class. However,
+please notice that in the pinhole model z 0 = f , while in this lens-based model,
+z 0 = f +z0 . Additionally, since this derivation takes advantage of the paraxial
+or “thin lens” assumption2 , it is called the paraxial refraction model.
+normal
+
+pincushion
+
+barrel
+
+Figure 6: Demonstrating how pincushion and barrel distortions affect images.
+Because the paraxial refraction model approximates using the thin lens
+assumption, a number of aberrations can occur. The most common one is
+referred to as radial distortion, which causes the image magnification to
+decrease or increase as a function of the distance to the optical axis. We
+classify the radial distortion as pincushion distortion when the magnification increases and barrel distortion3 when the magnification decreases.
+Radial distortion is caused by the fact that different portions of the lens have
+differing focal lengths.
+
+4
+
+Going to digital image space
+
+In this section, we will discuss the details of the parameters we must account
+for when modeling the projection from 3D space to the digital images we
+know. All the results derived will use the pinhole model, but they also hold
+for the paraxial refraction model.
+2
+
+For the angle θ that incoming light rays make with the optical axis of the lens, the
+paraxial assumption substitutes θ for any place sin(θ) is used. This approximation of θ
+for sin θ holds as θ approaches 0.
+3
+Barrel distortion typically occurs when one uses fish-eye lenses.
+
+5
+
+As discussed earlier, a point P in 3D space can be mapped (or projected)
+into a 2D point P 0 in the image plane Π0 . This R3 → R2 mapping is referred
+to as a projective transformation. This projection of 3D points into the
+image plane does not directly correspond to what we see in actual digital
+images for several reasons. First, points in the digital images are, in general,
+in a different reference system than those in the image plane. Second, digital
+images are divided into discrete pixels, whereas points in the image plane are
+continuous. Finally, the physical sensors can introduce non-linearity such as
+distortion to the mapping. To account for these differences, we will introduce
+a number of additional transformations that allow us to map any point from
+the 3D world to pixel coordinates.
+
+4.1
+
+The Camera Matrix Model and Homogeneous Coordinates
+
+4.1.1
+
+Introduction to the Camera Matrix Model
+
+The camera matrix model describes a set of important parameters that affect
+how a world point P is mapped to image coordinates P 0 . As the name
+suggests, these parameters will be represented in matrix form. First, let’s
+introduce some of those parameters.
+The first parameters, cx and cy , describe how image plane and digital
+image coordinates can differ by a translation. Image plane coordinates have
+their origin C 0 at the image center where the k axis intersects the image
+plane. On the other hand, digital image coordinates typically have their origin at the lower-left corner of the image. Thus, 2D points in the image plane
+
+T
+and 2D points in the image are offset by a translation vector cx , cy . To
+accommodate this change of coordinate systems, the mapping now becomes:
+
+ 0  x
+f z + cx
+x
+0
+(3)
+P = 0 =
+f yz + cy
+y
+The second effect we must account for that the points in digital images are
+expressed in pixels, while points in image plane are represented in physical
+measurements (e.g. centimeters). In order to accommodate this change of
+units, we must introduce two new parameters k and l. These parameters,
+whose units would be something like pixels
+, correspond to the change of units
+cm
+in the two axes of the image plane. Note that k and l may be different
+because the aspect ratio of a pixel is not guaranteed to be one. If k = l,
+we often say that the camera has square pixels. We adjust our previous
+mapping to be
+
+6
+
+ 0  x
+  x
+
+f k z + cx
+x
+α z + cx
+P = 0 =
+=
+y
+f l yz + cy
+β yz + cy
+0
+
+(4)
+
+Is there a better way to represent this projection from P → P 0 ? If this
+projection is a linear transformation, then it can be represented as a product
+of a matrix and the input vector (in this case, it would be P . However, from
+Equation 4, we see that this projection P → P 0 is not linear, as the operation divides one of the input parameters (namely z). Still, representing this
+projection as a matrix-vector product would be useful for future derivations.
+Therefore, can we represent our transformation as a matrix-vector product
+despite its nonlinearity? Homogeneous coordinates are the solution.
+4.1.2
+
+Homogeneous Coordinates
+
+One way to solve this problem is to change the coordinate systems. For
+example, we introduce a new coordinate, such that any point P 0 = (x0 , y 0 )
+becomes (x0 , y 0 , 1). Similarly, any point P = (x, y, z) becomes (x, y, z, 1).
+This augmented space is referred to as the homogeneous coordinate system. As demonstrated previously, to convert a Euclidean vector (v1 , ..., vn )
+to homogeneous coordinates, we simply append a 1 in a new dimension to get
+(v1 , ..., vn , 1). Note that the equality between a vector and its homogeneous
+coordinates only occurs when the final coordinate equals one. Therefore,
+when converting back from arbitrary homogeneous coordinates (v1 , ..., vn , w),
+we get Euclidean coordinates ( vw1 , ..., vwn ). Using homogeneous coordinates, we
+can formulate
+ 
+
+ 
+ x
+
+
+αx + cx z
+α 0 cx 0  
+α 0 cx 0
+y 
+
+(5)
+Ph0 =  βy + cy z  =  0 β cy 0 
+ z  = 0 β c y 0 Ph
+z
+0 0 1 0
+0 0 1 0
+1
+From this point on, assume that we will work in homogeneous coordinates,
+unless stated otherwise. We will drop the h index, so any point P or P 0 can
+be assumed to be in homogeneous coordinates. As seen from Equation 5,
+we can represent the relationship between a point in 3D space and its image
+coordinates by a matrix vector relationship:
+ 
+ 0 
+ x
+
+
+α 0 cx 0
+x
+α 0 cx 0  
+y 
+
+(6)
+P 0 = y 0  =  0 β cy 0 
+ z  = 0 β cy 0 P = M P
+0 0 1 0
+z
+0 0 1 0
+1
+
+7
+
+We can decompose this transformation a bit further into
+
+
+α 0 cx 
+
+
+
+P 0 = M P =  0 β cy  I 0 P = K I 0 P
+0 0 1
+
+(7)
+
+The matrix K is often referred to as the camera matrix.
+4.1.3
+
+The Complete Camera Matrix Model
+
+The camera matrix K contains some of the critical parameters that describes
+a camera’s characteristics and its model, including the cx , cy , k, and l parameters as discussed above. Two parameters are currently missing this formulation: skewness and distortion. We often say that an image is skewed when
+the camera coordinate system is skewed, meaning that the angle between the
+two axes is slightly larger or smaller than 90 degrees. Most cameras have
+zero-skew, but some degree of skewness may occur because of sensor manufacturing errors. Deriving the new camera matrix accounting for skewness is
+outside the scope of this class and we give it to you below:
+
+ 0 
+α −α cot θ cx
+x
+β
+(8)
+K = y 0  =  0
+cy 
+sin θ
+z
+0
+0
+1
+Most methods that we introduce in this class ignore distortion effects, therefore our class camera matrix K has 5 degrees of freedom: 2 for focal length, 2
+for offset, and 1 for skewness. These parameters are collectively known as the
+intrinsic parameters, as they are unique and inherent to a given camera
+and relate to essential properties of the camera, such as its manufacturing.
+
+4.2
+
+Extrinsic Parameters
+
+So far, we have described a mapping between a point P in the 3D camera
+reference system to a point P 0 in the 2D image plane using the intrinsic
+parameters of a camera described in matrix form. But what if the information
+about the 3D world is available in a different coordinate system? Then, we
+need to include an additional transformation that relates points from the
+world reference system to the camera reference system. This transformation
+is captured by a rotation matrix R and translation vector T . Therefore,
+given a point in a world reference system Pw , we can compute its camera
+coordinates as follows:
+
+
+R T
+P =
+P
+(9)
+0 1 w
+8
+
+Substituting this in equation (7) and simplifying gives
+
+
+P 0 = K R T Pw = M P w
+
+(10)
+
+These parameters R and T are known as the extrinsic parameters
+because they are external to and do not depend on the camera.
+This completes the mapping from a 3D point P in an arbitrary world
+reference system to the image plane. To reiterate, we see that the full projection matrix M consists of the two types of parameters introduced above:
+intrinsic and extrinsic parameters. All parameters contained in the camera
+matrix K are the intrinsic parameters, which change as the type of camera
+changes. The extrinsic paramters include the rotation and translation, which
+do not depend on the camera’s build. Overall, we find that the 3 × 4 projection matrix M has 11 degrees of freedom: 5 from the intrinsic camera matrix,
+3 from extrinsic rotation, and 3 from extrinsic translation.
+
+5
+
+Camera Calibration
+
+To precisely know the transformation from the real, 3D world into digital
+images requires prior knowledge of many of the camera’s intrinsic parameters. If given an arbitrary camera, we may or may not have access to these
+parameters. We do, however, have access to the images the camera takes.
+Therefore, can we find a way to deduce them from images? This problem of
+estimating the extrinsic and intrinsic camera parameters is known as camera
+calibration.
+
+Figure 7: The setup of an example calibration rig.
+Specifically, we do this by solving for the intrinsic camera matrix K and
+the extrinsic parameters R, T from Equation 10. We can describe this problem in the context of a calibration rig, such as the one show in Figure 7. The
+9
+
+rig usually consists of a simple pattern (i.e. checkerboard) with known dimensions. Furthermore, the rig defines our world reference frame with origin
+Ow and axes iw , jw , kw . From the rig’s known pattern, we have known points
+in the world reference frame P1 , ..., Pn . Finding these points in the image we
+take from the camera gives corresponding points in the image p1 , ..., pn .
+We set up a linear system of equations from n correspondences such
+that for each correspondence Pi , pi and camera matrix M whose rows are
+m1 , m2 , m3 :
+ 
+ m1 Pi 
+ui
+3 Pi
+(11)
+pi =
+= M Pi = m
+m2 Pi
+vi
+m3 Pi
+As we see from the above equation, each correspondence gives us two
+equations and, consequently, two constraints for solving the unknown parameters contained in m. From before, we know that the camera matrix
+has 11 unknown parameters. This means that we need at least 6 correspondences to solve this. However, in the real world, we often use more, as our
+measurements are often noisy. To explicitly see this, we can derive a pair of
+equations that relate ui and vi with Pi .
+ui (m3 Pi ) − m1 Pi = 0
+vi (m3 Pi ) − m2 Pi = 0
+Given n of these corresponding points, the entire linear system of equations becomes
+u1 (m3 P1 )−m1 P1 = 0
+v1 (m3 P1 )−m2 P1 = 0
+..
+.
+un (m3 Pn )−m1 Pn = 0
+vn (m3 Pn )−m2 Pn = 0
+This can be formatted as a matrix-vector product shown below:
+
+
+P1T 0T −u1 P1T
+ 0T P T −v1 P T   T 
+1
+1  m1
+
+
+ T
+..
+
+ m2 = Pm = 0
+.
+ T
+
+T
+T
+T
+Pn 0
+−un Pn  m3
+0T PnT −vn PnT
+
+(12)
+
+When 2n > 11, our homogeneous linear system is overdetermined. For
+such a system m = 0 is always a trivial solution. Furthemore, even if there
+10
+
+were some other m that were a nonzero solution, then ∀k ∈ R, km is also
+a solution. Therefore, to constrain our solution, we complete the following
+minimization:
+minimize kPmk2
+m
+(13)
+subject to kmk2 = 1
+To solve this minimization problem, we simply use singular value decomposition. If we let P = U DV T , then the solution to the above minimization is
+to set m equal to the last column of V . The derivation for this solution is
+outside the scope of this class and you may refer to Section 5.3 of Hartley &
+Zisserman on pages 592-593 for more details.
+After reformatting the vector m into the matrix M , we now want to
+explicitly solve for the extrinsic and intrinsic parameters. We know our
+SVD-solved M is known up to scale, which means that the true values of the
+camera matrix are some scalar multiple of M :
+
+ T
+αr1 − α cot θr2T + cx r3T αtx − α cot θty + cx tz
+β
+β
+
+(14)
+ρM = 
+rT + cy r3T
+t + cy tz
+sin θ 2
+sin θ y
+T
+r3
+tz
+Here, r1T , r2T , and r3T are the three rows of R. Dividing by the scaling
+parameter gives
+
+ T 
+ T
+αr1 − α cot θr2T + cx r3T αtx − α cot θty + cx tz
+b1
+a1
+
+
+1
+β
+β
+T 
+T
+T
+
+
+b2
+M=
+= A b = a2
+r + cy r 3
+t + cy tz
+sin θ 2
+sin θ y
+ρ
+T
+T
+b3
+a3
+tz
+r3
+Solving for the intrinsics gives
+1
+ρ=±
+ka3 k
+2
+cx = ρ (a1 · a3 )
+cy = ρ2 (a2 · a3 )
+
+
+(a1 × a3 ) · (a2 × a3 )
+−1
+θ = cos
+−
+ka1 × a3 k · ka2 × a3 k
+2
+α = ρ ka1 × a3 k sin θ
+β = ρ2 ka2 × a3 k sin θ
+The extrinsics are
+
+a2 × a3
+ka2 × a3 k
+r2 = r3 × r1
+r3 = ρa3
+T = ρK −1 b
+
+(15)
+
+r1 =
+
+11
+
+(16)
+
+We leave the derivations as a class exercise or you can refer to Section 1.3.1
+of the Forsyth & Ponce textbook.
+With the calibration procedure complete, we warn against degenerate
+cases. Not all sets of n correspondences will work. For example, if the
+points Pi lie on the same plane, then the system will not be able to be
+solved. These unsolvable configurations of points are known as degenerate
+configurations. More generally, degenerate configurations have points that
+lie on the intersection curve of two quadric surfaces. Although this outside
+the scope of the class, you can find more information in Section 1.3 of the
+Forsyth & Ponce textbook.
+
+6
+
+Handling Distortion in Camera Calibration
+
+So far, we have been working with ideal lenses which are free from any
+distortion. However, as seen before, real lenses can deviate from rectilinear
+projection, which require more advanced methods. This section provides just
+a brief introduction to handling distortions.
+Often, distortions are radially symmetric because of the physical symmetry of the lens. We model the radial distortion with an isotropic transformation:
+
+1
+ 
+0 0
+λ
+u
+1
+
+
+(17)
+QPi = 0 λ 0 M Pi = i = pi
+vi
+0 0 1
+If we try to rewrite this into a system of equations as before, we get
+
+ui q3 Pi = q1 Pi
+vi q3 Pi = q2 Pi
+This system, however, is no longer linear, and we require the use of nonlinear optimization techniques, which are covered in Section 22.2 of Forsyth
+& Ponce. We can simplify the nonlinear optimization of the calibration problem if we make certain assumptions. In radial distortion, we note that the
+ratio between two coordinates ui and vi is not affected. We can compute this
+ratio as
+m 1 Pi
+ui
+m 1 Pi
+3 Pi
+= m
+=
+(18)
+m 2 Pi
+vi
+m 2 Pi
+m P
+3 i
+
+Assuming that n correspondences are available, we can set up the system
+
+12
+
+of linear equations:
+v1 (m1 P1 )−u1 (m2 P1 ) = 0
+..
+.
+vn (m1 Pn )−un (m2 Pn ) = 0
+Similar to before, this gives a matrix-vector product that we can solve via
+SVD:
+
+
+v1 P1T −u1 P1T  T 
+
+..  m1
+Ln =  ...
+(19)
+.  mT
+2
+T
+T
+vn Pn −un Pn
+Once m1 and m2 are estimated, m3 can be expressed as a nonlinear function of m1 , m2 , and λ. This requires to solve a nonlinear optimization problem
+whose complexity is much simpler than the original one.
+
+7
+
+Appendix A: Rigid Transformations
+
+The basic rigid transformations are rotation, translation, and scaling. This
+appendix will cover them for the 3D case, as they are common type in this
+class.
+Rotating a point in 3D space can be represented by rotating around each
+of the three coordinate axes respectively. When rotating around the coordinate axes, common convention is to rotate in a counter-clockwise direction.
+One intuitive way to think of rotations is how much we rotate around each
+degree of freedom, which is often referred to as Euler angles. However, this
+methodology can result in what is known as singularities, or gimbal lock,
+in which certain configurations result in a loss of a degree of freedom for the
+rotation.
+One way to prevent this is to use rotation matrices, which are a more general form of representing rotations. Rotation matrices are square, orthogonal
+matrices with determinant one. Given a rotation matrix R and a vector v,
+we can compute the resulting vector v 0 as
+v 0 = Rv
+Since rotation matrices are a very general representation of matrices, we
+can represent a rotation α, β, γ around each of the respective axes as follows:
+
+
+1
+0
+0
+Rx (α) = 0 cos α − sin α
+0 sin α cos α
+13
+
+
+
+
+cos β 0 sin β
+1
+0 
+Ry (β) =  0
+− sin β 0 cos β
+
+
+cos γ − sin γ 0
+Rz (γ) =  sin γ cos γ 0
+0
+0
+1
+Due to the convention of matrix multiplication, the rotation achieved by
+first rotating around the z-axis, then y-axis, then x-axis is given by the matrix
+product Rx Ry Rz .
+Translations, or displacements, are used to describe the movement in a
+certain direction. In 3D space, we define a translation vector t with 3 values:
+the displacements in each of the 3 axes, often denoted as tx , ty , tz . Thus,
+given some point P which is translated to some other point P 0 by t, we can
+write it as:
+   
+Px
+tx
+0
+
+
+
+P = P + t = Py + ty 
+Pz
+tz
+In matrix form, translations can be written using homogeneous coordinates. If we construct a translation matrix as
+
+
+1 0 0 tx
+0 1 0 ty 
+
+T =
+0 0 1 tz 
+0 0 0 1
+then we see that P 0 = T P is equivalent to P 0 = P + t.
+If we want to combine translation with our rotation matrix multiplication,
+we can again use homogeneous coordinates to our advantage. If we want to
+rotate a vector v by R and then translate it by t, we can write the resulting
+vector v 0 as:
+ 0 
+ 
+R t v
+v
+=
+1
+0 1 1
+Finally, if we want to scale the vector in certain directions by some amount
+Sx , Sy , Sz , we can construct a scaling matrix
+
+
+Sx 0 0
+S =  0 Sy 0 
+0 0 Sz
+Therefore, if we want to scale a vector, then rotate, then translate, our
+final transformation matrix would be:
+
+
+RS t
+T =
+0 1
+14
+
+Note that all of these types of transformations would be examples of affine
+transformations. Recall that projective transformations occur when the final
+row of T is not 0 0 0 1 .
+
+8
+
+Appendix B: Different Camera Models
+
+We will now describe a simple model known as the weak perspective
+model. In the weak perspective model, points are first projected to the
+reference plane using orthogonal projection and then projected to the image
+plane using a projective transformation.
+
+Figure 8: The weak perspective model: orthogonal projection onto reference
+plane
+As Figure 8 shows, given a reference plane Π at a distance zo from the
+center of the camera, the points P, Q, R are first projected to the plane
+Π using an orthogonal projection, generating points P , Q , R . This is a
+reasonable approximation when deviations in depth from the plane are small
+compared to the distance of the camera.
+Figure 9 illustrates how points P , Q , R are then projected to the image
+plane using a regular projective transformation to produce the points p0 , q 0 , r0 .
+Notice, however, that because we have approximated the depth of each point
+to zo the projection has been reduced to a simple, constant magnification.
+The magnification is equal to the focal length f 0 divided by zo , leading to
+x0 =
+
+f0
+x
+z0
+
+y0 =
+
+f0
+y
+z0
+
+This model also simplifies the projection matrix
+
+
+A b
+M=
+0 1
+15
+
+Figure 9: The weak perspective model: projection onto the image plane
+
+
+As we see, the
+ last row of M is 0 0 0 1 in the weak perspective model,
+compared to v 1 in the normal camera model. We do not prove this result
+and leave it to you as an exercise. The simplification is clearly demonstrated
+when mapping the 3D points to the image plane.
+
+
+ 
+m1 P
+m1
+(20)
+P 0 = M P = m2  P = m2 P 
+m3
+1
+Thus, we see that the image plane point ultimately becomes a magnification
+of the original 3D point, irrespective of depth. The nonlinearity of the projective transformation disappears, making the weak perspective transformation
+a mere magnifier.
+
+Figure 10: The orthographic projection model
+Further simplification leads to the orthographic (or affine) projection
+model. In this case, the optical center is located at infinity. The projection
+16
+
+rays are now perpendicular to the retinal plane. As a result, this model
+ignores depth altogether. Therefore,
+x0 = x
+y0 = y
+Orthographic projection models are often used for architecture and industrial
+design.
+Overall, weak perspective models result in much simpler math, at the
+cost of being somewhat imprecise. However, it often yields results that are
+very accurate when the object is small and distant from the camera.
+
+17
+
+

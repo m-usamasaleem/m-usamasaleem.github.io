@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="generator" content="Source Themes Academic 4.8.0">
+    <meta name="author" content="Muhammad Usama Saleem">
+    <meta name="description" content="Comprehensive tutorial on camera models and mathematical foundations of computer vision">
+    <link rel="alternate" hreflang="en-us" href="https://m-usamasaleem.github.io/blogs/tutorials/camera-models.html">
+    <meta name="theme-color" content="#A6372A">
+    <script src="/js/mathjax-config.js"></script>
+    <link rel="stylesheet" href="/css/academic.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    <title>Camera Models: Mathematical Foundations - Computer Vision & GenAI Tutorials</title>
+  </head>
+
+  <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71">
+    <nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+      <div class="container">
+        <a class="navbar-brand" href="/">Muhammad Usama Saleem</a>
+        <div class="navbar-nav ml-auto">
+          <a class="nav-item nav-link" href="/blogs/">
+            <i class="fas fa-arrow-left"></i> Back to Tutorials
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid docs">
+      <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+          <div class="docs-sidebar-content">
+            <nav id="TableOfContents">
+              <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#pinhole-camera">Pinhole Camera Model</a></li>
+                <li><a href="#geometric-derivation">Geometric Derivation</a></li>
+                <li><a href="#lens-cameras">Cameras with Lenses</a></li>
+                <li><a href="#digital-space">Digital Image Space</a></li>
+                <li><a href="#camera-matrix">Camera Matrix Model</a></li>
+                <li><a href="#homogeneous-coordinates">Homogeneous Coordinates</a></li>
+                <li><a href="#intrinsic-parameters">Intrinsic Parameters</a></li>
+                <li><a href="#extrinsic-parameters">Extrinsic Parameters</a></li>
+                <li><a href="#camera-calibration">Camera Calibration</a></li>
+                <li><a href="#distortion">Modeling Distortion</a></li>
+                <li><a href="#alternative-models">Alternative Camera Models</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+                <li><a href="#references">References</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+          <article class="article">
+            <div class="docs-article-container">
+              <h1>Camera Models: Mathematical Foundations</h1>
+              
+              <div class="article-style">
+                <div class="tutorial-meta">
+                  <span class="badge badge-primary">Computer Vision</span>
+                  <span class="badge badge-secondary">Intermediate</span>
+                  <span class="reading-time"><i class="far fa-clock"></i> 45 min read</span>
+                </div>
+
+                <div class="tutorial-intro">
+                  <p class="lead">Master the mathematical foundations of camera models, from the simple pinhole camera to complex lens systems. Learn how 3D world points are transformed into 2D pixel coordinates through rigorous geometric analysis.</p>
+                </div>
+
+                <h2 id="introduction">Introduction</h2>
+                <p>Computer vision begins with capturing images of the 3D world. Cameras act as the interface between the real world and digital systems, making understanding how cameras form images essential. A <strong>camera model</strong> mathematically describes how 3D points in space are transformed into 2D pixels in a captured image.</p>
+
+                <p>This tutorial covers the complete mathematical framework, from basic geometric principles to advanced calibration techniques. We'll explore:</p>
+                <ul>
+                  <li>The fundamental pinhole camera model and its geometric derivation</li>
+                  <li>Lens-based cameras and the paraxial refraction model</li>
+                  <li>Camera matrix formulation using homogeneous coordinates</li>
+                  <li>Intrinsic and extrinsic parameter estimation</li>
+                  <li>Camera calibration techniques and distortion modeling</li>
+                </ul>
+
+                <h2 id="pinhole-camera">The Pinhole Camera Model</h2>
+                <h3>Core Concept</h3>
+                <p>The pinhole camera is the simplest model of perspective projection. It consists of:</p>
+                <ul>
+                  <li>A small aperture (pinhole) between the scene and image plane</li>
+                  <li>Only one light ray per scene point passes through the pinhole</li>
+                  <li>Ensures a unique mapping between 3D scene points and 2D image locations</li>
+                </ul>
+
+                <div class="alert alert-info">
+                  <h4><i class="fas fa-info-circle"></i> Key Insight</h4>
+                  <p>The pinhole camera model establishes a one-to-one mapping between 3D world points and 2D image points through geometric projection.</p>
+                </div>
+
+                <h2 id="geometric-derivation">Geometric Derivation</h2>
+                <p>Let's derive the mathematical relationship between 3D points and their 2D projections.</p>
+
+                <h3>Coordinate System Setup</h3>
+                <p>Consider a 3D point <strong>P = (x, y, z)<sup>T</sup></strong> in the camera coordinate frame with origin at the pinhole. The image plane is located at distance <em>f</em> (focal length) from the pinhole.</p>
+
+                <h3>Similar Triangles Derivation</h3>
+                <p>Using the law of similar triangles, we can derive the projection relationship:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+CiAgPHRleHQgeD0iMjAwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzMzIj5QaW5ob2xlIENhbWVyYSBHZW9tZXRyeTwvdGV4dD4KICA8dGV4dCB4PSIyMDAiIHk9IjgwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2NjYiPkRlcml2YXRpb24gdXNpbmcgc2ltaWxhciB0cmlhbmdsZXM8L3RleHQ+Cjwvc3ZnPgo=" alt="Pinhole Camera Geometry" class="img-fluid">
+                </div>
+
+                <p>The projection relationship is given by:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Pinhole Camera Projection</strong><br>
+                    P' = (x', y') = (f·x/z, f·y/z)
+                  </div>
+                </div>
+
+                <p>Where:</p>
+                <ul>
+                  <li><strong>f</strong> = focal length (distance from pinhole to image plane)</li>
+                  <li><strong>z</strong> = depth of the 3D point</li>
+                  <li>The projection is <strong>non-linear</strong> due to division by depth z</li>
+                </ul>
+
+                <h3>Aperture Size Trade-offs</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="alert alert-warning">
+                      <h5><i class="fas fa-exclamation-triangle"></i> Smaller Aperture</h5>
+                      <ul>
+                        <li>Sharper images</li>
+                        <li>Dimmer images</li>
+                        <li>Less light passes through</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="alert alert-info">
+                      <h5><i class="fas fa-info-circle"></i> Larger Aperture</h5>
+                      <ul>
+                        <li>Brighter images</li>
+                        <li>Blurred images</li>
+                        <li>Multiple rays per point</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <h2 id="lens-cameras">Cameras with Lenses</h2>
+                <p>Real cameras use lenses to resolve the brightness-sharpness trade-off. The <strong>paraxial refraction model</strong> (thin lens assumption) provides a mathematical framework for lens-based cameras.</p>
+
+                <h3>Thin Lens Equation</h3>
+                <p>The fundamental relationship in lens optics is the thin lens equation:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Thin Lens Equation</strong><br>
+                    1/z + 1/z' = 1/f
+                  </div>
+                </div>
+
+                <p>Where:</p>
+                <ul>
+                  <li><strong>z</strong> = object distance</li>
+                  <li><strong>z'</strong> = image distance</li>
+                  <li><strong>f</strong> = focal length</li>
+                </ul>
+
+                <h3>Paraxial Refraction Model</h3>
+                <p>For the paraxial refraction model, the projection becomes:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Lens-based Projection</strong><br>
+                    P' = (x', y') = (f·x/(f+z₀), f·y/(f+z₀))
+                  </div>
+                </div>
+
+                <p>Note that z' = f + z₀, where z₀ is the reference depth.</p>
+
+                <h3>Lens Distortions</h3>
+                <p>Real lenses introduce geometric distortions:</p>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5>Barrel Distortion</h5>
+                    <ul>
+                      <li>Lines bulge outward</li>
+                      <li>Common in wide-angle lenses</li>
+                      <li>Magnification decreases with distance from center</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <h5>Pincushion Distortion</h5>
+                    <ul>
+                      <li>Lines pinch inward</li>
+                      <li>Common in telephoto lenses</li>
+                      <li>Magnification increases with distance from center</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <h2 id="digital-space">From Image Plane to Digital Pixels</h2>
+                <p>The projection from 3D world points to digital pixel coordinates requires several transformations to account for:</p>
+                <ul>
+                  <li>Coordinate system differences</li>
+                  <li>Unit conversions (physical units to pixels)</li>
+                  <li>Sensor non-linearities and distortions</li>
+                </ul>
+
+                <h2 id="camera-matrix">Camera Matrix Model</h2>
+                <p>The camera matrix model provides a unified framework for representing all camera parameters in matrix form.</p>
+
+                <h3>Basic Camera Matrix</h3>
+                <p>The camera matrix K captures the intrinsic parameters:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Camera Matrix K</strong><br>
+                    K = [α 0 cₓ; 0 β cᵧ; 0 0 1]
+                  </div>
+                </div>
+
+                <p>Where:</p>
+                <ul>
+                  <li><strong>α, β</strong> = effective focal lengths (scaled by pixel dimensions)</li>
+                  <li><strong>cₓ, cᵧ</strong> = principal point offset (image center)</li>
+                </ul>
+
+                <h2 id="homogeneous-coordinates">Homogeneous Coordinates</h2>
+                <p>Homogeneous coordinates allow us to represent the non-linear perspective projection as a linear matrix transformation.</p>
+
+                <h3>Coordinate Transformation</h3>
+                <p>Convert between Euclidean and homogeneous coordinates:</p>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5>3D Points</h5>
+                    <ul>
+                      <li>Euclidean: P = (x, y, z)</li>
+                      <li>Homogeneous: P = (x, y, z, 1)</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <h5>2D Points</h5>
+                    <ul>
+                      <li>Euclidean: P' = (x', y')</li>
+                      <li>Homogeneous: P' = (x', y', 1)</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <h3>Projection Matrix</h3>
+                <p>The complete projection can now be written as:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Homogeneous Projection</strong><br>
+                    P' = M·P = K·[R|T]·P
+                  </div>
+                </div>
+
+                <h2 id="intrinsic-parameters">Intrinsic Parameters</h2>
+                <p>Intrinsic parameters describe the internal properties of the camera and are independent of camera pose.</p>
+
+                <h3>Complete Camera Matrix</h3>
+                <p>Including skew parameter θ:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Full Camera Matrix</strong><br>
+                    K = [α -α·cot(θ) cₓ; 0 β/sin(θ) cᵧ; 0 0 1]
+                  </div>
+                </div>
+
+                <h3>Degrees of Freedom</h3>
+                <p>The camera matrix K has 5 degrees of freedom:</p>
+                <ul>
+                  <li>2 for focal length (α, β)</li>
+                  <li>2 for principal point (cₓ, cᵧ)</li>
+                  <li>1 for skew (θ)</li>
+                </ul>
+
+                <h2 id="extrinsic-parameters">Extrinsic Parameters</h2>
+                <p>Extrinsic parameters describe the camera's position and orientation relative to the world coordinate system.</p>
+
+                <h3>Rigid Body Transformation</h3>
+                <p>The transformation from world to camera coordinates:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Extrinsic Transformation</strong><br>
+                    P_camera = [R T; 0 1]·P_world
+                  </div>
+                </div>
+
+                <p>Where:</p>
+                <ul>
+                  <li><strong>R</strong> = 3×3 rotation matrix (SO(3))</li>
+                  <li><strong>T</strong> = 3×1 translation vector</li>
+                </ul>
+
+                <h3>Complete Projection Matrix</h3>
+                <p>The full 3×4 projection matrix M has 11 degrees of freedom:</p>
+                <ul>
+                  <li>5 intrinsic (from K)</li>
+                  <li>3 rotation (from R)</li>
+                  <li>3 translation (from T)</li>
+                </ul>
+
+                <h2 id="camera-calibration">Camera Calibration</h2>
+                <p>Camera calibration is the process of estimating intrinsic and extrinsic parameters from images of known calibration patterns.</p>
+
+                <h3>Calibration Process</h3>
+                <ol>
+                  <li><strong>Capture calibration pattern</strong> (e.g., checkerboard) with known 3D positions</li>
+                  <li><strong>Detect 2D image points</strong> corresponding to 3D pattern points</li>
+                  <li><strong>Set up linear system</strong> of equations from 3D↔2D correspondences</li>
+                  <li><strong>Solve using SVD</strong> to estimate projection matrix M</li>
+                  <li><strong>Decompose M</strong> to extract K, R, and T</li>
+                </ol>
+
+                <h3>Linear System Formulation</h3>
+                <p>For each correspondence (P_i, p_i), we get two equations:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Calibration Equations</strong><br>
+                    u_i·(m₃·P_i) - m₁·P_i = 0<br>
+                    v_i·(m₃·P_i) - m₂·P_i = 0
+                  </div>
+                </div>
+
+                <p>Where m₁, m₂, m₃ are the rows of matrix M.</p>
+
+                <h3>SVD Solution</h3>
+                <p>The system is solved by minimizing ||P·m||² subject to ||m||² = 1 using Singular Value Decomposition.</p>
+
+                <div class="alert alert-warning">
+                  <h4><i class="fas fa-exclamation-triangle"></i> Degenerate Configurations</h4>
+                  <p>Calibration fails if 3D points lie on a plane (no depth variation). Use multiple tilted views to avoid this.</p>
+                </div>
+
+                <h2 id="distortion">Modeling Distortion</h2>
+                <p>Real lenses introduce radial distortion that deviates from the ideal pinhole model.</p>
+
+                <h3>Radial Distortion Model</h3>
+                <p>Radial distortion is modeled as:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Radial Distortion</strong><br>
+                    (u_d, v_d) = (u, v)·(1 + λ·r²)
+                  </div>
+                </div>
+
+                <p>Where:</p>
+                <ul>
+                  <li><strong>r</strong> = √(u² + v²) (distance from principal point)</li>
+                  <li><strong>λ</strong> = distortion coefficient</li>
+                </ul>
+
+                <h3>Non-linear Calibration</h3>
+                <p>Joint estimation of K, R, T, and λ requires non-linear optimization techniques.</p>
+
+                <h2 id="alternative-models">Alternative Camera Models</h2>
+                <p>Simplified camera models trade realism for mathematical tractability.</p>
+
+                <h3>Weak Perspective Model</h3>
+                <p>Approximates constant depth for distant objects:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Weak Perspective</strong><br>
+                    x' = (f/z₀)·x, y' = (f/z₀)·y
+                  </div>
+                </div>
+
+                <h3>Orthographic Model</h3>
+                <p>Parallel projection ignoring depth:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Orthographic</strong><br>
+                    x' = x, y' = y
+                  </div>
+                </div>
+
+                <h2 id="conclusion">Conclusion</h2>
+                <p>Camera models provide the mathematical foundation for understanding how 3D world points are transformed into 2D pixel coordinates. Key takeaways:</p>
+
+                <div class="alert alert-success">
+                  <h4><i class="fas fa-check-circle"></i> What You've Learned</h4>
+                  <ul>
+                    <li><strong>Pinhole model</strong>: Foundational perspective projection with geometric derivation</li>
+                    <li><strong>Lens model</strong>: Resolves brightness-sharpness trade-off, introduces focus and distortion</li>
+                    <li><strong>Camera matrix</strong>: Unified representation of intrinsic and extrinsic parameters</li>
+                    <li><strong>Homogeneous coordinates</strong>: Linear representation of non-linear perspective projection</li>
+                    <li><strong>Calibration</strong>: Estimation of unknown parameters using known calibration patterns</li>
+                    <li><strong>Alternative models</strong>: Simplified approximations for specific use cases</li>
+                  </ul>
+                </div>
+
+                <p>This mathematical framework is essential for computer vision applications including 3D reconstruction, augmented reality, and autonomous navigation.</p>
+
+                <h2 id="references">References</h2>
+                <ol>
+                  <li>Hartley, R., & Zisserman, A. (2003). <em>Multiple View Geometry in Computer Vision</em>. Cambridge University Press.</li>
+                  <li>Forsyth, D. A., & Ponce, J. (2012). <em>Computer Vision: A Modern Approach</em>. Pearson.</li>
+                  <li>Hata, K., & Savarese, S. (2015). <em>CS231A Course Notes 1: Camera Models</em>. Stanford University.</li>
+                  <li>Zhang, Z. (2000). A flexible new technique for camera calibration. <em>IEEE Transactions on Pattern Analysis and Machine Intelligence</em>, 22(11), 1330-1334.</li>
+                  <li>Bouguet, J. Y. (2004). Camera calibration toolbox for Matlab. <em>Caltech Vision Lab</em>.</li>
+                </ol>
+
+                <div class="tutorial-footer">
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5>Related Tutorials</h5>
+                      <ul class="list-unstyled">
+                        <li><a href="3d-pose-estimation.html"><i class="fas fa-user"></i> 3D Human Pose Estimation</a></li>
+                        <li><a href="#"><i class="fas fa-cube"></i> Multi-View Geometry</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6">
+                      <h5>Resources</h5>
+                      <ul class="list-unstyled">
+                        <li><a href="https://github.com/opencv/opencv/tree/master/samples/python"><i class="fab fa-github"></i> OpenCV Camera Calibration</a></li>
+                        <li><a href="https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html"><i class="fas fa-file-pdf"></i> OpenCV Documentation</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </main>
+
+        <div class="d-none d-xl-block col-xl-2 docs-toc">
+          <ul class="nav toc-top">
+            <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+          </ul>
+          <nav id="TableOfContents">
+            <ul>
+              <li><a href="#introduction">Introduction</a></li>
+              <li><a href="#pinhole-camera">Pinhole Camera Model</a></li>
+              <li><a href="#geometric-derivation">Geometric Derivation</a></li>
+              <li><a href="#lens-cameras">Cameras with Lenses</a></li>
+              <li><a href="#digital-space">Digital Image Space</a></li>
+              <li><a href="#camera-matrix">Camera Matrix Model</a></li>
+              <li><a href="#homogeneous-coordinates">Homogeneous Coordinates</a></li>
+              <li><a href="#intrinsic-parameters">Intrinsic Parameters</a></li>
+              <li><a href="#extrinsic-parameters">Extrinsic Parameters</a></li>
+              <li><a href="#camera-calibration">Camera Calibration</a></li>
+              <li><a href="#distortion">Modeling Distortion</a></li>
+              <li><a href="#alternative-models">Alternative Camera Models</a></li>
+              <li><a href="#conclusion">Conclusion</a></li>
+              <li><a href="#references">References</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <p>&copy; 2024 Muhammad Usama Saleem. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-right">
+            <a href="/blogs/" class="btn btn-outline-primary">Back to Tutorials</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="/js/academic.min.341e58d06db179e1d53f3322b6883f4c.js"></script>
+
+    <style>
+      /* Base styles */
+      :root {
+        --primary-color: #A6372A;
+        --secondary-color: #6c757d;
+        --success-color: #28a745;
+        --warning-color: #ffc107;
+        --danger-color: #dc3545;
+        --light-bg: #f8f9fa;
+        --border-color: #dee2e6;
+        --text-muted: #6c757d;
+        --shadow: 0 2px 10px rgba(0,0,0,0.1);
+        --border-radius: 0.5rem;
+        --transition: all 0.3s ease;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #fff;
+      }
+
+      /* Navigation */
+      .navbar {
+        box-shadow: var(--shadow);
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(10px);
+        transition: var(--transition);
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        color: var(--primary-color) !important;
+        font-size: 1.25rem;
+      }
+
+      .nav-link {
+        font-weight: 500;
+        transition: var(--transition);
+        border-radius: var(--border-radius);
+        margin: 0 0.25rem;
+      }
+
+      .nav-link:hover {
+        background-color: var(--light-bg);
+        transform: translateY(-1px);
+      }
+
+      /* Layout */
+      .docs {
+        padding-top: 80px;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      }
+
+      .docs-sidebar {
+        position: sticky;
+        top: 100px;
+        height: calc(100vh - 100px);
+        overflow-y: auto;
+        padding-right: 1rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+      }
+
+      .docs-content {
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+        margin: 1rem 0;
+      }
+
+      .docs-toc {
+        position: sticky;
+        top: 100px;
+        height: calc(100vh - 100px);
+        overflow-y: auto;
+        padding-left: 1rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+      }
+
+      /* Typography */
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        border-bottom: 3px solid var(--primary-color);
+        padding-bottom: 0.5rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #333;
+        margin: 2rem 0 1rem 0;
+        padding-left: 1rem;
+        border-left: 4px solid var(--primary-color);
+      }
+
+      h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #444;
+        margin: 1.5rem 0 1rem 0;
+      }
+
+      p {
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+
+      /* Tutorial Meta */
+      .tutorial-meta {
+        margin-bottom: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
+      .tutorial-meta .badge {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 500;
+        transition: var(--transition);
+      }
+
+      .badge-primary {
+        background: linear-gradient(45deg, var(--primary-color), #8B2635);
+        color: white;
+      }
+
+      .badge-secondary {
+        background: linear-gradient(45deg, var(--secondary-color), #9e9e9e);
+        color: white;
+      }
+
+      .reading-time {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      /* Tutorial Intro */
+      .tutorial-intro {
+        background: linear-gradient(135deg, #A6372A 0%, #8B2635 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .tutorial-intro::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.1);
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      }
+
+      .tutorial-intro .lead {
+        font-size: 1.2rem;
+        font-weight: 400;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Alerts */
+      .alert {
+        border-radius: var(--border-radius);
+        margin: 1.5rem 0;
+        padding: 1.5rem;
+        border: none;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .alert-info {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        color: #1565c0;
+        border-left: 4px solid #2196f3;
+      }
+
+      .alert-warning {
+        background: linear-gradient(135deg, #fff3e0 0%, #ffcc02 100%);
+        color: #e65100;
+        border-left: 4px solid #ff9800;
+      }
+
+      .alert-success {
+        background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+        color: #2e7d32;
+        border-left: 4px solid #4caf50;
+      }
+
+      .alert h4 {
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      /* Navigation Links */
+      #TableOfContents {
+        padding: 1rem;
+      }
+
+      #TableOfContents ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      #TableOfContents li {
+        margin: 0;
+      }
+
+      #TableOfContents a {
+        display: block;
+        padding: 0.75rem 1rem;
+        color: #333;
+        text-decoration: none;
+        border-radius: var(--border-radius);
+        transition: var(--transition);
+        font-weight: 500;
+        border-left: 3px solid transparent;
+      }
+
+      #TableOfContents a:hover,
+      #TableOfContents a.active {
+        background: var(--light-bg);
+        color: var(--primary-color);
+        border-left-color: var(--primary-color);
+        transform: translateX(5px);
+      }
+
+      /* Footer */
+      .tutorial-footer {
+        margin-top: 3rem;
+        padding: 2rem;
+        border-top: 2px solid var(--border-color);
+        background: var(--light-bg);
+        border-radius: var(--border-radius);
+      }
+
+      .tutorial-footer h5 {
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .tutorial-footer ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .tutorial-footer li {
+        margin-bottom: 0.5rem;
+      }
+
+      .tutorial-footer a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .tutorial-footer a:hover {
+        color: #1a237e;
+        transform: translateX(3px);
+      }
+
+      /* Site Footer */
+      .site-footer {
+        background: linear-gradient(135deg, #A6372A 0%, #8B2635 100%);
+        color: white;
+        padding: 2rem 0;
+        margin-top: 3rem;
+      }
+
+      .site-footer .btn {
+        border-radius: 25px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        transition: var(--transition);
+      }
+
+      .site-footer .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        .docs-toc {
+          display: none;
+        }
+        
+        .docs-content {
+          margin-right: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .docs-sidebar {
+          display: none;
+        }
+        
+        .docs-content {
+          padding: 1rem;
+          margin: 0.5rem;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        h3 {
+          font-size: 1.2rem;
+        }
+
+        .tutorial-meta {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .tutorial-intro {
+          padding: 1.5rem;
+        }
+
+        .tutorial-intro .lead {
+          font-size: 1.1rem;
+        }
+
+        .alert {
+          padding: 1rem;
+        }
+
+        .tutorial-footer {
+          padding: 1.5rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .docs {
+          padding-top: 70px;
+        }
+
+        .docs-content {
+          padding: 0.75rem;
+          margin: 0.25rem;
+        }
+
+        h1 {
+          font-size: 1.75rem;
+        }
+
+        .tutorial-meta .badge {
+          font-size: 0.7rem;
+          padding: 0.4rem 0.8rem;
+        }
+
+        .reading-time {
+          font-size: 0.8rem;
+        }
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .docs-content {
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      /* Scrollbar Styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #1a237e;
+      }
+
+      /* Focus States */
+      a:focus,
+      button:focus {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+      }
+
+      /* Print Styles */
+      @media print {
+        .docs-sidebar,
+        .docs-toc,
+        .navbar,
+        .site-footer {
+          display: none !important;
+        }
+
+        .docs-content {
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+        }
+      }
+    </style>
+
+    <script>
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Back to top functionality
+      document.getElementById('back_to_top').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // Highlight current section in TOC
+      window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('h2[id], h3[id]');
+        const navLinks = document.querySelectorAll('#TableOfContents a');
+        
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          if (pageYOffset >= sectionTop - 100) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
