@@ -53,7 +53,7 @@
   <style>
     /* Base styles */
     :root {
-      --primary-color: #2962ff;
+      --primary-color: #A6372A;
       --secondary-color: #6c757d;
       --success-color: #28a745;
       --warning-color: #ffc107;
@@ -136,7 +136,7 @@
 
     /* Header Section */
     .blog-header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #A6372A 0%, #8B2635 100%);
       color: white;
       padding: 5rem 0;
       text-align: center;
@@ -287,17 +287,17 @@
       cursor: pointer;
     }
 
-    .blog-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary-color), #5c6bc0);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
+          .blog-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-color), #8B2635);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
 
     .blog-card:hover {
       transform: translateY(-8px);
@@ -308,19 +308,19 @@
       transform: scaleX(1);
     }
 
-    .blog-card-image {
-      width: 100%;
-      height: 220px;
-      background: linear-gradient(45deg, var(--primary-color), #5c6bc0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 3rem;
-      transition: transform 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
+          .blog-card-image {
+        width: 100%;
+        height: 220px;
+        background: linear-gradient(45deg, var(--primary-color), #8B2635);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+        transition: transform 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
 
     .blog-card:hover .blog-card-image {
       transform: scale(1.05);
@@ -669,101 +669,9 @@
             </div>
           </div>
 
-          <!-- Tutorial 3: Hand Mesh Reconstruction -->
-          <div class="blog-card" data-category="3d-vision computer-vision advanced">
-            <div class="blog-card-image">
-              <i class="fas fa-hand-paper"></i>
-            </div>
-            <div class="blog-card-content">
-              <div class="category">3D Vision • Computer Vision</div>
-              <h3>Robust Hand Mesh Reconstruction in the Wild</h3>
-              <p class="excerpt">Advanced tutorial on hand mesh reconstruction using generative masked modeling. Learn about MANO parameterization, VQ-tokenization, and handling challenging real-world scenarios.</p>
-              <div class="meta">
-                <span class="difficulty-badge difficulty-advanced">Advanced</span>
-                <span>35 min read</span>
-              </div>
-            </div>
-          </div>
 
-          <!-- Tutorial 4: Motion Synthesis with Multimodal Inputs -->
-          <div class="blog-card" data-category="motion-synthesis generative-ai intermediate">
-            <div class="blog-card-image">
-              <i class="fas fa-running"></i>
-            </div>
-            <div class="blog-card-content">
-              <div class="category">Motion Synthesis • Generative AI</div>
-              <h3>Motion Synthesis with Multimodal Inputs</h3>
-              <p class="excerpt">Learn how to generate human motion from text, music, and pose inputs. This tutorial covers the architecture of multimodal motion synthesis frameworks and their applications.</p>
-              <div class="meta">
-                <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
-                <span>30 min read</span>
-              </div>
-            </div>
-          </div>
 
-          <!-- Tutorial 5: Biomechanical Pose Estimation -->
-          <div class="blog-card" data-category="3d-vision computer-vision advanced">
-            <div class="blog-card-image">
-              <i class="fas fa-bone"></i>
-            </div>
-            <div class="blog-card-content">
-              <div class="category">3D Vision • Computer Vision</div>
-              <h3>Biomechanically-Accurate 3D Pose Estimation</h3>
-              <p class="excerpt">Advanced tutorial on incorporating biomechanical constraints into 3D pose estimation. Learn about inverse kinematics, anatomical constraints, and neural IK networks.</p>
-              <div class="meta">
-                <span class="difficulty-badge difficulty-advanced">Advanced</span>
-                <span>40 min read</span>
-              </div>
-            </div>
-          </div>
 
-          <!-- Tutorial 6: Dance Generation with Editability -->
-          <div class="blog-card" data-category="motion-synthesis generative-ai intermediate">
-            <div class="blog-card-image">
-              <i class="fas fa-music"></i>
-            </div>
-            <div class="blog-card-content">
-              <div class="category">Motion Synthesis • Generative AI</div>
-              <h3>High-Fidelity Dance Generation with Multimodal Editability</h3>
-              <p class="excerpt">Learn how to generate and edit dance sequences using text, music, and pose inputs. This tutorial covers progressive generative masking and inference-time optimization.</p>
-              <div class="meta">
-                <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
-                <span>35 min read</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tutorial 7: Transformer Architectures for Vision -->
-          <div class="blog-card" data-category="computer-vision generative-ai intermediate">
-            <div class="blog-card-image">
-              <i class="fas fa-cube"></i>
-            </div>
-            <div class="blog-card-content">
-              <div class="category">Computer Vision • Generative AI</div>
-              <h3>Transformer Architectures for Computer Vision</h3>
-              <p class="excerpt">Comprehensive guide to transformer architectures in computer vision. Learn about Vision Transformers, Swin Transformers, and their applications in various vision tasks.</p>
-              <div class="meta">
-                <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
-                <span>28 min read</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tutorial 8: Privacy-Preserving Computer Vision -->
-          <div class="blog-card" data-category="computer-vision beginner">
-            <div class="blog-card-image">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <div class="blog-card-content">
-              <div class="category">Computer Vision • Privacy</div>
-              <h3>Privacy-Preserving Computer Vision Techniques</h3>
-              <p class="excerpt">Introduction to privacy-preserving techniques in computer vision. Learn about differential privacy, federated learning, and secure multi-party computation.</p>
-              <div class="meta">
-                <span class="difficulty-badge difficulty-beginner">Beginner</span>
-                <span>20 min read</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
