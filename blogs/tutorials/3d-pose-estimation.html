@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="generator" content="Source Themes Academic 4.8.0">
+    <meta name="author" content="Muhammad Usama Saleem">
+    <meta name="description" content="Introduction to 3D Human Pose Estimation - A comprehensive tutorial">
+    <link rel="alternate" hreflang="en-us" href="https://m-usamasaleem.github.io/blogs/tutorials/3d-pose-estimation.html">
+    <meta name="theme-color" content="#2962ff">
+    <script src="/js/mathjax-config.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    <link rel="stylesheet" href="/css/academic.css">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <link rel="alternate" href="/blogs/index.xml" type="application/rss+xml" title="Computer Vision & GenAI Tutorials">
+    <link rel="manifest" href="/index.webmanifest">
+    <link rel="icon" type="image/png" href="/images/logo.jpg">
+    <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_3.png">
+    <link rel="canonical" href="https://m-usamasaleem.github.io/blogs/tutorials/3d-pose-estimation.html">
+    <meta property="twitter:card" content="summary">
+    <meta property="og:site_name" content="Computer Vision & GenAI Tutorials">
+    <meta property="og:url" content="https://m-usamasaleem.github.io/blogs/tutorials/3d-pose-estimation.html">
+    <meta property="og:title" content="Introduction to 3D Human Pose Estimation">
+    <meta property="og:description" content="Learn the fundamentals of 3D human pose estimation from monocular images">
+    <meta property="og:image" content="https://m-usamasaleem.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png">
+    <meta property="twitter:image" content="https://m-usamasaleem.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:updated_time" content="2025-01-01T16:00:00-04:00">
+    <title>Introduction to 3D Human Pose Estimation - Computer Vision & GenAI Tutorials</title>
+  </head>
+  <style>
+    /* Import existing styles from main site */
+    body {
+      font-size: 80%;
+      font-family: 'Merriweather', serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fafafa;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      color: #111;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    p {
+      margin-bottom: 1em;
+    }
+
+    ul, ol {
+      margin-left: 1.5em;
+      margin-bottom: 1em;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    :root {
+      --brand-color: #A6372A;
+      --accent-color: #555;
+    }
+
+    a {
+      color: var(--brand-color);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 3rem 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    html {
+      font-size: 87.5%;
+    }
+
+    /* Tutorial specific styles */
+    .tutorial-header {
+      background: linear-gradient(135deg, #A6372A 0%, #8B2635 100%);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .tutorial-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .tutorial-meta {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .difficulty-badge {
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .difficulty-beginner {
+      background: #e8f5e8;
+      color: #2d5a2d;
+    }
+
+    .tutorial-content {
+      background: white;
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 3rem;
+    }
+
+    .tutorial-content h2 {
+      color: #A6372A;
+      border-bottom: 2px solid #A6372A;
+      padding-bottom: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .tutorial-content h3 {
+      color: #333;
+      margin-top: 1.5rem;
+    }
+
+    .code-block {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+
+    .code-block pre {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    .highlight-box {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .highlight-box h4 {
+      color: #856404;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .math-equation {
+      text-align: center;
+      margin: 2rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .image-placeholder {
+      background: linear-gradient(45deg, #A6372A, #8B2635);
+      color: white;
+      padding: 3rem;
+      text-align: center;
+      border-radius: 8px;
+      margin: 2rem 0;
+    }
+
+    .image-placeholder i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .navigation {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      color: #A6372A;
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+
+    .breadcrumb {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: #666;
+    }
+
+    .breadcrumb .separator {
+      color: #ccc;
+    }
+
+    .table-of-contents {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .table-of-contents h3 {
+      color: #A6372A;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .table-of-contents ul {
+      margin: 0;
+      padding-left: 1.5rem;
+    }
+
+    .table-of-contents li {
+      margin-bottom: 0.5rem;
+    }
+
+    .table-of-contents a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    .table-of-contents a:hover {
+      color: #A6372A;
+    }
+
+    .prerequisites {
+      background: #e8f5e8;
+      border: 1px solid #c3e6cb;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .prerequisites h3 {
+      color: #2d5a2d;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .prerequisites ul {
+      margin: 0;
+      padding-left: 1.5rem;
+    }
+
+    .prerequisites li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .tutorial-header h1 {
+        font-size: 2rem;
+      }
+      
+      .tutorial-content {
+        padding: 2rem 1rem;
+      }
+      
+      .tutorial-meta {
+        gap: 1rem;
+      }
+      
+      .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navigation">
+      <div class="container">
+        <div class="nav-container">
+          <a href="/blogs/" class="nav-brand">← Back to Tutorials</a>
+          <div class="breadcrumb">
+            <a href="/">Home</a>
+            <span class="separator">/</span>
+            <a href="/blogs/">Tutorials</a>
+            <span class="separator">/</span>
+            <span>3D Pose Estimation</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="tutorial-header">
+      <div class="container">
+        <h1>Introduction to 3D Human Pose Estimation</h1>
+        <p>Learn the fundamentals of 3D human pose estimation from monocular images</p>
+        <div class="tutorial-meta">
+          <div class="meta-item">
+            <i class="fas fa-clock"></i>
+            <span>15 min read</span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-calendar"></i>
+            <span>January 2025</span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-tag"></i>
+            <span>Computer Vision, 3D Vision</span>
+          </div>
+          <div class="meta-item">
+            <span class="difficulty-badge difficulty-beginner">Beginner</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="tutorial-content">
+      <div class="container">
+        <div class="prerequisites">
+          <h3><i class="fas fa-info-circle"></i> Prerequisites</h3>
+          <ul>
+            <li>Basic understanding of linear algebra and calculus</li>
+            <li>Familiarity with Python and PyTorch</li>
+            <li>Knowledge of basic computer vision concepts</li>
+            <li>Understanding of neural networks and deep learning</li>
+          </ul>
+        </div>
+
+        <div class="table-of-contents">
+          <h3><i class="fas fa-list"></i> Table of Contents</h3>
+          <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#camera-geometry">Camera Geometry and Projection</a></li>
+            <li><a href="#pose-representation">3D Pose Representation</a></li>
+            <li><a href="#deep-learning-approaches">Deep Learning Approaches</a></li>
+            <li><a href="#implementation">Practical Implementation</a></li>
+            <li><a href="#evaluation">Evaluation Metrics</a></li>
+            <li><a href="#challenges">Challenges and Future Directions</a></li>
+          </ul>
+        </div>
+
+        <h2 id="introduction">Introduction</h2>
+        <p>3D human pose estimation is a fundamental computer vision task that aims to predict the 3D positions of human body joints from images or videos. This technology has numerous applications in robotics, augmented reality, sports analysis, and human-computer interaction.</p>
+
+        <p>Unlike 2D pose estimation, which only predicts joint locations in the image plane, 3D pose estimation requires understanding the depth and spatial relationships of body parts in 3D space. This makes it a significantly more challenging problem due to the inherent ambiguity of projecting 3D information onto a 2D image.</p>
+
+        <div class="image-placeholder">
+          <i class="fas fa-user"></i>
+          <h4>3D Human Pose Estimation Visualization</h4>
+          <p>This would show a person with 3D skeleton overlay</p>
+        </div>
+
+        <h2 id="camera-geometry">Camera Geometry and Projection</h2>
+        <p>Understanding camera geometry is crucial for 3D pose estimation. The process of projecting 3D points onto a 2D image plane is described by the camera projection matrix:</p>
+
+        <div class="math-equation">
+          \[
+          \begin{bmatrix} u \\ v \\ 1 \end{bmatrix} = 
+          \begin{bmatrix} 
+          f_x & 0 & c_x \\
+          0 & f_y & c_y \\
+          0 & 0 & 1
+          \end{bmatrix}
+          \begin{bmatrix} 
+          R_{11} & R_{12} & R_{13} & t_x \\
+          R_{21} & R_{22} & R_{23} & t_y \\
+          R_{31} & R_{32} & R_{33} & t_z
+          \end{bmatrix}
+          \begin{bmatrix} X \\ Y \\ Z \\ 1 \end{bmatrix}
+          \]
+        </div>
+
+        <p>Where:</p>
+        <ul>
+          <li><strong>(u, v):</strong> 2D image coordinates</li>
+          <li><strong>(X, Y, Z):</strong> 3D world coordinates</li>
+          <li><strong>f_x, f_y:</strong> Focal lengths</li>
+          <li><strong>c_x, c_y:</strong> Principal point</li>
+          <li><strong>R:</strong> Rotation matrix</li>
+          <li><strong>t:</strong> Translation vector</li>
+        </ul>
+
+        <h2 id="pose-representation">3D Pose Representation</h2>
+        <p>There are several ways to represent 3D human poses:</p>
+
+        <h3>1. Joint Coordinates</h3>
+        <p>The most straightforward representation is using 3D coordinates for each joint:</p>
+
+        <div class="code-block">
+          <pre><code># Example: 17 joints (COCO format)
+pose_3d = {
+    'nose': [x1, y1, z1],
+    'left_eye': [x2, y2, z2],
+    'right_eye': [x3, y3, z3],
+    # ... more joints
+}</code></pre>
+        </div>
+
+        <h3>2. Relative Joint Positions</h3>
+        <p>Using relative positions from a root joint (usually pelvis) can help with scale invariance:</p>
+
+        <div class="code-block">
+          <pre><code># Relative to root joint
+root_joint = pose_3d['pelvis']
+relative_pose = {}
+for joint_name, joint_pos in pose_3d.items():
+    relative_pose[joint_name] = [
+        joint_pos[0] - root_joint[0],
+        joint_pos[1] - root_joint[1],
+        joint_pos[2] - root_joint[2]
+    ]</code></pre>
+        </div>
+
+        <h2 id="deep-learning-approaches">Deep Learning Approaches</h2>
+        <p>Modern 3D pose estimation methods typically use deep learning architectures. Here are the main approaches:</p>
+
+        <h3>1. Direct Regression</h3>
+        <p>Directly regress 3D joint coordinates from image features:</p>
+
+        <div class="code-block">
+          <pre><code>class Pose3DNet(nn.Module):
+    def __init__(self, num_joints=17):
+        super(Pose3DNet, self).__init__()
+        self.backbone = resnet50(pretrained=True)
+        self.regressor = nn.Sequential(
+            nn.Linear(2048, 512),
+            nn.ReLU(),
+            nn.Dropout(0.5),
+            nn.Linear(512, num_joints * 3)
+        )
+    
+    def forward(self, x):
+        features = self.backbone(x)
+        pose_3d = self.regressor(features)
+        return pose_3d.view(-1, 17, 3)</code></pre>
+        </div>
+
+        <h3>2. 2D-to-3D Lifting</h3>
+        <p>First predict 2D poses, then lift them to 3D:</p>
+
+        <div class="code-block">
+          <pre><code>class PoseLifting(nn.Module):
+    def __init__(self, input_dim=34, output_dim=51):
+        super(PoseLifting, self).__init__()
+        self.layers = nn.Sequential(
+            nn.Linear(input_dim, 1024),
+            nn.ReLU(),
+            nn.Dropout(0.5),
+            nn.Linear(1024, 1024),
+            nn.ReLU(),
+            nn.Dropout(0.5),
+            nn.Linear(1024, output_dim)
+        )
+    
+    def forward(self, pose_2d):
+        return self.layers(pose_2d)</code></pre>
+        </div>
+
+        <div class="highlight-box">
+          <h4><i class="fas fa-lightbulb"></i> Key Insight</h4>
+          <p>2D-to-3D lifting approaches often perform better than direct regression because they can leverage the strong performance of 2D pose estimation methods and focus on the 3D reconstruction problem separately.</p>
+        </div>
+
+        <h2 id="implementation">Practical Implementation</h2>
+        <p>Here's a complete implementation example using PyTorch:</p>
+
+        <div class="code-block">
+          <pre><code>import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class Simple3DPoseEstimator(nn.Module):
+    def __init__(self, num_joints=17):
+        super(Simple3DPoseEstimator, self).__init__()
+        self.num_joints = num_joints
+        
+        # Feature extraction
+        self.conv1 = nn.Conv2d(3, 64, 7, stride=2, padding=3)
+        self.bn1 = nn.BatchNorm2d(64)
+        self.relu = nn.ReLU(inplace=True)
+        self.maxpool = nn.MaxPool2d(3, stride=2, padding=1)
+        
+        # Residual blocks (simplified)
+        self.layer1 = self._make_layer(64, 64, 2)
+        self.layer2 = self._make_layer(64, 128, 2, stride=2)
+        self.layer3 = self._make_layer(128, 256, 2, stride=2)
+        
+        # Global average pooling
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        
+        # Regression head
+        self.fc = nn.Sequential(
+            nn.Linear(256, 512),
+            nn.ReLU(),
+            nn.Dropout(0.5),
+            nn.Linear(512, num_joints * 3)
+        )
+    
+    def _make_layer(self, in_channels, out_channels, blocks, stride=1):
+        layers = []
+        layers.append(nn.Conv2d(in_channels, out_channels, 3, 
+                               stride=stride, padding=1))
+        layers.append(nn.BatchNorm2d(out_channels))
+        layers.append(nn.ReLU(inplace=True))
+        return nn.Sequential(*layers)
+    
+    def forward(self, x):
+        x = self.conv1(x)
+        x = self.bn1(x)
+        x = self.relu(x)
+        x = self.maxpool(x)
+        
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = self.layer3(x)
+        
+        x = self.avgpool(x)
+        x = torch.flatten(x, 1)
+        x = self.fc(x)
+        
+        return x.view(-1, self.num_joints, 3)
+
+# Training loop
+def train_epoch(model, dataloader, criterion, optimizer):
+    model.train()
+    total_loss = 0
+    
+    for batch_idx, (images, poses_3d) in enumerate(dataloader):
+        optimizer.zero_grad()
+        
+        predictions = model(images)
+        loss = criterion(predictions, poses_3d)
+        
+        loss.backward()
+        optimizer.step()
+        
+        total_loss += loss.item()
+    
+    return total_loss / len(dataloader)</code></pre>
+        </div>
+
+        <h2 id="evaluation">Evaluation Metrics</h2>
+        <p>Several metrics are commonly used to evaluate 3D pose estimation performance:</p>
+
+        <h3>1. Mean Per Joint Position Error (MPJPE)</h3>
+        <p>The most common metric, measuring the average Euclidean distance between predicted and ground truth joint positions:</p>
+
+        <div class="math-equation">
+          \[ MPJPE = \frac{1}{N} \sum_{i=1}^{N} \frac{1}{J} \sum_{j=1}^{J} \| \hat{p}_i^j - p_i^j \|_2 \]
+        </div>
+
+        <h3>2. Procrustes Aligned MPJPE (PA-MPJPE)</h3>
+        <p>MPJPE after aligning the predicted pose to the ground truth using Procrustes analysis:</p>
+
+        <div class="code-block">
+          <pre><code>def procrustes_analysis(pred, target):
+    """Align prediction to target using Procrustes analysis"""
+    pred_centered = pred - pred.mean(dim=1, keepdim=True)
+    target_centered = target - target.mean(dim=1, keepdim=True)
+    
+    # Compute optimal rotation
+    H = pred_centered.transpose(-2, -1) @ target_centered
+    U, S, V = torch.svd(H)
+    R = V @ U.transpose(-2, -1)
+    
+    # Apply rotation
+    pred_aligned = pred_centered @ R
+    return pred_aligned + target.mean(dim=1, keepdim=True)</code></pre>
+        </div>
+
+        <h2 id="challenges">Challenges and Future Directions</h2>
+        <p>Despite significant progress, 3D pose estimation still faces several challenges:</p>
+
+        <h3>1. Depth Ambiguity</h3>
+        <p>The fundamental challenge of recovering 3D information from 2D images. Multiple 3D poses can project to the same 2D image.</p>
+
+        <h3>2. Occlusion Handling</h3>
+        <p>Robustly handling cases where body parts are occluded by objects or other body parts.</p>
+
+        <h3>3. Scale Ambiguity</h3>
+        <p>Determining the absolute scale of the person in the scene without additional depth information.</p>
+
+        <div class="highlight-box">
+          <h4><i class="fas fa-rocket"></i> Future Directions</h4>
+          <ul>
+            <li><strong>Multi-view approaches:</strong> Using multiple cameras to resolve depth ambiguity</li>
+            <li><strong>Temporal consistency:</strong> Leveraging video sequences for more stable predictions</li>
+            <li><strong>Weakly supervised learning:</strong> Training with limited 3D annotations</li>
+            <li><strong>Real-time performance:</strong> Optimizing for real-time applications</li>
+          </ul>
+        </div>
+
+        <h2>Conclusion</h2>
+        <p>3D human pose estimation is a rapidly evolving field with significant practical applications. While challenges remain, recent advances in deep learning have led to substantial improvements in accuracy and robustness.</p>
+
+        <p>Key takeaways from this tutorial:</p>
+        <ul>
+          <li>Understanding camera geometry is fundamental to 3D pose estimation</li>
+          <li>Multiple pose representations exist, each with their advantages</li>
+          <li>2D-to-3D lifting often outperforms direct regression</li>
+          <li>Proper evaluation metrics are crucial for comparing methods</li>
+          <li>Challenges like depth ambiguity and occlusion remain active research areas</li>
+        </ul>
+
+        <p>In the next tutorial, we'll explore more advanced techniques including temporal modeling and multi-view approaches.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #333; color: white; padding: 2rem 0; margin-top: 3rem;">
+      <div class="container">
+        <div style="text-align: center;">
+          <p>&copy; 2025 Muhammad Usama Saleem. All rights reserved.</p>
+          <p>Computer Vision & GenAI Tutorials</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        // Smooth scrolling for table of contents
+        $('.table-of-contents a').on('click', function(event) {
+          const target = $(this.getAttribute('href'));
+          if (target.length) {
+            event.preventDefault();
+            $('html, body').stop().animate({
+              scrollTop: target.offset().top - 100
+            }, 1000);
+          }
+        });
+
+        // Highlight current section in table of contents
+        $(window).scroll(function() {
+          const scrollTop = $(window).scrollTop();
+          
+          $('h2[id]').each(function() {
+            const offsetTop = $(this).offset().top - 150;
+            const offsetBottom = offsetTop + $(this).outerHeight();
+            
+            if (scrollTop >= offsetTop && scrollTop < offsetBottom) {
+              $('.table-of-contents a').removeClass('active');
+              $('.table-of-contents a[href="#' + $(this).attr('id') + '"]').addClass('active');
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

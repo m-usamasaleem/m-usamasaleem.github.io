@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="generator" content="Source Themes Academic 4.8.0">
+    <meta name="author" content="Muhammad Usama Saleem">
+    <meta name="description" content="Computer Vision and GenAI Tutorials">
+    <link rel="alternate" hreflang="en-us" href="https://m-usamasaleem.github.io/blogs/">
+    <meta name="theme-color" content="#2962ff">
+    <script src="/js/mathjax-config.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    <link rel="stylesheet" href="/css/academic.css">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <link rel="alternate" href="/blogs/index.xml" type="application/rss+xml" title="Computer Vision & GenAI Tutorials">
+    <link rel="manifest" href="/index.webmanifest">
+    <link rel="icon" type="image/png" href="/images/logo.jpg">
+    <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_3.png">
+    <link rel="canonical" href="https://m-usamasaleem.github.io/blogs/">
+    <meta property="twitter:card" content="summary">
+    <meta property="og:site_name" content="Computer Vision & GenAI Tutorials">
+    <meta property="og:url" content="https://m-usamasaleem.github.io/blogs/">
+    <meta property="og:title" content="Computer Vision & GenAI Tutorials">
+    <meta property="og:description" content="Tutorials on Computer Vision and Generative AI">
+    <meta property="og:image" content="https://m-usamasaleem.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png">
+    <meta property="twitter:image" content="https://m-usamasaleem.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:updated_time" content="2025-01-01T16:00:00-04:00">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://m-usamasaleem.github.io/blogs?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        },
+        "url": "https://m-usamasaleem.github.io/blogs"
+      }
+    </script>
+    <title>Computer Vision & GenAI Tutorials - Muhammad Usama Saleem</title>
+  </head>
+  <style>
+    /* Import existing styles from main site */
+    .conference-name {
+      color: #A6372A;
+      font-style: italic;
+      font-weight: normal;
+      font-size: 1em;
+    }
+
+    body {
+      font-size: 80%;
+      font-family: 'Merriweather', serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fafafa;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      color: #111;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    p {
+      margin-bottom: 1em;
+    }
+
+    ul, ol {
+      margin-left: 1.5em;
+      margin-bottom: 1em;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    :root {
+      --brand-color: #A6372A;
+      --accent-color: #555;
+    }
+
+    a {
+      color: var(--brand-color);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 3rem 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    html {
+      font-size: 87.5%;
+    }
+
+    /* Blog specific styles */
+    .blog-header {
+      background: linear-gradient(135deg, #A6372A 0%, #8B2635 100%);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .blog-header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .blog-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .blog-categories {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .category-tag {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .category-tag:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .blog-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid #e0e0e0;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .blog-card-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(45deg, #A6372A, #8B2635);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+    }
+
+    .blog-card-content {
+      padding: 1.5rem;
+    }
+
+    .blog-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: #111;
+    }
+
+    .blog-card .category {
+      color: #A6372A;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .blog-card .excerpt {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .blog-card .read-more {
+      color: #A6372A;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .blog-card .read-more:hover {
+      text-decoration: underline;
+    }
+
+    .blog-card .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+
+    .difficulty-badge {
+      padding: 0.2rem 0.5rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .difficulty-beginner {
+      background: #e8f5e8;
+      color: #2d5a2d;
+    }
+
+    .difficulty-intermediate {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .difficulty-advanced {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .search-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 3rem;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #A6372A;
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid #A6372A;
+      background: white;
+      color: #A6372A;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: #A6372A;
+      color: white;
+    }
+
+    .coming-soon {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: #666;
+    }
+
+    .coming-soon i {
+      font-size: 4rem;
+      color: #A6372A;
+      margin-bottom: 1rem;
+    }
+
+    .coming-soon h2 {
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .coming-soon p {
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .blog-header h1 {
+        font-size: 2rem;
+      }
+      
+      .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .blog-categories {
+        gap: 0.5rem;
+      }
+      
+      .category-tag {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+      }
+    }
+
+    /* Navigation styles */
+    .navbar {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem 0;
+    }
+
+    .navbar-brand {
+      color: #A6372A;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+
+    .navbar-nav {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #A6372A;
+    }
+
+    .back-to-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #A6372A;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .back-to-main:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <a href="/" class="navbar-brand">← Back to Main Site</a>
+          <ul class="navbar-nav">
+            <li><a href="#tutorials" class="nav-link">Tutorials</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="blog-header">
+      <div class="container">
+        <h1>Computer Vision & GenAI Tutorials</h1>
+        <p>Comprehensive tutorials on cutting-edge computer vision and generative AI techniques</p>
+        <div class="blog-categories">
+          <span class="category-tag">Computer Vision</span>
+          <span class="category-tag">Generative AI</span>
+          <span class="category-tag">Deep Learning</span>
+          <span class="category-tag">3D Vision</span>
+          <span class="category-tag">Motion Synthesis</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search and Filter -->
+    <section class="search-section">
+      <div class="container">
+        <input type="text" class="search-input" placeholder="Search tutorials..." id="searchInput">
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="computer-vision">Computer Vision</button>
+          <button class="filter-btn" data-filter="generative-ai">Generative AI</button>
+          <button class="filter-btn" data-filter="3d-vision">3D Vision</button>
+          <button class="filter-btn" data-filter="motion-synthesis">Motion Synthesis</button>
+          <button class="filter-btn" data-filter="beginner">Beginner</button>
+          <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+          <button class="filter-btn" data-filter="advanced">Advanced</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tutorials Grid -->
+    <section id="tutorials">
+      <div class="container">
+        <div class="blog-grid" id="tutorialGrid">
+          <!-- Tutorial 1: Introduction to 3D Human Pose Estimation -->
+          <div class="blog-card" data-category="computer-vision 3d-vision beginner">
+            <div class="blog-card-image">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="blog-card-content">
+              <div class="category">Computer Vision • 3D Vision</div>
+              <h3>Introduction to 3D Human Pose Estimation</h3>
+              <p class="excerpt">Learn the fundamentals of 3D human pose estimation from monocular images. This tutorial covers the basics of camera geometry, pose representation, and modern deep learning approaches.</p>
+              <div class="meta">
+                <span class="difficulty-badge difficulty-beginner">Beginner</span>
+                <span>15 min read</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tutorial 2: Generative Masked Modeling for Vision -->
+          <div class="blog-card" data-category="generative-ai computer-vision intermediate">
+            <div class="blog-card-image">
+              <i class="fas fa-mask"></i>
+            </div>
+            <div class="blog-card-content">
+              <div class="category">Generative AI • Computer Vision</div>
+              <h3>Generative Masked Modeling for Vision Tasks</h3>
+              <p class="excerpt">Explore how masked modeling techniques, inspired by BERT, can be applied to computer vision tasks. Learn about MAE, SimMIM, and their applications in image understanding.</p>
+              <div class="meta">
+                <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                <span>25 min read</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tutorial 3: Hand Mesh Reconstruction -->
+          <div class="blog-card" data-category="3d-vision computer-vision advanced">
+            <div class="blog-card-image">
+              <i class="fas fa-hand-paper"></i>
+            </div>
+            <div class="blog-card-content">
+              <div class="category">3D Vision • Computer Vision</div>
+              <h3>Robust Hand Mesh Reconstruction in the Wild</h3>
+              <p class="excerpt">Advanced tutorial on hand mesh reconstruction using generative masked modeling. Learn about MANO parameterization, VQ-tokenization, and handling challenging real-world scenarios.</p>
+              <div class="meta">
+                <span class="difficulty-badge difficulty-advanced">Advanced</span>
+                <span>35 min read</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tutorial 4: Motion Synthesis with Multimodal Inputs -->
+          <div class="blog-card" data-category="motion-synthesis generative-ai intermediate">
+            <div class="blog-card-image">
+              <i class="fas fa-running"></i>
+            </div>
+            <div class="blog-card-content">
+              <div class="category">Motion Synthesis • Generative AI</div>
+              <h3>Motion Synthesis with Multimodal Inputs</h3>
+              <p class="excerpt">Learn how to generate human motion from text, music, and pose inputs. This tutorial covers the architecture of multimodal motion synthesis frameworks and their applications.</p>
+              <div class="meta">
+                <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                <span>30 min read</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tutorial 5: Biomechanical Pose Estimation -->
+          <div class="blog-card" data-category="3d-vision computer-vision advanced">
+            <div class="blog-card-image">
+              <i class="fas fa-bone"></i>
+            </div>
+            <div class="blog-card-content">
+              <div class="category">3D Vision • Computer Vision</div>
+              <h3>Biomechanically-Accurate 3D Pose Estimation</h3>
+              <p class="excerpt">Advanced tutorial on incorporating biomechanical constraints into 3D pose estimation. Learn about inverse kinematics, anatomical constraints, and neural IK networks.</p>
+              <div class="meta">
+                <span class="difficulty-badge difficulty-advanced">Advanced</span>
+                <span>40 min read</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tutorial 6: Dance Generation with Editability -->
+          <div class="blog-card" data-category="motion-synthesis generative-ai intermediate">
+            <div class="blog-card-image">
+              <i class="fas fa-music"></i>
+            </div>
+            <div class="blog-card-content">
+              <div class="category">Motion Synthesis • Generative AI</div>
+              <h3>High-Fidelity Dance Generation with Multimodal Editability</h3>
+              <p class="excerpt">Learn how to generate and edit dance sequences using text, music, and pose inputs. This tutorial covers progressive generative masking and inference-time optimization.</p>
+              <div class="meta">
+                <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                <span>35 min read</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tutorial 7: Transformer Architectures for Vision -->
+          <div class="blog-card" data-category="computer-vision generative-ai intermediate">
+            <div class="blog-card-image">
+              <i class="fas fa-cube"></i>
+            </div>
+            <div class="blog-card-content">
+              <div class="category">Computer Vision • Generative AI</div>
+              <h3>Transformer Architectures for Computer Vision</h3>
+              <p class="excerpt">Comprehensive guide to transformer architectures in computer vision. Learn about Vision Transformers, Swin Transformers, and their applications in various vision tasks.</p>
+              <div class="meta">
+                <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                <span>28 min read</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tutorial 8: Privacy-Preserving Computer Vision -->
+          <div class="blog-card" data-category="computer-vision beginner">
+            <div class="blog-card-image">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="blog-card-content">
+              <div class="category">Computer Vision • Privacy</div>
+              <h3>Privacy-Preserving Computer Vision Techniques</h3>
+              <p class="excerpt">Introduction to privacy-preserving techniques in computer vision. Learn about differential privacy, federated learning, and secure multi-party computation.</p>
+              <div class="meta">
+                <span class="difficulty-badge difficulty-beginner">Beginner</span>
+                <span>20 min read</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="coming-soon">
+      <div class="container">
+        <i class="fas fa-rocket"></i>
+        <h2>More Tutorials Coming Soon!</h2>
+        <p>I'm constantly working on new tutorials covering the latest developments in computer vision and generative AI. Subscribe to stay updated with new content.</p>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="container">
+        <h2>About These Tutorials</h2>
+        <p>These tutorials are designed to provide practical, hands-on knowledge about computer vision and generative AI techniques. Each tutorial includes:</p>
+        <ul>
+          <li><strong>Theoretical Foundations:</strong> Understanding the underlying concepts and mathematics</li>
+          <li><strong>Practical Implementation:</strong> Step-by-step code examples and implementations</li>
+          <li><strong>Real-World Applications:</strong> How these techniques are applied in industry</li>
+          <li><strong>Best Practices:</strong> Tips and tricks for optimal performance</li>
+        </ul>
+        <p>The tutorials are organized by difficulty level and topic area to help you find the content that best matches your expertise and interests.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #333; color: white; padding: 2rem 0; margin-top: 3rem;">
+      <div class="container">
+        <div style="text-align: center;">
+          <p>&copy; 2025 Muhammad Usama Saleem. All rights reserved.</p>
+          <p>Computer Vision & GenAI Tutorials</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        // Search functionality
+        $('#searchInput').on('input', function() {
+          const searchTerm = $(this).val().toLowerCase();
+          $('.blog-card').each(function() {
+            const title = $(this).find('h3').text().toLowerCase();
+            const excerpt = $(this).find('.excerpt').text().toLowerCase();
+            const category = $(this).find('.category').text().toLowerCase();
+            
+            if (title.includes(searchTerm) || excerpt.includes(searchTerm) || category.includes(searchTerm)) {
+              $(this).show();
+            } else {
+              $(this).hide();
+            }
+          });
+        });
+
+        // Filter functionality
+        $('.filter-btn').click(function() {
+          $('.filter-btn').removeClass('active');
+          $(this).addClass('active');
+          
+          const filter = $(this).data('filter');
+          
+          if (filter === 'all') {
+            $('.blog-card').show();
+          } else {
+            $('.blog-card').each(function() {
+              const categories = $(this).data('category').split(' ');
+              if (categories.includes(filter)) {
+                $(this).show();
+              } else {
+                $(this).hide();
+              }
+            });
+          }
+        });
+
+        // Smooth scrolling for navigation
+        $('a[href^="#"]').on('click', function(event) {
+          const target = $(this.getAttribute('href'));
+          if (target.length) {
+            event.preventDefault();
+            $('html, body').stop().animate({
+              scrollTop: target.offset().top - 100
+            }, 1000);
+          }
+        });
+
+        // Card hover effects
+        $('.blog-card').hover(
+          function() {
+            $(this).find('.blog-card-image').css('transform', 'scale(1.05)');
+          },
+          function() {
+            $(this).find('.blog-card-image').css('transform', 'scale(1)');
+          }
+        );
+      });
+    </script>
+  </body>
+</html>
