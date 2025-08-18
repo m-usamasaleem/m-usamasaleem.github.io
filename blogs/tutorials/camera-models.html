@@ -73,14 +73,40 @@
                 <h2 id="introduction">Introduction</h2>
                 <p>Computer vision begins with capturing images of the 3D world. Cameras act as the interface between the real world and digital systems, making understanding how cameras form images essential. A <strong>camera model</strong> mathematically describes how 3D points in space are transformed into 2D pixels in a captured image.</p>
 
-                <p>This tutorial covers the complete mathematical framework, from basic geometric principles to advanced calibration techniques. We'll explore:</p>
-                <ul>
-                  <li>The fundamental pinhole camera model and its geometric derivation</li>
-                  <li>Lens-based cameras and the paraxial refraction model</li>
-                  <li>Camera matrix formulation using homogeneous coordinates</li>
-                  <li>Intrinsic and extrinsic parameter estimation</li>
-                  <li>Camera calibration techniques and distortion modeling</li>
-                </ul>
+                <div class="alert alert-info">
+                  <h4><i class="fas fa-info-circle"></i> Core Objective</h4>
+                  <p>Map a 3D world point <strong>X = (X, Y, Z, 1)<sup>T</sup></strong> onto a 2D pixel <strong>x = (u, v, 1)<sup>T</sup></strong> using a perspective camera model (central/pinhole projection).</p>
+                </div>
+
+                <h3>Four Coordinate Systems</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <table class="table table-bordered">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th>Coordinate System</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td><strong>World</strong></td><td>3D coordinate frame of your scene</td></tr>
+                        <tr><td><strong>Camera</strong></td><td>Origin at optical center of camera</td></tr>
+                        <tr><td><strong>Image Plane</strong></td><td>2D plane inside camera (in meters)</td></tr>
+                        <tr><td><strong>Sensor (Pixel)</strong></td><td>Discrete pixel grid (u, v)</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-md-6">
+                    <p>This tutorial covers the complete mathematical framework, from basic geometric principles to advanced calibration techniques. We'll explore:</p>
+                    <ul>
+                      <li>The fundamental pinhole camera model and its geometric derivation</li>
+                      <li>Lens-based cameras and the paraxial refraction model</li>
+                      <li>Camera matrix formulation using homogeneous coordinates</li>
+                      <li>Intrinsic and extrinsic parameter estimation</li>
+                      <li>Camera calibration techniques and distortion modeling</li>
+                    </ul>
+                  </div>
+                </div>
 
                 <h2 id="pinhole-camera">The Pinhole Camera Model</h2>
                 <h3>Core Concept</h3>
@@ -211,24 +237,136 @@
                   <li>Sensor non-linearities and distortions</li>
                 </ul>
 
-                <h2 id="camera-matrix">Camera Matrix Model</h2>
-                <p>The camera matrix model provides a unified framework for representing all camera parameters in matrix form.</p>
+                <h2 id="camera-matrix">Complete Mathematical Framework</h2>
+                <p>The camera matrix model provides a unified framework for representing all camera parameters in matrix form. Let's build this step-by-step.</p>
 
-                <h3>Basic Camera Matrix</h3>
-                <p>The camera matrix K captures the intrinsic parameters:</p>
+                <h3>Step 1: World → Camera Coordinates (Extrinsic Parameters)</h3>
+                <p>We need to describe where the <strong>camera is located</strong> and how it is <strong>oriented</strong> in the world.</p>
 
                 <div style="text-align: center; margin: 2rem 0;">
                   <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
-                    <strong>Camera Matrix K</strong><br>
-                    K = [α 0 cₓ; 0 β cᵧ; 0 0 1]
+                    <strong>Extrinsic Transformation</strong><br>
+                    X_c = R·X_w + t
                   </div>
                 </div>
 
                 <p>Where:</p>
                 <ul>
-                  <li><strong>α, β</strong> = effective focal lengths (scaled by pixel dimensions)</li>
-                  <li><strong>cₓ, cᵧ</strong> = principal point offset (image center)</li>
+                  <li><strong>R</strong> = 3×3 rotation matrix (camera orientation)</li>
+                  <li><strong>t</strong> = 3×1 translation vector (camera center position)</li>
                 </ul>
+
+                <p>In homogeneous form:</p>
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Homogeneous Extrinsic</strong><br>
+                    X_c = [R | t]·X_w
+                  </div>
+                </div>
+
+                <h3>Step 2: Camera → Image Plane (Perspective Projection)</h3>
+                <p>Given camera coordinates X_c = (x_c, y_c, z_c), the perspective projection is:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Perspective Projection</strong><br>
+                    x_img = (x_c/z_c, y_c/z_c, 1)<sup>T</sup>
+                  </div>
+                </div>
+
+                <p>This is <strong>where light rays hit the image plane</strong>. Note the division by z_c ⇒ <strong>nonlinear (perspective)</strong>.</p>
+
+                <h3>Step 3: Image Plane → Pixel Coordinates (Intrinsic Parameters)</h3>
+                <p>This depends on the internal geometry of the camera: focal length, pixel sizes, skew, optical center, etc. These are the <strong>intrinsic parameters</strong>, encoded into matrix K:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Intrinsic Matrix K</strong><br>
+                    K = [f_x s c_x; 0 f_y c_y; 0 0 1]
+                  </div>
+                </div>
+
+                <p>Where:</p>
+                <ul>
+                  <li><strong>f_x, f_y</strong> = effective focal lengths in pixel units</li>
+                  <li><strong>(c_x, c_y)</strong> = principal point (optical center in pixels)</li>
+                  <li><strong>s</strong> = skew (usually 0 for most cameras)</li>
+                </ul>
+
+                <p>Pixel coordinates:</p>
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Pixel Coordinates</strong><br>
+                    x = K·x_img
+                  </div>
+                </div>
+
+                <h3>Final Combined Mapping</h3>
+                <p>All three steps can be merged into one matrix equation:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Complete Camera Projection</strong><br>
+                    x ∼ P·X_w with P = K·[R|t]
+                  </div>
+                </div>
+
+                <p>Where:</p>
+                <ul>
+                  <li><strong>P ∈ ℝ<sup>3×4</sup></strong> = camera projection matrix</li>
+                  <li><strong>X_w ∈ ℝ<sup>4</sup></strong> = homogeneous world point</li>
+                  <li><strong>x ∈ ℝ<sup>3</sup></strong> = homogeneous pixel coordinate</li>
+                  <li><strong>"∼"</strong> means equality up to scaling ⇒ divide by last coordinate to get (u,v)</li>
+                </ul>
+
+                <div class="alert alert-warning">
+                  <h4><i class="fas fa-exclamation-triangle"></i> Why Can't We Invert This?</h4>
+                  <p>Because projection collapses 3D depth onto 2D — so information <strong>is lost</strong>. From a single image you know only that the 3D point lies somewhere on a <strong>ray</strong> starting from the camera center through the pixel. You cannot recover the depth without:</p>
+                  <ul>
+                    <li>Another camera (stereo/structure-from-motion)</li>
+                    <li>Or prior knowledge</li>
+                  </ul>
+                </div>
+
+                <h3>Summary Table</h3>
+                <div class="table-responsive">
+                  <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th>Transformation</th>
+                        <th>Matrix</th>
+                        <th>Parameters</th>
+                        <th>DOF</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>World → Camera</td>
+                        <td>[R | t]</td>
+                        <td>Extrinsic</td>
+                        <td>6 DOF</td>
+                      </tr>
+                      <tr>
+                        <td>Camera → Image plane</td>
+                        <td>divide by z</td>
+                        <td>Perspective</td>
+                        <td>-</td>
+                      </tr>
+                      <tr>
+                        <td>Image plane → Pixels</td>
+                        <td>K</td>
+                        <td>Intrinsic</td>
+                        <td>4-5 DOF</td>
+                      </tr>
+                      <tr class="table-primary">
+                        <td><strong>Full projection</strong></td>
+                        <td><strong>P</strong></td>
+                        <td><strong>Combines both</strong></td>
+                        <td><strong>11 DOF total</strong></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
 
                 <h2 id="homogeneous-coordinates">Homogeneous Coordinates</h2>
                 <p>Homogeneous coordinates allow us to represent the non-linear perspective projection as a linear matrix transformation.</p>
@@ -311,37 +449,137 @@
                   <li>3 translation (from T)</li>
                 </ul>
 
-                <h2 id="camera-calibration">Camera Calibration</h2>
-                <p>Camera calibration is the process of estimating intrinsic and extrinsic parameters from images of known calibration patterns.</p>
+                <h2 id="camera-calibration">Camera Calibration: Direct Linear Transform (DLT)</h2>
+                <p>Camera calibration is the process of estimating intrinsic and extrinsic parameters from images of known calibration patterns. The <strong>Direct Linear Transform (DLT)</strong> algorithm is the foundation of modern camera calibration.</p>
 
-                <h3>Calibration Process</h3>
+                <h3>Calibration Process Overview</h3>
                 <ol>
                   <li><strong>Capture calibration pattern</strong> (e.g., checkerboard) with known 3D positions</li>
                   <li><strong>Detect 2D image points</strong> corresponding to 3D pattern points</li>
                   <li><strong>Set up linear system</strong> of equations from 3D↔2D correspondences</li>
-                  <li><strong>Solve using SVD</strong> to estimate projection matrix M</li>
-                  <li><strong>Decompose M</strong> to extract K, R, and T</li>
+                  <li><strong>Solve using SVD</strong> to estimate projection matrix P</li>
+                  <li><strong>Decompose P</strong> to extract K, R, and t</li>
                 </ol>
 
                 <h3>Linear System Formulation</h3>
-                <p>For each correspondence (P_i, p_i), we get two equations:</p>
+                <p>For each correspondence (X_i, x_i), we get two equations from the projection equation x_i ∼ P·X_i:</p>
 
                 <div style="text-align: center; margin: 2rem 0;">
                   <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
-                    <strong>Calibration Equations</strong><br>
-                    u_i·(m₃·P_i) - m₁·P_i = 0<br>
-                    v_i·(m₃·P_i) - m₂·P_i = 0
+                    <strong>DLT Calibration Equations</strong><br>
+                    u_i·(p₃·X_i) - p₁·X_i = 0<br>
+                    v_i·(p₃·X_i) - p₂·X_i = 0
                   </div>
                 </div>
 
-                <p>Where m₁, m₂, m₃ are the rows of matrix M.</p>
+                <p>Where p₁, p₂, p₃ are the rows of projection matrix P.</p>
+
+                <h3>Matrix Formulation</h3>
+                <p>For n correspondences, we stack all equations into a matrix form:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>Linear System</strong><br>
+                    A·p = 0
+                  </div>
+                </div>
+
+                <p>Where A is a 2n×12 matrix and p is the 12×1 vector containing the elements of P.</p>
 
                 <h3>SVD Solution</h3>
-                <p>The system is solved by minimizing ||P·m||² subject to ||m||² = 1 using Singular Value Decomposition.</p>
+                <p>The system is solved by minimizing ||A·p||² subject to ||p||² = 1 using Singular Value Decomposition:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>SVD Solution</strong><br>
+                    A = U·D·V<sup>T</sup><br>
+                    p = last column of V
+                  </div>
+                </div>
+
+                <h3>Decomposing P into K, R, t</h3>
+                <p>Once P is recovered, we factor it into intrinsic and extrinsic parameters:</p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                  <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid #A6372A;">
+                    <strong>QR Decomposition</strong><br>
+                    P = K·[R|t]<br>
+                    Use QR/RQ factorization to extract K and [R|t]
+                  </div>
+                </div>
+
+                <h3>Practical Calibration Pipeline</h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5>1. Data Collection</h5>
+                    <ul>
+                      <li>Print checkerboard pattern</li>
+                      <li>Capture 10-20 images from different angles</li>
+                      <li>Ensure pattern covers different depths</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <h5>2. Feature Detection</h5>
+                    <ul>
+                      <li>Detect corner points in each image</li>
+                      <li>Establish 3D↔2D correspondences</li>
+                      <li>Use known pattern dimensions</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5>3. Linear Estimation</h5>
+                    <ul>
+                      <li>Solve DLT for initial P</li>
+                      <li>Decompose into K, R, t</li>
+                      <li>Validate orthogonality of R</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <h5>4. Nonlinear Refinement</h5>
+                    <ul>
+                      <li>Bundle adjustment optimization</li>
+                      <li>Include distortion parameters</li>
+                      <li>Minimize reprojection error</li>
+                    </ul>
+                  </div>
+                </div>
 
                 <div class="alert alert-warning">
                   <h4><i class="fas fa-exclamation-triangle"></i> Degenerate Configurations</h4>
-                  <p>Calibration fails if 3D points lie on a plane (no depth variation). Use multiple tilted views to avoid this.</p>
+                  <p>Calibration fails if 3D points lie on a plane (no depth variation). Use multiple tilted views to avoid this. The minimum requirement is 6 points, but 10-20 points provide better accuracy.</p>
+                </div>
+
+                <h3>Calibration Quality Metrics</h3>
+                <div class="table-responsive">
+                  <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th>Metric</th>
+                        <th>Description</th>
+                        <th>Good Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Reprojection Error</td>
+                        <td>RMS error between projected and detected points</td>
+                        <td>< 1 pixel</td>
+                      </tr>
+                      <tr>
+                        <td>Orthogonality</td>
+                        <td>How close R is to being orthogonal</td>
+                        <td>det(R) ≈ 1</td>
+                      </tr>
+                      <tr>
+                        <td>Focal Length</td>
+                        <td>Consistency across images</td>
+                        <td>CV < 5%</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
 
                 <h2 id="distortion">Modeling Distortion</h2>

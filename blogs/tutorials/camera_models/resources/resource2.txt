@@ -271,3 +271,231 @@ Once calibrated, this simple model forms the foundation for:
 * Pose estimation
 * Robotics & autonomous navigation
 
+# 📷 **Comprehensive Tutorial on the Linear Camera Model & Camera Calibration**
+
+---
+
+## 🧩 **1. Overview: Forward Imaging Model (3D → 2D)**
+
+The *forward imaging model* describes how a 3D point in the **world** projects onto a 2D **image**. It forms the mathematical foundation of **camera calibration**, where we estimate camera parameters.
+
+We break this transformation into two parts:
+
+| Stage                        | Purpose                            |
+| ---------------------------- | ---------------------------------- |
+| **World → Camera (3D → 3D)** | Camera **pose** (Extrinsics)       |
+| **Camera → Image (3D → 2D)** | Camera **projection** (Intrinsics) |
+
+---
+
+## 🌍 **2. Camera Coordinate Frames**
+
+We typically define two 3D coordinate systems:
+
+* **World Frame (W):** fixed in the environment.
+* **Camera Frame (C):** origin at the **projection center**, z-axis aligned with the **optical axis**.
+
+A 3D point is:
+
+* $P_W = (X_W, Y_W, Z_W)^T$ in world coordinates
+* $P_C = (X_C, Y_C, Z_C)^T$ in camera coordinates
+
+---
+
+## 🔧 **3. Extrinsic Parameters: World → Camera**
+
+Extrinsics describe *where the camera is* and *what direction it looks*. They define a rigid 3D transformation:
+
+$$
+P_C = R\,P_W + t
+$$
+
+* $R \in \mathbb{R}^{3×3}$: **rotation matrix**
+
+  * Orthonormal (columns perpendicular, length 1)
+  * $R^T R = I$, $R^{-1} = R^T$
+* $t \in \mathbb{R}^{3×1}$: **translation vector**
+
+> Together $[R|t]$ uses **6 degrees of freedom** (3 rotation + 3 translation).
+
+**Homogeneous form:**
+
+$$
+\begin{bmatrix} P_C \\ 1 \end{bmatrix}
+=
+\underbrace{
+\begin{bmatrix}
+R & t \\
+0 & 1
+\end{bmatrix}}_{\text{Extrinsic matrix } E}
+\begin{bmatrix}
+P_W \\ 1
+\end{bmatrix}
+$$
+
+---
+
+## 🎯 **4. Perspective Projection: Camera → Image Plane (3D → 2D)**
+
+Assume a pinhole model with focal length $f$:
+
+$$
+x_i = \frac{f X_C}{Z_C}, \quad y_i = \frac{f Y_C}{Z_C}
+$$
+
+These coordinates $(x_i, y_i)$ are in **meters or millimeters** on the *image plane* — not yet pixels!
+
+---
+
+## 🖼️ **5. Intrinsic Parameters: Image Plane → Pixel Coordinates**
+
+To convert from physical image-plane coordinates to pixels on the image sensor:
+
+* $m_x$, $m_y$: pixel density (pixels per mm)
+* $(u_0, v_0)$: *principal point* (optical center in pixel coordinates)
+
+$$
+u = m_x \left( \frac{f X_C}{Z_C} \right) + u_0, \quad
+v = m_y \left( \frac{f Y_C}{Z_C} \right) + v_0
+$$
+
+Let:
+
+* $f_x = m_x \cdot f$
+* $f_y = m_y \cdot f$
+
+Then,
+
+$$
+u = \frac{f_x X_C}{Z_C} + u_0, \quad
+v = \frac{f_y Y_C}{Z_C} + v_0
+$$
+
+These four quantities — $f_x, f_y, u_0, v_0$ — are the **intrinsic parameters**.
+
+---
+
+## 🚀 **6. Linear Projection in Homogeneous Coordinates**
+
+Using homogeneous coordinates:
+
+* 3D point: $P_C = (X_C, Y_C, Z_C, 1)^T$
+* 2D pixel (homog.): $\tilde{x} = (u, v, 1)^T$
+
+The intrinsic matrix is:
+
+$$
+K =
+\begin{bmatrix}
+f_x & 0   & u_0 \\
+0   & f_y & v_0 \\
+0   & 0   & 1
+\end{bmatrix}
+$$
+
+Then:
+
+$$
+\tilde{x} \sim K \begin{bmatrix} I & 0 \end{bmatrix} P_C
+\quad \Longrightarrow \quad
+\tilde{x} \sim K [R|t] P_W
+$$
+
+Define the **projection matrix**:
+
+$$
+P = K [R|t] \quad (3 \times 4)
+$$
+
+Then:
+
+$$
+\tilde{x} \sim P \tilde{X}_W
+$$
+
+This is the *linear* camera model in homogeneous form.
+
+---
+
+## 🧠 **7. Camera Calibration**
+
+**Goal:** Determine $P$, or equivalently $(K, R, t)$.
+
+Two phases:
+
+| Type      | Parameters        | Purpose           |
+| --------- | ----------------- | ----------------- |
+| Intrinsic | $f_x,f_y,u_0,v_0$ | Internal geometry |
+| Extrinsic | $R,t$             | Camera pose       |
+
+---
+
+### 🔬 **7.1 Linear Calibration via DLT (Direct Linear Transform)**
+
+Given at least **6 known 3D points** and their detected 2D pixel locations, we solve:
+
+$$
+\tilde{x}_i \sim P\,\tilde{X}_{W,i}
+$$
+
+* Each correspondence gives **2 linear equations**
+* Stack ≥6 correspondences → solve for 12 unknowns of $P$ (up to scale)
+* Solve using **SVD** → obtain $P$
+
+---
+
+### 🔧 **7.2 Decomposing $P$ to Intrinsics & Extrinsics**
+
+Given $P$, factor into:
+
+$$
+P = K [R|t]
+$$
+
+* Use QR / RQ factorization
+* Extract **upper-triangular $K$** (with positive diagonals)
+* $R$ becomes orthonormal matrix
+* $t$ extracted as offset
+
+> This gives **complete camera calibration**, both intrinsics and extrinsics.
+
+---
+
+## 🎯 **8. Summary of Key Equations**
+
+| Mapping           | Equation               |                  |
+| ----------------- | ---------------------- | ---------------- |
+| World → Camera    | $P_C = R P_W + t$      |                  |
+| Camera → Pixel    | $\tilde{x} \sim K P_C$ |                  |
+| Combined          | ( \tilde{x} \sim K\[R  | t]\tilde{X}\_W ) |
+| Projection Matrix | ( P = K\[R             | t] )             |
+
+---
+
+## 🔍 **9. What About Lens Distortion?**
+
+So far we modeled a perfect pinhole. Real lenses cause radial/tangential distortions ⇒ nonlinear parameters (e.g., $k_1, k_2, p_1, p_2$). These are estimated using nonlinear calibration after linear DLT initialization.
+
+---
+
+## 🧪 **10. Practical Calibration Pipeline (e.g., OpenCV)**
+
+1. Print a checkerboard pattern
+2. Capture multiple images of the board
+3. Detect corner points in images
+4. Use known 3D coordinates of board corners
+5. Solve using DLT → initial $K, R, t$
+6. Refine with nonlinear optimization (bundle adjustment) to also get distortion parameters
+
+---
+
+## ✅ **Conclusion**
+
+The **linear camera model** provides a powerful way to relate 3D points to 2D pixels:
+
+$$
+\tilde{x} \sim P \tilde{X}_W
+$$
+
+Knowing the projection matrix $P$ means knowing *everything* about the camera. **Camera calibration** is the process of estimating this matrix, then decomposing it into the intrinsic and extrinsic parameters that define the camera’s geometry and pose.
+
