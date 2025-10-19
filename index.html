@@ -502,166 +502,183 @@
       background-color: rgba(166, 55, 42, 0.05);
     }
 
-	  /* Highlight style for June 2025 news items */
-.highlight-june-2025 {
-  background-color: rgba(166, 55, 42, 0.08);
-  border-left: 4px solid var(--brand-color);
-  padding: 0.75em 1em;
-  margin-bottom: 0.5em;
-  border-radius: 4px;
-}
+    /* Highlight style for June 2025 news items */
+    .highlight-june-2025 {
+      background-color: rgba(166, 55, 42, 0.08);
+      border-left: 4px solid var(--brand-color);
+      padding: 0.75em 1em;
+      margin-bottom: 0.5em;
+      border-radius: 4px;
+    }
 
-#experience .experience-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 2rem;
-}
+    #experience .experience-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
 
-#experience .company-logo {
-  flex: 0 0 80px;
-  margin-right: 1.5rem;
-}
+    #experience .company-logo {
+      flex: 0 0 80px;
+      margin-right: 1.5rem;
+    }
 
-#experience .company-logo img {
-  width: 150px;      /* or whatever full size you want */
-  height: auto;      /* preserve aspect ratio */
-  max-width: none;   /* override any library constraints */
-}
+    #experience .company-logo img {
+      width: 150px;
+      /* or whatever full size you want */
+      height: auto;
+      /* preserve aspect ratio */
+      max-width: none;
+      /* override any library constraints */
+    }
 
-#experience .experience-details h3 {
-  margin-top: 0;
-}
+    #experience .experience-details h3 {
+      margin-top: 0;
+    }
 
-.experience-details p {
-  display: inline-flex;
-  align-items: baseline;   /* keep text aligned nicely */
-  gap: 2rem;               /* space between location and dates */
-  flex-wrap: wrap;         /* in case it needs to wrap on small screens */
-}
+    .experience-details p {
+      display: inline-flex;
+      align-items: baseline;
+      /* keep text aligned nicely */
+      gap: 2rem;
+      /* space between location and dates */
+      flex-wrap: wrap;
+      /* in case it needs to wrap on small screens */
+    }
 
+    #experience .experience-details ul {
+      margin: 0;
+      padding-left: 1.25em;
+    }
 
-#experience .experience-details ul {
-  margin: 0;
-  padding-left: 1.25em;
-}
+    #experience .container {
+      padding: 3rem;
+      border-radius: 8px;
+    }
 
-	  #experience .container {
-  padding: 3rem;
-  border-radius: 8px;
-}
+    /* match your publications & posts headings */
+    #experience .section-heading h1 {
+      margin-top: 1.5rem;
+      /* same top spacing */
+      margin-bottom: 2rem;
+      /* same bottom spacing */
+      font-size: 2.5rem;
+      /* match your other 
+																																	<h1> in .section-heading */
+      text-align: left;
+      /* override any stray centering */
+      border-bottom: none;
+      /* no extra lines */
+    }
 
-/* match your publications & posts headings */
-#experience .section-heading h1 {
-  margin-top: 1.5rem;       /* same top spacing */
-  margin-bottom: 2rem;      /* same bottom spacing */
-  font-size: 2.5rem;        /* match your other <h1> in .section-heading */
-  text-align: left;         /* override any stray centering */
-  border-bottom: none;      /* no extra lines */
-}
+    #experience .container {
+      background-color: #fff !important;
+    }
 
+    #experience.home-section {
+      background-color: #fff;
+    }
 
-	  #experience .container {
-  background-color: #fff !important;
-}
+    /* 1) Make the entire Experience section pure white */
+    #experience {
+      background-color: #fff;
+      /* tighten its top & bottom padding to match your other sections */
+      padding-top: 1.5rem !important;
+      padding-bottom: 1.5rem !important;
+    }
 
-#experience.home-section {
-  background-color: #fff;
-}
+    /* 2) Kill the section‐border “hairlines” just above & below it */
+    #experience,
+    #experience+section {
+      border-bottom: none !important;
+    }
 
-	  /* 1) Make the entire Experience section pure white */
-#experience {
-  background-color: #fff;
-  /* tighten its top & bottom padding to match your other sections */
-  padding-top: 1.5rem !important;
-  padding-bottom: 1.5rem !important;
-}
+    /* 3) Reduce the huge gutters between sections */
+    section {
+      /* shrink the 3rem default to something tighter if you like */
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
 
-/* 2) Kill the section‐border “hairlines” just above & below it */
-#experience,
-#experience + section {
-  border-bottom: none !important;
-}
+    /* 4) If your HTML is emitting extra 
+																																		<hr> tags, hide them */
+    hr {
+      display: none;
+    }
 
-/* 3) Reduce the huge gutters between sections */
-section {
-  /* shrink the 3rem default to something tighter if you like */
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
+    /* 1) Make the page background pure white */
+    body {
+      background-color: #fff;
+    }
 
-/* 4) If your HTML is emitting extra <hr> tags, hide them */
-hr {
-  display: none;
-}
+    /* 2) Keep the Experience container itself white */
+    #experience .container {
+      background-color: #fff;
+    }
 
-	  /* 1) Make the page background pure white */
-body {
-  background-color: #fff;
-}
+    /* 3) Remove the horizontal “border” between Experience and the next section */
+    section#experience {
+      border-bottom: none;
+    }
 
-/* 2) Keep the Experience container itself white */
-#experience .container {
-  background-color: #fff;
-}
+    /* 4) Match the padding of the other sections (you already have 1.5rem if you like it) */
+    section#experience,
+    section#experience+section {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
 
-/* 3) Remove the horizontal “border” between Experience and the next section */
-section#experience {
-  border-bottom: none;
-}
+    /* 1) Shrink the default section padding a bit */
+    section {
+      padding-top: 2rem;
+      /* was 3rem */
+      padding-bottom: 2rem;
+      /* was 3rem */
+    }
 
-/* 4) Match the padding of the other sections (you already have 1.5rem if you like it) */
-section#experience,
-section#experience + section {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-/* 1) Shrink the default section padding a bit */
-section {
-  padding-top: 2rem;    /* was 3rem */
-  padding-bottom: 2rem; /* was 3rem */
-}
+    /* 2) If you want them even tighter only between Experience → Publications */
+    section#experience {
+      padding-bottom: 1.5rem;
+    }
 
-/* 2) If you want them even tighter only between Experience → Publications */
-section#experience {
-  padding-bottom: 1.5rem;
-}
-section#publications {
-  padding-top: 1.5rem;
-}
+    section#publications {
+      padding-top: 1.5rem;
+    }
 
-/* 3) Remove any extra hr or border from the bottom of #experience */
-section#experience {
-  border-bottom: none;
-  margin-bottom: 0; /* in case your theme adds extra space */
-}
+    /* 3) Remove any extra hr or border from the bottom of #experience */
+    section#experience {
+      border-bottom: none;
+      margin-bottom: 0;
+      /* in case your theme adds extra space */
+    }
 
-/* 4) Make sure headings don’t add huge margins */
-section h1 {
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-}
-/* tighten vertical spacing */
-section {
-  padding: 2rem 0;
-}
-section#experience {
-  padding-bottom: 1.5rem;
-  border-bottom: none;
-  margin-bottom: 0;
-}
-/* center and constrain work experience */
-#experience .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-/* heading margins */
-#experience h1 {
-  margin: 0.5rem 0 1rem;
-}
+    /* 4) Make sure headings don’t add huge margins */
+    section h1 {
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+    }
 
+    /* tighten vertical spacing */
+    section {
+      padding: 2rem 0;
+    }
 
+    section#experience {
+      padding-bottom: 1.5rem;
+      border-bottom: none;
+      margin-bottom: 0;
+    }
 
+    /* center and constrain work experience */
+    #experience .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* heading margins */
+    #experience h1 {
+      margin: 0.5rem 0 1rem;
+    }
   </style>
   <aside class="search-results" id="search">
     <div class="container">
@@ -803,21 +820,18 @@ section#experience {
               </a>
             </span>
             <!-- Lowe’s name separately -->
-            <a href="https://www.lowes.com/" target="_blank" class="logo-name">Lowe’s</a> where I am developing large-scale, multimodal language models (MLLMs) to enhance operational efficiency and customer experience in complex, real-world environments. 
+            <a href="https://www.lowes.com/" target="_blank" class="logo-name">Lowe’s</a> where I am developing large-scale, multimodal language models (MLLMs) to enhance operational efficiency and customer experience in complex, real-world environments.
           </p>
           <!--
         <p>I am currently a Ph.D. candidate in the Department of Computer Science at the <strong><a href="https://www.charlotte.edu/" target="_blank">University of North Carolina at Charlotte</a></strong>, working under the supervision of <span style="color: #A6372A;"><strong><a href="https://scholar.google.com/citations?hl=en&user=0buJlAUAAAAJ&view_op=list_works&authuser=2&sortby=pubdate" target="_blank">Dr. Pu Wang</a></strong></span> at the <span style="color: #A6372A;"><em><a href="" target="_blank">GENIUS Lab</a></em></span>. My research focuses on advancing computer vision and generative AI, particularly in <strong>3D Human Pose Estimation</strong> and <strong>Mesh Recovery</strong>. Moreover, I am interested in <strong>3D Human Motion Generation</strong> driven by multi-modal inputs (e.g., text, music, or speech), with a focus on achieving controllable, high-quality synthesis for realistic and dynamically responsive motion generation in real-time interactive settings. Previously, at the <span style="color: #A6372A;"><em><a href="https://webpages.charlotte.edu/lfan4/index.html" target="_blank">Image Privacy Lab</a></em></span> under <span style="color: #A6372A;"><strong><a href="https://scholar.google.com/citations?hl=en&user=mPJmXakAAAAJ&view_op=list_works&sortby=pubdate" target="_blank">Dr. Liyue Fan</a></strong></span>, I developed privacy-preserving federated frameworks for generative AI, enabling secure synthetic data generation in non-IID settings. Currently, I am a researcher at Amazon and Lowe’s working on computer vision and generative AI. Before joining UNCC, I earned my Bachelor's degree in Computer Science from <strong><a href="https://_"></a></strong></p>
         -->
           <h2>Research Interests</h2>
           <p> My research interests lie at the intersection of computer vision and generative AI, with a focus on 3D human modeling. Specifically, I focus on 3D human pose estimation and mesh reconstruction via generative masked modeling. Moreover, I’m interested in developing multimodal motion synthesis frameworks that synthesize controllable, high-fidelity 3D human animations for real time applications. </p>
-<p>
-  <strong>
-    If you have any research opportunities or open positions, please feel free to reach out at 
-    <a href="mailto:msaleem2@charlotte.edu" style="color: #A6372A;">
-      <em>msaleem2@charlotte.edu</em>
-    </a>.
-  </strong>
-</p>
+          <p>
+            <strong> If you have any research opportunities or open positions, please feel free to reach out at <a href="mailto:msaleem2@charlotte.edu" style="color: #A6372A;">
+                <em>msaleem2@charlotte.edu</em>
+              </a>. </strong>
+          </p>
           <!--  In parallel, I’m building large-scale multimodal language models to enable robust video understanding in complex, real-world environments. -->
           <!--
         <p> My research interests lie in Computer Vision and Generative AI, specifically focusing on two interconnected pillars: </p><ul><li>3D Human Pose Estimation and Mesh Recovery</li><li>Multi-Modality Motion Synthesis</li></ul>
@@ -827,43 +841,38 @@ section#experience {
           </h3>
           <ul class="news-list">
 
-<li class="highlight-june-2025">
-  <i class="fas fa-bell news-icon" aria-hidden="true"></i>
-  <strong>October 2025:</strong> MaskControl paper selected for <em>Oral Presentation</em> and <em>🏆 Award Candidate</em> at <strong style="color:#A6372A">ICCV 2025</strong>!
-</li>
+            <li class="highlight-june-2025">
+              <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+              <strong>October 2025:</strong> Will be joining <a href="https://www.google.com/" target="_blank" class="logo-name">Google</a> as Student Researcher in Multimodal GenAI (AR/VR) Team!
 
-			  
- <li class="highlight-june-2025">
-    <i class="fas fa-bell news-icon" aria-hidden="true"></i>
-  <strong>Aug 2025:</strong> Available for <span class="logo-name">Research Scientist / Engineer</span> oppertunities. Please reach out if there’s a good match.  </li>
-
-<li class="highlight-june-2025">
-  <i class="fas fa-bell news-icon" aria-hidden="true"></i>
-  <strong>July 2025:</strong> Poster selected at <em> Amazon WWAS Science Fair Seattle</em>, presented next-gen multimodal shopping demo to VPs!
-</li>
-
+            </li>
 
 
 			  
-
-			  
-
-			  
- <li class="highlight-june-2025">
-    <i class="fas fa-bell news-icon" aria-hidden="true"></i>
-    <strong>June 2025:</strong> Joined <a href="https://www.amazon.com/" target="_blank" class="logo-name">Amazon</a> as Applied Scientist II Intern
-  </li>
-
-  <li class="highlight-june-2025">
-    <i class="fas fa-bell news-icon" aria-hidden="true"></i>
-    <strong>June 2025:</strong> A paper on “MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild” is accepted to <strong style="color:#A6372A">ICCV 2025</strong>!
-  </li>
-
-  <li class="highlight-june-2025">
-    <i class="fas fa-bell news-icon" aria-hidden="true"></i>
-    <strong>June 2025:</strong> A paper on “Spatio-Temporal Control for Masked Motion Synthesis” is accepted to <strong style="color:#A6372A">ICCV 2025 (Oral)</strong>!
-  </li>
-
+            <li class="highlight-june-2025">
+              <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+              <strong>October 2025:</strong> MaskControl paper selected for <em>Oral Presentation</em> and <em>🏆 Award Candidate</em> at <strong style="color:#A6372A">ICCV 2025</strong>!
+            </li>
+            <li class="highlight-june-2025">
+              <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+              <strong>Aug 2025:</strong> Available for <span class="logo-name">Research Scientist / Engineer</span> oppertunities. Please reach out if there’s a good match.
+            </li>
+            <li class="highlight-june-2025">
+              <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+              <strong>July 2025:</strong> Poster selected at <em> Amazon WWAS Science Fair Seattle</em>, presented next-gen multimodal shopping demo to VPs!
+            </li>
+            <li class="highlight-june-2025">
+              <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+              <strong>June 2025:</strong> Joined <a href="https://www.amazon.com/" target="_blank" class="logo-name">Amazon</a> as Applied Scientist II Intern
+            </li>
+            <li class="highlight-june-2025">
+              <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+              <strong>June 2025:</strong> A paper on “MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild” is accepted to <strong style="color:#A6372A">ICCV 2025</strong>!
+            </li>
+            <li class="highlight-june-2025">
+              <i class="fas fa-bell news-icon" aria-hidden="true"></i>
+              <strong>June 2025:</strong> A paper on “Spatio-Temporal Control for Masked Motion Synthesis” is accepted to <strong style="color:#A6372A">ICCV 2025 (Oral)</strong>!
+            </li>
             <li>
               <strong>April 2025:</strong> “DanceMosaic: High-Fidelity Dance Generation with Multimodal Editability” is now available on <strong style="color:#A6372A">arXiv</strong>.
             </li>
@@ -898,8 +907,6 @@ section#experience {
     </div>
   </section>
   <!-- <section id="skills" class="home-section wg-featurette   "><div class="container"><div class="row featurette"><div class="col-md-12 section-heading"><h1>Skills</h1></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/python.svg" alt="python" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/C.svg" alt="C" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/cplusplus.svg" alt="cplusplus" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/csharp.svg" alt="csharp" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/java.svg" alt="java" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/matlab.svg" alt="matlab" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/scala.svg" alt="scala" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/mysql.svg" alt="mysql" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/bash.svg" alt="bash" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/latex.svg" alt="latex" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/R.svg" alt="R" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/haskell.svg" alt="haskell" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/docker.svg" alt="docker" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/git.svg" alt="git" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/jupyter.svg" alt="jupyter" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/numpy.svg" alt="numpy" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/opencv.svg" alt="opencv" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/pandas.svg" alt="pandas" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/pytorch.svg" alt="pytorch" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/scikit.svg" alt="scikit" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/tensorflow.svg" alt="tensorflow" class="svg-icon svg-baseline"></div><h3></h3></div><div class="col-12 col-sm-2"><div class="featurette-icon"><img src="/images/icon-pack/huggingface.svg" alt="huggingface" class="svg-icon svg-baseline"></div><h3></h3></div></div></div></section> -->
-  
-  
   <section id="experience" class="home-section wg-pages">
     <div class="container">
       <div class="row">
@@ -907,10 +914,25 @@ section#experience {
           <h1 class="text-center">Work Experience</h1>
         </div>
       </div>
-  
       <div class="row">
         <div class="col-12">
-  
+
+          <div class="experience-item">
+            <div class="company-logo">
+              <img src="./author/usama/google.png" alt="Google logo" width="200">
+            </div>
+            <div class="experience-details">
+              <h3>Student Researcher at Multimodal GenAI (AR/VR) Team</h3>
+              <p>
+                <span class="company-location">
+                  <strong>Google</strong>, San Francisco, CA </span>
+                <span class="employment-dates"> Nov. 2025 – Present </span>
+              </p>
+            </div>
+          </div>
+
+
+			
           <div class="experience-item">
             <div class="company-logo">
               <img src="./author/usama/amazon.webp" alt="Amazon logo" width="200">
@@ -919,15 +941,11 @@ section#experience {
               <h3>Applied Scientist II Intern</h3>
               <p>
                 <span class="company-location">
-                  <strong>Amazon Inc.</strong>, Boston, MA
-                </span>
-                <span class="employment-dates">
-                  June 2025 – Present
-                </span>
+                  <strong>Amazon Inc.</strong>, Boston, MA </span>
+                <span class="employment-dates"> June 2025 – Present </span>
               </p>
             </div>
           </div>
-  
           <div class="experience-item">
             <div class="company-logo">
               <img src="./author/usama/lowes.png" alt="Lowe’s logo" width="200">
@@ -936,25 +954,15 @@ section#experience {
               <h3>Research Lead, Computer Vision UNCC Team</h3>
               <p>
                 <span class="company-location">
-                  <strong>Lowe’s</strong>, Charlotte, NC
-                </span>
-                <span class="employment-dates">
-                  Sept. 2023 – Present
-                </span>
+                  <strong>Lowe’s</strong>, Charlotte, NC </span>
+                <span class="employment-dates"> Sept. 2023 – Present </span>
               </p>
             </div>
           </div>
-  
         </div>
       </div>
     </div>
   </section>
-  
-  
-  
-  
-  
-  
   <section id="publications" class="home-section wg-pages">
     <div class="container">
       <!-- Full-width heading -->
@@ -1032,7 +1040,7 @@ section#experience {
                 <div class="stream-meta article-metadata"> Ekkasit Pinyoanuntapong, <strong>
                     <u>Muhammad Usama Saleem</u>
                   </strong>, Korrawe Karunratanakul, Pu Wang, Hongfei Xue, Chen Chen, Chuan Guo, Junli Cao, Jian Ren, Sergey Tulyakov </div>
-	                <div class="media-summary"> MaskControl is a novel masked generative motion model—combining masked consistency and inference-time logit editing in a parallel decoder for fast, high-fidelity, spatially precise motion generation. </div>
+                <div class="media-summary"> MaskControl is a novel masked generative motion model—combining masked consistency and inference-time logit editing in a parallel decoder for fast, high-fidelity, spatially precise motion generation. </div>
                 <div class="btn-links">
                   <a class="btn btn-outline-primary btn-sm" href="https://arxiv.org/pdf/2410.10780" target="_blank">PDF</a>
                   <a class="btn btn-outline-primary btn-sm" href="https://exitudio.github.io/ControlMM-page/" target="_blank">Webpage</a>
@@ -1103,7 +1111,7 @@ section#experience {
                 <h4 class="article-title mb-1">
                   <a href="https://exitudio.github.io/BAMM-page/"> BAMM: Bidirectional Autoregressive Motion Model </a>
                 </h4>
-             <div class="conference-name">
+                <div class="conference-name">
                   <strong>ECCV 2024</strong>
                 </div>
                 <div class="stream-meta article-metadata mb-3"> Ekkasit Pinyoanuntapong, <strong>
@@ -1128,7 +1136,7 @@ section#experience {
                 <h4 class="article-title mb-1">
                   <a href="./publication/DPFedProxGAN/dpfedproxgan.html"> Private Data Synthesis from Decentralized Non-IID Data </a>
                 </h4>
-             <div class="conference-name">
+                <div class="conference-name">
                   <strong>IJCNN 2023</strong>
                 </div>
                 <div class="stream-meta article-metadata mb-3">
@@ -1153,7 +1161,7 @@ section#experience {
                 <h4 class="article-title mb-1">
                   <a href="/publication/05-fs-privacy/"> Privacy Enhancement for Cloud-Based Few-Shot Learning </a>
                 </h4>
-               <div class="conference-name">
+                <div class="conference-name">
                   <strong>IJCNN 2022</strong>
                 </div>
                 <div class="stream-meta article-metadata mb-3"> A. Parnami, <strong>
@@ -1174,7 +1182,7 @@ section#experience {
                 <h4 class="article-title mb-1">
                   <a href="http://3.223.148.187/"> DP-Shield: Face Obfuscation with Differential Privacy </a>
                 </h4>
-                    <div class="conference-name">
+                <div class="conference-name">
                   <strong>EDBT 2022</strong>
                 </div>
                 <div class="stream-meta article-metadata mb-3">
@@ -1242,15 +1250,15 @@ section#experience {
     };
   </script>
   <script id="search-hit-fuse-template" type="text/x-template"> <div class="search-hit" id="summary-{{key}}">
-																																														<div class="search-hit-content">
-																																															<div class="search-hit-name">
-																																																<a href="{{relpermalink}}">{{title}}</a>
-																																																<div class="article-metadata search-hit-type">{{type}}</div>
-																																																<p class="search-hit-description">{{snippet}}</p>
-																																															</div>
-																																														</div>
-																																													</div>
-																																												</script>
+																																																			<div class="search-hit-content">
+																																																				<div class="search-hit-name">
+																																																					<a href="{{relpermalink}}">{{title}}</a>
+																																																					<div class="article-metadata search-hit-type">{{type}}</div>
+																																																					<p class="search-hit-description">{{snippet}}</p>
+																																																				</div>
+																																																			</div>
+																																																		</div>
+																																																	</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
   <script>
@@ -1297,8 +1305,8 @@ section#experience {
         </div>
         <div class="modal-body">
           <pre>
-																																																	<code class="tex hljs"></code>
-																																																</pre>
+																																																						<code class="tex hljs"></code>
+																																																					</pre>
         </div>
         <div class="modal-footer">
           <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
