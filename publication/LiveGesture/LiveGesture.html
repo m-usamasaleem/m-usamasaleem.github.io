@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>LiveGesture</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
+
+    <!-- Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --accent: #c02504;
+        --glass: rgba(255, 255, 255, 0.4);
+        --glass-border: rgba(255, 255, 255, 0.7);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", -apple-system, system-ui, sans-serif;
+        background: radial-gradient(circle at top, #f8f9fc, #d7dae5);
+        color: #111;
+        margin: 0;
+      }
+
+      .container-narrow {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 16px 16px 32px;
+      }
+
+      .title {
+        font-size: 2.4rem;
+        font-weight: 700;
+      }
+
+      .subtitle {
+        color: #6b7280;
+        font-size: 1rem;
+      }
+
+      .small-text {
+        font-size: 0.92rem;
+        color: #4b5563;
+      }
+
+      .small-muted {
+        font-size: 0.85rem;
+        color: #6b7280;
+      }
+
+      .accent {
+        color: var(--accent);
+      }
+
+      .glass {
+        background: var(--glass);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border-radius: 24px;
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 15px 40px rgba(15, 23, 42, 0.2);
+        padding: 20px;
+      }
+
+      .hero-img,
+      .figure-img {
+        width: 100%;
+        border-radius: 18px;
+        display: block;
+      }
+
+      .section-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .pill {
+        font-size: 0.7rem;
+        padding: 4px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(120, 120, 130, 0.4);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        display: inline-block;
+        color: #4b5563;
+      }
+
+      .btn-main {
+        background: linear-gradient(135deg, #c02504, #ff6a3e);
+        color: #fff;
+        border-radius: 999px;
+        border: none;
+        padding: 9px 22px;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      .btn-main:hover {
+        filter: brightness(1.04);
+      }
+
+      pre {
+        background: #000;
+        color: #e5e7eb;
+        border-radius: 16px;
+        padding: 14px;
+        font-size: 0.8rem;
+        overflow-x: auto;
+        margin: 0;
+      }
+
+      table {
+        font-size: 0.8rem;
+      }
+
+      thead tr {
+        background: rgba(243, 244, 246, 0.9);
+      }
+
+      .highlight-row {
+        background: rgba(192, 37, 4, 0.06);
+      }
+
+      .tick {
+        color: #16a34a;
+        font-weight: 700;
+      }
+
+      .cross {
+        color: #9ca3af;
+        font-weight: 700;
+      }
+
+      footer {
+        text-align: center;
+        font-size: 0.85rem;
+        color: #6b7280;
+        padding-bottom: 12px;
+      }
+
+      .fade {
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadein 0.7s ease-out forwards;
+      }
+
+      .fade-delay {
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadein 0.8s ease-out forwards;
+        animation-delay: 0.1s;
+      }
+
+      @keyframes fadein {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .figure-caption {
+        font-size: 0.85rem;
+        color: #4b5563;
+        margin-top: 6px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-narrow">
+
+      <!-- HERO / TITLE -->
+      <section class="my-4 fade text-center">
+        <h1 class="title">LiveGesture</h1>
+        <p class="subtitle">Streamable Co-Speech Gesture Generation Model</p>
+
+        <p class="small-text mt-3">
+          <a href="https://m-usamasaleem.github.io/" class="accent fw-semibold" target="_blank">
+            Muhammad Usama Saleem
+          </a>,
+          Mayur Jagdishbhai Patel,
+          Ekkasit Pinyoanuntapong,
+          Zhongxing Qin,
+          Li Yang,
+          Hongfei Xue,
+          Ahmed Helmy,
+          Chen Chen,
+          Pu Wang
+        </p>
+        <p class="small-muted">University of North Carolina at Charlotte · University of Central Florida</p>
+
+        <div class="mt-3">
+          <a href="https://arxiv.org/abs/2412.14444" target="_blank" class="btn-main">
+            arXiv
+          </a>
+        </div>
+      </section>
+
+      <!-- FIGURE 1: LANDING -->
+      <section class="my-4 fade">
+        <div class="glass">
+          <img src="./assets/landing.png" class="hero-img" alt="LiveGesture landing figure" loading="lazy" />
+        </div>
+        <div class="figure-caption">
+          <strong>Figure 1.</strong> LiveGesture overview teaser. Given live speech audio, the system generates
+          full-body SMPL-X gestures online with zero look-ahead and low latency.
+        </div>
+      </section>
+
+      <!-- ABSTRACT (FULL) -->
+      <section class="my-5 fade">
+        <div class="glass">
+          <span class="pill mb-2">Abstract</span>
+          <p class="small-text mt-2" style="text-align:justify;">
+            We propose <span class="accent fw-semibold">LiveGesture</span>, the first fully streamable, speech-driven
+            full-body gesture generation framework that operates with zero look-ahead and supports arbitrary sequence
+            length. Unlike existing co-speech gesture methods—which are designed for offline generation and either treat
+            body regions independently or entangle all joints within a single model—LiveGesture is built from the ground
+            up for causal, region-coordinated motion generation.
+          </p>
+          <p class="small-text" style="text-align:justify;">
+            <span class="accent fw-semibold">LiveGesture</span> consists of two main modules: the
+            <span class="fw-semibold">Streamable Vector-Quantized Motion Tokenizer (SVQ)</span> and the
+            <span class="fw-semibold">Hierarchical Autoregressive Transformer (HAR)</span>.
+            The SVQ tokenizer converts the motion sequence of each body region into causal, discrete motion tokens,
+            enabling real-time, streamable token decoding. On top of SVQ, HAR employs
+            <span class="fw-semibold">region-eXpert autoregressive (xAR) transformers</span> to model expressive,
+            fine-grained motion dynamics for each body region. A causal spatio-temporal fusion module
+            (<span class="fw-semibold">xAR-Fusion</span>) then captures and integrates correlated motion dynamics across regions.
+          </p>
+          <p class="small-text" style="text-align:justify;">
+            Both xAR and xAR-Fusion are conditioned on live, continuously arriving audio signals encoded by a
+            streamable causal audio encoder. To enhance robustness under streaming noise and prediction errors, we
+            introduce <span class="fw-semibold">autoregressive masking training</span>, which leverages
+            uncertainty-guided token masking and random region masking to expose the model to imperfect, partially
+            erroneous histories during training. Experiments on the BEAT2 dataset demonstrate that LiveGesture produces
+            coherent, diverse, and beat-synchronous full-body gestures in real time, matching or surpassing
+            state-of-the-art offline methods under true zero–look-ahead conditions.
+          </p>
+        </div>
+      </section>
+
+      <!-- METHOD FIGURES -->
+      <section class="my-4 fade">
+        <h2 class="section-title">Method Figures</h2>
+
+        <!-- FIGURE 2: FRAMEWORK -->
+        <div class="glass mb-4">
+          <img src="./assets/framework.png" class="figure-img" alt="Hierarchical autoregressive framework" loading="lazy" />
+        </div>
+        <div class="figure-caption mb-4">
+          <strong>Figure 2.</strong> Hierarchical Autoregressive Model in <em>LiveGesture</em>. A streamable audio encoder
+          provides causal tokens to region-eXpert transformers (xAR) for upper body, lower body, hands, and face.
+          Their states are adapted and fused by xAR-Fuse, a causal spatial–temporal transformer that predicts next-step
+          SVQ motion tokens for zero–look-ahead full-body gesture generation.
+        </div>
+
+        <!-- FIGURE 3: VQVAE / SVQ -->
+        <div class="glass mb-4">
+          <img src="./assets/vqvae.png" class="figure-img" alt="SVQ motion tokenizer" loading="lazy" />
+        </div>
+        <div class="figure-caption mb-4">
+          <strong>Figure 3.</strong> Streamable Vector-Quantized Motion Tokenizer (SVQ). For each body region, a
+          bidirectional encoder and causal decoder form an asymmetric autoencoder. A region-specific VQ codebook and
+          projection head then quantize latents into discrete, time-synchronous motion tokens that remain compatible with
+          strictly causal decoding.
+        </div>
+
+        <!-- FIGURE 4: SOTA -->
+        <div class="glass mb-2">
+          <img src="./assets/SOTA.png" class="figure-img" alt="SOTA comparison" loading="lazy" />
+        </div>
+        <div class="figure-caption">
+          <strong>Figure 4.</strong> Qualitative comparison with recent co-speech gesture methods on BEAT2.
+          LiveGesture generates diverse, expressive full-body gestures that better follow speech rhythm, while prior
+          methods exhibit typical failure cases (e.g., off-beat or stiff motion).
+        </div>
+      </section>
+
+      <!-- RESULTS -->
+      <section class="my-5 fade">
+        <h2 class="section-title">Results on BEAT2</h2>
+
+
+        <!-- Full table -->
+        <div class="glass">
+          <div class="small-muted mb-2">
+            Best values in <strong>bold</strong>; second-best values <u>underlined</u>.
+          </div>
+          <div class="table-responsive">
+            <table class="table table-sm table-bordered text-center align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Venue</th>
+                  <th>Streaming</th>
+                  <th>FGD ↓</th>
+                  <th>BC →</th>
+                  <th>Div ↑</th>
+                  <th>MSE ↓</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>HA2G</td>
+                  <td>CVPR'22</td>
+                  <td><span class="cross">✗</span></td>
+                  <td>12.32</td>
+                  <td>0.677</td>
+                  <td>8.63</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td>DisCo</td>
+                  <td>MM'22</td>
+                  <td><span class="cross">✗</span></td>
+                  <td>9.42</td>
+                  <td>0.643</td>
+                  <td>9.91</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td>CaMN</td>
+                  <td>ECCV'22</td>
+                  <td><span class="cross">✗</span></td>
+                  <td>6.64</td>
+                  <td>0.676</td>
+                  <td>10.86</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td>TalkShow</td>
+                  <td>CVPR'23</td>
+                  <td><span class="cross">✗</span></td>
+                  <td>6.21</td>
+                  <td>0.695</td>
+                  <td>13.47</td>
+                  <td>7.791</td>
+                </tr>
+                <tr>
+                  <td>DiffSHEG</td>
+                  <td>CVPR'24</td>
+                  <td><span class="cross">✗</span></td>
+                  <td>7.14</td>
+                  <td>0.743</td>
+                  <td>8.21</td>
+                  <td>9.571</td>
+                </tr>
+                <tr>
+                  <td>ProbTalk</td>
+                  <td>CVPR'24</td>
+                  <td><span class="cross">✗</span></td>
+                  <td>5.04</td>
+                  <td>0.771</td>
+                  <td>13.27</td>
+                  <td>8.614</td>
+                </tr>
+                <tr>
+                  <td>EMAGE</td>
+                  <td>CVPR'24</td>
+                  <td><span class="cross">✗</span></td>
+                  <td>5.51</td>
+                  <td>0.772</td>
+                  <td>13.06</td>
+                  <td>7.680</td>
+                </tr>
+                <tr>
+                  <td>MambaTalk</td>
+                  <td>NeurIPS'24</td>
+                  <td><span class="cross">✗</span></td>
+                  <td>5.37</td>
+                  <td><u>0.781</u></td>
+                  <td>13.05</td>
+                  <td>7.680</td>
+                </tr>
+                <tr>
+                  <td>SynTalker</td>
+                  <td>MM'24</td>
+                  <td><span class="cross">✗</span></td>
+                  <td>4.69</td>
+                  <td>0.736</td>
+                  <td>12.43</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td>RAG-Gesture</td>
+                  <td>CVPR'25</td>
+                  <td><span class="cross">✗</span></td>
+                  <td>9.11</td>
+                  <td>0.727</td>
+                  <td>12.62</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td>RAG-Gesture (w/ Disc.)</td>
+                  <td>CVPR'25</td>
+                  <td><span class="cross">✗</span></td>
+                  <td>8.79</td>
+                  <td>0.739</td>
+                  <td>12.62</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td>GestureLSM</td>
+                  <td>ICCV'25</td>
+                  <td><span class="cross">✗</span></td>
+                  <td><strong>4.25</strong></td>
+                  <td>0.729</td>
+                  <td><u>13.76</u></td>
+                  <td><strong>1.021</strong></td>
+                </tr>
+                <tr class="highlight-row">
+                  <td><strong>LiveGesture (ours)</strong></td>
+                  <td>–</td>
+                  <td><span class="tick">✓</span></td>
+                  <td><u>4.57</u></td>
+                  <td><strong>0.794</strong></td>
+                  <td><strong>13.91</strong></td>
+                  <td><u>1.241</u></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- BIBTEX -->
+      <section class="my-5 fade">
+        <h2 class="section-title">BibTeX</h2>
+        <div class="glass">
+<pre>
+@article{saleem2024livegesture,
+  title   = {LiveGesture: Streamable Co-Speech Gesture Generation Model},
+  author  = {Saleem, Muhammad Usama and Patel, Mayur Jagdishbhai and
+             Pinyoanuntapong, Ekkasit and Qin, Zhongxing and Yang, Li and
+             Xue, Hongfei and Helmy, Ahmed and Chen, Chen and Wang, Pu},
+  journal = {arXiv preprint -},
+  year    = {2024}
+}
+</pre>
+        </div>
+      </section>
+
+    </div>
+
+    <footer>
+      © 2024 LiveGesture · msaleem2@charlotte.edu
+    </footer>
+  </body>
+</html>
