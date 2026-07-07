@@ -581,7 +581,7 @@
 
     .exp-rail {
       position: absolute;
-      top: 7.35rem;
+      top: 6.5rem;
       left: 10%;
       right: 10%;
       height: 4px;
@@ -651,63 +651,44 @@
       box-shadow: 0 2px 10px rgba(140,21,21,0.28);
     }
 
-    .exp-brand {
+    .exp-logo-card {
       position: relative;
       width: 100%;
       max-width: 118px;
+      height: 76px;
       margin-bottom: 1rem;
       border-radius: 14px;
-      overflow: hidden;
       background: #fff;
       border: 1.5px solid #e8e8e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 0.85rem;
       box-shadow: 0 4px 16px rgba(0,0,0,0.06);
       transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s, border-color 0.35s;
     }
 
-    .exp-brand-logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 58px;
-      padding: 0.75rem 0.85rem 0.55rem;
-      background: #fff;
-    }
-
-    .exp-brand-logo img {
+    .exp-logo-card img {
       max-width: 100%;
-      max-height: 36px;
+      max-height: 44px;
       width: auto;
       height: auto;
       object-fit: contain;
     }
 
-    .exp-brand-photo {
-      height: 42px;
-      border-top: 1px solid #efefef;
-      background: #f3f3f3;
-    }
-
-    .exp-brand-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      display: block;
-    }
-
-    .exp-step:hover .exp-brand {
+    .exp-step:hover .exp-logo-card {
       transform: translateY(-4px);
       box-shadow: 0 12px 28px rgba(0,0,0,0.1);
       border-color: #d4d4d4;
     }
 
-    .exp-step.current .exp-brand {
+    .exp-step.current .exp-logo-card {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(140,21,21,0.1), 0 10px 30px rgba(140,21,21,0.16);
       transform: translateY(-3px) scale(1.03);
     }
 
-    .exp-step.current .exp-brand::after {
+    .exp-step.current .exp-logo-card::after {
       content: '';
       position: absolute;
       inset: -4px;
@@ -771,7 +752,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       .exp-rail-fill { animation: none; transform: scaleX(1); opacity: 1; }
-      .exp-step.current .exp-brand::after { animation: none; }
+      .exp-step.current .exp-logo-card::after { animation: none; }
     }
 
     /* ── Footer ──────────────────────────────────────── */
@@ -852,23 +833,16 @@
       .exp-rail {
         left: 14%;
         right: 14%;
-        top: 7.5rem;
+        top: 6.35rem;
       }
 
-      .exp-brand {
+      .exp-logo-card {
         max-width: 140px;
+        height: 82px;
       }
 
-      .exp-brand-logo {
-        height: 62px;
-      }
-
-      .exp-brand-logo img {
-        max-height: 40px;
-      }
-
-      .exp-brand-photo {
-        height: 46px;
+      .exp-logo-card img {
+        max-height: 48px;
       }
 
       .exp-role { max-width: none; }
@@ -940,13 +914,8 @@
 
           <article class="exp-step">
             <span class="exp-date">2023 – 2025</span>
-            <div class="exp-brand">
-              <div class="exp-brand-logo">
-                <img src="./author/usama/lowes.png" alt="Lowe's">
-              </div>
-              <div class="exp-brand-photo">
-                <img src="./author/lowes.jpg" alt="Lowe's Innovation Labs">
-              </div>
+            <div class="exp-logo-card">
+              <img src="./author/usama/lowes.png" alt="Lowe's">
               <span class="exp-rail-node" aria-hidden="true"></span>
             </div>
             <div class="exp-role">Research Lead</div>
@@ -956,13 +925,8 @@
 
           <article class="exp-step">
             <span class="exp-date">Summer 2025</span>
-            <div class="exp-brand">
-              <div class="exp-brand-logo">
-                <img src="./author/usama/amazon.webp" alt="Amazon">
-              </div>
-              <div class="exp-brand-photo">
-                <img src="./author/dashcart-amazon-intern.jpeg" alt="Amazon Dash Cart">
-              </div>
+            <div class="exp-logo-card">
+              <img src="./author/usama/amazon.webp" alt="Amazon">
               <span class="exp-rail-node" aria-hidden="true"></span>
             </div>
             <div class="exp-role">Research Scientist</div>
@@ -972,13 +936,8 @@
 
           <article class="exp-step">
             <span class="exp-date">2025 – 2026</span>
-            <div class="exp-brand">
-              <div class="exp-brand-logo">
-                <img src="./author/usama/google.png" alt="Google">
-              </div>
-              <div class="exp-brand-photo">
-                <img src="./author/googleXR.jpg" alt="Google XR">
-              </div>
+            <div class="exp-logo-card">
+              <img src="./author/usama/google.png" alt="Google">
               <span class="exp-rail-node" aria-hidden="true"></span>
             </div>
             <div class="exp-role">Research Scientist Intern</div>
@@ -988,13 +947,8 @@
 
           <article class="exp-step current">
             <span class="exp-present">Present · 2026</span>
-            <div class="exp-brand">
-              <div class="exp-brand-logo">
-                <img src="./author/usama/amazon.webp" alt="Amazon">
-              </div>
-              <div class="exp-brand-photo">
-                <img src="./author/amazon-music-now.png" alt="Amazon Music">
-              </div>
+            <div class="exp-logo-card">
+              <img src="./author/usama/amazon.webp" alt="Amazon">
               <span class="exp-rail-node" aria-hidden="true"></span>
             </div>
             <div class="exp-role">Research Scientist</div>
