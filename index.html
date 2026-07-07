@@ -34,9 +34,10 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html {
-      font-size: 17px;
+      font-size: clamp(15px, 2.8vw, 17px);
       scroll-behavior: smooth;
       scroll-padding-top: 3.5rem;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
@@ -50,6 +51,20 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
+      overflow-x: clip;
+    }
+
+    img, video {
+      max-width: 100%;
+    }
+
+    .research-video video,
+    .research-video img,
+    .pub-media img,
+    .pub-media video {
+      width: 100%;
+      height: 100%;
+      max-width: none;
     }
 
     a {
@@ -66,7 +81,7 @@
     .wrap {
       max-width: var(--max-w);
       margin: 0 auto;
-      padding: 0 1.25rem;
+      padding: 0 clamp(1rem, 4vw, 1.5rem);
     }
 
     /* ── Nav ───────────────────────────────────────────── */
@@ -83,31 +98,83 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 3rem;
+      gap: 0.75rem;
+      min-height: 3rem;
+      padding-top: 0.35rem;
+      padding-bottom: 0.35rem;
     }
 
     .nav-name {
       font-family: var(--font-sans);
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: clamp(0.82rem, 2.5vw, 0.95rem);
       color: var(--text);
       text-decoration: none;
+      min-width: 0;
+      line-height: 1.3;
     }
 
     .nav-name:hover { text-decoration: none; color: var(--text); }
 
+    .nav-toggle {
+      display: none;
+      flex-shrink: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .nav-toggle span,
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      display: block;
+      width: 1.1rem;
+      height: 2px;
+      background: var(--text);
+      border-radius: 1px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .nav-toggle span {
+      position: relative;
+    }
+
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      content: '';
+      position: absolute;
+      left: 0;
+    }
+
+    .nav-toggle span::before { top: -5px; }
+    .nav-toggle span::after { top: 5px; }
+
+    .nav-toggle[aria-expanded="true"] span { background: transparent; }
+    .nav-toggle[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
+
     .nav-links {
       display: flex;
-      gap: 1.35rem;
+      gap: clamp(0.65rem, 2vw, 1.35rem);
       list-style: none;
       font-family: var(--font-sans);
-      font-size: 0.9rem;
+      font-size: clamp(0.78rem, 2.2vw, 0.9rem);
       font-weight: 500;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
+      white-space: nowrap;
+      padding: 0.25rem 0;
     }
 
     .nav-links a:hover,
@@ -163,6 +230,11 @@
       font-weight: 500;
       margin-top: 0.75rem;
       color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.15rem 0;
+      line-height: 1.8;
     }
 
     .contact-links a {
@@ -242,8 +314,8 @@
 
     .research-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.1rem;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+      gap: clamp(0.75rem, 2.5vw, 1.1rem);
     }
 
     .research-card {
@@ -395,19 +467,6 @@
 
     .research-card:hover .research-cta {
       text-decoration: underline !important;
-    }
-
-    @media (min-width: 960px) {
-      .research-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .research-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     /* ── Publications ────────────────────────────────── */
@@ -789,63 +848,259 @@
     }
 
     /* ── Responsive ──────────────────────────────────── */
-    @media (max-width: 720px) {
+    @media (max-width: 900px) {
       .about-grid {
         grid-template-columns: 1fr;
-      }
-
-      .profile-photo {
-        width: 160px;
-        margin: 0 auto;
+        gap: 1.5rem;
       }
 
       .about-photo { text-align: center; }
 
-      .nav-links { gap: 0.85rem; font-size: 0.8rem; }
+      .profile-photo {
+        width: min(180px, 55vw);
+        margin: 0 auto;
+      }
+
+      .exp-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem 0.75rem;
+      }
+
+      .exp-rail {
+        display: none;
+      }
+
+      .exp-rail-node {
+        display: none;
+      }
+
+      .exp-timeline {
+        padding: 1.25rem 1rem 1rem;
+      }
 
       .pub-entry {
         flex-direction: column;
+        gap: 0.85rem;
+        padding: 1.1rem 0;
       }
 
       .pub-media {
         flex: none;
         width: 100%;
+        max-width: 100%;
         height: auto;
         aspect-ratio: 16 / 9;
+      }
+    }
+
+    @media (max-width: 680px) {
+      nav .wrap {
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0.35rem 0 0.5rem;
+        border-top: 1px solid var(--border);
+        margin-top: 0.15rem;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 0.65rem 0.25rem;
+        white-space: normal;
+      }
+
+      section {
+        padding: 2rem 0;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .news-table thead { display: none; }
+
+      .news-table tr {
+        display: block;
+        padding: 0.65rem 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .news-table tr:last-child { border-bottom: none; }
+
+      .news-table td {
+        display: inline;
+        padding: 0;
+      }
+
+      .news-table .news-month,
+      .news-table .news-year {
+        font-size: 0.8rem;
+        width: auto;
+        padding-right: 0.35rem;
+      }
+
+      .news-table .news-year::after {
+        content: ' ·';
+        color: var(--text-light);
+      }
+
+      .news-table .news-body {
+        display: block;
+        margin-top: 0.35rem;
+        line-height: 1.55;
       }
 
       .exp-steps {
         display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        gap: 0.5rem;
-        padding-bottom: 0.35rem;
-        scrollbar-width: none;
+        flex-direction: column;
+        gap: 0;
       }
-
-      .exp-steps::-webkit-scrollbar { display: none; }
 
       .exp-step {
-        flex: 0 0 78%;
-        scroll-snap-align: center;
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        grid-template-rows: auto auto;
+        gap: 0 0.85rem;
+        align-items: start;
+        text-align: left;
+        padding: 1rem 0 1rem 0.85rem;
+        border-left: 2px solid #e8e8e8;
+        position: relative;
       }
 
-      .exp-rail {
-        left: 14%;
-        right: 14%;
-        top: 6.35rem;
+      .exp-step::before {
+        content: '';
+        position: absolute;
+        left: -6px;
+        top: 1.65rem;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid #ccc;
+      }
+
+      .exp-step.current::before {
+        border-color: var(--accent);
+        background: var(--accent);
+      }
+
+      .exp-step.current {
+        border-left-color: var(--accent);
+      }
+
+      .exp-date,
+      .exp-present {
+        grid-column: 2;
+        grid-row: 1;
+        justify-content: flex-start;
+        margin-bottom: 0.35rem;
+        min-height: auto;
       }
 
       .exp-logo-card {
-        max-width: 140px;
-        height: 82px;
+        grid-column: 1;
+        grid-row: 1 / span 4;
+        align-self: start;
+        width: 72px;
+        max-width: 72px;
+        height: 56px;
+        margin-bottom: 0;
+        padding: 0.45rem;
+        border-radius: 10px;
       }
 
       .exp-logo-card img {
-        max-height: 48px;
+        max-height: 36px;
       }
 
-      .exp-role { max-width: none; }
+      .exp-role {
+        grid-column: 2;
+        grid-row: 2;
+        font-size: 0.84rem;
+        margin-bottom: 0.1rem;
+        max-width: none;
+      }
+
+      .exp-org {
+        grid-column: 2;
+        grid-row: 3;
+      }
+
+      .exp-loc {
+        grid-column: 2;
+        grid-row: 4;
+      }
+
+      .pub-collab {
+        flex-wrap: wrap;
+        max-width: 100%;
+      }
+
+      .pub-collab-label {
+        white-space: normal;
+      }
+
+      .research-name {
+        font-size: 0.84rem;
+      }
+
+      .research-name span {
+        display: block;
+        margin-top: 0.15rem;
+      }
+
+      #visitor-map {
+        width: min(100px, 70vw);
+        height: auto;
+        aspect-ratio: 1;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .nav-name {
+        max-width: calc(100% - 3rem);
+      }
+
+      .contact-links .sep {
+        display: none;
+      }
+
+      .contact-links a {
+        margin-right: 0.65rem;
+      }
+    }
+
+    @supports (padding: max(0px)) {
+      body {
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+      }
+
+      nav {
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+      }
     }
   </style>
 </head>
@@ -854,7 +1109,10 @@
   <nav>
     <div class="wrap">
       <a class="nav-name" href="#">Muhammad Usama Saleem</a>
-      <ul class="nav-links">
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-nav">
+        <span></span>
+      </button>
+      <ul class="nav-links" id="site-nav">
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#news">News</a></li>
@@ -1386,6 +1644,22 @@
     (function () {
       const sections = ['about', 'experience', 'news', 'research', 'publications'];
       const links = document.querySelectorAll('.nav-links a');
+      const navToggle = document.querySelector('.nav-toggle');
+      const navMenu = document.getElementById('site-nav');
+
+      if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+          const open = navMenu.classList.toggle('open');
+          navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+
+        navMenu.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+            navToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
 
       function onScroll() {
         let current = sections[0];
