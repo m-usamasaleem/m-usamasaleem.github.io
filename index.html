@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Muhammad Usama Saleem — Research Scientist at Amazon. Multimodal AI for 3D human perception and synthesis.">
   <meta name="author" content="Muhammad Usama Saleem">
-  <meta name="theme-color" content="#8C1515">
+  <meta name="theme-color" content="#9B1C1C">
   <link rel="canonical" href="https://m-usamasaleem.github.io/">
   <link rel="icon" type="image/png" href="/images/logo.jpg">
   <link rel="apple-touch-icon" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_3.png">
@@ -16,45 +16,51 @@
   <title>Muhammad Usama Saleem</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --accent: #8C1515;
-      --accent-hover: #6B1010;
-      --text: #222;
-      --text-muted: #555;
-      --text-light: #888;
-      --border: #ddd;
-      --bg: #fff;
+      --accent: #9B1C1C;
+      --accent-hover: #7A1515;
+      --text: #111111;
+      --text-muted: #333333;
+      --text-light: #555555;
+      --border: #d8d8d8;
+      --bg: #fefefe;
       --max-w: 900px;
-      --font-sans: 'Lato', 'Helvetica Neue', Arial, sans-serif;
-      --font-serif: 'Source Serif 4', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-serif: 'Newsreader', 'Georgia', 'Times New Roman', serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html {
-      font-size: 16px;
+      font-size: 17px;
       scroll-behavior: smooth;
       scroll-padding-top: 3.5rem;
     }
 
     body {
       font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 400;
       color: var(--text);
       background: var(--bg);
-      line-height: 1.65;
+      line-height: 1.72;
+      letter-spacing: 0.01em;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
 
     a {
       color: var(--accent);
-      text-decoration: none;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
     }
 
     a:hover {
       color: var(--accent-hover);
-      text-decoration: underline;
     }
 
     .wrap {
@@ -82,7 +88,7 @@
 
     .nav-name {
       font-family: var(--font-sans);
-      font-weight: 700;
+      font-weight: 600;
       font-size: 0.95rem;
       color: var(--text);
       text-decoration: none;
@@ -95,8 +101,8 @@
       gap: 1.35rem;
       list-style: none;
       font-family: var(--font-sans);
-      font-size: 0.88rem;
-      font-weight: 400;
+      font-size: 0.9rem;
+      font-weight: 500;
     }
 
     .nav-links a {
@@ -120,13 +126,14 @@
 
     h2 {
       font-family: var(--font-sans);
-      font-size: 1.35rem;
-      font-weight: 700;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
       margin-bottom: 1.25rem;
       color: var(--text);
     }
 
-    p { margin-bottom: 0.85rem; }
+    p { margin-bottom: 0.9rem; }
 
     /* ── About ─────────────────────────────────────────── */
     .about-grid {
@@ -137,10 +144,12 @@
     }
 
     .about-text {
-      font-size: 0.97rem;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text);
     }
 
-    .about-text strong { font-weight: 600; }
+    .about-text strong { font-weight: 600; color: var(--text); }
 
     .profile-photo {
       width: 200px;
@@ -150,12 +159,18 @@
 
     .contact-links {
       font-family: var(--font-sans);
-      font-size: 0.88rem;
+      font-size: 0.92rem;
+      font-weight: 500;
       margin-top: 0.75rem;
       color: var(--text-muted);
     }
 
-    .contact-links a { font-weight: 400; }
+    .contact-links a {
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .contact-links a:hover { text-decoration: underline; }
 
     .sep { color: var(--text-light); margin: 0 0.35rem; }
 
@@ -163,7 +178,8 @@
     .news-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.92rem;
+      font-size: 0.98rem;
+      line-height: 1.65;
     }
 
     .news-table td {
@@ -174,8 +190,8 @@
     .news-table .news-month {
       width: 2.8rem;
       font-family: var(--font-sans);
-      font-weight: 700;
-      font-size: 0.82rem;
+      font-weight: 600;
+      font-size: 0.86rem;
       color: var(--text);
       white-space: nowrap;
     }
@@ -183,7 +199,8 @@
     .news-table .news-year {
       width: 3rem;
       font-family: var(--font-sans);
-      font-size: 0.82rem;
+      font-size: 0.86rem;
+      font-weight: 500;
       color: var(--text-muted);
       white-space: nowrap;
       padding-right: 1rem;
@@ -196,13 +213,15 @@
 
     .show-more {
       font-family: var(--font-sans);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
+      font-weight: 500;
       margin-top: 0.75rem;
       cursor: pointer;
       color: var(--accent);
       background: none;
       border: none;
       padding: 0;
+      text-decoration: underline;
     }
 
     .show-more:hover { text-decoration: underline; }
@@ -261,6 +280,15 @@
       display: block;
     }
 
+    .research-video img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      display: block;
+      background: #f7f7f7;
+    }
+
     .research-video::after {
       content: '';
       position: absolute;
@@ -312,9 +340,9 @@
 
     .research-name {
       font-family: var(--font-sans);
-      font-size: 0.8rem;
-      font-weight: 700;
-      line-height: 1.38;
+      font-size: 0.88rem;
+      font-weight: 600;
+      line-height: 1.42;
       color: var(--text);
       margin: 0;
     }
@@ -326,10 +354,43 @@
 
     .research-cta {
       font-family: var(--font-sans);
-      font-size: 0.7rem;
+      font-size: 0.78rem;
       font-weight: 600;
       color: var(--accent);
       margin-top: auto;
+      text-decoration: none;
+    }
+
+    .research-collab {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.15rem;
+      padding: 0.22rem 0.5rem;
+      background: #f5f5f5;
+      border-radius: 999px;
+      border: 1px solid #ececec;
+      align-self: flex-start;
+    }
+
+    .research-collab span {
+      font-family: var(--font-sans);
+      font-size: 0.62rem;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.02em;
+    }
+
+    .research-collab img {
+      height: 14px;
+      width: auto;
+      max-width: 56px;
+      object-fit: contain;
+    }
+
+    .research-collab img.collab-logo-square {
+      height: 15px;
+      max-width: 15px;
     }
 
     .research-card:hover .research-cta {
@@ -366,6 +427,36 @@
       overflow: hidden;
       border-radius: 2px;
       background: #f5f5f5;
+      position: relative;
+    }
+
+    .pub-media-collab {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.22rem 0.4rem;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(4px);
+    }
+
+    .pub-media-collab img {
+      height: 15px;
+      width: auto;
+      max-width: 64px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .pub-media-collab img.collab-logo-square {
+      height: 16px;
+      max-width: 16px;
     }
 
     .pub-media img,
@@ -380,27 +471,29 @@
 
     .pub-title {
       font-family: var(--font-sans);
-      font-weight: 700;
-      font-size: 0.95rem;
-      line-height: 1.35;
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.4;
       color: var(--text);
       display: inline;
+      text-decoration: none;
     }
 
-    .pub-title:hover { color: var(--accent); text-decoration: none; }
+    .pub-title:hover { color: var(--accent); text-decoration: underline; }
 
     .pub-authors {
-      font-size: 0.85rem;
+      font-size: 0.92rem;
       color: var(--text-muted);
       margin: 0.3rem 0 0.2rem;
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
     .pub-authors u { text-decoration: underline; text-underline-offset: 2px; }
 
     .pub-venue {
       font-family: var(--font-sans);
-      font-size: 0.82rem;
+      font-size: 0.88rem;
+      font-weight: 500;
       color: var(--accent);
       font-style: italic;
       margin-bottom: 0.35rem;
@@ -414,16 +507,57 @@
 
     .pub-links {
       font-family: var(--font-sans);
-      font-size: 0.82rem;
+      font-size: 0.88rem;
+      font-weight: 500;
       color: var(--text-muted);
     }
 
     .pub-links a { color: var(--accent); }
 
     .pub-note {
-      font-size: 0.78rem;
+      font-size: 0.84rem;
       color: var(--text-muted);
       margin-top: 0.15rem;
+      line-height: 1.5;
+    }
+
+    .pub-collab {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin: 0.4rem 0 0.5rem;
+      padding: 0.32rem 0.65rem 0.32rem 0.55rem;
+      background: linear-gradient(135deg, #f8f8f8 0%, #f3f3f3 100%);
+      border: 1px solid #e8e8e8;
+      border-radius: 999px;
+    }
+
+    .pub-collab-label {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-light);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .pub-collab-logos {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .pub-collab-logos img {
+      height: 18px;
+      width: auto;
+      max-width: 76px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .pub-collab-logos img.collab-logo-square {
+      height: 20px;
+      max-width: 20px;
     }
 
     /* ── Experience — Premium Progression Bar ────────── */
@@ -447,7 +581,7 @@
 
     .exp-rail {
       position: absolute;
-      top: 6.5rem;
+      top: 7.35rem;
       left: 10%;
       right: 10%;
       height: 4px;
@@ -498,10 +632,10 @@
     }
 
     .exp-date {
-      font-size: 0.7rem;
+      font-size: 0.74rem;
       font-weight: 600;
-      letter-spacing: 0.05em;
-      color: var(--text-light);
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
       white-space: nowrap;
     }
 
@@ -517,44 +651,63 @@
       box-shadow: 0 2px 10px rgba(140,21,21,0.28);
     }
 
-    .exp-logo-card {
+    .exp-brand {
       position: relative;
       width: 100%;
       max-width: 118px;
-      height: 76px;
+      margin-bottom: 1rem;
       border-radius: 14px;
+      overflow: hidden;
       background: #fff;
       border: 1.5px solid #e8e8e8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1rem;
-      padding: 0.65rem 0.85rem;
       box-shadow: 0 4px 16px rgba(0,0,0,0.06);
       transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s, border-color 0.35s;
     }
 
-    .exp-logo-card img {
+    .exp-brand-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 58px;
+      padding: 0.75rem 0.85rem 0.55rem;
+      background: #fff;
+    }
+
+    .exp-brand-logo img {
       max-width: 100%;
-      max-height: 44px;
+      max-height: 36px;
       width: auto;
       height: auto;
       object-fit: contain;
     }
 
-    .exp-step:hover .exp-logo-card {
+    .exp-brand-photo {
+      height: 42px;
+      border-top: 1px solid #efefef;
+      background: #f3f3f3;
+    }
+
+    .exp-brand-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+    }
+
+    .exp-step:hover .exp-brand {
       transform: translateY(-4px);
       box-shadow: 0 12px 28px rgba(0,0,0,0.1);
       border-color: #d4d4d4;
     }
 
-    .exp-step.current .exp-logo-card {
+    .exp-step.current .exp-brand {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(140,21,21,0.1), 0 10px 30px rgba(140,21,21,0.16);
       transform: translateY(-3px) scale(1.03);
     }
 
-    .exp-step.current .exp-logo-card::after {
+    .exp-step.current .exp-brand::after {
       content: '';
       position: absolute;
       inset: -4px;
@@ -562,6 +715,7 @@
       border: 2px solid var(--accent);
       opacity: 0;
       animation: expPulse 2.5s ease-out infinite;
+      pointer-events: none;
     }
 
     @keyframes expPulse {
@@ -593,30 +747,31 @@
     }
 
     .exp-role {
-      font-size: 0.8rem;
-      font-weight: 700;
+      font-size: 0.86rem;
+      font-weight: 600;
       color: var(--text);
-      line-height: 1.35;
+      line-height: 1.4;
       margin-bottom: 0.22rem;
       max-width: 12rem;
     }
 
     .exp-org {
-      font-size: 0.74rem;
-      font-weight: 600;
+      font-size: 0.8rem;
+      font-weight: 500;
       color: var(--text-muted);
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
     .exp-loc {
-      font-size: 0.67rem;
+      font-size: 0.74rem;
+      font-weight: 500;
       color: var(--text-light);
       margin-top: 0.2rem;
     }
 
     @media (prefers-reduced-motion: reduce) {
       .exp-rail-fill { animation: none; transform: scaleX(1); opacity: 1; }
-      .exp-step.current .exp-logo-card::after { animation: none; }
+      .exp-step.current .exp-brand::after { animation: none; }
     }
 
     /* ── Footer ──────────────────────────────────────── */
@@ -624,11 +779,16 @@
       padding: 2rem 0 2.5rem;
       text-align: center;
       font-family: var(--font-sans);
-      font-size: 0.78rem;
-      color: var(--text-light);
+      font-size: 0.86rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
-    footer a { color: var(--text-muted); }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: underline;
+    }
 
     #visitor-map {
       width: 100px;
@@ -692,16 +852,23 @@
       .exp-rail {
         left: 14%;
         right: 14%;
-        top: 6.35rem;
+        top: 7.5rem;
       }
 
-      .exp-logo-card {
+      .exp-brand {
         max-width: 140px;
-        height: 82px;
       }
 
-      .exp-logo-card img {
-        max-height: 48px;
+      .exp-brand-logo {
+        height: 62px;
+      }
+
+      .exp-brand-logo img {
+        max-height: 40px;
+      }
+
+      .exp-brand-photo {
+        height: 46px;
       }
 
       .exp-role { max-width: none; }
@@ -773,8 +940,13 @@
 
           <article class="exp-step">
             <span class="exp-date">2023 – 2025</span>
-            <div class="exp-logo-card">
-              <img src="./author/usama/lowes.png" alt="Lowe's">
+            <div class="exp-brand">
+              <div class="exp-brand-logo">
+                <img src="./author/usama/lowes.png" alt="Lowe's">
+              </div>
+              <div class="exp-brand-photo">
+                <img src="./author/lowes.jpg" alt="Lowe's Innovation Labs">
+              </div>
               <span class="exp-rail-node" aria-hidden="true"></span>
             </div>
             <div class="exp-role">Research Lead</div>
@@ -784,8 +956,13 @@
 
           <article class="exp-step">
             <span class="exp-date">Summer 2025</span>
-            <div class="exp-logo-card">
-              <img src="./author/usama/amazon.webp" alt="Amazon">
+            <div class="exp-brand">
+              <div class="exp-brand-logo">
+                <img src="./author/usama/amazon.webp" alt="Amazon">
+              </div>
+              <div class="exp-brand-photo">
+                <img src="./author/dashcart-amazon-intern.jpeg" alt="Amazon Dash Cart">
+              </div>
               <span class="exp-rail-node" aria-hidden="true"></span>
             </div>
             <div class="exp-role">Research Scientist</div>
@@ -795,8 +972,13 @@
 
           <article class="exp-step">
             <span class="exp-date">2025 – 2026</span>
-            <div class="exp-logo-card">
-              <img src="./author/usama/google.png" alt="Google">
+            <div class="exp-brand">
+              <div class="exp-brand-logo">
+                <img src="./author/usama/google.png" alt="Google">
+              </div>
+              <div class="exp-brand-photo">
+                <img src="./author/googleXR.jpg" alt="Google XR">
+              </div>
               <span class="exp-rail-node" aria-hidden="true"></span>
             </div>
             <div class="exp-role">Research Scientist Intern</div>
@@ -806,8 +988,13 @@
 
           <article class="exp-step current">
             <span class="exp-present">Present · 2026</span>
-            <div class="exp-logo-card">
-              <img src="./author/usama/amazon.webp" alt="Amazon">
+            <div class="exp-brand">
+              <div class="exp-brand-logo">
+                <img src="./author/usama/amazon.webp" alt="Amazon">
+              </div>
+              <div class="exp-brand-photo">
+                <img src="./author/amazon-music-now.png" alt="Amazon Music">
+              </div>
               <span class="exp-rail-node" aria-hidden="true"></span>
             </div>
             <div class="exp-role">Research Scientist</div>
@@ -939,7 +1126,7 @@
       <!-- Patent -->
       <div class="pub-entry" id="patent">
         <div class="pub-media">
-          <img src="/author/usama/header.png" alt="Patent">
+          <img src="./publication/GenHMR/assets/challenging_poses/genhmr_front_pose.png" alt="U.S. Patent — 3D human pose from monocular images">
         </div>
         <div class="pub-info">
           <a class="pub-title" href="https://patents.google.com/patent/US20260065565A1/en" target="_blank" rel="noopener">
@@ -956,7 +1143,10 @@
       <!-- MAGE -->
       <div class="pub-entry" id="mage">
         <div class="pub-media">
-          <img src="/publication/MAGE/assets/landing.png" alt="MAGE">
+          <img src="./publication/MAGE/assets/header.png" alt="MAGE">
+          <div class="pub-media-collab" aria-label="Google collaboration">
+            <img src="./author/usama/google.png" alt="Google">
+          </div>
         </div>
         <div class="pub-info">
           <a class="pub-title" href="./publication/MAGE/MAGE.html">
@@ -965,7 +1155,14 @@
           <div class="pub-authors">
             <u>Muhammad Usama Saleem</u>, Ravi Tejasvi, Tianyu Xu, Rajeev Nongpiur, Ishan Chatterjee, Mayur Jagdishbhai Patel, Pu Wang
           </div>
+          <div class="pub-collab" aria-label="Collaboration with Google">
+            <span class="pub-collab-label">In collaboration with</span>
+            <span class="pub-collab-logos">
+              <img src="./author/usama/google.png" alt="Google">
+            </span>
+          </div>
           <div class="pub-venue">arXiv, 2026</div>
+          <div class="pub-note">Work done during research internship at Google.</div>
           <div class="pub-links">
             <a href="./publication/MAGE/MAGE.html">project page</a> |
             <a href="https://arxiv.org/pdf/2604.09803" target="_blank" rel="noopener">arxiv</a>
@@ -976,9 +1173,7 @@
       <!-- LiveGesture -->
       <div class="pub-entry" id="livegesture">
         <div class="pub-media">
-          <video autoplay loop muted playsinline>
-            <source src="./videos/demo.mp4" type="video/mp4">
-          </video>
+          <img src="./publication/LiveGesture/assets/landing.png" alt="LiveGesture">
         </div>
         <div class="pub-info">
           <a class="pub-title" href="./publication/LiveGesture/LiveGesture.html">
@@ -1063,6 +1258,9 @@
           <video autoplay loop muted playsinline>
             <source src="./videos/CAM.mp4" type="video/mp4">
           </video>
+          <div class="pub-media-collab" aria-label="Snapchat collaboration">
+            <img class="collab-logo-square" src="./author/snapchat.png" alt="Snapchat">
+          </div>
         </div>
         <div class="pub-info">
           <a class="pub-title" href="https://exitudio.github.io/ControlMM-page/" target="_blank" rel="noopener">
@@ -1070,6 +1268,12 @@
           </a>
           <div class="pub-authors">
             Ekkasit Pinyoanuntapong, <u>Muhammad Usama Saleem</u>, Korrawe Karunratanakul, Pu Wang, Hongfei Xue, Chen Chen, Chuan Guo, Junli Cao, Jian Ren, Sergey Tulyakov
+          </div>
+          <div class="pub-collab" aria-label="Collaboration with Snapchat">
+            <span class="pub-collab-label">In collaboration with</span>
+            <span class="pub-collab-logos">
+              <img class="collab-logo-square" src="./author/snapchat.png" alt="Snapchat">
+            </span>
           </div>
           <div class="pub-venue">ICCV, 2025 <span class="pub-award">(Oral, Best Paper Award Nominee)</span></div>
           <div class="pub-links">
@@ -1255,7 +1459,7 @@
           venue: 'CVPR 2026',
           badge: '',
           href: './publication/LiveGesture/LiveGesture.html',
-          video: './videos/demo.mp4'
+          image: './publication/LiveGesture/assets/landing.png'
         },
         {
           id: 'dancemosaic',
@@ -1282,7 +1486,8 @@
           venue: 'ICCV 2025',
           badge: 'Oral',
           href: 'https://exitudio.github.io/ControlMM-page/',
-          video: './videos/CAM.mp4'
+          video: './videos/CAM.mp4',
+          collab: [{ name: 'Snapchat', logo: './author/snapchat.png', square: true }]
         },
         {
           id: 'genhmr',
@@ -1344,16 +1549,24 @@
         const videoWrap = document.createElement('div');
         videoWrap.className = 'research-video';
 
-        const video = document.createElement('video');
-        video.src = item.video;
-        video.muted = true;
-        video.loop = true;
-        video.playsInline = true;
-        video.autoplay = true;
-        video.preload = 'auto';
-        video.setAttribute('playsinline', '');
-        keepPlaying(video);
-        videoWrap.appendChild(video);
+        if (item.image) {
+          const img = document.createElement('img');
+          img.src = item.image;
+          img.alt = item.name;
+          img.loading = 'lazy';
+          videoWrap.appendChild(img);
+        } else {
+          const video = document.createElement('video');
+          video.src = item.video;
+          video.muted = true;
+          video.loop = true;
+          video.playsInline = true;
+          video.autoplay = true;
+          video.preload = 'auto';
+          video.setAttribute('playsinline', '');
+          keepPlaying(video);
+          videoWrap.appendChild(video);
+        }
 
         const venue = document.createElement('span');
         venue.className = 'research-venue';
@@ -1374,6 +1587,22 @@
         title.className = 'research-name';
         title.innerHTML = item.name + ' <span>— ' + item.subtitle + '</span>';
         body.appendChild(title);
+
+        if (item.collab && item.collab.length) {
+          const collab = document.createElement('div');
+          collab.className = 'research-collab';
+          const label = document.createElement('span');
+          label.textContent = 'with';
+          collab.appendChild(label);
+          item.collab.forEach((partner) => {
+            const logo = document.createElement('img');
+            logo.src = partner.logo;
+            logo.alt = partner.name;
+            if (partner.square) logo.className = 'collab-logo-square';
+            collab.appendChild(logo);
+          });
+          body.appendChild(collab);
+        }
 
         const cta = document.createElement('span');
         cta.className = 'research-cta';
