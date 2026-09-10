@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Legacy taxonomy archives from the old site generator — thin pages, keep crawlers on content
+Disallow: /tagss/
+Disallow: /tagsss/
+Disallow: /categories/
+Disallow: /category/
+Disallow: /publication-type/
+Disallow: /publication_types/
+
+Sitemap: https://m-usamasaleem.github.io/sitemap.xml

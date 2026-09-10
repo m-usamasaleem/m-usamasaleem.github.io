@@ -1,0 +1,38 @@
+# Muhammad Usama Saleem
+
+> Applied Scientist II at Amazon working on multimodal foundation models for 3D human
+> perception and synthesis. Ph.D. in Computer Science from the University of North
+> Carolina at Charlotte (2026), advised by Prof. Pu Wang in the GENIUS Lab.
+> Previously a Research Scientist Intern on Google's Extended Reality (AR/VR) team.
+
+Research focus: multimodal foundation models that unify real-time perception with
+high-fidelity synthesis — 3D human pose estimation and mesh reconstruction via
+generative masked modeling, controllable 3D human motion and co-speech gesture
+generation, and interactive digital humans for immersive XR environments.
+Holds U.S. Patent US20260065565A1 on 3D human pose and movement estimation from
+monocular images.
+
+## Key pages
+
+- [Home](https://m-usamasaleem.github.io/): bio, experience timeline, news, selected research, publications
+- [Publications](https://m-usamasaleem.github.io/publication/): full publication list with PDFs and code
+
+## Selected research
+
+- LiveGesture — streamable co-speech gesture generation (CVPR 2026)
+- Walk Before You Dance — editable dance synthesis via generative masked motion prior (AAAI 2026)
+- MaskHand — generative masked modeling for robust hand mesh reconstruction (ICCV 2025)
+- MaskControl — spatio-temporal control for masked motion synthesis (ICCV 2025, Oral, Best Paper Award Nominee)
+- GenHMR — generative human mesh recovery (AAAI 2025)
+- BioPose — biomechanically-accurate 3D pose estimation from monocular videos (WACV 2025)
+
+## Profiles
+
+- [Google Scholar](https://scholar.google.com/citations?user=8ZSRk3IAAAAJ)
+- [GitHub](https://github.com/m-usamasaleem)
+- [LinkedIn](https://www.linkedin.com/in/muhammad-usama-saleem-504b65164)
+- [X / Twitter](https://x.com/usamasaleem_)
+
+## Contact
+
+- Email: usama.saleem7477@gmail.com (open to research collaborations and opportunities)
