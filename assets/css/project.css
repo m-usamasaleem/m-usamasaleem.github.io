@@ -1,0 +1,155 @@
+/* ==========================================================================
+   Project / publication detail pages — shared visual system.
+   Load AFTER tokens.css and after any page-local <style>, so the site tokens
+   and the compatibility layer win the cascade.
+
+   Two layers:
+   1. `.project-page` — the clean system for new pages.
+   2. `body.pg-compat` (+ per-page classes) — harmonizes existing custom pages
+      (MAGE, LiveGesture, …) without rewriting their scientific content.
+   ========================================================================== */
+
+/* --- 1. Clean system for new project pages ------------------------------ */
+.project-page {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.project-page .proj-wrap {
+  width: min(calc(100% - 48px), 1160px);
+  margin-inline: auto;
+}
+
+.project-page .proj-prose {
+  width: min(calc(100% - 48px), 760px);
+  margin-inline: auto;
+}
+
+.project-page .proj-home {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  display: inline-block;
+  margin: var(--space-5) 0;
+}
+
+.project-page .proj-venue {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+
+.project-page h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 640;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-wrap: balance;
+  margin-bottom: var(--space-4);
+}
+
+.project-page .proj-authors {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.project-page .proj-authors .me { font-weight: 600; color: var(--ink); }
+.project-page .proj-affil {
+  color: var(--text-subtle);
+  font-size: 0.88rem;
+  margin-top: var(--space-1);
+}
+.project-page .proj-equal { font-size: 0.82rem; color: var(--text-subtle); }
+
+.project-page .proj-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  font-weight: 500;
+  margin: var(--space-5) 0;
+}
+
+.project-page figure { margin: var(--space-6) 0; }
+.project-page figure img,
+.project-page figure video {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.project-page figcaption {
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+  margin-top: var(--space-2);
+  line-height: 1.5;
+}
+
+.project-page h2 {
+  font-size: 1.4rem;
+  font-weight: 620;
+  letter-spacing: -0.015em;
+  margin: var(--space-7) 0 var(--space-4);
+}
+
+.project-page .proj-bibtex {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.project-page .proj-footer {
+  border-top: 1px solid var(--border);
+  padding: var(--space-6) 0;
+  margin-top: var(--space-8);
+  color: var(--text-subtle);
+  font-size: 0.85rem;
+}
+
+/* --- 2. Compatibility layer for existing custom pages -------------------- */
+/* Generic: repaint ground + type onto the site palette. Elements that set an
+   explicit font-family (code blocks, icon fonts) intentionally keep it. */
+body.pg-compat {
+  font-family: var(--font-sans);
+  background: var(--bg);
+}
+
+/* MAGE (publication/MAGE/MAGE.html) — maps its maroon token set onto the
+   site accent. Its inline styles reference these names throughout. */
+body.pg-mage {
+  --maroon: var(--accent);
+  --maroon-dark: var(--accent-hover);
+  --maroon-mid: var(--accent);
+  --maroon-light: var(--accent-soft);
+  --bg: #FBFAF7;
+  --bg-alt: var(--surface-muted);
+}
+
+/* LiveGesture (publication/LiveGesture/LiveGesture.html) — its inline sheet
+   applies Poppins via a universal selector; this equal-specificity rule loads
+   later and wins. The page uses no icon fonts, so this is safe. */
+body.pg-livegesture,
+body.pg-livegesture * {
+  font-family: var(--font-sans);
+}
+body.pg-livegesture code,
+body.pg-livegesture pre {
+  font-family: var(--font-mono);
+}
+body.pg-livegesture {
+  --accent: #99624E;
+}
+body.pg-livegesture .btn-main {
+  background: var(--accent-hover);
+}

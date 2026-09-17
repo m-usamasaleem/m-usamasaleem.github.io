@@ -1,0 +1,54 @@
+/* ==========================================================================
+   Design tokens — the single source of truth for the whole site.
+   ~85% paper neutrals, ~10% ink, ~5% terracotta accent. Venues share one
+   semantic treatment; recognition badges are ink. No decorative color.
+   ========================================================================== */
+
+:root {
+  /* Surfaces */
+  --bg: #FBFAF7;
+  --surface: #FFFFFF;
+  --surface-muted: #F3F1EC;
+
+  /* Ink */
+  --ink: #0A1622;
+  --text-muted: #58636D;
+  --text-subtle: #69737C;
+
+  /* Lines */
+  --border: #E2DED8;
+
+  /* Accent — terracotta, used sparingly and semantically */
+  --accent: #99624E;
+  --accent-hover: #7C4937;
+  --accent-soft: #F1E7E2;
+
+  /* Media wells (video letterboxing, dark figures) */
+  --media-dark: #071323;
+
+  /* Type */
+  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+
+  /* Layout */
+  --page-width: 1080px;
+  --content-width: 720px;
+
+  /* Spacing scale: 4 8 12 16 24 32 48 64 96 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* Radii — small and quiet */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+}

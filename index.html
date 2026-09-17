@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#FBFAF7">
   <link rel="canonical" href="https://m-usamasaleem.github.io/">
   <link rel="icon" type="image/png" href="/images/logo.jpg">
-  <link rel="apple-touch-icon" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_3.png">
+  <link rel="apple-touch-icon" href="/images/logo.jpg">
   <meta property="og:type" content="profile">
   <meta property="og:site_name" content="Muhammad Usama Saleem">
   <meta property="og:locale" content="en_US">
@@ -71,1204 +71,36 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      /* Percevio Labs palette: warm paper, navy-black ink, terracotta accent */
-      --accent: #99624E;
-      --accent-hover: #7C4937;
-      --text: #0A1622;
-      --text-muted: #444E58;
-      --text-light: #656D73;
-      --border: #DFE3E8;
-      --bg: #FBFAF7;
-      --max-w: 900px;
-      --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
-      --font-serif: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
-      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    ::selection { background-color: var(--accent); color: #FFFFFF; }
-
-    .visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip-path: inset(50%);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    :focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-      border-radius: 2px;
-    }
-
-    html {
-      font-size: clamp(14.5px, 2.6vw, 16px);
-      scroll-behavior: smooth;
-      scroll-padding-top: 3.5rem;
-      -webkit-text-size-adjust: 100%;
-    }
-
-    body {
-      font-family: var(--font-sans);
-      font-size: 1rem;
-      font-weight: 400;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.6;
-      font-variant-numeric: tabular-nums;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-      overflow-x: hidden;
-      overflow-x: clip;
-    }
-
-    img, video {
-      max-width: 100%;
-    }
-
-    .research-video video,
-    .research-video img,
-    .pub-media img,
-    .pub-media video {
-      width: 100%;
-      height: 100%;
-      max-width: none;
-    }
-
-    a, button {
-      touch-action: manipulation;
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
-      text-decoration-color: rgba(153,98,78,0.35);
-      transition: color 0.18s ease, text-decoration-color 0.18s ease;
-    }
-
-    a:hover {
-      text-decoration-color: currentColor;
-    }
-
-    .skip-link {
-      position: absolute;
-      top: -100%;
-      left: 1rem;
-      z-index: 200;
-      padding: 0.6rem 1rem;
-      background: var(--accent);
-      color: #FFFFFF;
-      font-family: var(--font-sans);
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 0 0 6px 6px;
-    }
-
-    .skip-link:focus {
-      top: 0;
-    }
-
-    a:hover {
-      color: var(--accent-hover);
-    }
-
-    .wrap {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 clamp(1rem, 4vw, 1.5rem);
-    }
-
-    /* ── Nav ───────────────────────────────────────────── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(251,250,247,0.96);
-      border-bottom: 1px solid var(--border);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-    }
-
-    nav .wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      min-height: 3rem;
-      padding-top: 0.35rem;
-      padding-bottom: 0.35rem;
-    }
-
-    .nav-name {
-      font-family: var(--font-sans);
-      font-weight: 600;
-      font-size: clamp(0.82rem, 2.5vw, 0.95rem);
-      color: var(--text);
-      text-decoration: none;
-      min-width: 0;
-      line-height: 1.3;
-    }
-
-    .nav-name:hover { text-decoration: none; color: var(--text); }
-
-    .nav-toggle {
-      display: none;
-      flex-shrink: 0;
-      width: 2.5rem;
-      height: 2.5rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: #FEFEFD;
-      cursor: pointer;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-    }
-
-    .nav-toggle span,
-    .nav-toggle span::before,
-    .nav-toggle span::after {
-      display: block;
-      width: 1.1rem;
-      height: 2px;
-      background: var(--text);
-      border-radius: 1px;
-      transition: transform 0.2s, opacity 0.2s;
-    }
-
-    .nav-toggle span {
-      position: relative;
-    }
-
-    .nav-toggle span::before,
-    .nav-toggle span::after {
-      content: '';
-      position: absolute;
-      left: 0;
-    }
-
-    .nav-toggle span::before { top: -5px; }
-    .nav-toggle span::after { top: 5px; }
-
-    .nav-toggle[aria-expanded="true"] span { background: transparent; }
-    .nav-toggle[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
-    .nav-toggle[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
-
-    .nav-links {
-      display: flex;
-      gap: clamp(0.65rem, 2vw, 1.35rem);
-      list-style: none;
-      font-family: var(--font-sans);
-      font-size: clamp(0.78rem, 2.2vw, 0.9rem);
-      font-weight: 500;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      white-space: nowrap;
-      padding: 0.25rem 0;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    /* ── Sections ──────────────────────────────────────── */
-    section {
-      padding: 2.4rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    section:last-of-type { border-bottom: none; }
-
-    h2 {
-      /* Percevio eyebrow register: small mono caps, wide tracked */
-      font-family: var(--font-mono);
-      font-size: 0.8125rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 1.25rem;
-      color: var(--text-light);
-    }
-
-    p { margin-bottom: 0.9rem; }
-
-    /* ── Hero ──────────────────────────────────────────── */
-    .hero {
-      margin-bottom: 2rem;
-    }
-
-    .hero-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.8125rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent-hover);
-      margin-bottom: 0.6rem;
-    }
-
-    .hero-name {
-      font-family: var(--font-sans);
-      font-size: clamp(1.9rem, 4.4vw, 2.6rem);
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      line-height: 1.05;
-      color: var(--text);
-      text-wrap: balance;
-    }
-
-    /* ── About ─────────────────────────────────────────── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 200px;
-      gap: 2rem;
-      align-items: start;
-    }
-
-    .about-text {
-      font-size: 1rem;
-      line-height: 1.65;
-      color: var(--text);
-    }
-
-    .about-text strong { font-weight: 600; color: var(--text); }
-
-    .profile-photo {
-      width: 200px;
-      border-radius: 4px;
-      display: block;
-    }
-
-    .contact-links {
-      font-family: var(--font-sans);
-      font-size: 0.92rem;
-      font-weight: 500;
-      margin-top: 0.75rem;
-      color: var(--text-muted);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.15rem 0;
-      line-height: 1.8;
-    }
-
-    .contact-links a {
-      font-weight: 500;
-      text-decoration: none;
-    }
-
-    .contact-links a:hover { text-decoration: underline; }
-
-    .sep { color: var(--text-light); margin: 0 0.35rem; }
-
-    /* ── News ──────────────────────────────────────────── */
-    .news-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.98rem;
-      line-height: 1.65;
-    }
-
-    .news-table td {
-      padding: 0.35rem 0;
-      vertical-align: top;
-    }
-
-    .news-table .news-month {
-      width: 2.8rem;
-      font-family: var(--font-mono);
-      font-weight: 600;
-      font-size: 0.8rem;
-      color: var(--text);
-      white-space: nowrap;
-    }
-
-    .news-table .news-year {
-      width: 3rem;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      white-space: nowrap;
-      padding-right: 1rem;
-    }
-
-    .news-table .news-body { color: var(--text); }
-
-    .news-old { display: none; }
-    .news-old.visible { display: table-row; }
-
-    .show-more {
-      font-family: var(--font-sans);
-      font-size: 0.9rem;
-      font-weight: 500;
-      margin-top: 0.75rem;
-      cursor: pointer;
-      color: var(--accent);
-      background: none;
-      border: none;
-      padding: 0;
-      text-decoration: underline;
-    }
-
-    .show-more:hover { text-decoration: underline; }
-
-    /* ── Selected Research — Video Grid ──────────────── */
-    #research {
-      padding-bottom: 3.5rem;
-      background: linear-gradient(180deg, #FBFAF7 0%, #F2F0EA 40%, #FBFAF7 100%);
-    }
-
-    #research .wrap {
-      max-width: 1060px;
-    }
-
-    #research > .wrap > h2 {
-      margin-bottom: 1.35rem;
-    }
-
-    .research-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
-      gap: clamp(0.75rem, 2.5vw, 1.1rem);
-    }
-
-    .research-card {
-      display: flex;
-      flex-direction: column;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #DFE3E8;
-      background: #FEFEFD;
-      text-decoration: none !important;
-      color: inherit;
-      box-shadow: 0 2px 10px rgba(10,22,34,0.04);
-      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.32s, border-color 0.32s;
-    }
-
-    .research-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 16px 40px rgba(10,22,34,0.11);
-      border-color: rgba(153,98,78,0.28);
-    }
-
-    .research-video {
-      position: relative;
-      aspect-ratio: 16 / 10;
-      background: #071323;
-      overflow: hidden;
-    }
-
-    .research-video video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      display: block;
-    }
-
-    .research-video img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      display: block;
-      background: #F2F0EA;
-    }
-
-    .research-meta {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .research-venue {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-hover);
-    }
-
-    .research-badge {
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #F9F6F2;
-      background: #071323;
-      padding: 0.14rem 0.42rem;
-      border-radius: 999px;
-    }
-
-    .research-body {
-      padding: 0.72rem 0.85rem 0.85rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-
-    .research-name {
-      font-family: var(--font-sans);
-      font-size: 0.88rem;
-      font-weight: 600;
-      line-height: 1.42;
-      color: var(--text);
-      margin: 0;
-    }
-
-    .research-name span {
-      font-weight: 400;
-      color: var(--text-muted);
-    }
-
-    .research-cta {
-      font-family: var(--font-sans);
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--accent);
-      margin-top: auto;
-      text-decoration: none;
-    }
-
-    .research-collab {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-top: 0.15rem;
-      padding: 0.22rem 0.5rem;
-      background: #F2F0EA;
-      border-radius: 999px;
-      border: 1px solid #DFE3E8;
-      align-self: flex-start;
-    }
-
-    .research-collab span {
-      font-family: var(--font-sans);
-      font-size: 0.68rem;
-      font-weight: 500;
-      color: var(--text-light);
-      letter-spacing: 0.02em;
-    }
-
-    .research-collab img {
-      height: 14px;
-      width: auto;
-      max-width: 56px;
-      object-fit: contain;
-    }
-
-    .research-collab img.collab-logo-square {
-      height: 15px;
-      max-width: 15px;
-    }
-
-    .research-card:hover .research-cta {
-      text-decoration: underline !important;
-    }
-
-    /* ── Publications ────────────────────────────────── */
-    .pub-entry {
-      display: flex;
-      gap: 1.25rem;
-      padding: 1.35rem 0;
-      border-bottom: 1px solid #E5E8EC;
-    }
-
-    .pub-entry:last-child { border-bottom: none; }
-
-    .pub-media {
-      flex: 0 0 180px;
-      width: 180px;
-      height: 108px;
-      overflow: hidden;
-      border-radius: 2px;
-      background: #F2F0EA;
-      position: relative;
-    }
-
-    .pub-media-collab {
-      position: absolute;
-      bottom: 6px;
-      right: 6px;
-      z-index: 2;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      padding: 0.22rem 0.4rem;
-      background: rgba(251, 250, 247, 0.94);
-      border: 1px solid rgba(10, 22, 34,0.08);
-      border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(10, 22, 34,0.1);
-      -webkit-backdrop-filter: blur(4px);
-      backdrop-filter: blur(4px);
-    }
-
-    .pub-media-collab img {
-      height: 15px;
-      width: auto;
-      max-width: 64px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .pub-media-collab img.collab-logo-square {
-      height: 16px;
-      max-width: 16px;
-    }
-
-    .pub-media img,
-    .pub-media video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .pub-info { flex: 1; min-width: 0; }
-
-    .pub-title {
-      font-family: var(--font-sans);
-      font-weight: 600;
-      font-size: 1rem;
-      line-height: 1.4;
-      color: var(--text);
-      display: inline;
-      text-decoration: none;
-    }
-
-    .pub-title:hover { color: var(--accent); text-decoration: underline; }
-
-    .pub-authors {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      margin: 0.3rem 0 0.2rem;
-      line-height: 1.55;
-    }
-
-    .pub-authors u { text-decoration: underline; text-underline-offset: 2px; }
-
-    .pub-venue {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      font-family: var(--font-mono);
-      font-size: 0.74rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-hover);
-      margin-bottom: 0.4rem;
-    }
-
-    .pub-venue-chip {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--accent-hover);
-    }
-
-    .pub-award {
-      font-style: normal;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .pub-links {
-      font-family: var(--font-sans);
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
-
-    .pub-links a { color: var(--accent); }
-
-    .pub-note {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      margin-top: 0.15rem;
-      line-height: 1.5;
-    }
-
-    .pub-collab {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      margin: 0.4rem 0 0.5rem;
-      padding: 0.32rem 0.65rem 0.32rem 0.55rem;
-      background: linear-gradient(135deg, #FBFAF7 0%, #F2F0EA 100%);
-      border: 1px solid #DFE3E8;
-      border-radius: 999px;
-    }
-
-    .pub-collab-label {
-      font-family: var(--font-sans);
-      font-size: 0.72rem;
-      font-weight: 500;
-      color: var(--text-light);
-      letter-spacing: 0.02em;
-      white-space: nowrap;
-    }
-
-    .pub-collab-logos {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-
-    .pub-collab-logos img {
-      height: 18px;
-      width: auto;
-      max-width: 76px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .pub-collab-logos img.collab-logo-square {
-      height: 20px;
-      max-width: 20px;
-    }
-
-    /* ── Experience — Premium Progression Bar ────────── */
-    #experience {
-      padding: 2.25rem 0 2.75rem;
-      background: var(--bg);
-    }
-
-    #experience h2 {
-      margin-bottom: 1.5rem;
-    }
-
-    .exp-timeline {
-      position: relative;
-      padding: 2rem 1.25rem 1.5rem;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #FBFAF7 0%, #FEFEFD 50%, #F2F0EA 100%);
-      border: 1px solid #DFE3E8;
-      box-shadow: 0 4px 24px rgba(10,22,34,0.04);
-    }
-
-    .exp-rail {
-      position: absolute;
-      top: 6.5rem;
-      left: 10%;
-      right: 10%;
-      height: 4px;
-      border-radius: 999px;
-      background: #DFE3E8;
-      overflow: hidden;
-      z-index: 0;
-    }
-
-    .exp-rail-fill {
-      height: 100%;
-      width: 100%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #DFE3E8 0%, #B97F6B 55%, var(--accent) 100%);
-      transform-origin: left center;
-      animation: expFill 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    @keyframes expFill {
-      from { transform: scaleX(0); opacity: 0.6; }
-      to { transform: scaleX(1); opacity: 1; }
-    }
-
-    .exp-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.75rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .exp-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      font-family: var(--font-sans);
-      padding: 0 0.25rem;
-    }
-
-    .exp-date,
-    .exp-present {
-      min-height: 1.4rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 0.7rem;
-    }
-
-    .exp-date {
-      font-size: 0.74rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    .exp-present {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: #F9F6F2;
-      background: var(--accent);
-      padding: 0.22rem 0.55rem;
-      border-radius: 999px;
-      box-shadow: 0 2px 10px rgba(153,98,78,0.28);
-    }
-
-    .exp-logo-card {
-      position: relative;
-      width: 100%;
-      max-width: 118px;
-      height: 76px;
-      margin-bottom: 1rem;
-      border-radius: 14px;
-      background: #FEFEFD;
-      border: 1.5px solid #DFE3E8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.65rem 0.85rem;
-      box-shadow: 0 4px 16px rgba(10,22,34,0.06);
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s, border-color 0.35s;
-    }
-
-    .exp-logo-card img {
-      max-width: 100%;
-      max-height: 44px;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-    }
-
-    .exp-step:hover .exp-logo-card {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(10,22,34,0.1);
-      border-color: #B7BEC6;
-    }
-
-    .exp-step.current .exp-logo-card {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(153,98,78,0.1), 0 10px 30px rgba(153,98,78,0.16);
-      transform: translateY(-3px) scale(1.03);
-    }
-
-    .exp-step.current .exp-logo-card::after {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border-radius: 17px;
-      border: 2px solid var(--accent);
-      opacity: 0;
-      animation: expPulse 2.5s ease-out infinite;
-      pointer-events: none;
-    }
-
-    @keyframes expPulse {
-      0% { transform: scale(1); opacity: 0.45; }
-      100% { transform: scale(1.12); opacity: 0; }
-    }
-
-    .exp-rail-node {
-      position: absolute;
-      bottom: -7px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #FEFEFD;
-      border: 3px solid #B7BEC6;
-      z-index: 2;
-    }
-
-    .exp-step.current .exp-rail-node {
-      border-color: var(--accent);
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(153,98,78,0.15);
-    }
-
-    .exp-step:not(.current) .exp-rail-node {
-      background: #F2F0EA;
-    }
-
-    .exp-role {
-      font-size: 0.86rem;
-      font-weight: 600;
-      color: var(--text);
-      line-height: 1.4;
-      margin-bottom: 0.22rem;
-      max-width: 12rem;
-    }
-
-    .exp-org {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      line-height: 1.35;
-    }
-
-    .exp-loc {
-      font-size: 0.74rem;
-      font-weight: 500;
-      color: var(--text-light);
-      margin-top: 0.2rem;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      .exp-rail-fill { animation: none; transform: scaleX(1); opacity: 1; }
-      .exp-step.current .exp-logo-card::after { animation: none; }
-    }
-
-    /* ── Footer ──────────────────────────────────────── */
-    footer {
-      padding: 2rem 0 2.5rem;
-      text-align: center;
-      font-family: var(--font-sans);
-      font-size: 0.86rem;
-      font-weight: 400;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    footer a {
-      color: var(--text-muted);
-      text-decoration: underline;
-    }
-
-    #visitor-map {
-      width: 100px;
-      height: 100px;
-      margin: 1.5rem auto 0;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 8px rgba(10, 22, 34,0.06);
-      overflow: hidden;
-    }
-
-    #fallback-message {
-      text-align: center;
-      font-size: 0.7rem;
-      color: var(--text-light);
-      padding: 0.5rem;
-    }
-
-    /* ── Responsive ──────────────────────────────────── */
-    @media (max-width: 900px) {
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      .about-photo { text-align: center; }
-
-      .profile-photo {
-        width: min(180px, 55vw);
-        margin: 0 auto;
-      }
-
-      .exp-steps {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.25rem 0.75rem;
-      }
-
-      .exp-rail {
-        display: none;
-      }
-
-      .exp-rail-node {
-        display: none;
-      }
-
-      .exp-timeline {
-        padding: 1.25rem 1rem 1rem;
-      }
-
-      .pub-entry {
-        flex-direction: column;
-        gap: 0.85rem;
-        padding: 1.1rem 0;
-      }
-
-      .pub-media {
-        flex: none;
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        aspect-ratio: 16 / 9;
-      }
-    }
-
-    @media (max-width: 680px) {
-      nav .wrap {
-        flex-wrap: wrap;
-        align-items: center;
-      }
-
-      .nav-toggle {
-        display: inline-flex;
-      }
-
-      .nav-links {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding: 0.35rem 0 0.5rem;
-        border-top: 1px solid var(--border);
-        margin-top: 0.15rem;
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-links li {
-        width: 100%;
-      }
-
-      .nav-links a {
-        display: block;
-        padding: 0.65rem 0.25rem;
-        white-space: normal;
-      }
-
-      section {
-        padding: 2rem 0;
-      }
-
-      h2 {
-        margin-bottom: 1rem;
-      }
-
-      .news-table thead { display: none; }
-
-      .news-table tr {
-        display: block;
-        padding: 0.65rem 0;
-        border-bottom: 1px solid #E5E8EC;
-      }
-
-      .news-table tr:last-child { border-bottom: none; }
-
-      .news-table td {
-        display: inline;
-        padding: 0;
-      }
-
-      .news-table .news-month,
-      .news-table .news-year {
-        font-size: 0.8rem;
-        width: auto;
-        padding-right: 0.35rem;
-      }
-
-      .news-table .news-year::after {
-        content: ' ·';
-        color: var(--text-light);
-      }
-
-      .news-table .news-body {
-        display: block;
-        margin-top: 0.35rem;
-        line-height: 1.55;
-      }
-
-      .exp-steps {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-      }
-
-      .exp-step {
-        display: grid;
-        grid-template-columns: 72px 1fr;
-        grid-template-rows: auto auto;
-        gap: 0 0.85rem;
-        align-items: start;
-        text-align: left;
-        padding: 1rem 0 1rem 0.85rem;
-        border-left: 2px solid #DFE3E8;
-        position: relative;
-      }
-
-      .exp-step::before {
-        content: '';
-        position: absolute;
-        left: -6px;
-        top: 1.65rem;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: #FEFEFD;
-        border: 2px solid #B7BEC6;
-      }
-
-      .exp-step.current::before {
-        border-color: var(--accent);
-        background: var(--accent);
-      }
-
-      .exp-step.current {
-        border-left-color: var(--accent);
-      }
-
-      .exp-date,
-      .exp-present {
-        grid-column: 2;
-        grid-row: 1;
-        justify-content: flex-start;
-        margin-bottom: 0.35rem;
-        min-height: auto;
-      }
-
-      .exp-logo-card {
-        grid-column: 1;
-        grid-row: 1 / span 4;
-        align-self: start;
-        width: 72px;
-        max-width: 72px;
-        height: 56px;
-        margin-bottom: 0;
-        padding: 0.45rem;
-        border-radius: 10px;
-      }
-
-      .exp-logo-card img {
-        max-height: 36px;
-      }
-
-      .exp-role {
-        grid-column: 2;
-        grid-row: 2;
-        font-size: 0.84rem;
-        margin-bottom: 0.1rem;
-        max-width: none;
-      }
-
-      .exp-org {
-        grid-column: 2;
-        grid-row: 3;
-      }
-
-      .exp-loc {
-        grid-column: 2;
-        grid-row: 4;
-      }
-
-      .pub-collab {
-        flex-wrap: wrap;
-        max-width: 100%;
-      }
-
-      .pub-collab-label {
-        white-space: normal;
-      }
-
-      .research-name {
-        font-size: 0.84rem;
-      }
-
-      .research-name span {
-        display: block;
-        margin-top: 0.15rem;
-      }
-
-      #visitor-map {
-        width: min(100px, 70vw);
-        height: auto;
-        aspect-ratio: 1;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .nav-name {
-        max-width: calc(100% - 3rem);
-      }
-
-      .contact-links .sep {
-        display: none;
-      }
-
-      .contact-links a {
-        margin-right: 0.65rem;
-      }
-    }
-
-    @supports (padding: max(0px)) {
-      body {
-        padding-left: env(safe-area-inset-left);
-        padding-right: env(safe-area-inset-right);
-      }
-
-      nav {
-        padding-left: env(safe-area-inset-left);
-        padding-right: env(safe-area-inset-right);
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
   <a class="skip-link" href="#about">Skip to main content</a>
 
-  <nav>
-    <div class="wrap">
-      <a class="nav-name" href="#">Muhammad Usama Saleem</a>
-      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-nav">
+  <header class="site-nav">
+    <nav class="wrap" aria-label="Main">
+      <a class="nav-name" href="#top">Muhammad Usama Saleem</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Menu">
         <span></span>
       </button>
-      <ul class="nav-links" id="site-nav">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#news">News</a></li>
+      <ul class="nav-links" id="site-menu">
         <li><a href="#research">Research</a></li>
         <li><a href="#publications">Publications</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="/resume/resume.pdf" target="_blank" rel="noopener">CV</a></li>
       </ul>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
-  <!-- About -->
-  <section id="about">
+  <main id="top">
+
+  <section id="about" class="hero">
     <div class="wrap">
-      <header class="hero">
-        <p class="hero-eyebrow">Applied Scientist II · Amazon</p>
-        <h1 class="hero-name">Muhammad Usama Saleem</h1>
-      </header>
-      <div class="about-grid">
-        <div class="about-text">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <p class="hero-eyebrow">Applied Scientist II · Amazon</p>
+          <h1>Muhammad Usama Saleem</h1>
           <p>
             I'm an <strong>Applied Scientist II</strong> at
             <a href="https://www.amazon.com/" target="_blank" rel="noopener">Amazon</a>,
@@ -1278,219 +110,127 @@
             in 2026, advised by
             <a href="https://scholar.google.com/citations?user=0buJlAUAAAAJ" target="_blank" rel="noopener">Prof. Pu Wang</a>
             in the GENIUS Lab. I was previously a Research Scientist Intern at
-            <a href="https://www.google.com/" target="_blank" rel="noopener">Google</a>'s Extended Reality (AR/VR) team.
-            My work includes a
+            <a href="https://www.google.com/" target="_blank" rel="noopener">Google</a>'s Extended Reality (AR/VR) team,
+            and my work includes a
             <a href="https://patents.google.com/patent/US20260065565A1/en" target="_blank" rel="noopener">U.S. Patent</a>
             on 3D human pose and movement estimation from monocular images.
           </p>
           <p>
-            My research focuses on building multimodal foundation models that unify real-time perception with
-            high-fidelity synthesis. I aim to develop context-aware AI systems capable of perceiving, reconstructing,
-            and interacting with complex human behavior across both physical and virtual environments. My work centers
-            on multimodal motion synthesis frameworks that enable controllable, high-quality 3D human animation for
-            real-time applications, as well as 3D human pose estimation and mesh reconstruction using generative
-            masked modeling. Ultimately, I seek to leverage these generative foundations to create AI systems that can
-            both understand human behavior in the physical world and synthesize interactive digital counterparts
-            within immersive XR environments.
+            My research builds multimodal foundation models that unify real-time perception with high-fidelity
+            synthesis: 3D human pose estimation and mesh reconstruction via generative masked modeling, and
+            multimodal motion synthesis frameworks for controllable, high-quality 3D human animation in real time.
+            Ultimately, I aim to create AI systems that both understand human behavior in the physical world and
+            synthesize interactive digital counterparts within immersive XR environments.
           </p>
-          <p class="about-opportunities">
-            <strong>Open to research collaborations and opportunities</strong> — reach me at
-            <a href="mailto:usama.saleem7977@gmail.com">usama.saleem7977@gmail.com</a>.
-          </p>
-          <p class="contact-links">
+          <div class="interests">
+            <p class="interests-label">Research interests</p>
+            <p class="interests-line">3D Human Understanding<span class="sep">·</span>Generative Motion<span class="sep">·</span>Multimodal AI<span class="sep">·</span>Interactive XR</p>
+          </div>
+          <p><strong>Open to research collaborations and opportunities</strong> — reach me at
+            <a href="mailto:usama.saleem7977@gmail.com">usama.saleem7977@gmail.com</a>.</p>
+          <p class="profile-links">
             <a href="mailto:usama.saleem7977@gmail.com">Email</a><span class="sep">|</span>
             <a href="https://scholar.google.com/citations?user=8ZSRk3IAAAAJ&hl" target="_blank" rel="noopener">Google Scholar</a><span class="sep">|</span>
             <a href="https://github.com/m-usamasaleem" target="_blank" rel="noopener">GitHub</a><span class="sep">|</span>
             <a href="https://www.linkedin.com/in/muhammad-usama-saleem-504b65164" target="_blank" rel="noopener">LinkedIn</a><span class="sep">|</span>
-            <a href="https://x.com/usamasaleem_" target="_blank" rel="noopener">Twitter</a>
+            <a href="https://x.com/usamasaleem_" target="_blank" rel="noopener">Twitter</a><span class="sep">|</span>
+            <a href="/resume/resume.pdf" target="_blank" rel="noopener">CV</a>
           </p>
         </div>
-        <div class="about-photo">
-          <img class="profile-photo" src="/author/usama/image.jpeg" alt="Muhammad Usama Saleem">
+        <div class="hero-photo">
+          <img class="profile-photo" src="/author/usama/image.jpeg" alt="Muhammad Usama Saleem" width="210" height="280">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Experience -->
-  <section id="experience">
-    <div class="wrap">
-      <h2>Experience</h2>
-      <div class="exp-timeline">
-        <div class="exp-rail" aria-hidden="true"><div class="exp-rail-fill"></div></div>
-        <div class="exp-steps">
-
-          <article class="exp-step">
-            <span class="exp-date">2023 – 2025</span>
-            <div class="exp-logo-card">
-              <img src="./author/usama/lowes.png" alt="Lowe's" loading="lazy" decoding="async">
-              <span class="exp-rail-node" aria-hidden="true"></span>
-            </div>
-            <div class="exp-role">Research Lead</div>
-            <div class="exp-org">Lowe's</div>
-            <div class="exp-loc">Charlotte, NC</div>
-          </article>
-
-          <article class="exp-step">
-            <span class="exp-date">Summer 2025</span>
-            <div class="exp-logo-card">
-              <img src="./author/usama/amazon.webp" alt="Amazon" loading="lazy" decoding="async">
-              <span class="exp-rail-node" aria-hidden="true"></span>
-            </div>
-            <div class="exp-role">Research Scientist</div>
-            <div class="exp-org">Amazon · Multimodal GenAI</div>
-            <div class="exp-loc">Boston, MA</div>
-          </article>
-
-          <article class="exp-step">
-            <span class="exp-date">2025 – 2026</span>
-            <div class="exp-logo-card">
-              <img src="./author/usama/google.png" alt="Google" loading="lazy" decoding="async">
-              <span class="exp-rail-node" aria-hidden="true"></span>
-            </div>
-            <div class="exp-role">Research Scientist Intern</div>
-            <div class="exp-org">Google · AR/VR</div>
-            <div class="exp-loc">San Francisco, CA</div>
-          </article>
-
-          <article class="exp-step current">
-            <span class="exp-present">Present · 2026</span>
-            <div class="exp-logo-card">
-              <img src="./author/usama/amazon.webp" alt="Amazon" loading="lazy" decoding="async">
-              <span class="exp-rail-node" aria-hidden="true"></span>
-            </div>
-            <div class="exp-role">Applied Scientist II</div>
-            <div class="exp-org">Amazon</div>
-            <div class="exp-loc">Seattle, WA</div>
-          </article>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- News -->
-  <section id="news">
-    <div class="wrap">
-      <h2>News</h2>
-      <table class="news-table">
-        <tbody>
-          <tr>
-              <td class="news-month">Aug</td>
-              <td class="news-year">2026</td>
-              <td class="news-body"><a href="https://ieeexplore.ieee.org/abstract/document/11668045" target="_blank" rel="noopener">Real-Time Neural Musculoskeletal Pose Estimation</a> demo paper published at <strong>IEEE/ACM CHASE 2026</strong>.</td>
-            </tr>
-            <tr>
-            <td class="news-month">Jun</td>
-            <td class="news-year">2026</td>
-            <td class="news-body"><a href="#mage">MAGE</a> on modality-agnostic music generation released on <strong>arXiv</strong>.</td>
-          </tr>
-          <tr>
-            <td class="news-month">Jun</td>
-            <td class="news-year">2026</td>
-            <td class="news-body"><a href="#m2mhmr">M2M-HMR</a> accepted to <strong>ECCV 2026 (Oral)</strong>.</td>
-          </tr>
-          <tr>
-            <td class="news-month">Mar</td>
-            <td class="news-year">2026</td>
-            <td class="news-body">Joined <strong>Amazon</strong> as Applied Scientist II (Full-Time).</td>
-          </tr>
-          <tr>
-            <td class="news-month">Mar</td>
-            <td class="news-year">2026</td>
-            <td class="news-body">Completed <strong>Ph.D.</strong> from UNC Charlotte. Dissertation: <a href="https://www.proquest.com/openview/2f20bbc70daa64ddec6219ec4d1295ea/1?pq-origsite=gscholar&cbl=18750&diss=y" target="_blank" rel="noopener"><em>Towards Generative Modeling of 3D Humans From Multimodal Signals</em></a>.</td>
-          </tr>
-          <tr>
-            <td class="news-month">Mar</td>
-            <td class="news-year">2026</td>
-            <td class="news-body">U.S. Patent published: <a href="https://patents.google.com/patent/US20260065565A1/en" target="_blank" rel="noopener">3D human pose and movement from monocular images</a>.</td>
-          </tr>
-          <tr>
-            <td class="news-month">Feb</td>
-            <td class="news-year">2026</td>
-            <td class="news-body"><a href="#livegesture">LiveGesture</a> accepted to <strong>CVPR 2026</strong>.</td>
-          </tr>
-          <tr>
-            <td class="news-month">Nov</td>
-            <td class="news-year">2025</td>
-            <td class="news-body"><a href="#dancemosaic">DanceMosaic</a> accepted to <strong>AAAI 2026</strong>.</td>
-          </tr>
-          <tr>
-            <td class="news-month">Oct</td>
-            <td class="news-year">2025</td>
-            <td class="news-body">Joined <strong>Google</strong> as Research Scientist Intern — Extended Reality (AR/VR).</td>
-          </tr>
-
-          <tr class="news-old">
-            <td class="news-month">Oct</td>
-            <td class="news-year">2025</td>
-            <td class="news-body"><a href="#maskcontrol">MaskControl</a> selected for <em>Oral Presentation</em> &amp; <em>Best Paper Award Nominee</em> at <strong>ICCV 2025</strong>.</td>
-          </tr>
-          <tr class="news-old">
-            <td class="news-month">July</td>
-            <td class="news-year">2025</td>
-            <td class="news-body">Poster selected at <em>Amazon WWAS Science Fair Seattle</em>.</td>
-          </tr>
-          <tr class="news-old">
-            <td class="news-month">June</td>
-            <td class="news-year">2025</td>
-            <td class="news-body"><a href="#maskhand">MaskHand</a> &amp; <a href="#maskcontrol">MaskControl</a> accepted to <strong>ICCV 2025</strong>.</td>
-          </tr>
-          <tr class="news-old">
-            <td class="news-month">Dec</td>
-            <td class="news-year">2024</td>
-            <td class="news-body"><a href="#genhmr">GenHMR</a> accepted to <strong>AAAI 2025</strong>, presented in Philadelphia.</td>
-          </tr>
-          <tr class="news-old">
-            <td class="news-month">Oct</td>
-            <td class="news-year">2024</td>
-            <td class="news-body"><a href="#biopose">BioPose</a> accepted to <strong>WACV 2025</strong>.</td>
-          </tr>
-          <tr class="news-old">
-            <td class="news-month">July</td>
-            <td class="news-year">2024</td>
-            <td class="news-body"><a href="#bamm">BAMM</a> accepted to <strong>ECCV 2024</strong>.</td>
-          </tr>
-          <tr class="news-old">
-            <td class="news-month">Sept</td>
-            <td class="news-year">2023</td>
-            <td class="news-body">Joined <strong>Lowe's</strong> as Research Lead of the CV &amp; UNCC Team.</td>
-          </tr>
-          <tr class="news-old">
-            <td class="news-month">June</td>
-            <td class="news-year">2023</td>
-            <td class="news-body"><a href="#dpfedproxgan">DPFedProxGAN</a> accepted to <strong>IJCNN 2023</strong>.</td>
-          </tr>
-          <tr class="news-old">
-            <td class="news-month">July</td>
-            <td class="news-year">2022</td>
-            <td class="news-body">Privacy Enhancement for Few-Shot Learning accepted to <strong>IJCNN 2022</strong>.</td>
-          </tr>
-          <tr class="news-old">
-            <td class="news-month">Jan</td>
-            <td class="news-year">2022</td>
-            <td class="news-body"><a href="#dpshield">DP-Shield</a> accepted to <strong>EDBT 2022</strong>.</td>
-          </tr>
-        </tbody>
-      </table>
-      <button class="show-more" id="news-toggle" onclick="toggleNews()">Show more</button>
-    </div>
-  </section>
-
-  <!-- Selected Research -->
   <section id="research">
     <div class="wrap">
-      <h2>Selected Research</h2>
-      <div class="research-grid" id="research-grid" aria-label="Research demo videos"></div>
+      <div class="section-head"><h2>Selected Research</h2></div>
+      <div class="research-grid">
+      <article class="research-item">
+        <a class="research-media" href="https://arxiv.org/pdf/2603.20391" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <img src="/author/usama/multi-view.png" alt="M2M-HMR multi-view human mesh recovery results across camera views" loading="lazy" decoding="async">
+        </a>
+        <div class="meta-row">
+          <span class="venue">ECCV 2026</span>
+          <span class="badge">Oral</span>
+        </div>
+        <h3><a href="https://arxiv.org/pdf/2603.20391" target="_blank" rel="noopener">M2M-HMR</a></h3>
+        <p class="research-sub">Monocular Models are Strong Learners for Multi-View Human Mesh Recovery</p>
+        <div class="research-links"><a href="https://arxiv.org/pdf/2603.20391" target="_blank" rel="noopener">Paper ↗</a></div>
+      </article>
+
+      <article class="research-item">
+        <a class="research-media" href="./publication/LiveGesture/LiveGesture.html" aria-hidden="true" tabindex="-1">
+          <img src="./publication/LiveGesture/assets/landing.png" alt="LiveGesture streamable co-speech gesture generation pipeline" loading="lazy" decoding="async">
+        </a>
+        <div class="meta-row">
+          <span class="venue">CVPR 2026</span>
+        </div>
+        <h3><a href="./publication/LiveGesture/LiveGesture.html">LiveGesture</a></h3>
+        <p class="research-sub">Streamable Co-Speech Gesture Generation Model</p>
+        <div class="research-links"><a href="./publication/LiveGesture/LiveGesture.html">Project ↗</a>   <a href="https://openaccess.thecvf.com/content/CVPR2026/papers/Saleem_LiveGesture_Streamable_Co-Speech_Gesture_Generation_Model_CVPR_2026_paper.pdf" target="_blank" rel="noopener">Paper ↗</a></div>
+      </article>
+
+      <article class="research-item">
+        <a class="research-media" href="https://foram-s1.github.io/DanceMosaic/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <video data-autoplay muted loop playsinline preload="none" poster="./assets/posters/DanceMosaic.jpg" aria-label="Dance synthesis motion preview"><source src="./videos/DanceMosaic.mp4" type="video/mp4"></video>
+        </a>
+        <div class="meta-row">
+          <span class="venue">AAAI 2026</span>
+        </div>
+        <h3><a href="https://foram-s1.github.io/DanceMosaic/" target="_blank" rel="noopener">Walk Before You Dance</a></h3>
+        <p class="research-sub">High-fidelity and Editable Dance Synthesis via Generative Masked Motion Prior</p>
+        <div class="research-links"><a href="https://foram-s1.github.io/DanceMosaic/" target="_blank" rel="noopener">Project ↗</a>   <a href="https://arxiv.org/abs/2504.04634" target="_blank" rel="noopener">Paper ↗</a></div>
+      </article>
+
+      <article class="research-item">
+        <a class="research-media" href="./publication/MaskHand/MaskHand.html" aria-hidden="true" tabindex="-1">
+          <video data-autoplay muted loop playsinline preload="none" poster="./assets/posters/mmhmr.jpg" aria-label="Hand mesh reconstruction preview"><source src="./videos/mmhmr.mp4" type="video/mp4"></video>
+        </a>
+        <div class="meta-row">
+          <span class="venue">ICCV 2025</span>
+        </div>
+        <h3><a href="./publication/MaskHand/MaskHand.html">MaskHand</a></h3>
+        <p class="research-sub">Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild</p>
+        <div class="research-links"><a href="./publication/MaskHand/MaskHand.html">Project ↗</a>   <a href="https://arxiv.org/abs/2412.13393" target="_blank" rel="noopener">Paper ↗</a></div>
+      </article>
+
+      <article class="research-item">
+        <a class="research-media" href="https://exitudio.github.io/ControlMM-page/" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1">
+          <video data-autoplay muted loop playsinline preload="none" poster="./assets/posters/CAM.jpg" aria-label="Controllable motion synthesis preview"><source src="./videos/CAM.mp4" type="video/mp4"></video>
+        </a>
+        <div class="meta-row">
+          <span class="venue">ICCV 2025</span>
+          <span class="badge">Oral · Best Paper Nominee</span>
+        </div>
+        <h3><a href="https://exitudio.github.io/ControlMM-page/" target="_blank" rel="noopener">MaskControl</a></h3>
+        <p class="research-sub">Spatio-Temporal Control for Masked Motion Synthesis</p>
+        <div class="research-collab"><span>with</span><img src="./author/snapchat.png" alt="Snapchat"></div><div class="research-links"><a href="https://exitudio.github.io/ControlMM-page/" target="_blank" rel="noopener">Project ↗</a>   <a href="https://arxiv.org/pdf/2410.10780" target="_blank" rel="noopener">Paper ↗</a>   <a href="https://github.com/exitudio/ControlMM" target="_blank" rel="noopener">Code ↗</a></div>
+      </article>
+
+      <article class="research-item">
+        <a class="research-media" href="./publication/GenHMR/GenHMR.html" aria-hidden="true" tabindex="-1">
+          <video data-autoplay muted loop playsinline preload="none" poster="./assets/posters/genhmr.jpg" aria-label="Generative human mesh recovery preview"><source src="./videos/genhmr.mp4" type="video/mp4"></video>
+        </a>
+        <div class="meta-row">
+          <span class="venue">AAAI 2025</span>
+        </div>
+        <h3><a href="./publication/GenHMR/GenHMR.html">GenHMR</a></h3>
+        <p class="research-sub">Generative Human Mesh Recovery</p>
+        <div class="research-links"><a href="./publication/GenHMR/GenHMR.html">Project ↗</a>   <a href="https://arxiv.org/abs/2412.14444" target="_blank" rel="noopener">Paper ↗</a></div>
+      </article>
+      </div>
     </div>
   </section>
 
-  <!-- Publications -->
   <section id="publications">
     <div class="wrap">
-      <h2>Publications</h2>
+      <div class="section-head"><h2>Publications</h2></div>
+      <div class="pub-list">
+      <h3 class="pub-year">2026</h3>
 
-      <!-- Patent -->
       <div class="pub-entry" id="patent">
         <div class="pub-media">
           <img src="./publication/GenHMR/assets/challenging_poses/genhmr_front_pose.png" alt="U.S. Patent — 3D human pose from monocular images" loading="lazy" decoding="async">
@@ -1499,7 +239,7 @@
           <a class="pub-title" href="https://patents.google.com/patent/US20260065565A1/en" target="_blank" rel="noopener">
             Methods, Systems, and Computer Program Products for Generating 3D Human Pose and Movement Estimation from Monocular Image Information
           </a>
-          <div class="pub-authors"><u>Muhammad Usama Saleem</u></div>
+          <div class="pub-authors"><span class="me">Muhammad Usama Saleem</span></div>
           <div class="pub-venue"><span class="pub-venue-chip">U.S. Patent, US20260065565A1, 2026</span></div>
           <div class="pub-links">
             <a href="https://patents.google.com/patent/US20260065565A1/en" target="_blank" rel="noopener">patent</a>
@@ -1507,7 +247,6 @@
         </div>
       </div>
 
-      <!-- MAGE -->
       <div class="pub-entry" id="mage">
         <div class="pub-media">
           <img src="./publication/MAGE/assets/header.png" alt="MAGE" loading="lazy" decoding="async">
@@ -1520,7 +259,7 @@
             MAGE: Modality-Agnostic Music Generation and Target-Source Extraction
           </a>
           <div class="pub-authors">
-            <u>Muhammad Usama Saleem</u>, Ravi Tejasvi, Tianyu Xu, Rajeev Nongpiur, Ishan Chatterjee, Mayur Jagdishbhai Patel, Pu Wang
+            <span class="me">Muhammad Usama Saleem</span>, Ravi Tejasvi, Tianyu Xu, Rajeev Nongpiur, Ishan Chatterjee, Mayur Jagdishbhai Patel, Pu Wang
           </div>
           <div class="pub-collab" aria-label="Collaboration with Google">
             <span class="pub-collab-label">In collaboration with</span>
@@ -1537,7 +276,6 @@
         </div>
       </div>
 
-      <!-- LiveGesture -->
       <div class="pub-entry" id="chase-demo">
         <div class="pub-media">
           <img src="./demo.png" alt="Real-Time Neural Musculoskeletal Pose Estimation" loading="lazy" decoding="async">
@@ -1547,7 +285,7 @@
             Real-Time Neural Musculoskeletal Pose Estimation
           </a>
           <div class="pub-authors">
-            Shengkai Xu, Farnoosh Koleini, <u>Muhammad Usama Saleem</u>, Abbey Thomas, Ahmed Helmy, Pu Wang
+            Shengkai Xu, Farnoosh Koleini, <span class="me">Muhammad Usama Saleem</span>, Abbey Thomas, Ahmed Helmy, Pu Wang
           </div>
           <div class="pub-venue"><span class="pub-venue-chip">IEEE/ACM CHASE, 2026</span></div>
           <div class="pub-links">
@@ -1566,7 +304,7 @@
             LiveGesture: Streamable Co-Speech Gesture Generation Model
           </a>
           <div class="pub-authors">
-            <u>Muhammad Usama Saleem</u>, Mayur Jagdishbhai Patel, Ekkasit Pinyoanuntapong, Zhongxing Qin, Li Yang, Hongfei Xue, Ahmed Helmy, Chen Chen, Pu Wang
+            <span class="me">Muhammad Usama Saleem</span>, Mayur Jagdishbhai Patel, Ekkasit Pinyoanuntapong, Zhongxing Qin, Li Yang, Hongfei Xue, Ahmed Helmy, Chen Chen, Pu Wang
           </div>
           <div class="pub-venue"><span class="pub-venue-chip">CVPR, 2026</span></div>
           <div class="pub-links">
@@ -1576,7 +314,6 @@
         </div>
       </div>
 
-      <!-- M2M-HMR -->
       <div class="pub-entry" id="m2mhmr">
         <div class="pub-media">
           <img src="/author/usama/multi-view.png" alt="M2M-HMR" loading="lazy" decoding="async">
@@ -1585,7 +322,7 @@
           <a class="pub-title" href="https://arxiv.org/pdf/2603.20391" target="_blank" rel="noopener">
             Monocular Models are Strong Learners for Multi-View Human Mesh Recovery
           </a>
-          <div class="pub-authors"><u>Muhammad Usama Saleem</u> (co-author)</div>
+          <div class="pub-authors"><span class="me">Muhammad Usama Saleem</span> (co-author)</div>
           <div class="pub-venue"><span class="pub-venue-chip">ECCV, 2026</span><span class="pub-award">(Oral)</span></div>
           <div class="pub-links">
             <a href="https://arxiv.org/pdf/2603.20391" target="_blank" rel="noopener">arxiv</a>
@@ -1593,7 +330,6 @@
         </div>
       </div>
 
-      <!-- DanceMosaic -->
       <div class="pub-entry" id="dancemosaic">
         <div class="pub-media">
           <video autoplay loop muted playsinline>
@@ -1605,7 +341,7 @@
             Walk Before You Dance: High-fidelity and Editable Dance Synthesis via Generative Masked Motion Prior
           </a>
           <div class="pub-authors">
-            Foram Shah*, Parshwa Shah*, <u>Muhammad Usama Saleem</u>, Ekkasit Pinyoanuntapong, Pu Wang, Hongfei Xue, Ahmed Helmy
+            Foram Shah*, Parshwa Shah*, <span class="me">Muhammad Usama Saleem</span>, Ekkasit Pinyoanuntapong, Pu Wang, Hongfei Xue, Ahmed Helmy
           </div>
           <div class="pub-venue"><span class="pub-venue-chip">AAAI, 2026</span></div>
           <div class="pub-note">*Equal Contribution</div>
@@ -1616,7 +352,8 @@
         </div>
       </div>
 
-      <!-- MaskHand -->
+      <h3 class="pub-year">2025</h3>
+
       <div class="pub-entry" id="maskhand">
         <div class="pub-media">
           <video autoplay loop muted playsinline>
@@ -1628,7 +365,7 @@
             MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild
           </a>
           <div class="pub-authors">
-            <u>Muhammad Usama Saleem</u>, Ekkasit Pinyoanuntapong, Mayur Jagdishbhai Patel, Hongfei Xue, Ahmed Helmy, Srijan Das, Pu Wang
+            <span class="me">Muhammad Usama Saleem</span>, Ekkasit Pinyoanuntapong, Mayur Jagdishbhai Patel, Hongfei Xue, Ahmed Helmy, Srijan Das, Pu Wang
           </div>
           <div class="pub-venue"><span class="pub-venue-chip">ICCV, 2025</span></div>
           <div class="pub-links">
@@ -1638,7 +375,6 @@
         </div>
       </div>
 
-      <!-- MaskControl -->
       <div class="pub-entry" id="maskcontrol">
         <div class="pub-media">
           <video autoplay loop muted playsinline>
@@ -1653,7 +389,7 @@
             MaskControl: Spatio-Temporal Control for Masked Motion Synthesis
           </a>
           <div class="pub-authors">
-            Ekkasit Pinyoanuntapong, <u>Muhammad Usama Saleem</u>, Korrawe Karunratanakul, Pu Wang, Hongfei Xue, Chen Chen, Chuan Guo, Junli Cao, Jian Ren, Sergey Tulyakov
+            Ekkasit Pinyoanuntapong, <span class="me">Muhammad Usama Saleem</span>, Korrawe Karunratanakul, Pu Wang, Hongfei Xue, Chen Chen, Chuan Guo, Junli Cao, Jian Ren, Sergey Tulyakov
           </div>
           <div class="pub-collab" aria-label="Collaboration with Snapchat">
             <span class="pub-collab-label">In collaboration with</span>
@@ -1670,7 +406,6 @@
         </div>
       </div>
 
-      <!-- GenHMR -->
       <div class="pub-entry" id="genhmr">
         <div class="pub-media">
           <video autoplay loop muted playsinline>
@@ -1682,7 +417,7 @@
             GenHMR: Generative Human Mesh Recovery
           </a>
           <div class="pub-authors">
-            <u>Muhammad Usama Saleem</u>, Ekkasit Pinyoanuntapong, Pu Wang, Hongfei Xue, Srijan Das, Chen Chen
+            <span class="me">Muhammad Usama Saleem</span>, Ekkasit Pinyoanuntapong, Pu Wang, Hongfei Xue, Srijan Das, Chen Chen
           </div>
           <div class="pub-venue"><span class="pub-venue-chip">AAAI, 2025</span></div>
           <div class="pub-links">
@@ -1692,7 +427,6 @@
         </div>
       </div>
 
-      <!-- BioPose -->
       <div class="pub-entry" id="biopose">
         <div class="pub-media">
           <video autoplay loop muted playsinline>
@@ -1704,7 +438,7 @@
             BioPose: Biomechanically-accurate 3D Pose Estimation from Monocular Videos
           </a>
           <div class="pub-authors">
-            <u>Muhammad Usama Saleem</u>*, Farnoosh Koleini*, Pu Wang, Hongfei Xue, Ahmed Helmy, Abbey Fenwick
+            <span class="me">Muhammad Usama Saleem</span>*, Farnoosh Koleini*, Pu Wang, Hongfei Xue, Ahmed Helmy, Abbey Fenwick
           </div>
           <div class="pub-venue"><span class="pub-venue-chip">WACV, 2025</span></div>
           <div class="pub-note">*Equal Contribution</div>
@@ -1715,7 +449,8 @@
         </div>
       </div>
 
-      <!-- BAMM -->
+      <h3 class="pub-year">2024</h3>
+
       <div class="pub-entry" id="bamm">
         <div class="pub-media">
           <video autoplay loop muted playsinline>
@@ -1727,7 +462,7 @@
             BAMM: Bidirectional Autoregressive Motion Model
           </a>
           <div class="pub-authors">
-            Ekkasit Pinyoanuntapong, <u>Muhammad Usama Saleem</u>, Pu Wang, Minwoo Lee, Srijan Das, Chen Chen
+            Ekkasit Pinyoanuntapong, <span class="me">Muhammad Usama Saleem</span>, Pu Wang, Minwoo Lee, Srijan Das, Chen Chen
           </div>
           <div class="pub-venue"><span class="pub-venue-chip">ECCV, 2024</span></div>
           <div class="pub-links">
@@ -1738,7 +473,8 @@
         </div>
       </div>
 
-      <!-- DPFedProxGAN -->
+      <h3 class="pub-year">2023</h3>
+
       <div class="pub-entry" id="dpfedproxgan">
         <div class="pub-media">
           <img src="/publication/06-fs-data-synthesis/private_data.png" alt="DPFedProxGAN" loading="lazy" decoding="async">
@@ -1747,7 +483,7 @@
           <a class="pub-title" href="./publication/DPFedProxGAN/dpfedproxgan.html">
             Private Data Synthesis from Decentralized Non-IID Data
           </a>
-          <div class="pub-authors"><u>Muhammad Usama Saleem</u>, L. Fan</div>
+          <div class="pub-authors"><span class="me">Muhammad Usama Saleem</span>, L. Fan</div>
           <div class="pub-venue"><span class="pub-venue-chip">IJCNN, 2023</span></div>
           <div class="pub-links">
             <a href="./publication/DPFedProxGAN/dpfedproxgan.html">project page</a> |
@@ -1757,7 +493,8 @@
         </div>
       </div>
 
-      <!-- Privacy Enhancement -->
+      <h3 class="pub-year">2022</h3>
+
       <div class="pub-entry" id="privacy">
         <div class="pub-media">
           <img src="/publication/05-fs-privacy/featured_hu5afa6d22d114b7460f804b57e93d75ca_82188_150x0_resize_lanczos_3.png" alt="Privacy Enhancement" loading="lazy" decoding="async">
@@ -1766,7 +503,7 @@
           <a class="pub-title" href="/publication/05-fs-privacy/">
             Privacy Enhancement for Cloud-Based Few-Shot Learning
           </a>
-          <div class="pub-authors">A. Parnami, <u>Muhammad Usama Saleem</u>, L. Fan, M. Lee</div>
+          <div class="pub-authors">A. Parnami, <span class="me">Muhammad Usama Saleem</span>, L. Fan, M. Lee</div>
           <div class="pub-venue"><span class="pub-venue-chip">IJCNN, 2022</span></div>
           <div class="pub-links">
             <a href="https://arxiv.org/abs/2205.07864" target="_blank" rel="noopener">arxiv</a>
@@ -1774,7 +511,6 @@
         </div>
       </div>
 
-      <!-- DP-Shield -->
       <div class="pub-entry" id="dpshield">
         <div class="pub-media">
           <video autoplay loop muted playsinline>
@@ -1785,7 +521,7 @@
           <a class="pub-title" href="http://3.223.148.187/" target="_blank" rel="noopener">
             DP-Shield: Face Obfuscation with Differential Privacy
           </a>
-          <div class="pub-authors"><u>Muhammad Usama Saleem</u>, D. Reilly, L. Fan</div>
+          <div class="pub-authors"><span class="me">Muhammad Usama Saleem</span>, D. Reilly, L. Fan</div>
           <div class="pub-venue"><span class="pub-venue-chip">EDBT, 2022</span></div>
           <div class="pub-links">
             <a href="https://openproceedings.org/2022/conf/edbt/paper-150.pdf" target="_blank" rel="noopener">paper</a> |
@@ -1794,265 +530,152 @@
           </div>
         </div>
       </div>
-
+      </div>
     </div>
   </section>
 
-  <footer>
+  <section id="experience">
     <div class="wrap">
-      <p>Last updated: July, 2026</p>
-      <p>Template adapted from <a href="https://jonbarron.info" target="_blank" rel="noopener">Jon Barron</a>.</p>
-      <p>&copy; 2026 Muhammad Usama Saleem</p>
+      <div class="section-head"><h2>Experience</h2></div>
+      <div class="exp-list">
+        <div class="exp-row">
+          <div class="exp-dates">2026 — Present</div>
+          <div>
+            <div class="exp-org"><img src="./author/usama/amazon.webp" alt="" loading="lazy" decoding="async">Amazon</div>
+            <div class="exp-role">Applied Scientist II · Seattle, WA</div>
+          </div>
+        </div>
+        <div class="exp-row">
+          <div class="exp-dates">2025 — 2026</div>
+          <div>
+            <div class="exp-org"><img src="./author/usama/google.png" alt="" loading="lazy" decoding="async">Google</div>
+            <div class="exp-role">Research Scientist Intern · Extended Reality (AR/VR) · San Francisco, CA</div>
+          </div>
+        </div>
+        <div class="exp-row">
+          <div class="exp-dates">Summer 2025</div>
+          <div>
+            <div class="exp-org"><img src="./author/usama/amazon.webp" alt="" loading="lazy" decoding="async">Amazon</div>
+            <div class="exp-role">Research Scientist · Multimodal GenAI · Boston, MA</div>
+          </div>
+        </div>
+        <div class="exp-row">
+          <div class="exp-dates">2023 — 2025</div>
+          <div>
+            <div class="exp-org"><img src="./author/usama/lowes.png" alt="" loading="lazy" decoding="async">Lowe's</div>
+            <div class="exp-role">Research Lead · Charlotte, NC</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="news">
+    <div class="wrap">
+      <div class="section-head"><h2>News</h2></div>
+      <ul class="news-list">
+        <li class="news-item">
+          <span class="news-date">Aug 2026</span>
+          <div class="news-body"><a href="https://ieeexplore.ieee.org/abstract/document/11668045" target="_blank" rel="noopener">Real-Time Neural Musculoskeletal Pose Estimation</a> demo paper published at <strong>IEEE/ACM CHASE 2026</strong>.</div>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Jun 2026</span>
+          <div class="news-body"><a href="#mage">MAGE</a> on modality-agnostic music generation released on <strong>arXiv</strong>.</div>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Jun 2026</span>
+          <div class="news-body"><a href="#m2mhmr">M2M-HMR</a> accepted to <strong>ECCV 2026 (Oral)</strong>.</div>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Mar 2026</span>
+          <div class="news-body">Joined <strong>Amazon</strong> as Applied Scientist II (Full-Time).</div>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Mar 2026</span>
+          <div class="news-body">Completed <strong>Ph.D.</strong> from UNC Charlotte. Dissertation: <a href="https://www.proquest.com/openview/2f20bbc70daa64ddec6219ec4d1295ea/1?pq-origsite=gscholar&cbl=18750&diss=y" target="_blank" rel="noopener"><em>Towards Generative Modeling of 3D Humans From Multimodal Signals</em></a>.</div>
+        </li>
+        <li class="news-item" data-old hidden>
+          <span class="news-date">Mar 2026</span>
+          <div class="news-body">U.S. Patent published: <a href="https://patents.google.com/patent/US20260065565A1/en" target="_blank" rel="noopener">3D human pose and movement from monocular images</a>.</div>
+        </li>
+        <li class="news-item" data-old hidden>
+          <span class="news-date">Feb 2026</span>
+          <div class="news-body"><a href="#livegesture">LiveGesture</a> accepted to <strong>CVPR 2026</strong>.</div>
+        </li>
+        <li class="news-item" data-old hidden>
+          <span class="news-date">Nov 2025</span>
+          <div class="news-body"><a href="#dancemosaic">DanceMosaic</a> accepted to <strong>AAAI 2026</strong>.</div>
+        </li>
+        <li class="news-item" data-old hidden>
+          <span class="news-date">Oct 2025</span>
+          <div class="news-body">Joined <strong>Google</strong> as Research Scientist Intern — Extended Reality (AR/VR).</div>
+        </li>
+        <li class="news-item" data-old hidden>
+          <span class="news-date">Oct 2025</span>
+          <div class="news-body"><a href="#maskcontrol">MaskControl</a> selected for <em>Oral Presentation</em> &amp; <em>Best Paper Award Nominee</em> at <strong>ICCV 2025</strong>.</div>
+        </li>
+        <li class="news-item" data-old hidden>
+          <span class="news-date">July 2025</span>
+          <div class="news-body">Poster selected at <em>Amazon WWAS Science Fair Seattle</em>.</div>
+        </li>
+        <li class="news-item" data-old hidden>
+          <span class="news-date">June 2025</span>
+          <div class="news-body"><a href="#maskhand">MaskHand</a> &amp; <a href="#maskcontrol">MaskControl</a> accepted to <strong>ICCV 2025</strong>.</div>
+        </li>
+        <li class="news-item" data-old hidden>
+          <span class="news-date">Dec 2024</span>
+          <div class="news-body"><a href="#genhmr">GenHMR</a> accepted to <strong>AAAI 2025</strong>, presented in Philadelphia.</div>
+        </li>
+        <li class="news-item" data-old hidden>
+          <span class="news-date">Oct 2024</span>
+          <div class="news-body"><a href="#biopose">BioPose</a> accepted to <strong>WACV 2025</strong>.</div>
+        </li>
+        <li class="news-item" data-old hidden>
+          <span class="news-date">July 2024</span>
+          <div class="news-body"><a href="#bamm">BAMM</a> accepted to <strong>ECCV 2024</strong>.</div>
+        </li>
+        <li class="news-item" data-old hidden>
+          <span class="news-date">Sept 2023</span>
+          <div class="news-body">Joined <strong>Lowe's</strong> as Research Lead of the CV &amp; UNCC Team.</div>
+        </li>
+        <li class="news-item" data-old hidden>
+          <span class="news-date">June 2023</span>
+          <div class="news-body"><a href="#dpfedproxgan">DPFedProxGAN</a> accepted to <strong>IJCNN 2023</strong>.</div>
+        </li>
+        <li class="news-item" data-old hidden>
+          <span class="news-date">July 2022</span>
+          <div class="news-body">Privacy Enhancement for Few-Shot Learning accepted to <strong>IJCNN 2022</strong>.</div>
+        </li>
+        <li class="news-item" data-old hidden>
+          <span class="news-date">Jan 2022</span>
+          <div class="news-body"><a href="#dpshield">DP-Shield</a> accepted to <strong>EDBT 2022</strong>.</div>
+        </li>
+      </ul>
+      <button class="show-more" type="button">Show all news</button>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="footer-name">Muhammad Usama Saleem</p>
+      <p class="footer-role">Applied Scientist · Multimodal AI &amp; 3D Human Understanding</p>
+      <p class="footer-links">
+        <a href="https://scholar.google.com/citations?user=8ZSRk3IAAAAJ&hl" target="_blank" rel="noopener">Scholar</a><span class="sep">·</span>
+        <a href="https://github.com/m-usamasaleem" target="_blank" rel="noopener">GitHub</a><span class="sep">·</span>
+        <a href="https://www.linkedin.com/in/muhammad-usama-saleem-504b65164" target="_blank" rel="noopener">LinkedIn</a><span class="sep">·</span>
+        <a href="https://x.com/usamasaleem_" target="_blank" rel="noopener">X</a><span class="sep">·</span>
+        <a href="mailto:usama.saleem7977@gmail.com">Email</a>
+      </p>
+      <p class="footer-copy">&copy; 2026 Muhammad Usama Saleem · Template adapted from
+        <a href="https://jonbarron.info" target="_blank" rel="noopener">Jon Barron</a></p>
+      <div class="footer-tracker" aria-hidden="true">
+        <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=8PZR3rhBAnuOEFb9RecojjlYPmyeuvZ7B5cY31wCebE&cl=ffffff&w=a"></script>
+      </div>
     </div>
   </footer>
 
-  <script>
-    function toggleNews() {
-      const rows = document.querySelectorAll('.news-old');
-      const btn = document.getElementById('news-toggle');
-      const showing = rows[0] && rows[0].classList.contains('visible');
-      rows.forEach(r => r.classList.toggle('visible', !showing));
-      btn.textContent = showing ? 'Show more' : 'Show less';
-    }
-
-    (function () {
-      const sections = ['about', 'experience', 'news', 'research', 'publications'];
-      const links = document.querySelectorAll('.nav-links a');
-      const navToggle = document.querySelector('.nav-toggle');
-      const navMenu = document.getElementById('site-nav');
-
-      if (navToggle && navMenu) {
-        navToggle.addEventListener('click', () => {
-          const open = navMenu.classList.toggle('open');
-          navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        });
-
-        navMenu.querySelectorAll('a').forEach((link) => {
-          link.addEventListener('click', () => {
-            navMenu.classList.remove('open');
-            navToggle.setAttribute('aria-expanded', 'false');
-          });
-        });
-      }
-
-      function onScroll() {
-        let current = sections[0];
-        for (const id of sections) {
-          const el = document.getElementById(id);
-          if (el && el.getBoundingClientRect().top <= 80) current = id;
-        }
-        links.forEach(a => {
-          a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-        });
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    })();
-
-  </script>
-  <script>
-    (function () {
-      const RESEARCH_ITEMS = [
-        {
-          id: 'm2mhmr-card',
-          name: 'M2M-HMR',
-          subtitle: 'Monocular Models are Strong Learners for Multi-View Human Mesh Recovery',
-          venue: 'ECCV 2026',
-          badge: 'Oral',
-          href: 'https://arxiv.org/pdf/2603.20391',
-          image: '/author/usama/multi-view.png'
-        },
-        {
-          id: 'livegesture',
-          name: 'LiveGesture',
-          subtitle: 'Streamable Co-Speech Gesture Generation Model',
-          venue: 'CVPR 2026',
-          badge: '',
-          href: './publication/LiveGesture/LiveGesture.html',
-          image: './publication/LiveGesture/assets/landing.png'
-        },
-        {
-          id: 'dancemosaic',
-          name: 'Walk Before You Dance',
-          subtitle: 'High-fidelity and Editable Dance Synthesis via Generative Masked Motion Prior',
-          venue: 'AAAI 2026',
-          badge: '',
-          href: 'https://foram-s1.github.io/DanceMosaic/',
-          video: './videos/DanceMosaic.mkv'
-        },
-        {
-          id: 'maskhand',
-          name: 'MaskHand',
-          subtitle: 'Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild',
-          venue: 'ICCV 2025',
-          badge: '',
-          href: './publication/MaskHand/MaskHand.html',
-          video: './videos/mmhmr.mp4'
-        },
-        {
-          id: 'maskcontrol',
-          name: 'MaskControl',
-          subtitle: 'Spatio-Temporal Control for Masked Motion Synthesis',
-          venue: 'ICCV 2025',
-          badge: 'Oral',
-          href: 'https://exitudio.github.io/ControlMM-page/',
-          video: './videos/CAM.mp4',
-          collab: [{ name: 'Snapchat', logo: './author/snapchat.png', square: true }]
-        },
-        {
-          id: 'genhmr',
-          name: 'GenHMR',
-          subtitle: 'Generative Human Mesh Recovery',
-          venue: 'AAAI 2025',
-          badge: '',
-          href: './publication/GenHMR/GenHMR.html',
-          video: './videos/genhmr.mp4'
-        },
-        {
-          id: 'biopose',
-          name: 'BioPose',
-          subtitle: 'Biomechanically-accurate 3D Pose Estimation from Monocular Videos',
-          venue: 'WACV 2025',
-          badge: '',
-          href: './publication/BioPose/BioPose.html',
-          video: './videos/biopose.mp4'
-        },
-        {
-          id: 'bamm',
-          name: 'BAMM',
-          subtitle: 'Bidirectional Autoregressive Motion Model',
-          venue: 'ECCV 2024',
-          badge: '',
-          href: 'https://exitudio.github.io/BAMM-page/',
-          video: './videos/BAMM.mp4'
-        }
-      ];
-
-      const grid = document.getElementById('research-grid');
-
-      function keepPlaying(v) {
-        v.addEventListener('pause', () => {
-          if (!document.hidden) v.play().catch(() => {});
-        });
-        v.addEventListener('ended', () => v.play().catch(() => {}));
-      }
-
-      RESEARCH_ITEMS.forEach((item) => {
-        const card = document.createElement('a');
-        card.className = 'research-card';
-        card.id = item.id;
-        card.href = item.href;
-        if (item.href.startsWith('http')) {
-          card.target = '_blank';
-          card.rel = 'noopener';
-        }
-
-        const videoWrap = document.createElement('div');
-        videoWrap.className = 'research-video';
-
-        if (item.image) {
-          const img = document.createElement('img');
-          img.src = item.image;
-          img.alt = item.name;
-          img.loading = 'lazy';
-          videoWrap.appendChild(img);
-        } else {
-          const video = document.createElement('video');
-          video.src = item.video;
-          video.muted = true;
-          video.loop = true;
-          video.playsInline = true;
-          video.autoplay = true;
-          video.preload = 'auto';
-          video.setAttribute('playsinline', '');
-          keepPlaying(video);
-          videoWrap.appendChild(video);
-        }
-
-        const body = document.createElement('div');
-        body.className = 'research-body';
-
-        const meta = document.createElement('div');
-        meta.className = 'research-meta';
-        const venue = document.createElement('span');
-        venue.className = 'research-venue';
-        venue.textContent = item.venue;
-        meta.appendChild(venue);
-        if (item.badge) {
-          const badge = document.createElement('span');
-          badge.className = 'research-badge';
-          badge.textContent = item.badge;
-          meta.appendChild(badge);
-        }
-        body.appendChild(meta);
-
-        const title = document.createElement('p');
-        title.className = 'research-name';
-        title.innerHTML = item.name + ' <span>— ' + item.subtitle + '</span>';
-        body.appendChild(title);
-
-        if (item.collab && item.collab.length) {
-          const collab = document.createElement('div');
-          collab.className = 'research-collab';
-          const label = document.createElement('span');
-          label.textContent = 'with';
-          collab.appendChild(label);
-          item.collab.forEach((partner) => {
-            const logo = document.createElement('img');
-            logo.src = partner.logo;
-            logo.alt = partner.name;
-            if (partner.square) logo.className = 'collab-logo-square';
-            collab.appendChild(logo);
-          });
-          body.appendChild(collab);
-        }
-
-        const cta = document.createElement('span');
-        cta.className = 'research-cta';
-        cta.textContent = 'View project →';
-        body.appendChild(cta);
-
-        card.appendChild(videoWrap);
-        card.appendChild(body);
-        grid.appendChild(card);
-      });
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          entry.target.querySelectorAll('video').forEach((v) => {
-            if (entry.isIntersecting) v.play().catch(() => {});
-          });
-        });
-      }, { threshold: 0.15 });
-
-      grid.querySelectorAll('.research-card').forEach((card) => observer.observe(card));
-
-      document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) {
-          grid.querySelectorAll('video').forEach((v) => v.play().catch(() => {}));
-        }
-      });
-
-      grid.querySelectorAll('video').forEach((v) => v.play().catch(() => {}));
-    })();
-  </script>
-
-  <div id="visitor-map">
-    <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=8PZR3rhBAnuOEFb9RecojjlYPmyeuvZ7B5cY31wCebE&cl=ffffff&w=a"></script>
-    <noscript>
-      <div id="fallback-message">Visitor map cannot be displayed because JavaScript is disabled in your browser.</div>
-    </noscript>
-  </div>
-
-  <script>
-    // Respect reduced-motion: stop the autoplaying research previews
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.querySelectorAll('video[autoplay]').forEach(function (v) {
-        v.removeAttribute('autoplay');
-        v.pause();
-      });
-    }
-  </script>
+  <script src="/assets/js/site.js" defer></script>
 </body>
 </html>
