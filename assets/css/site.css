@@ -273,6 +273,9 @@ h1 {
 }
 
 .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32em;
   font-family: var(--font-mono);
   font-size: 0.66rem;
   font-weight: 600;
@@ -429,6 +432,9 @@ a.pub-title:hover { color: var(--accent-hover); text-decoration: none; }
   color: var(--accent);
 }
 .pub-award {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32em;
   font-family: var(--font-mono);
   font-size: 0.66rem;
   font-weight: 600;
@@ -484,7 +490,7 @@ a.pub-title:hover { color: var(--accent-hover); text-decoration: none; }
   align-items: center;
   gap: var(--space-2);
 }
-.exp-org img { height: 16px; width: auto; }
+.exp-org img { height: 26px; width: auto; }
 .exp-role { color: var(--text-muted); font-size: 0.92rem; margin-top: 2px; }
 
 /* --- News ---------------------------------------------------------------- */
@@ -617,4 +623,12 @@ a.pub-title:hover { color: var(--accent-hover); text-decoration: none; }
   }
   .research-item:hover .research-media img,
   .research-item:hover .research-media video { transform: none; }
+}
+
+.badge .medal,
+.pub-award .medal {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  color: #E8B44C;
 }
