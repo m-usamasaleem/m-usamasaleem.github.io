@@ -198,6 +198,13 @@ h1 {
 }
 
 .hero-text { max-width: var(--content-width); }
+
+.hero-links {
+  font-size: 0.92rem;
+  font-weight: 500;
+  margin: calc(-1 * var(--space-3)) 0 var(--space-5);
+}
+.hero-links .sep { color: var(--border); margin: 0 0.5rem; }
 .hero-text p { margin-bottom: var(--space-4); }
 .hero-text strong { font-weight: 600; }
 
