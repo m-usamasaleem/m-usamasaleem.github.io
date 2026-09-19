@@ -9,12 +9,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
       body {
-        background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
-        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #F3F1EC, #E2DED8);
+        font-family: 'Instrument Sans', Arial, sans-serif;
       }
 
       .carousel-indicators [data-bs-target] {
-        background-color: #741906;
+        background-color: #7C4937;
         width: 12px;
         height: 12px;
         border-radius: 50%;
@@ -28,15 +28,15 @@
 
       .carousel-control-prev-icon,
       .carousel-control-next-icon {
-        background-color: #741906;
+        background-color: #7C4937;
         border-radius: 50%;
         width: 50px;
         height: 50px;
       }
 
       header {
-        background-color: #343a40;
-        color: white;
+        background-color: #FBFAF7;
+        color: #0A1622;
         padding: 10px 0;
         text-align: center;
       }
@@ -92,7 +92,7 @@
       }
 
       footer {
-        background-color: #343a40;
+        background-color: #0A1622;
         color: #ffffff;
         padding: 10px 0;
         text-align: center;
@@ -125,14 +125,14 @@
       }
 
       body {
-        font-family: 'Roboto', Arial, sans-serif;
-        background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+        font-family: 'Instrument Sans', Arial, sans-serif;
+        background: linear-gradient(to bottom, #F3F1EC, #E2DED8);
       }
 
       h1,
       h2,
       h3 {
-        font-family: 'Poppins', Arial, sans-serif;
+        font-family: 'Instrument Sans', Arial, sans-serif;
         font-weight: 700;
       }
 
@@ -149,14 +149,14 @@
       }
 
       p {
-        font-family: 'Roboto', Arial, sans-serif;
+        font-family: 'Instrument Sans', Arial, sans-serif;
         font-size: 1rem;
         line-height: 1.6;
       }
 
       a {
-        font-family: 'Poppins', Arial, sans-serif;
-        color: #C02504;
+        font-family: 'Instrument Sans', Arial, sans-serif;
+        color: #99624E;
         text-decoration: none;
       }
 
@@ -186,7 +186,7 @@
       #visitor-map {
         width: 100px;
         height: 100px;
-        background: #f4f4f4;
+        background: #F3F1EC;
         /* Light background */
         border: 1px solid #ddd;
         /* Add a subtle border */
@@ -209,13 +209,16 @@
         /* Hides the element completely */
       }
     </style>
-  </head>
-  <body>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/project.css">
+</head>
+  <body class="pg-compat pg-maskhand">
     <header class="py-3 bg-dark text-white">
       <div class="container text-center">
         <h1>MaskHand: Generative Masked Modeling for Robust Hand Mesh Reconstruction in the Wild</h1>
         <h1>(ICCV 2025)</h1>
-        <h2 style="margin-top: 10px; font-size: 1.0em; font-weight: normal; color: #C02504;"><u><strong><a href="https://m-usamasaleem.github.io/" style="font-size: inherit; text-decoration: none; color: inherit;">Muhammad Usama Saleem</a></strong></u>, Ekkasit Pinyoanuntapong, Mayur Jagdishbhai Patel, Hongfei Xue, Ahmed Helmy, Srijan Das, Pu Wang </h2>
+        <h2 style="margin-top: 10px; font-size: 1.0em; font-weight: normal; color: #99624E;"><u><strong><a href="https://m-usamasaleem.github.io/" style="font-size: inherit; text-decoration: none; color: inherit;">Muhammad Usama Saleem</a></strong></u>, Ekkasit Pinyoanuntapong, Mayur Jagdishbhai Patel, Hongfei Xue, Ahmed Helmy, Srijan Das, Pu Wang </h2>
         <div style="font-size: 0.9em; color: gray; margin-top: 5px;"> University of North Carolina at Charlotte (UNCC) </div>
         <div style="margin-top: 15px;"><a href="https://arxiv.org/abs/2412.13393" class="btn btn-outline-secondary">arXiv</a></div>
       </div>
@@ -228,7 +231,7 @@
         <div class="video-overlay"></div>
         <div class="video-content"></div>
       </div>
-      <div class="album py-5" style="background-color: #f8f9fa;">
+      <div class="album py-5" style="background-color: #F3F1EC;">
         <div class="container" style="min-width: 100%;">
           <div class="row g-4">
             <!-- First Video -->
@@ -307,7 +310,7 @@
           </section>
         </div>
       </div>
-      <div class="album py-5" style="background-color: #f8f9fa;">
+      <div class="album py-5" style="background-color: #F3F1EC;">
         <div class="container">
           <h3 class="text-center">MaskHand Training</h3>
           <p>
@@ -317,7 +320,7 @@
           <img src="./assets/arch/MMHMR_overview.png" class="img-fluid" alt="MMHMR Overview Image">
         </div>
       </div>
-      <!-- <div class="album py-5" style="background-color: #f8f9fa;"><div class="container"><h3 class="text-center">MMHMR Inference</h3><div class="text-center"><img src="./assets/arch/MMHMR_infer.png" class="custom-img" alt="MMHMR Inference Image"></div></div></div> -->
+      <!-- <div class="album py-5" style="background-color: #F3F1EC;"><div class="container"><h3 class="text-center">MMHMR Inference</h3><div class="text-center"><img src="./assets/arch/MMHMR_infer.png" class="custom-img" alt="MMHMR Inference Image"></div></div></div> -->
       <!-- Carousel -->
       <div id="carouselExampleIndicators" class="carousel slide py-5" data-bs-ride="carousel">
         <div class="container">
