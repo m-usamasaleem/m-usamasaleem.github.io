@@ -278,10 +278,10 @@ h1 {
 .venue {
   font-family: var(--font-mono);
   font-size: 0.84rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 800;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--accent-hover);
+  color: var(--venue);
 }
 
 .badge {
@@ -437,11 +437,11 @@ a.pub-title:hover { color: var(--accent-hover); text-decoration: none; }
 }
 .pub-venue-chip {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--venue);
 }
 .pub-award {
   display: inline-flex;
