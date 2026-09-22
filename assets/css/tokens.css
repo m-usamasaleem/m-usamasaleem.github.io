@@ -21,6 +21,7 @@
   /* Accent — terracotta, used sparingly and semantically */
   --accent: #99624E;
   --accent-hover: #7C4937;
+  --accent-deep: #5C3625;   /* darkest step of the same terracotta — venue emphasis only */
   --accent-soft: #F1E7E2;
 
   /* Media wells (video letterboxing, dark figures) */
