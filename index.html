@@ -84,6 +84,7 @@
         <span></span>
       </button>
       <ul class="nav-links" id="site-menu">
+        <li><a href="#focus">Focus</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#news">News</a></li>
         <li><a href="#research">Research</a></li>
@@ -138,6 +139,59 @@
         <div class="hero-photo">
           <img class="profile-photo" src="/author/usama/image.jpeg" alt="Muhammad Usama Saleem" width="210" height="280">
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="focus">
+    <div class="wrap">
+      <div class="section-head"><h2>Research Focus</h2></div>
+      <p class="focus-lead">My research spans generative 3D human modeling, controllable motion synthesis, and
+        multimodal generation — with collaborations across Google, Snapchat, and the University of Central Florida.</p>
+
+      <div class="focus-list">
+        <article class="focus-row">
+          <div class="focus-head">
+            <h3>Generative 3D Human Modeling</h3>
+            <p class="focus-tags">3D Pose Estimation<span class="sep">·</span>Mesh Recovery</p>
+          </div>
+          <p class="focus-desc">
+            Generative models that recover accurate 3D human pose and mesh directly from monocular images and
+            video, replacing single-prediction regressors with masked and diffusion-based generation to handle
+            depth ambiguity and occlusion. This spans full-body mesh recovery (GenHMR, M2M-HMR), hand mesh
+            reconstruction in the wild (MaskHand), and biomechanically accurate pose estimation grounded in
+            anatomical constraints (BioPose), alongside a U.S. patent on 3D pose and movement estimation from
+            monocular images.
+          </p>
+        </article>
+
+        <article class="focus-row">
+          <div class="focus-head">
+            <h3>Generative Motion AI</h3>
+            <p class="focus-tags">Motion Synthesis<span class="sep">·</span>Masked Modeling<span class="sep">·</span>Control</p>
+          </div>
+          <p class="focus-desc">
+            Generative frameworks for controllable, high-fidelity 3D human motion: streamable co-speech gesture
+            generation with zero look-ahead (LiveGesture), editable dance synthesis via a generative masked
+            motion prior (Walk Before You Dance), spatio-temporal control over masked motion synthesis
+            (MaskControl, with Snapchat), and bidirectional autoregressive motion modeling (BAMM). I'm interested
+            in how masking, tokenization, and diffusion jointly enable real-time, controllable generation.
+          </p>
+        </article>
+
+        <article class="focus-row">
+          <div class="focus-head">
+            <h3>Multimodal GenAI</h3>
+            <p class="focus-tags">Audio &amp; Music Generation<span class="sep">·</span>Cross-Modal Learning</p>
+          </div>
+          <p class="focus-desc">
+            Extending generative modeling beyond vision to audio and cross-modal settings, including a
+            modality-agnostic framework for conditional music generation and mixture-grounded target-source
+            extraction (MAGE), developed during a research internship at Google. I'm broadly interested in how
+            the same generative principles — masking, tokenization, diffusion — transfer across modalities to
+            build unified multimodal systems.
+          </p>
+        </article>
       </div>
     </div>
   </section>

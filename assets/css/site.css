@@ -267,6 +267,39 @@ h1 {
   color: var(--ink);
 }
 
+/* --- Research Focus ------------------------------------------------------ */
+.focus-lead {
+  max-width: var(--content-width);
+  color: var(--text-muted);
+  margin-bottom: var(--space-7);
+}
+
+.focus-row {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--space-3) var(--space-6);
+  padding: var(--space-6) 0;
+}
+.focus-row + .focus-row { border-top: 1px solid var(--border); }
+
+.focus-head h3 {
+  font-size: 1.08rem;
+  font-weight: 630;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: var(--space-1);
+}
+
+.focus-tags {
+  font-size: 0.86rem;
+  color: var(--text-subtle);
+}
+.focus-tags .sep { color: var(--border); margin: 0 0.4rem; }
+
+.focus-desc {
+  color: var(--text-muted);
+}
+
 /* --- Shared metadata row: venue + badge --------------------------------- */
 .meta-row {
   display: flex;
@@ -591,6 +624,8 @@ a.pub-title:hover { color: var(--accent-hover); text-decoration: none; }
 
 @media (max-width: 680px) {
   .wrap { width: calc(100% - 40px); }
+
+  .focus-row { grid-template-columns: 1fr; gap: var(--space-2); }
 
   .nav-toggle { display: inline-flex; }
   .site-nav .wrap { flex-wrap: wrap; }
