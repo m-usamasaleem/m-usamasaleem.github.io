@@ -85,10 +85,10 @@
       </button>
       <ul class="nav-links" id="site-menu">
         <li><a href="#experience">Experience</a></li>
-        <li><a href="#focus">Focus</a></li>
         <li><a href="#news">News</a></li>
         <li><a href="#research">Research</a></li>
         <li><a href="#publications">Publications</a></li>
+        <li><a href="#focus">Focus</a></li>
       </ul>
     </nav>
   </header>
@@ -183,60 +183,6 @@
     </div>
   </section>
 
-  <section id="focus">
-    <div class="wrap">
-      <div class="section-head"><h2>Research Focus</h2></div>
-      <p class="focus-lead">My research spans three areas: generative 3D human reconstruction, controllable motion synthesis, and
-        multimodal audio generation and separation, with collaborations across Google DeepMind/XR, Amazon, Snapchat, and Lowe's.</p>
-
-      <div class="focus-list">
-        <article class="focus-row">
-          <div class="focus-head">
-            <h3>Generative 3D Human Reconstruction</h3>
-            <p class="focus-tags">3D Pose Estimation<span class="sep">·</span>Mesh Recovery</p>
-          </div>
-          <p class="focus-desc">
-            Generative models that recover accurate 3D human pose and mesh directly from monocular images and
-            video, replacing single-prediction regressors with masked and diffusion-based generation to handle
-            depth ambiguity and occlusion. This spans full-body mesh recovery (GenHMR, M2M-HMR), hand mesh
-            reconstruction in the wild (MaskHand), and biomechanically accurate pose estimation grounded in
-            anatomical constraints (BioPose), alongside a U.S. patent on 3D pose and movement estimation from
-            monocular images.
-          </p>
-        </article>
-
-        <article class="focus-row">
-          <div class="focus-head">
-            <h3>Controllable Motion Synthesis</h3>
-            <p class="focus-tags">Masked Motion Modeling<span class="sep">·</span>Co-Speech Gesture<span class="sep">·</span>Dance Synthesis</p>
-          </div>
-          <p class="focus-desc">
-            Generative frameworks for controllable, high-fidelity 3D human motion: streamable co-speech gesture
-            generation with zero look-ahead (LiveGesture), editable dance synthesis via a generative masked
-            motion prior (Walk Before You Dance), spatio-temporal control over masked motion synthesis
-            (MaskControl, with Snapchat), and bidirectional autoregressive motion modeling (BAMM). I'm interested
-            in how masking, tokenization, and diffusion jointly enable real-time, controllable generation.
-          </p>
-        </article>
-
-        <article class="focus-row">
-          <div class="focus-head">
-            <h3>Multimodal Audio Generation and Separation</h3>
-            <p class="focus-tags">Music Generation<span class="sep">·</span>Source Separation<span class="sep">·</span>Music Understanding<span class="sep">·</span>LLMs</p>
-          </div>
-          <p class="focus-desc">
-            Extending generative modeling beyond vision to audio and cross-modal settings, including a
-            modality-agnostic framework for conditional music generation and mixture-grounded target-source
-            extraction (MAGE), developed during a research internship at Google. At Amazon Music, I work on multimodal content
-            understanding for music, including track and artist understanding across all genres, sonics,
-            sequencing, and recommendation, using LLMs with LoRA fine-tuning and automated evaluators. I'm broadly
-            interested in how the same generative principles (masking, tokenization, diffusion) transfer across
-            modalities to build unified multimodal systems.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
 
 
   <section id="news">
@@ -734,6 +680,61 @@
           </div>
         </div>
       </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="focus">
+    <div class="wrap">
+      <div class="section-head"><h2>Research Focus</h2></div>
+      <p class="focus-lead">My research spans three areas: generative 3D human reconstruction, controllable motion synthesis, and
+        multimodal audio generation and separation, with collaborations across Google DeepMind/XR, Amazon, Snapchat, and Lowe's.</p>
+
+      <div class="focus-list">
+        <article class="focus-row">
+          <div class="focus-head">
+            <h3>Generative 3D Human Reconstruction</h3>
+            <p class="focus-tags">3D Pose Estimation<span class="sep">·</span>Mesh Recovery</p>
+          </div>
+          <p class="focus-desc">
+            Generative models that recover accurate 3D human pose and mesh directly from monocular images and
+            video, replacing single-prediction regressors with masked and diffusion-based generation to handle
+            depth ambiguity and occlusion. This spans full-body mesh recovery (GenHMR, M2M-HMR), hand mesh
+            reconstruction in the wild (MaskHand), and biomechanically accurate pose estimation grounded in
+            anatomical constraints (BioPose), alongside a U.S. patent on 3D pose and movement estimation from
+            monocular images.
+          </p>
+        </article>
+
+        <article class="focus-row">
+          <div class="focus-head">
+            <h3>Controllable Motion Synthesis</h3>
+            <p class="focus-tags">Masked Motion Modeling<span class="sep">·</span>Co-Speech Gesture<span class="sep">·</span>Dance Synthesis</p>
+          </div>
+          <p class="focus-desc">
+            Generative frameworks for controllable, high-fidelity 3D human motion: streamable co-speech gesture
+            generation with zero look-ahead (LiveGesture), editable dance synthesis via a generative masked
+            motion prior (Walk Before You Dance), spatio-temporal control over masked motion synthesis
+            (MaskControl, with Snapchat), and bidirectional autoregressive motion modeling (BAMM). I'm interested
+            in how masking, tokenization, and diffusion jointly enable real-time, controllable generation.
+          </p>
+        </article>
+
+        <article class="focus-row">
+          <div class="focus-head">
+            <h3>Multimodal Audio Generation and Separation</h3>
+            <p class="focus-tags">Music Generation<span class="sep">·</span>Source Separation<span class="sep">·</span>Music Understanding<span class="sep">·</span>LLMs</p>
+          </div>
+          <p class="focus-desc">
+            Extending generative modeling beyond vision to audio and cross-modal settings, including a
+            modality-agnostic framework for conditional music generation and mixture-grounded target-source
+            extraction (MAGE), developed during a research internship at Google. At Amazon Music, I work on multimodal content
+            understanding for music, including track and artist understanding across all genres, sonics,
+            sequencing, and recommendation, using LLMs with LoRA fine-tuning and automated evaluators. I'm broadly
+            interested in how the same generative principles (masking, tokenization, diffusion) transfer across
+            modalities to build unified multimodal systems.
+          </p>
+        </article>
       </div>
     </div>
   </section>
