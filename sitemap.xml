@@ -105,4 +105,14 @@
     <lastmod>2026-09-09</lastmod>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://m-usamasaleem.github.io/blog/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://m-usamasaleem.github.io/blog/human-in-the-loop/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.7</priority>
+  </url>
 </urlset>
