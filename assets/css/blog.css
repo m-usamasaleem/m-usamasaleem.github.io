@@ -321,3 +321,5 @@
 .author-name { font-weight: 630; margin: 0 0 2px !important; font-size: 1rem !important; }
 .author-name a { color: var(--ink); }
 .author-bio { font-size: 0.88rem !important; color: var(--text-muted); line-height: 1.55 !important; margin: 0 !important; }
+
+.disclaimer { margin-top: var(--space-7) !important; padding-top: var(--space-4); border-top: 1px solid var(--border); font-size: 0.86rem !important; font-style: italic; color: var(--text-subtle); line-height: 1.55 !important; }

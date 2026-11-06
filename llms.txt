@@ -28,7 +28,7 @@ monocular images.
 
 ## Writing
 
-- [The Illusion of Human Control in the Age of AI](https://m-usamasaleem.github.io/blog/illusion-of-human-control/): a 2-minute, cited essay on the reliability paradox (the better AI gets, the worse people may get at noticing its errors), automation bias, algorithm aversion, AI sycophancy, and calibrated trust. Argues the goal is calibration, not distrust, and proposes AI that fades its support as human skill grows.
+- [Who Decides When We Decide? Judgment Drift in Human-AI Systems](https://m-usamasaleem.github.io/blog/illusion-of-human-control/): an essay introducing "judgment drift" (the gradual relocation of judgment from a person to an AI system while authority and accountability stay with the person) and proposing "consequence-aware AI" for high-stakes decisions.
 
 ## Profiles
 
