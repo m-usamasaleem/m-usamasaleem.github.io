@@ -81,3 +81,53 @@
   }
   render(0, false);
 })();
+
+/* Calibrated-trust explorer */
+(function () {
+  'use strict';
+  var rel = document.getElementById('cal-rel');
+  if (!rel) return;
+  var trust = document.getElementById('cal-trust');
+  var dot = document.getElementById('cal-dot');
+  var zone = document.getElementById('cal-zone');
+  var text = document.getElementById('cal-text');
+  var relOut = document.getElementById('cal-rel-out');
+  var trustOut = document.getElementById('cal-trust-out');
+  var MSG = {
+    over: ['Over-reliance', 'You rely on it more than it has earned on this task, so its mistakes flow into your decisions. This is automation bias, and it grows quietly with every good answer.'],
+    under: ['Under-use', 'You rely on it less than it deserves, and leave real gains on the table. People often abandon an algorithm after one visible mistake, even when it outperforms them.'],
+    ok: ['Calibrated', 'Your reliance matches its real reliability on this task. This, not distrust, is the goal, and it needs updating as the task or the system changes.']
+  };
+  function update() {
+    var r = +rel.value, t = +trust.value;
+    relOut.textContent = r + '%'; trustOut.textContent = t + '%';
+    dot.setAttribute('cx', 40 + r * 2.7);
+    dot.setAttribute('cy', 280 - t * 2.7);
+    var k = t - r > 15 ? 'over' : (r - t > 15 ? 'under' : 'ok');
+    zone.textContent = MSG[k][0]; text.textContent = MSG[k][1];
+    zone.className = 'calib-zone' + (k === 'ok' ? ' ok' : k === 'under' ? ' under' : '');
+    dot.setAttribute('fill', k === 'ok' ? '#3F6B4F' : k === 'under' ? '#69737C' : '#7C4937');
+  }
+  rel.addEventListener('input', update); trust.addEventListener('input', update);
+  document.querySelectorAll('.calib-presets button').forEach(function (b) {
+    b.addEventListener('click', function () { rel.value = b.dataset.rel; trust.value = b.dataset.trust; update(); });
+  });
+  update();
+})();
+
+/* Reading progress bar */
+(function () {
+  'use strict';
+  if (!document.querySelector('main.post')) return;
+  var bar = document.createElement('div');
+  bar.className = 'read-progress'; bar.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(bar);
+  var ticking = false;
+  function draw() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, window.scrollY / h) : 0) + ')';
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(draw); } }, { passive: true });
+  draw();
+})();
