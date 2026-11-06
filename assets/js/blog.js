@@ -94,9 +94,9 @@
   var relOut = document.getElementById('cal-rel-out');
   var trustOut = document.getElementById('cal-trust-out');
   var MSG = {
-    over: ['Over-reliance', 'You rely on it more than it has earned on this task, so its mistakes flow into your decisions. This is automation bias, and it grows quietly with every good answer.'],
-    under: ['Under-use', 'You rely on it less than it deserves, and leave real gains on the table. People often abandon an algorithm after one visible mistake, even when it outperforms them.'],
-    ok: ['Calibrated', 'Your reliance matches its real reliability on this task. This, not distrust, is the goal, and it needs updating as the task or the system changes.']
+    over: ['Over-reliance', 'You lean on it more than it has earned, so its mistakes become your mistakes. Every good answer makes this a little easier to slip into.'],
+    under: ['Under-use', 'You trust it less than it deserves and leave real help on the table. One bad experience can do this, even when the tool is better than you on average.'],
+    ok: ['Calibrated', 'You lean on it about as much as it has earned. That is the sweet spot, and it moves whenever the task or the tool changes.']
   };
   function update() {
     var r = +rel.value, t = +trust.value;
