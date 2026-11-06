@@ -309,3 +309,8 @@
   .ideas { grid-template-columns: 1fr; }
   .tl-item { grid-template-columns: 74px 1fr; }
 }
+
+/* Discussion questions */
+.discuss { border-left: 2px solid var(--accent); background: var(--surface); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: var(--space-5) var(--space-5) var(--space-3); margin-top: var(--space-6); }
+.discuss ol { margin: var(--space-2) 0 0 1.2rem; }
+.discuss li { font-size: 1rem; font-weight: 560; color: var(--ink); line-height: 1.5; margin-bottom: var(--space-3); }
