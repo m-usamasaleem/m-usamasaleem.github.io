@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Writing by Muhammad Usama Saleem</title>
+  <link>https://m-usamasaleem.github.io/blog/</link>
+  <atom:link href="https://m-usamasaleem.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Evidence-led essays on AI and the people who use it.</description>
+  <language>en</language>
+  <item>
+    <title>The Illusion of Human Control in the Age of AI</title>
+    <link>https://m-usamasaleem.github.io/blog/illusion-of-human-control/</link>
+    <guid isPermaLink="true">https://m-usamasaleem.github.io/blog/illusion-of-human-control/</guid>
+    <pubDate>Fri, 06 Nov 2026 12:00:00 GMT</pubDate>
+    <description>The more reliable AI becomes, the harder it gets to catch its mistakes. That paradox, not replacement, may be the real story of AI and human judgment.</description>
+  </item>
+</channel>
+</rss>
