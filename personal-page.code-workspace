@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../conferences/wacv2027/arxiv/sound_separation_wacv"
+		}
+	],
+	"settings": {}
+}
